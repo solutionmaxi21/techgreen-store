@@ -3,7 +3,8 @@ services:
     name: techgreen-api
     runtime: node
     plan: free
-    buildCommand: npm install
+    rootDir: backend
+    buildCommand: npm install --production
     startCommand: node server.js
     healthCheckPath: /api/health
     envVars:
