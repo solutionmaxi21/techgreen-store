@@ -1,0 +1,117 @@
+import type React from "react"
+import type { Metadata } from "next"
+import Script from "next/script"
+import { Inter, Cairo } from "next/font/google"
+import "../globals.css"
+import { CartProvider } from "@/lib/cart-context"
+import { AuthProvider } from "@/lib/auth-context"
+import { WishlistProvider } from "@/lib/wishlist-context"
+import { LanguageProvider } from "@/lib/language-context"
+import { Toaster } from "@/components/ui/sonner"
+import { OfflineInitializer } from "@/components/offline-initializer"
+import { SyncStatusIndicator } from "@/components/sync-status-indicator"
+import { ThemeProvider } from "@/components/theme-provider"
+
+// Import the wrapper we just created
+import { GoogleProvider } from "@/components/google-provider"
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const cairo = Cairo({ subsets: ["arabic"], variable: "--font-cairo" })
+
+type Locale = 'fr' | 'ar'
+
+const locales: Locale[] = ['fr', 'ar']
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale: localeParam } = await params
+
+  const titles = {
+    fr: "Maxi Store - Matériel Informatique Algérie",
+    ar: "ماكسي ستور - معدات الكمبيوتر الجزائر"
+  }
+
+  const descriptions = {
+    fr: "Achetez le meilleur matériel informatique, composants et accessoires en Algérie.",
+    ar: "اشترِ أفضل معدات الكمبيوتر والمكونات والملحقات في الجزائر."
+  }
+
+  const locale = localeParam || 'fr'
+
+  return {
+    title: titles[locale],
+    description: descriptions[locale],
+    icons: {
+      icon: "/logo-dark.png",
+      shortcut: "/logo-dark.png",
+      apple: "/logo-dark.png",
+    },
+    manifest: "/manifest.json",
+    alternates: {
+      languages: {
+        'fr': '/fr',
+        'ar': '/ar',
+      },
+    },
+  }
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#1a7a3a",
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode
+  params: Promise<{ locale: Locale }>
+}>) {
+  const { locale: localeParam } = await params
+  const locale = localeParam || 'fr'
+  const dir = locale === 'ar' ? 'rtl' : 'ltr'
+
+  return (
+    <html lang={locale} dir={dir} suppressHydrationWarning>
+      <head>
+        <link rel="alternate" hrefLang="fr" href={`/fr`} />
+        <link rel="alternate" hrefLang="ar" href={`/ar`} />
+        <link rel="alternate" hrefLang="x-default" href={`/fr`} />
+        <Script
+          src="/sw-register.js"
+          strategy="afterInteractive"
+          async
+        />
+      </head>
+      <body className={`font-sans antialiased ${inter.variable} ${cairo.variable}`}>
+        <GoogleProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <LanguageProvider initialLocale={locale}>
+              <AuthProvider>
+                <WishlistProvider>
+                  <CartProvider>
+                    <OfflineInitializer />
+                    {children}
+                    <Toaster position="top-right" />
+                    <SyncStatusIndicator />
+                  </CartProvider>
+                </WishlistProvider>
+              </AuthProvider>
+            </LanguageProvider>
+          </ThemeProvider>
+        </GoogleProvider>
+      </body>
+    </html>
+  )
+}

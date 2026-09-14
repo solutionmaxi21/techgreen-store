@@ -1,0 +1,36 @@
+{
+  "name": "MaxiStore - Quincaillerie en Ligne",
+  "short_name": "MaxiStore",
+  "description": "La meilleure quincaillerie en ligne en Algérie - Outils, équipements et matériaux de qualité",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a7a3a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo-dark.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["shopping", "business"],
+  "lang": "fr-DZ",
+  "dir": "ltr",
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
