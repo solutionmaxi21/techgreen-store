@@ -33,7 +33,9 @@ const COOKIE_OPTIONS = {
   httpOnly: true,
   // Allow COOKIE_SECURE=false to override even in production (for local HTTP dev with NODE_ENV=production)
   secure: process.env.COOKIE_SECURE === 'false' ? false : isProduction,
-  sameSite: 'lax',
+  // 'none' required for cross-origin cookie auth (admin panel on different domain)
+  // CSRF double-submit pattern protects against cross-site attacks
+  sameSite: isProduction ? 'none' : 'lax',
   maxAge: ACCESS_TOKEN_EXPIRY_MS
 };
 
@@ -251,8 +253,9 @@ router.post('/login', loginLimiter, validate(authSchemas.loginSchema), asyncHand
     res.cookie('refreshToken', refreshToken, REFRESH_COOKIE_OPTIONS);
   }
 
-  // Only include tokens in body for Electron (file:// can't use cross-origin cookies)
-  // Browser clients use HttpOnly cookies exclusively (safer against XSS)
+  // Include tokens in body for Electron and admin panel clients
+  // Browser storefront uses HttpOnly cookies via same-origin proxy
+  // Admin panel is cross-origin so needs tokens in body to use Authorization header
   const isElectronClient = req.headers['x-client-platform'] === 'electron';
 
   const responseBody = {
@@ -267,7 +270,8 @@ router.post('/login', loginLimiter, validate(authSchemas.loginSchema), asyncHand
     }
   };
 
-  if (isElectronClient) {
+  // Return tokens in body for Electron and admin panel (cross-origin can't read HttpOnly cookies)
+  if (isElectronClient || isAdmin) {
     responseBody.accessToken = accessToken;
     responseBody.refreshToken = refreshToken;
   }
@@ -388,10 +392,10 @@ router.post('/refresh', refreshLimiter, asyncHandler(async (req, res) => {
       res.cookie('refreshToken', newRefreshToken, REFRESH_COOKIE_OPTIONS);
     }
 
-    // Only include tokens in body for Electron (file:// can't read cross-origin cookies)
+    // Return tokens in body for Electron and admin panel (cross-origin can't read HttpOnly cookies)
     const isElectronClient = req.headers['x-client-platform'] === 'electron';
     const refreshResponse = { success: true, message: 'Token refreshed' };
-    if (isElectronClient) {
+    if (isElectronClient || isAdminClient) {
       refreshResponse.accessToken = accessToken;
       refreshResponse.refreshToken = newRefreshToken;
     }

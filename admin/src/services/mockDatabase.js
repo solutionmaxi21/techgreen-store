@@ -365,7 +365,7 @@ class MockDatabase {
     return {
       totalRevenue,
       totalOrders,
-      totalCustomers: this.users.filter(u => u.role === 'customer').length,
+      totalCustomers: this.users.filter(u => u.role === 'customer' || u.role === 'CUSTOMER').length,
       pendingOrders,
       lowStockProducts,
     };

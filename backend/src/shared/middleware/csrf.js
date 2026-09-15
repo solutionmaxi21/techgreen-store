@@ -31,6 +31,7 @@ const EXEMPT_PATHS = [
   '/auth/login',
   '/auth/signup',
   '/auth/google',
+  '/auth/logout',
   '/auth/forgot-password',
   '/auth/reset-password',
   '/auth/verify-email',

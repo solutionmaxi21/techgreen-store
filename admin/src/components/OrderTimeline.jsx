@@ -132,7 +132,7 @@ const OrderTimeline = ({ timeline }) => {
 
               <div className="event-footer">
                 <div className="event-actor">
-                  {event.changed_by_role === 'admin' ? (
+                  {(event.changed_by_role === 'admin' || event.changed_by_role === 'ADMIN') ? (
                     <div className="actor-badge admin">
                       <ShieldCheck size={12} />
                       <span>{event.changed_by_name || t('timeline.administrator')}</span>

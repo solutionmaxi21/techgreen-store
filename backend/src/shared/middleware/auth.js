@@ -120,8 +120,11 @@ export const authenticateToken = (req, res, next) => {
  * Attaches user if token present, but doesn't require it
  */
 export const optionalAuth = (req, res, next) => {
-  // Check Cookie or Header
-  let token = req.cookies.accessToken;
+  // Check Cookie or Header — support admin cookies too
+  const isAdminClient = req.headers['x-client-type'] === 'admin';
+  let token = isAdminClient
+    ? req.cookies?.adminAccessToken
+    : req.cookies?.accessToken;
   if (!token) {
     const authHeader = req.headers['authorization'];
     token = authHeader && authHeader.split(' ')[1];

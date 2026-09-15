@@ -150,7 +150,7 @@ const transformUsers = () => {
       email: user.email,
       password: 'admin123', // Default for demo
       name: user.full_name,
-      role: user.user_type === 'admin' ? 'admin' : 'customer',
+      role: user.user_type === 'admin' || user.user_type === 'ADMIN' ? 'admin' : 'customer',
       phone: user.phone,
       address: defaultAddress ? {
         street: defaultAddress.address_line1,

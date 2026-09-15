@@ -269,6 +269,22 @@ let lastRefreshResult = null;
 let isLoggingOut = false; // Prevent refresh attempts during logout
 const MIN_REFRESH_INTERVAL = 2000; // 2 seconds between refresh attempts
 
+// In-memory token storage for browser mode (cross-origin can't use cookies reliably)
+// Tokens are stored in JS variables (not localStorage) — no XSS risk from storage,
+// and they're sent as Authorization header which bypasses CSRF.
+let inMemoryAccessToken = null;
+let inMemoryRefreshToken = null;
+
+const storeTokens = (accessToken, refreshToken) => {
+  if (accessToken) inMemoryAccessToken = accessToken;
+  if (refreshToken) inMemoryRefreshToken = refreshToken;
+};
+
+const clearTokens = () => {
+  inMemoryAccessToken = null;
+  inMemoryRefreshToken = null;
+};
+
 // Queue of pending requests waiting for refresh
 let pendingRequests = [];
 
@@ -338,7 +354,7 @@ const attemptTokenRefresh = async () => {
         console.log('[Auth] Token refresh successful');
         lastSuccessfulAuth = Date.now();
 
-        // Update Electron's secure token storage with the new tokens
+        // Store new tokens
         try {
           const refreshData = await refreshRes.json();
           if (isElectron && window.electronAPI?.storeToken) {
@@ -350,10 +366,13 @@ const attemptTokenRefresh = async () => {
               await window.electronAPI.storeRefreshToken(refreshData.refreshToken);
               console.log('[Auth] Updated Electron keytar with new refresh token');
             }
+          } else if (refreshData.accessToken) {
+            // Browser: store in memory for Authorization header
+            storeTokens(refreshData.accessToken, refreshData.refreshToken);
+            console.log('[Auth] Updated in-memory tokens after refresh');
           }
         } catch (e) {
-          // Non-critical for browser (cookies work); critical for Electron but logged
-          console.log('[Auth] Could not update Electron token store:', e.message);
+          console.log('[Auth] Could not update token store:', e.message);
         }
 
         return { success: true };
@@ -436,25 +455,15 @@ export const apiRequest = async (endpoint, options = {}, isRetry = false) => {
     background = false,
     ...requestOptions
   } = options;
-  // CSRF: Read the XSRF-TOKEN cookie and send it as a header on mutating requests
-  const csrfHeaders = {};
+  // CSRF: For cross-origin admin panel, we use Authorization header instead of CSRF cookie
+  // (cross-origin JS can't read HttpOnly XSRF-TOKEN cookie).
+  // Backend skips CSRF when Authorization header is present.
   const method = (requestOptions.method || 'GET').toUpperCase();
   const idempotencyKey = providedIdempotencyKey
     || (idempotencyRequired ? createIdempotencyKey() : null);
-  if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
-    try {
-      const csrfToken = typeof document !== 'undefined'
-        ? document.cookie.match(/XSRF-TOKEN=([^;]+)/)?.[1]
-        : undefined;
-      if (csrfToken) {
-        csrfHeaders['X-XSRF-TOKEN'] = csrfToken;
-      }
-    } catch (_) { /* ignore */ }
-  }
 
   const config = {
     ...requestOptions,
-    // CRITICAL: Always send cookies with requests
     credentials: 'include',
     headers: {
       ...(
@@ -463,25 +472,23 @@ export const apiRequest = async (endpoint, options = {}, isRetry = false) => {
           : { 'Content-Type': 'application/json' }
       ),
       'X-Client-Type': 'admin',
-      // Tell backend this is Electron so it returns tokens in response body
       ...(isElectron ? { 'X-Client-Platform': 'electron' } : {}),
       ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}),
-      ...csrfHeaders,
       ...requestOptions.headers,
     },
   };
 
-  // CRITICAL 3: Browser uses HttpOnly cookies (secure, automatic)
-  // Electron can use secure token storage via IPC
-  // DO NOT use localStorage - XSS vulnerability
-  let storedToken = null
-  try {
-    if (typeof window !== 'undefined' && window.electronAPI && window.electronAPI.getToken) {
-      // Only for Electron: fetch token from secure storage
-      storedToken = await window.electronAPI.getToken()
+  // Auth: Use in-memory token (browser) or Electron secure storage
+  // Sending Authorization header bypasses CSRF check on the backend
+  let storedToken = inMemoryAccessToken;
+  if (isElectron) {
+    try {
+      if (typeof window !== 'undefined' && window.electronAPI && window.electronAPI.getToken) {
+        storedToken = await window.electronAPI.getToken();
+      }
+    } catch (e) {
+      storedToken = null;
     }
-  } catch (e) {
-    storedToken = null
   }
 
   if (storedToken && !config.headers.Authorization) {
@@ -674,20 +681,25 @@ export const authApi = {
       body: JSON.stringify({ email, password, isAdmin: true }),
     });
 
-    // Store tokens securely in Electron via IPC
-    // Browser uses HttpOnly cookies (handled by browser automatically)
-    if (isElectron && window.electronAPI) {
-      try {
-        if (result.accessToken && window.electronAPI.storeToken) {
-          await window.electronAPI.storeToken(result.accessToken);
-          console.log('[Auth] Access token stored securely via Electron IPC');
+    // Store tokens: Electron uses IPC secure storage, browser uses in-memory
+    if (result.accessToken) {
+      if (isElectron && window.electronAPI) {
+        try {
+          if (window.electronAPI.storeToken) {
+            await window.electronAPI.storeToken(result.accessToken);
+            console.log('[Auth] Access token stored securely via Electron IPC');
+          }
+          if (result.refreshToken && window.electronAPI.storeRefreshToken) {
+            await window.electronAPI.storeRefreshToken(result.refreshToken);
+            console.log('[Auth] Refresh token stored securely via Electron IPC');
+          }
+        } catch (e) {
+          console.error('[Auth] Failed to store tokens after login:', e);
         }
-        if (result.refreshToken && window.electronAPI.storeRefreshToken) {
-          await window.electronAPI.storeRefreshToken(result.refreshToken);
-          console.log('[Auth] Refresh token stored securely via Electron IPC');
-        }
-      } catch (e) {
-        console.error('[Auth] Failed to store tokens after login:', e);
+      } else {
+        // Browser: store in memory (not localStorage!) for Authorization header
+        storeTokens(result.accessToken, result.refreshToken);
+        console.log('[Auth] Tokens stored in memory for browser mode');
       }
     }
 
@@ -703,7 +715,17 @@ export const authApi = {
     isLoggingOut = true;
 
     try {
-      // Clear secure tokens in Electron
+      // Gather tokens BEFORE clearing (needed for server-side revocation and auth header)
+      const accessTokenToSend = inMemoryAccessToken;
+      let refreshTokenToSend = inMemoryRefreshToken;
+      if (isElectron && window.electronAPI?.getRefreshToken) {
+        try {
+          refreshTokenToSend = await window.electronAPI.getRefreshToken();
+        } catch (e) { /* ignore */ }
+      }
+
+      // Clear tokens from storage
+      clearTokens();
       if (isElectron && window.electronAPI) {
         try {
           if (window.electronAPI.clearToken) await window.electronAPI.clearToken();
@@ -717,26 +739,24 @@ export const authApi = {
       // Broadcast logout to other admin tabs
       broadcastAdminAuthEvent('LOGOUT');
 
-      // Build logout body - Electron sends refresh token in body for server-side revocation
-      let logoutBody = undefined;
-      if (isElectron && window.electronAPI?.getRefreshToken) {
-        try {
-          const storedRefreshToken = await window.electronAPI.getRefreshToken();
-          if (storedRefreshToken) {
-            logoutBody = JSON.stringify({ refreshToken: storedRefreshToken });
-          }
-        } catch (e) { /* ignore */ }
-      }
+      // Build logout body with refresh token for server-side revocation
+      const logoutBody = refreshTokenToSend
+        ? JSON.stringify({ refreshToken: refreshTokenToSend })
+        : undefined;
 
       // Use direct fetch (NOT apiRequest) to avoid the 401 interceptor
-      // which could trigger a token refresh and re-set cookies
+      const logoutHeaders = {
+        'Content-Type': 'application/json',
+        'X-Client-Type': 'admin',
+      };
+      if (accessTokenToSend) {
+        logoutHeaders['Authorization'] = `Bearer ${accessTokenToSend}`;
+      }
+
       const response = await fetch(`${API_BASE}/auth/logout`, {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Client-Type': 'admin',
-        },
+        headers: logoutHeaders,
         body: logoutBody,
       });
 

@@ -239,7 +239,7 @@ const AdminLayout = ({ children, theme, currentUser, onLogout }) => {
                   </div>
                   <div className="user-text">
                     <span className="name">{currentUser ? `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'Admin' : 'Admin'}</span>
-                    <span className="role">{currentUser?.accessRole?.name || (currentUser?.role === 'sub_admin' ? 'Sub-admin' : t('header.manager'))}</span>
+                    <span className="role">{currentUser?.accessRole?.name || (currentUser?.role?.toUpperCase() === 'SUB_ADMIN' ? 'Sub-admin' : t('header.manager'))}</span>
                   </div>
                   <ChevronDown size={14} className={`profile-chevron ${profileOpen ? 'rotate' : ''}`} />
                 </div>

@@ -1,11 +1,17 @@
-export const isSuperAdmin = (user) => user?.role === 'admin';
+export const isSuperAdmin = (user) => {
+  const role = user?.role?.toUpperCase();
+  return role === 'ADMIN' || role === 'admin';
+};
 
-export const isAdminPanelUser = (user) =>
-  user?.role === 'admin' || user?.role === 'sub_admin';
+export const isAdminPanelUser = (user) => {
+  const role = user?.role?.toUpperCase();
+  return role === 'ADMIN' || role === 'SUB_ADMIN' || role === 'STAFF' || role === 'admin' || role === 'sub_admin';
+};
 
 export const hasPermission = (user, permission) => {
   if (isSuperAdmin(user)) return true;
-  if (!permission || user?.role !== 'sub_admin') return false;
+  const role = user?.role?.toUpperCase();
+  if (!permission || role !== 'SUB_ADMIN') return false;
   return Array.isArray(user.permissions) && user.permissions.includes(permission);
 };
 

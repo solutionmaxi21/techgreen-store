@@ -79,8 +79,8 @@ const getFallbackConstants = () => ({
         REFUNDED: 'refunded'
     },
     USER_ROLES: {
-        CUSTOMER: 'customer',
-        ADMIN: 'admin'
+        CUSTOMER: 'CUSTOMER',
+        ADMIN: 'ADMIN'
     },
     PRODUCT_STATUSES: {
         ACTIVE: 'active',

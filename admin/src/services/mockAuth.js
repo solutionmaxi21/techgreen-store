@@ -190,7 +190,7 @@ export const refreshAccessToken = async () => {
 export const isAuthenticated = () => {
   const token = getToken();
   const user = getCurrentUser();
-  return !!(token && user && user.role === 'admin');
+  return !!(token && user && (user.role === 'admin' || user.role === 'ADMIN'));
 };
 
 export default {
