@@ -11,7 +11,6 @@
         "build": "vite build",
         "preview": "vite preview",
         "lint": "eslint .",
-        "postinstall": "electron-builder install-app-deps",
         "electron:dev": "concurrently \"npm:dev\" \"wait-on http://127.0.0.1:5174 --timeout 60000 && electron .\"",
         "electron:build": "vite build && electron-builder",
         "electron:pack": "vite build && electron-builder --dir",
@@ -85,7 +84,6 @@
         "recharts": "^2.15.4"
     },
     "devDependencies": {
-        "@electron/rebuild": "^4.0.3",
         "@eslint/js": "^9.17.0",
         "@types/react": "^19.0.2",
         "@types/react-dom": "^19.0.2",
