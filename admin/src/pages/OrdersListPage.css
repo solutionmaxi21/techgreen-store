@@ -99,7 +99,7 @@
 }
 
 .status-tab.active .tab-count {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, white, transparent 80%);
   color: var(--primary-foreground);
 }
 
@@ -167,7 +167,7 @@
   outline: none;
   border-color: var(--primary);
   background: var(--card);
-  box-shadow: 0 0 0 4px var(--muted);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary), transparent 88%);
 }
 
 .filters-grid {
@@ -276,29 +276,31 @@
 
 /* Dark Mode Overrides */
 .dark .status-tab {
-  background: var(--background);
+  background: var(--background-subtle);
   border-color: var(--border);
 }
 
 .dark .status-tab:hover {
   background: var(--card);
+  border-color: var(--border-strong);
 }
 
 .dark .filters-section {
-  background: var(--background);
+  background: oklch(0.175 0.024 160 / 0.6);
   border-color: var(--border);
+  backdrop-filter: blur(8px);
 }
 
 .dark .search-box input {
-  background: var(--background);
+  background: var(--background-subtle);
   border-color: var(--border);
-  color: var(--muted);
+  color: var(--foreground);
 }
 
 .dark .form-group input {
-  background: var(--background);
+  background: var(--background-subtle);
   border-color: var(--border);
-  color: var(--muted);
+  color: var(--foreground);
 }
 
 /* Responsive */

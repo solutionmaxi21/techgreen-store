@@ -30,7 +30,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
+  background: color-mix(in srgb, var(--foreground), transparent 30%);
   color: white;
   border: none;
   cursor: pointer;

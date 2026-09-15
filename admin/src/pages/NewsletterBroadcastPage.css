@@ -64,7 +64,7 @@
 .input:focus {
   outline: none;
   border-color: var(--info);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .input.textarea {
@@ -272,7 +272,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--overlay);
   display: flex;
   align-items: center;
   justify-content: center;

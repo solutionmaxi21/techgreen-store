@@ -214,21 +214,21 @@
   color: var(--warning);
   border-color: var(--warning);
   background: var(--warning);
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--warning), transparent 90%);
 }
 
 .timeline-indicator.status-returning {
   color: var(--warning);
   border-color: var(--warning);
   background: var(--warning);
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--warning), transparent 90%);
 }
 
 .timeline-indicator.status-returned {
   color: var(--warning);
   border-color: var(--warning);
   background: var(--warning);
-  box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--warning), transparent 90%);
 }
 
 .timeline-bubble.return-bubble {
@@ -286,12 +286,12 @@
 }
 
 .dark .actor-badge.admin {
-  background: rgba(59, 130, 246, 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .dark .timeline-bubble.return-bubble {
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.3);
+  background: color-mix(in srgb, var(--warning), transparent 90%);
+  border-color: color-mix(in srgb, var(--warning), transparent 70%);
 }
 
 .dark .guepex-status-line {

@@ -65,7 +65,7 @@
 
 .supplier-detail-page .supplier-subtitle {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
+    color: color-mix(in srgb, var(--primary-foreground), transparent 20%);
     margin: 0;
     font-weight: 500;
 }
@@ -99,22 +99,22 @@
 }
 
 .supplier-detail-page .btn-primary:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: color-mix(in srgb, var(--card), transparent 10%);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
 .supplier-detail-page .btn-danger {
-    background: rgba(255, 255, 255, 0.2);
+    background: color-mix(in srgb, var(--primary-foreground), transparent 80%);
     color: var(--primary-foreground);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid color-mix(in srgb, var(--primary-foreground), transparent 70%);
 }
 
 .supplier-detail-page .btn-danger:hover {
-    background: rgba(220, 38, 38, 0.8);
-    border-color: rgba(220, 38, 38, 0.8);
+    background: color-mix(in srgb, var(--danger), transparent 20%);
+    border-color: color-mix(in srgb, var(--danger), transparent 20%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--danger), transparent 70%);
 }
 
 /* ============ MAIN CONTENT ============ */
@@ -327,7 +327,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--overlay);
     color: var(--primary-foreground);
     backdrop-filter: blur(4px);
 }

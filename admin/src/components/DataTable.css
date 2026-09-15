@@ -230,7 +230,7 @@
   align-items: center;
   justify-content: space-between;
   animation: slideDown 0.2s ease-out;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px color-mix(in srgb, var(--foreground), transparent 90%);
 }
 
 @keyframes slideDown {
@@ -259,8 +259,8 @@
 }
 
 .bulk-btn {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: color-mix(in srgb, white, transparent 80%);
+  border: 1px solid color-mix(in srgb, white, transparent 70%);
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
@@ -271,7 +271,7 @@
 }
 
 .bulk-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: color-mix(in srgb, white, transparent 70%);
 }
 
 .bulk-btn.danger {

@@ -43,7 +43,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.9);
+  background: color-mix(in srgb, var(--background), transparent 10%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,7 +240,7 @@
 .products-table select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary), transparent 90%);
 }
 
 .input-number {

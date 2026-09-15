@@ -324,14 +324,18 @@ body {
   line-height: var(--leading-normal);
   background-color: var(--background);
   color: var(--foreground);
-  transition: background-color var(--duration-normal) var(--ease-in-out),
-              color var(--duration-normal) var(--ease-in-out);
+  transition: background-color var(--duration-slow) var(--ease-in-out),
+              color var(--duration-slow) var(--ease-in-out);
 }
 
 /* Selection color */
 ::selection {
-  background: oklch(0.46 0.17 155 / 0.20);
+  background: color-mix(in srgb, var(--primary), transparent 75%);
   color: var(--foreground);
+}
+
+.dark ::selection {
+  background: color-mix(in srgb, var(--primary), transparent 65%);
 }
 
 /* Scrollbar — thin, elegant */
@@ -353,10 +357,23 @@ body {
   background: var(--scrollbar-thumb-hover);
 }
 
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: oklch(0.30 0.02 160);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.38 0.03 160);
+}
+
 /* Focus visible — global */
 :focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline-color: oklch(0.72 0.18 155);
 }
 
 /* ============================================

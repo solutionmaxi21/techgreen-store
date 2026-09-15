@@ -388,26 +388,34 @@
 
 /* Dark Mode */
 .dark .review-stat-card {
-  background: var(--card);
+  background: oklch(0.175 0.024 160 / 0.6);
+  backdrop-filter: blur(8px);
+  border-color: var(--border);
 }
 
 .dark .filters-section-pro {
-  background: var(--card);
+  background: oklch(0.175 0.024 160 / 0.6);
+  backdrop-filter: blur(8px);
 }
 
 .dark .search-box-pro input {
-  background: var(--muted);
+  background: var(--background-subtle);
+  border-color: var(--border);
+  color: var(--foreground);
 }
 
 .dark .pro-select-minimal {
-  background: var(--muted);
+  background: var(--background-subtle);
+  border-color: var(--border);
   color: var(--foreground);
 }
 
 .dark .review-text {
-  color: var(--muted-foreground);
+  color: var(--foreground-subtle);
 }
 
 .dark .btn-icon-s {
-  background: var(--muted);
+  background: var(--background-subtle);
+  border-color: var(--border);
+  color: var(--foreground-subtle);
 }

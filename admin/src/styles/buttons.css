@@ -1,5 +1,6 @@
 /* ============================================
-   Button Design System
+   Button Design System — TechGreen v2
+   Micro-interactions, consistent spacing
    ============================================ */
 
 /* --- Base Button System --- */
@@ -20,8 +21,10 @@
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 150ms ease;
+  transition: all var(--duration-fast) var(--ease-in-out);
   user-select: none;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:focus-visible,
@@ -40,16 +43,26 @@
 .btn-warning:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* --- Primary Button --- */
 .btn-primary {
   background: var(--primary);
   color: var(--primary-foreground);
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-primary:hover:not(:disabled) {
-  opacity: 0.9;
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* --- Secondary Button --- */
@@ -59,27 +72,48 @@
 }
 
 .btn-secondary:hover:not(:disabled) {
-  opacity: 0.9;
+  background: var(--secondary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 /* --- Success Button --- */
 .btn-success {
   background: var(--success);
-  color: var(--primary-foreground);
+  color: var(--success-foreground);
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-success:hover:not(:disabled) {
   opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-success);
+}
+
+.btn-success:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* --- Danger Button --- */
 .btn-danger {
   background: var(--destructive);
   color: var(--destructive-foreground);
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-danger:hover:not(:disabled) {
-  opacity: 0.9;
+  background: var(--destructive-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-destructive);
+}
+
+.btn-danger:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* --- Warning Button --- */
@@ -90,6 +124,11 @@
 
 .btn-warning:hover:not(:disabled) {
   opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-warning:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 /* --- Danger Outline --- */
@@ -106,12 +145,18 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 150ms ease;
+  transition: all var(--duration-fast) var(--ease-in-out);
 }
 
 .btn-danger-outline:hover:not(:disabled) {
   background: var(--destructive);
   color: var(--destructive-foreground);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-destructive);
+}
+
+.btn-danger-outline:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 /* ============================================
@@ -151,12 +196,18 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 150ms ease;
+  transition: all var(--duration-fast) var(--ease-in-out);
 }
 
 .btn-outline:hover:not(:disabled) {
   background: var(--accent);
   color: var(--accent-foreground);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.btn-outline:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 /* ============================================
@@ -175,7 +226,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 150ms ease;
+  transition: all var(--duration-fast) var(--ease-in-out);
 }
 
 .btn-ghost:hover:not(:disabled) {
@@ -198,13 +249,17 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 150ms ease;
+  transition: all var(--duration-fast) var(--ease-in-out);
 }
 
 .btn-icon:hover {
   background: var(--accent);
   color: var(--accent-foreground);
-  border-color: var(--accent-foreground);
+  border-color: var(--border-strong);
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
 }
 
 .btn-icon.btn-sm {
@@ -247,7 +302,7 @@
 }
 
 /* ============================================
-   Loading State
+   Loading State — Spinner Overlay
    ============================================ */
 .btn-loading {
   position: relative;

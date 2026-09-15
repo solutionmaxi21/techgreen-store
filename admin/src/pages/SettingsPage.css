@@ -53,18 +53,23 @@
   font-weight: 600;
   color: var(--muted-foreground);
   border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
+  transition: all var(--duration-normal) var(--ease-in-out);
   margin-bottom: -2px;
   white-space: nowrap;
+  position: relative;
 }
 
 .tab-btn:hover {
   color: var(--foreground);
+  background: var(--accent);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .tab-btn.active {
   color: var(--primary);
   border-bottom-color: var(--primary);
+  background: var(--primary-subtle);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .tab-content {
@@ -104,7 +109,7 @@
 
 .card:hover {
   box-shadow: var(--shadow-lg);
-  border-color: oklch(0.55 0.15 240 / 0.1);
+  border-color: color-mix(in srgb, var(--primary), transparent 80%);
 }
 
 /* ============================================
@@ -991,7 +996,7 @@
 
 .card:hover {
   box-shadow: var(--shadow-lg);
-  border-color: oklch(0.55 0.15 240 / 0.1);
+  border-color: color-mix(in srgb, var(--primary), transparent 80%);
 }
 
 /* ============================================

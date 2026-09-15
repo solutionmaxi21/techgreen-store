@@ -1,5 +1,5 @@
 /* ============================================
-   DASHBOARD — TechGreen Premium
+   DASHBOARD — TechGreen Premium v2
    ============================================ */
 
 .dashboard-container {
@@ -9,6 +9,12 @@
   max-width: 100%;
   margin: 0 auto;
   padding-bottom: var(--space-8);
+  animation: fadeInUp 0.4s var(--ease-out);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- Header --- */
@@ -69,12 +75,24 @@
 
   box-shadow: var(--shadow-sm);
   transition: all var(--duration-normal) var(--ease-in-out);
+  animation: fadeInUp 0.4s var(--ease-out) backwards;
 }
+
+.stat-card:nth-child(1) { animation-delay: 0ms; }
+.stat-card:nth-child(2) { animation-delay: 60ms; }
+.stat-card:nth-child(3) { animation-delay: 120ms; }
+.stat-card:nth-child(4) { animation-delay: 180ms; }
 
 .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--border-strong);
+}
+
+/* Dark mode glass morphism */
+.dark .stat-card {
+  background: oklch(0.175 0.024 160 / 0.7);
+  backdrop-filter: blur(12px);
 }
 
 /* Subtle gradient accent at top */
@@ -85,6 +103,7 @@
   left: 0;
   right: 0;
   height: 3px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   transition: height var(--duration-normal) var(--ease-in-out);
 }
 
@@ -92,10 +111,10 @@
   height: 4px;
 }
 
-.stat-card.blue::after { background: var(--info); }
-.stat-card.orange::after { background: var(--primary); }
-.stat-card.green::after { background: var(--success); }
-.stat-card.purple::after { background: var(--info); }
+.stat-card.blue::after { background: linear-gradient(90deg, var(--info), oklch(0.60 0.14 250)); }
+.stat-card.orange::after { background: linear-gradient(90deg, var(--primary), oklch(0.55 0.18 155)); }
+.stat-card.green::after { background: linear-gradient(90deg, var(--success), oklch(0.65 0.19 155)); }
+.stat-card.purple::after { background: linear-gradient(90deg, oklch(0.55 0.14 300), oklch(0.62 0.16 300)); }
 
 /* Content layout */
 .stat-content {
@@ -168,8 +187,8 @@
 }
 
 .stat-card.purple .stat-icon {
-  background: var(--info-subtle);
-  color: var(--info);
+  background: oklch(0.55 0.14 300 / 0.12);
+  color: oklch(0.55 0.14 300);
 }
 
 .stat-card:hover .stat-icon {

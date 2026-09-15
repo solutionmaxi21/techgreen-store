@@ -1,5 +1,5 @@
 /* ============================================
-   LOGIN PAGE — TechGreen Premium
+   LOGIN PAGE — TechGreen Premium v2
    ============================================ */
 
 .login-wrapper {
@@ -11,6 +11,12 @@
   position: relative;
   overflow: hidden;
   padding: var(--space-4);
+  animation: fadeIn 0.5s var(--ease-out);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Background Pattern — subtle grid */
@@ -54,6 +60,23 @@
   box-shadow: var(--shadow-xl);
   padding: var(--space-10);
   z-index: 10;
+  animation: card-enter 0.5s var(--ease-spring) 0.1s backwards;
+}
+
+.dark .login-card {
+  background: oklch(0.175 0.024 160 / 0.85);
+  backdrop-filter: blur(16px);
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* --- Brand / Header --- */

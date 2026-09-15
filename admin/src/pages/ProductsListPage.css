@@ -143,7 +143,7 @@
 .search-box input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(28, 58, 110, 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary), transparent 88%);
 }
 
 .filters-grid {
@@ -178,7 +178,7 @@
 .filters-grid select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(28, 58, 110, 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary), transparent 88%);
 }
 
 .filters-grid select:hover {
@@ -222,9 +222,9 @@
   padding: 8px 16px;
   font-size: 0.8125rem;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, white, transparent 80%);
   color: var(--primary-foreground);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid color-mix(in srgb, white, transparent 70%);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s;
@@ -232,8 +232,8 @@
 }
 
 .bulk-action-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: color-mix(in srgb, white, transparent 70%);
+  border-color: color-mix(in srgb, white, transparent 50%);
   transform: translateY(-1px);
 }
 
@@ -281,7 +281,7 @@
 
 /* Dark mode */
 .dark .page-header h1 {
-  color: var(--muted);
+  color: var(--foreground);
 }
 
 .dark .page-subtitle {
@@ -289,24 +289,26 @@
 }
 
 .dark .filters-section {
-  background: var(--card);
-  border-color: var(--foreground);
+  background: oklch(0.175 0.024 160 / 0.6);
+  border-color: var(--border);
+  backdrop-filter: blur(8px);
 }
 
 .dark .search-box input,
 .dark .filters-grid select {
-  background: var(--background);
-  border-color: var(--foreground);
-  color: var(--muted);
+  background: var(--background-subtle);
+  border-color: var(--border);
+  color: var(--foreground);
 }
 
 .dark .bulk-actions {
-  background: var(--card);
-  border-color: var(--foreground);
+  background: oklch(0.175 0.024 160 / 0.8);
+  border-color: var(--border);
+  backdrop-filter: blur(8px);
 }
 
 .dark .selected-count {
-  color: var(--border);
+  color: var(--foreground);
 }
 
 .dark .results-count {

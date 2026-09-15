@@ -151,7 +151,7 @@
     padding: 1.25rem 2rem;
     background: var(--card);
     border-top: 1px solid var(--border);
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -4px 6px -1px color-mix(in srgb, var(--foreground), transparent 95%);
     display: flex;
     justify-content: center;
     z-index: 100;
@@ -191,7 +191,7 @@
 .btn-primary-lg:hover {
     background: var(--primary);
     transform: translateY(-1px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px -1px color-mix(in srgb, var(--foreground), transparent 80%);
 }
 
 .btn-secondary-lg {

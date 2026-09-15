@@ -1,9 +1,10 @@
 /* ============================================
-   UI Components & Visual Enhancements
+   UI Components & Visual Enhancements v2
+   TechGreen Premium Design System
    ============================================ */
 
 /* ============================================
-   Cards
+   Cards — Glass Morphism in Dark Mode
    ============================================ */
 .card {
   background: var(--card);
@@ -11,7 +12,13 @@
   border-radius: var(--radius-xl);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 150ms ease;
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.dark .card {
+  background: oklch(0.175 0.024 160 / 0.6);
+  backdrop-filter: blur(12px);
+  border-color: oklch(0.24 0.025 160 / 0.6);
 }
 
 .card:hover {
@@ -38,7 +45,7 @@
 }
 
 /* ============================================
-   Badges
+   Badges — Refined with Pulse for Live
    ============================================ */
 .badge {
   display: inline-flex;
@@ -50,6 +57,7 @@
   font-weight: 500;
   line-height: 1.4;
   white-space: nowrap;
+  transition: all var(--duration-fast) var(--ease-in-out);
 }
 
 .badge-primary {
@@ -58,22 +66,22 @@
 }
 
 .badge-success {
-  background: oklch(0.60 0.19 155 / 0.15);
+  background: var(--success-subtle);
   color: var(--success);
 }
 
 .badge-warning {
-  background: oklch(0.75 0.18 80 / 0.15);
+  background: var(--warning-subtle);
   color: var(--warning);
 }
 
 .badge-danger {
-  background: oklch(0.57 0.22 27 / 0.15);
+  background: var(--destructive-subtle);
   color: var(--destructive);
 }
 
 .badge-info {
-  background: oklch(0.55 0.15 240 / 0.15);
+  background: var(--info-subtle);
   color: var(--info);
 }
 
@@ -82,24 +90,31 @@
   color: var(--muted-foreground);
 }
 
-.dark .badge-success {
-  background: oklch(0.70 0.18 155 / 0.2);
+/* Pulse animation for live/active badges */
+.badge-pulse {
+  position: relative;
 }
 
-.dark .badge-warning {
-  background: oklch(0.78 0.16 80 / 0.2);
+.badge-pulse::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
 }
 
-.dark .badge-danger {
-  background: oklch(0.58 0.22 27 / 0.2);
-}
-
-.dark .badge-info {
-  background: oklch(0.62 0.15 240 / 0.2);
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
 }
 
 /* ============================================
-   Alerts
+   Alerts — Refined
    ============================================ */
 .alert {
   padding: 1rem;
@@ -110,47 +125,53 @@
   align-items: flex-start;
   gap: 0.75rem;
   margin-bottom: 1rem;
+  transition: all var(--duration-normal) var(--ease-in-out);
 }
 
 .alert-info {
-  background: oklch(0.55 0.15 240 / 0.1);
-  border-color: oklch(0.55 0.15 240 / 0.3);
+  background: var(--info-subtle);
+  border-color: color-mix(in srgb, var(--info), transparent 70%);
   color: var(--info);
 }
 
 .alert-success {
-  background: oklch(0.60 0.19 155 / 0.1);
-  border-color: oklch(0.60 0.19 155 / 0.3);
+  background: var(--success-subtle);
+  border-color: color-mix(in srgb, var(--success), transparent 70%);
   color: var(--success);
 }
 
 .alert-warning {
-  background: oklch(0.75 0.18 80 / 0.1);
-  border-color: oklch(0.75 0.18 80 / 0.3);
+  background: var(--warning-subtle);
+  border-color: color-mix(in srgb, var(--warning), transparent 70%);
   color: var(--warning);
 }
 
 .alert-danger {
-  background: oklch(0.57 0.22 27 / 0.1);
-  border-color: oklch(0.57 0.22 27 / 0.3);
+  background: var(--destructive-subtle);
+  border-color: color-mix(in srgb, var(--destructive), transparent 70%);
   color: var(--destructive);
 }
 
 /* ============================================
-   Avatars
+   Avatars — Gradient, Consistent
    ============================================ */
 .avatar {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 9999px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 0.875rem;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), oklch(0.55 0.18 155));
   color: var(--primary-foreground);
   flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-in-out);
+}
+
+.avatar:hover {
+  transform: scale(1.05);
 }
 
 .avatar-sm { width: 2rem; height: 2rem; font-size: 0.75rem; }
@@ -158,7 +179,7 @@
 .avatar-xl { width: 5rem; height: 5rem; font-size: 1.5rem; }
 
 /* ============================================
-   Progress Bars
+   Progress Bars — Animated
    ============================================ */
 .progress {
   width: 100%;
@@ -170,37 +191,51 @@
 
 .progress-bar {
   height: 100%;
-  background: var(--primary);
-  transition: width 300ms ease;
+  background: linear-gradient(90deg, var(--primary), oklch(0.55 0.18 155));
+  transition: width 600ms var(--ease-out);
   border-radius: 9999px;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.2), transparent);
+  animation: progress-shimmer 2s infinite;
+}
+
+@keyframes progress-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .progress-bar.success {
-  background: var(--success);
+  background: linear-gradient(90deg, var(--success), oklch(0.65 0.18 155));
 }
 
 .progress-bar.warning {
-  background: var(--warning);
+  background: linear-gradient(90deg, var(--warning), oklch(0.75 0.16 80));
 }
 
 .progress-bar.danger {
-  background: var(--destructive);
+  background: linear-gradient(90deg, var(--destructive), oklch(0.63 0.22 27));
 }
 
 /* ============================================
-   Loading Spinners
+   Loading Spinners — Elegant
    ============================================ */
 .spinner {
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
-  border: 2px solid oklch(0.46 0.17 155 / 0.15);
+  border: 2.5px solid color-mix(in srgb, var(--primary), transparent 80%);
   border-top-color: var(--primary);
   border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+  animation: spin 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-.spinner-sm { width: 1rem; height: 1rem; }
+.spinner-sm { width: 1rem; height: 1rem; border-width: 2px; }
 .spinner-lg { width: 2.5rem; height: 2.5rem; border-width: 3px; }
 
 @keyframes spin {
@@ -208,11 +243,18 @@
 }
 
 /* ============================================
-   Skeleton Loaders
+   Skeleton Loaders — Smooth
    ============================================ */
 .skeleton {
-  background: var(--muted);
+  background: linear-gradient(90deg, var(--muted) 25%, var(--border-subtle) 50%, var(--muted) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
   border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .skeleton-text { height: 1rem; margin-bottom: 0.5rem; }
@@ -220,7 +262,7 @@
 .skeleton-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; }
 
 /* ============================================
-   Empty States
+   Empty States — Enhanced
    ============================================ */
 .empty-state {
   padding: 4rem 1.5rem;
@@ -232,7 +274,7 @@
   height: 4rem;
   margin: 0 auto 1rem;
   color: var(--muted-foreground);
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .empty-state-title {
@@ -249,10 +291,11 @@
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
 }
 
 /* ============================================
-   Tooltips
+   Tooltips — Refined
    ============================================ */
 [data-tooltip] {
   position: relative;
@@ -264,7 +307,7 @@
   position: absolute;
   bottom: calc(100% + 8px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(4px);
   padding: 0.375rem 0.75rem;
   background: var(--foreground);
   color: var(--background);
@@ -273,16 +316,17 @@
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 150ms ease;
+  transition: all var(--duration-fast) var(--ease-out);
   z-index: 1000;
 }
 
 [data-tooltip]:hover::before {
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* ============================================
-   Dividers
+   Dividers — Subtle
    ============================================ */
 .divider {
   height: 1px;
@@ -298,54 +342,75 @@
 }
 
 /* ============================================
-   Tables
+   Tables — Global Enhancements
    ============================================ */
 table {
   border-collapse: collapse;
   width: 100%;
 }
 
+/* Zebra striping */
+.table-striped tbody tr:nth-child(even) {
+  background: var(--background-subtle);
+}
+
 /* ============================================
-   Scrollbar Styling
+   Scrollbar — Consistent, Thin
    ============================================ */
 ::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--muted);
-  border-radius: var(--radius-sm);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
-  border-radius: var(--radius-sm);
-  transition: background 150ms ease;
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* ============================================
-   Selection
+   Selection — Green Tint
    ============================================ */
 ::selection {
-  background: oklch(0.46 0.17 155 / 0.3);
+  background: color-mix(in srgb, var(--primary), transparent 70%);
   color: var(--foreground);
 }
 
 .dark ::selection {
-  background: oklch(0.70 0.18 155 / 0.3);
+  background: color-mix(in srgb, var(--primary), transparent 60%);
 }
 
 /* ============================================
-   Focus Styles
+   Focus Styles — Visible & Accessible
    ============================================ */
 *:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+/* ============================================
+   Page Enter Animation
+   ============================================ */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.3s var(--ease-out);
 }
 
 /* ============================================

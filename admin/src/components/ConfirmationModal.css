@@ -4,26 +4,31 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--overlay);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    animation: fadeIn 0.2s ease-out;
-    backdrop-filter: blur(2px);
+    animation: fadeIn 0.2s var(--ease-out);
+    backdrop-filter: blur(4px);
 }
 
 .confirmation-modal-content {
     background: var(--card);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl);
     width: 90%;
     max-width: 450px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slideUp 0.3s var(--ease-spring);
     border: 1px solid var(--border);
+}
+
+.dark .confirmation-modal-content {
+    background: oklch(0.175 0.024 160 / 0.95);
+    backdrop-filter: blur(16px);
 }
 
 .modal-header {
@@ -121,7 +126,7 @@
 
 .modal-input:focus {
     border-color: var(--info);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .modal-footer {

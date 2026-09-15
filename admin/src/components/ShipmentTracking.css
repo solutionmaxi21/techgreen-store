@@ -105,7 +105,7 @@
   background-color: var(--primary);
   border-color: var(--primary);
   color: var(--card);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--info), transparent 90%);
   animation: pulse 2s infinite;
 }
 
@@ -124,10 +124,10 @@
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--info), transparent 90%);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.05);
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--info), transparent 95%);
   }
 }
 
@@ -240,7 +240,7 @@
   background-color: var(--destructive);
   border-color: var(--destructive);
   color: var(--card);
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--destructive), transparent 90%);
 }
 
 .tracking-step.failed .step-label {

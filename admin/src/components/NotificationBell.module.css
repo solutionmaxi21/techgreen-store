@@ -27,7 +27,8 @@
 }
 
 .bellButton:hover {
-  background: var(--muted);
+  background: var(--accent);
+  transform: scale(1.05);
 }
 
 .bellButton:active {
@@ -52,15 +53,20 @@
   align-items: center;
   justify-content: center;
   background: var(--destructive);
-  /* Theme error color */
   color: var(--card);
   border-radius: 50%;
   font-size: 11px;
   font-weight: 700;
   border: 2px solid var(--card);
-  /* Punch out the button behind it */
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 0 2px oklch(0.57 0.22 27 / 0.2);
   padding: 0 4px;
+  animation: badge-pop 0.3s var(--ease-spring);
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 [dir="rtl"] .badge {
@@ -76,13 +82,19 @@
   width: 380px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl), 0 0 0 1px oklch(0 0 0 / 0.03);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   max-height: 500px;
-  animation: slideDown 0.2s ease-out;
+  animation: slideDown 0.25s var(--ease-spring);
+  transform-origin: top right;
+}
+
+.dark .panel {
+  background: oklch(0.175 0.024 160 / 0.95);
+  backdrop-filter: blur(16px);
 }
 
 @keyframes slideDown {
@@ -126,7 +138,8 @@
 }
 
 .markAllButton:hover {
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: var(--info-subtle);
+  color: var(--info);
 }
 
 /* Panel Content */
@@ -241,7 +254,8 @@
 }
 
 .notificationItem.unread {
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: var(--info-subtle);
+  border-left: 3px solid var(--info);
 }
 
 /* Notification Icon */
@@ -328,7 +342,7 @@
 }
 
 .viewAllButton:hover {
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: var(--info-subtle);
   border-color: var(--info);
   color: var(--info);
 }
