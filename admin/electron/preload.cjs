@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+const { contextBridge, ipcRenderer } = require('electron')
 
 let pendingAdminDeepLink = null
 const adminDeepLinkListeners = new Set()

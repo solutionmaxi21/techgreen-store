@@ -14,16 +14,16 @@
 }
 
 .confirmation-modal-content {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    background: var(--card);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
     width: 90%;
     max-width: 450px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
     animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border);
 }
 
 .modal-header {
@@ -31,7 +31,7 @@
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--muted);
 }
 
 .modal-icon-wrapper {
@@ -45,23 +45,23 @@
 }
 
 .modal-warning .modal-icon-wrapper {
-    background-color: #fef3c7;
-    color: #d97706;
+    background-color: oklch(0.75 0.18 80 / 0.15);
+    color: var(--warning);
 }
 
 .modal-danger .modal-icon-wrapper {
-    background-color: #fee2e2;
-    color: #dc2626;
+    background-color: oklch(0.57 0.22 27 / 0.08);
+    color: var(--destructive);
 }
 
 .modal-success .modal-icon-wrapper {
-    background-color: #dcfce7;
-    color: #16a34a;
+    background-color: oklch(0.60 0.19 155 / 0.12);
+    color: var(--success);
 }
 
 .modal-info .modal-icon-wrapper {
-    background-color: #dbeafe;
-    color: #2563eb;
+    background-color: oklch(0.55 0.15 240 / 0.1);
+    color: var(--info);
 }
 
 .modal-title-wrapper {
@@ -73,29 +73,29 @@
     margin: 0;
     font-size: 1.125rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--foreground);
     line-height: 1.5;
 }
 
 .modal-close-btn {
     background: transparent;
     border: none;
-    color: #94a3b8;
+    color: var(--muted-foreground);
     cursor: pointer;
     padding: 4px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     transition: all 0.2s;
     margin-left: 8px;
 }
 
 .modal-close-btn:hover {
-    background-color: #f1f5f9;
-    color: #475569;
+    background-color: var(--muted);
+    color: var(--foreground);
 }
 
 .modal-body {
     padding: 20px 24px;
-    color: #64748b;
+    color: var(--muted-foreground);
     font-size: 0.95rem;
     line-height: 1.6;
 }
@@ -111,36 +111,36 @@
 .modal-input {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     font-size: 0.95rem;
-    color: #1e293b;
+    color: var(--foreground);
     transition: all 0.2s;
     outline: none;
 }
 
 .modal-input:focus {
-    border-color: #3b82f6;
+    border-color: var(--info);
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
 .modal-footer {
     padding: 16px 24px;
-    background-color: #f8fafc;
-    border-top: 1px solid #f1f5f9;
+    background-color: var(--background);
+    border-top: 1px solid var(--muted);
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
 }
 
 .btn-cancel {
     padding: 8px 16px;
-    border: 1px solid #e2e8f0;
-    background-color: white;
-    color: #475569;
-    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    color: var(--foreground);
+    border-radius: var(--radius-sm);
     font-weight: 500;
     font-size: 0.875rem;
     cursor: pointer;
@@ -148,36 +148,36 @@
 }
 
 .btn-cancel:hover {
-    background-color: #f1f5f9;
-    border-color: #cbd5e1;
-    color: #334155;
+    background-color: var(--muted);
+    border-color: var(--border);
+    color: var(--foreground);
 }
 
 .btn-confirm {
     padding: 8px 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-weight: 500;
     font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.2s;
-    color: white;
+    color: var(--card);
 }
 
 .btn-primary.btn-confirm {
-    background-color: #3b82f6;
+    background-color: var(--info);
 }
 
 .btn-primary.btn-confirm:hover {
-    background-color: #2563eb;
+    background-color: var(--info);
 }
 
 .btn-danger.btn-confirm {
-    background-color: #ef4444;
+    background-color: var(--destructive);
 }
 
 .btn-danger.btn-confirm:hover {
-    background-color: #dc2626;
+    background-color: var(--destructive);
 }
 
 @keyframes fadeIn {

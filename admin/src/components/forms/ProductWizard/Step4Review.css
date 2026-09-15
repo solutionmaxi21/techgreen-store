@@ -8,10 +8,10 @@
 .review-section {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .section-header {
@@ -20,7 +20,7 @@
   justify-content: space-between;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e5e7eb;
+  border-bottom: 2px solid var(--border);
 }
 
 .section-header h3 {
@@ -30,13 +30,13 @@
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--foreground);
 }
 
 .section-icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #3b82f6;
+  color: var(--info);
   flex-shrink: 0;
 }
 
@@ -45,10 +45,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #3b82f6;
-  color: white;
+  background: var(--info);
+  color: var(--card);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -56,9 +56,9 @@
 }
 
 .btn-edit:hover {
-  background: #2563eb;
+  background: var(--info);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 8px oklch(0.55 0.15 240 / 0.3);
 }
 
 .btn-edit svg {
@@ -79,32 +79,32 @@
   grid-template-columns: 150px 1fr;
   gap: 1rem;
   padding: 0.75rem;
-  background: #f9fafb;
-  border-radius: 0.5rem;
+  background: var(--background);
+  border-radius: var(--radius-sm);
   transition: background 0.2s ease;
 }
 
 .review-item:hover {
-  background: #f3f4f6;
+  background: var(--muted);
 }
 
 .review-item dt {
   font-weight: 500;
-  color: #6b7280;
+  color: var(--muted-foreground);
   font-size: 0.875rem;
   margin: 0;
 }
 
 .review-item dd {
   font-size: 0.9375rem;
-  color: #1f2937;
+  color: var(--foreground);
   margin: 0;
   word-break: break-word;
 }
 
 .review-item dd.highlight {
   font-weight: 600;
-  color: #1f2937;
+  color: var(--foreground);
   font-size: 1rem;
 }
 
@@ -112,9 +112,9 @@
 .sku-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 0.375rem;
+  background: var(--primary);
+  color: var(--card);
+  border-radius: var(--radius-sm);
   font-family: 'Courier New', monospace;
   font-size: 0.875rem;
   font-weight: 600;
@@ -131,28 +131,28 @@
 
 .price-card {
   padding: 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
   text-align: center;
 }
 
 .price-card.cost {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: white;
+  background: var(--warning);
+  color: var(--card);
 }
 
 .price-card.current {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
+  background: var(--success);
+  color: var(--card);
 }
 
 .price-card.sale {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: white;
+  background: var(--destructive);
+  color: var(--card);
 }
 
 .price-card.profit {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-  color: white;
+  background: var(--info);
+  color: var(--card);
 }
 
 .price-label {
@@ -173,33 +173,33 @@
 .stock-badge {
   display: inline-block;
   padding: 0.375rem 0.875rem;
-  border-radius: 0.375rem;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
 }
 
 .stock-badge.in-stock {
-  background: #d1fae5;
-  color: #065f46;
+  background: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
 }
 
 .stock-badge.out-of-stock {
-  background: #fee2e2;
-  color: #991b1b;
+  background: oklch(0.57 0.22 27 / 0.08);
+  color: var(--destructive);
 }
 
 /* Subsections */
 .review-subsection {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border);
 }
 
 .review-subsection h4 {
   margin: 0 0 1rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--foreground);
 }
 
 /* Image Gallery */
@@ -212,9 +212,9 @@
 .review-image-card {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--border);
 }
 
 .review-image-card img {
@@ -228,9 +228,9 @@
   top: 0.5rem;
   left: 0.5rem;
   padding: 0.25rem 0.625rem;
-  background: #3b82f6;
-  color: white;
-  border-radius: 0.25rem;
+  background: var(--info);
+  color: var(--card);
+  border-radius: var(--radius-sm);
   font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -240,8 +240,8 @@
 /* Descriptions */
 .description-preview {
   padding: 1rem;
-  background: #f9fafb;
-  border-radius: 0.5rem;
+  background: var(--background);
+  border-radius: var(--radius-sm);
   margin-bottom: 0.75rem;
 }
 
@@ -252,7 +252,7 @@
 .description-preview strong {
   display: block;
   margin-bottom: 0.5rem;
-  color: #6b7280;
+  color: var(--muted-foreground);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -260,7 +260,7 @@
 
 .description-preview p {
   margin: 0;
-  color: #374151;
+  color: var(--foreground);
   line-height: 1.6;
   font-size: 0.9375rem;
 }
@@ -274,7 +274,7 @@
   margin: 0;
   padding: 1rem;
   text-align: center;
-  color: #9ca3af;
+  color: var(--muted-foreground);
   font-size: 0.875rem;
   font-style: italic;
 }
@@ -291,19 +291,19 @@
   grid-template-columns: 180px 1fr;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  background: #f9fafb;
-  border-radius: 0.375rem;
+  background: var(--background);
+  border-radius: var(--radius-sm);
 }
 
 .spec-item dt {
   font-weight: 600;
-  color: #374151;
+  color: var(--foreground);
   font-size: 0.875rem;
   margin: 0;
 }
 
 .spec-item dd {
-  color: #1f2937;
+  color: var(--foreground);
   font-size: 0.875rem;
   margin: 0;
 }
@@ -317,8 +317,8 @@
 
 .review-tag {
   padding: 0.375rem 0.875rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--primary);
+  color: var(--card);
   border-radius: 1rem;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -333,24 +333,24 @@
 
 .status-badge {
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
 }
 
 .status-badge.active {
-  background: #d1fae5;
-  color: #065f46;
+  background: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
 }
 
 .status-badge.inactive {
-  background: #fee2e2;
-  color: #991b1b;
+  background: oklch(0.57 0.22 27 / 0.08);
+  color: var(--destructive);
 }
 
 .status-badge.featured {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #78350f;
+  background: var(--warning);
+  color: var(--foreground);
 }
 
 /* Summary Stats */
@@ -366,9 +366,9 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 0.75rem;
-  color: white;
+  background: var(--primary);
+  border-radius: var(--radius-md);
+  color: var(--card);
   text-align: center;
 }
 
@@ -398,29 +398,29 @@
   display: flex;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 0.75rem;
+  background: oklch(0.55 0.15 240 / 0.1);
+  border: 1px solid var(--info);
+  border-radius: var(--radius-md);
   margin-top: 2rem;
 }
 
 .notice-icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #3b82f6;
+  color: var(--info);
   flex-shrink: 0;
   margin-top: 0.125rem;
 }
 
 .submit-notice p {
   margin: 0;
-  color: #1e40af;
+  color: var(--info);
   line-height: 1.6;
   font-size: 0.9375rem;
 }
 
 .submit-notice strong {
-  color: #1e3a8a;
+  color: var(--info);
 }
 
 /* Responsive Design */
@@ -506,16 +506,16 @@
 }
 
 .variant-review-card {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   padding: 0.875rem 1rem;
   transition: border-color 0.2s;
 }
 
 .variant-review-card.is-default {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: var(--info);
+  background: oklch(0.55 0.15 240 / 0.1);
 }
 
 .variant-review-header {
@@ -532,30 +532,30 @@
   min-width: 24px;
   height: 24px;
   padding: 0 6px;
-  background: #e5e7eb;
-  color: #374151;
+  background: var(--border);
+  color: var(--foreground);
   font-size: 11px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
 }
 
 .variant-review-card.is-default .variant-review-badge {
-  background: #3b82f6;
-  color: #fff;
+  background: var(--info);
+  color: var(--card);
 }
 
 .variant-review-name {
   font-size: 14px;
   font-weight: 600;
-  color: #111827;
+  color: var(--foreground);
 }
 
 .variant-review-default {
   margin-left: auto;
   font-size: 11px;
   font-weight: 600;
-  color: #3b82f6;
-  background: #dbeafe;
+  color: var(--info);
+  background: oklch(0.55 0.15 240 / 0.1);
   padding: 2px 8px;
   border-radius: 9999px;
 }
@@ -574,20 +574,20 @@
 }
 
 .variant-review-item dt {
-  color: #6b7280;
+  color: var(--muted-foreground);
   font-weight: 400;
 }
 
 .variant-review-item dd {
   margin: 0;
-  color: #111827;
+  color: var(--foreground);
   font-weight: 500;
 }
 
 .variant-review-item code {
   font-family: monospace;
-  background: #e5e7eb;
+  background: var(--border);
   padding: 0 4px;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
 }

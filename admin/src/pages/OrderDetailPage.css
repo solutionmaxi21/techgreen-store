@@ -71,9 +71,9 @@
 .card {
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .card-header {
@@ -96,7 +96,7 @@
   background: var(--gray-100);
   color: var(--gray-600);
   padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: var(--radius-xl);
   font-weight: 600;
 }
 
@@ -146,7 +146,7 @@
   height: 48px;
   min-width: 48px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
   background-color: var(--gray-100);
 }
@@ -259,11 +259,11 @@
 /* Print Styles */
 @media print {
   body {
-    background: white;
+    background: var(--card);
   }
 
   .no-print {
-    display: none !important;
+    display: none;
   }
 
   .order-detail-page {
@@ -276,14 +276,14 @@
   }
 
   .card {
-    border: 1px solid #eee;
+    border: 1px solid var(--border);
     box-shadow: none;
     border-radius: 0;
     margin-bottom: 20px;
   }
 
   .order-summary {
-    background: #f9f9f9 !important;
+    background: var(--background);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -316,9 +316,9 @@
 }
 
 .modal-content {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: var(--card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
   max-width: 600px;
   width: 90%;
   max-height: 90vh;

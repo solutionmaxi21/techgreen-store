@@ -13,21 +13,21 @@
 .bilingual-input__label {
     font-weight: 500;
     font-size: 0.875rem;
-    color: var(--text-primary, #1f2937);
+    color: var(--foreground);
     display: flex;
     align-items: center;
     gap: 0.25rem;
 }
 
 .bilingual-input__required {
-    color: var(--error-color, #ef4444);
+    color: var(--destructive);
 }
 
 /* Language Tabs */
 .bilingual-input__tabs {
     display: flex;
     gap: 0.25rem;
-    background: var(--bg-secondary, #f3f4f6);
+    background: var(--muted);
     padding: 0.25rem;
     border-radius: 0.5rem;
     width: fit-content;
@@ -44,23 +44,23 @@
     cursor: pointer;
     font-size: 0.813rem;
     font-weight: 500;
-    color: var(--text-secondary, #6b7280);
+    color: var(--muted-foreground);
     transition: all 0.2s ease;
 }
 
 .bilingual-input__tab:hover {
-    background: var(--bg-hover, #e5e7eb);
-    color: var(--text-primary, #1f2937);
+    background: var(--muted);
+    color: var(--foreground);
 }
 
 .bilingual-input__tab.active {
-    background: var(--bg-primary, #ffffff);
-    color: var(--primary-color, #3b82f6);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: var(--card);
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
 }
 
 .bilingual-input__tab.empty:not(.active) {
-    color: var(--warning-color, #f59e0b);
+    color: var(--warning);
 }
 
 .bilingual-input__tab-flag {
@@ -78,8 +78,8 @@
     justify-content: center;
     width: 1.125rem;
     height: 1.125rem;
-    background: var(--warning-color, #f59e0b);
-    color: white;
+    background: var(--warning);
+    color: var(--primary-foreground);
     border-radius: 50%;
     font-size: 0.75rem;
     font-weight: 700;
@@ -93,30 +93,30 @@
 /* Input/Textarea */
 input.bilingual-input__field,
 textarea.bilingual-input__field {
-    width: 100% !important;
-    padding: 0.625rem 0.875rem !important;
-    border: 1px solid var(--border-color, #cbd5e1) !important;
-    border-radius: 0.5rem !important;
-    font-size: 0.875rem !important;
-    line-height: 1.5 !important;
-    color: var(--text-primary, #1f2937) !important;
-    background-color: #ffffff !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--foreground);
+    background-color: var(--card);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input.bilingual-input__field:focus,
 textarea.bilingual-input__field:focus {
-    outline: none !important;
-    border-color: var(--primary-color, #3b82f6) !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-    background-color: #ffffff !important;
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: var(--card);
 }
 
 input.bilingual-input__field:disabled,
 textarea.bilingual-input__field:disabled {
-    background-color: var(--bg-disabled, #f9fafb) !important;
-    cursor: not-allowed !important;
-    color: var(--text-muted, #9ca3af) !important;
+    background-color: var(--background);
+    cursor: not-allowed;
+    color: var(--muted-foreground);
 }
 
 /* RTL Support */
@@ -137,8 +137,8 @@ textarea.bilingual-input__field:disabled {
     top: 0.5rem;
     left: 0.5rem;
     padding: 0.125rem 0.375rem;
-    background: var(--info-bg, #dbeafe);
-    color: var(--info-color, #2563eb);
+    background: oklch(0.55 0.15 240 / 0.1);
+    color: var(--info);
     font-size: 0.625rem;
     font-weight: 600;
     border-radius: 0.25rem;
@@ -155,7 +155,7 @@ textarea.bilingual-input__field:disabled {
 
 /* Error State */
 .bilingual-input--error .bilingual-input__field {
-    border-color: var(--error-color, #ef4444);
+    border-color: var(--destructive);
 }
 
 .bilingual-input--error .bilingual-input__field:focus {
@@ -164,7 +164,7 @@ textarea.bilingual-input__field:disabled {
 
 .bilingual-input__error-message {
     font-size: 0.75rem;
-    color: var(--error-color, #ef4444);
+    color: var(--destructive);
     margin-top: 0.25rem;
 }
 
@@ -174,16 +174,16 @@ textarea.bilingual-input__field:disabled {
     align-items: flex-start;
     gap: 0.5rem;
     padding: 0.5rem 0.75rem;
-    background: var(--bg-secondary, #f3f4f6);
+    background: var(--muted);
     border-radius: 0.375rem;
     font-size: 0.75rem;
-    color: var(--text-secondary, #6b7280);
+    color: var(--muted-foreground);
     margin-top: 0.25rem;
 }
 
 .bilingual-input__preview-label {
     font-weight: 600;
-    color: var(--text-muted, #9ca3af);
+    color: var(--muted-foreground);
     flex-shrink: 0;
 }
 
@@ -196,32 +196,32 @@ textarea.bilingual-input__field:disabled {
 
 /* Dark mode support */
 .dark .bilingual-input__tabs {
-    background-color: hsl(var(--bento-surface-elevated)) !important;
+    background-color: hsl(var(--bento-surface-elevated));
 }
 
 .dark button.bilingual-input__tab {
-    color: hsl(var(--bento-ink-muted)) !important;
-    background-color: transparent !important;
+    color: hsl(var(--bento-ink-muted));
+    background-color: transparent;
 }
 
 .dark button.bilingual-input__tab:hover {
-    background-color: hsl(var(--bento-surface-strong)) !important;
-    color: hsl(var(--bento-ink)) !important;
+    background-color: hsl(var(--bento-surface-strong));
+    color: hsl(var(--bento-ink));
 }
 
 .dark button.bilingual-input__tab.active {
-    background-color: hsl(var(--bento-surface)) !important;
-    color: hsl(var(--bento-accent)) !important;
+    background-color: hsl(var(--bento-surface));
+    color: hsl(var(--bento-accent));
 }
 
 .dark input.bilingual-input__field,
 .dark textarea.bilingual-input__field {
-    background-color: hsl(var(--bento-surface)) !important;
-    border-color: hsl(var(--bento-border)) !important;
-    color: hsl(var(--bento-ink)) !important;
+    background-color: hsl(var(--bento-surface));
+    border-color: hsl(var(--bento-border));
+    color: hsl(var(--bento-ink));
 }
 
 .dark .bilingual-input__preview {
-    background-color: hsl(var(--bento-surface-elevated)) !important;
-    color: hsl(var(--bento-ink-muted)) !important;
+    background-color: hsl(var(--bento-surface-elevated));
+    color: hsl(var(--bento-ink-muted));
 }

@@ -8,7 +8,7 @@
   background: var(--gray-100);
   color: var(--gray-600);
   padding: 2px 8px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
 }
 
 .timeline-empty-state {
@@ -62,7 +62,7 @@
   align-items: center;
   justify-content: center;
   color: var(--gray-500);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Status specific colors for indicators */
@@ -98,7 +98,7 @@
 .timeline-bubble {
   flex-grow: 1;
   background: var(--gray-50);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   padding: 16px;
   border: 1px solid var(--border-color);
   transition: all 0.2s;
@@ -107,7 +107,7 @@
 .timeline-bubble:hover {
   background: var(--bg-primary);
   border-color: var(--gray-300);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
   transform: translateX(4px);
 }
 
@@ -134,10 +134,10 @@
 .payment-tag-pro {
   font-size: 11px;
   font-weight: 700;
-  color: white;
+  color: var(--primary-foreground);
   background: var(--primary-700);
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .event-timestamp {
@@ -149,9 +149,9 @@
 .event-note {
   display: flex;
   gap: 10px;
-  background: white;
+  background: var(--card);
   padding: 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   margin-bottom: 12px;
 }
@@ -185,7 +185,7 @@
   align-items: center;
   gap: 6px;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-size: 11px;
   font-weight: 600;
 }
@@ -207,38 +207,38 @@
 
 /* Return Event Styles */
 .timeline-event.return-event .timeline-track {
-  background: var(--warning-300, #fcd34d);
+  background: var(--warning);
 }
 
 .timeline-indicator.return {
-  color: var(--warning-600, #d97706);
-  border-color: var(--warning-500, #f59e0b);
-  background: var(--warning-50, #fffbeb);
+  color: var(--warning);
+  border-color: var(--warning);
+  background: var(--warning);
   box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
 }
 
 .timeline-indicator.status-returning {
-  color: var(--warning-600, #d97706);
-  border-color: var(--warning-500, #f59e0b);
-  background: var(--warning-50, #fffbeb);
+  color: var(--warning);
+  border-color: var(--warning);
+  background: var(--warning);
   box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
 }
 
 .timeline-indicator.status-returned {
-  color: var(--warning-700, #b45309);
-  border-color: var(--warning-600, #d97706);
-  background: var(--warning-100, #fef3c7);
+  color: var(--warning);
+  border-color: var(--warning);
+  background: var(--warning);
   box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.1);
 }
 
 .timeline-bubble.return-bubble {
-  background: var(--warning-50, #fffbeb);
-  border-color: var(--warning-200, #fde68a);
+  background: var(--warning);
+  border-color: var(--warning);
 }
 
 .timeline-bubble.return-bubble:hover {
-  background: var(--warning-100, #fef3c7);
-  border-color: var(--warning-300, #fcd34d);
+  background: var(--warning);
+  border-color: var(--warning);
 }
 
 /* Guepex Status Line */
@@ -247,8 +247,8 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: white;
-  border-radius: 6px;
+  background: var(--card);
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
   margin-bottom: 12px;
   font-size: 12px;
@@ -269,20 +269,20 @@
   align-items: center;
   gap: 4px;
   margin-left: auto;
-  color: var(--warning-600, #d97706);
+  color: var(--warning);
   font-weight: 500;
 }
 
 .guepex-reason svg {
-  color: var(--warning-500, #f59e0b);
+  color: var(--warning);
 }
 
 .dark .timeline-bubble {
-  background: #0d1117;
+  background: var(--card);
 }
 
 .dark .event-note {
-  background: #161b22;
+  background: var(--background);
 }
 
 .dark .actor-badge.admin {
@@ -295,6 +295,6 @@
 }
 
 .dark .guepex-status-line {
-  background: #161b22;
+  background: var(--background);
   border-color: var(--border-color);
 }

@@ -5,14 +5,14 @@
 }
 
 .product-form {
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
 .form-section {
   padding: 24px;
-  border-bottom: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid var(--border);
 }
 
 .form-section:last-of-type {
@@ -22,7 +22,7 @@
 .form-section h2 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-gray-900);
+  color: var(--foreground);
   margin: 0 0 20px 0;
 }
 
@@ -61,7 +61,7 @@
 .form-group label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-gray-700);
+  color: var(--foreground);
   margin-bottom: 8px;
 }
 
@@ -69,8 +69,8 @@
 .form-group select,
 .form-group textarea {
   padding: 10px 12px;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-family: inherit;
   transition: all 0.2s;
@@ -80,13 +80,13 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(28, 58, 110, 0.1);
 }
 
 .form-group input.error,
 .form-group select.error {
-  border-color: var(--color-error);
+  border-color: var(--destructive);
 }
 
 .form-group textarea {
@@ -95,14 +95,14 @@
 }
 
 .error-message {
-  color: var(--color-error);
+  color: var(--destructive);
   font-size: 0.75rem;
   margin-top: 4px;
 }
 
 .char-count {
   font-size: 0.75rem;
-  color: var(--color-gray-500);
+  color: var(--muted-foreground);
   text-align: right;
   margin-top: 4px;
 }
@@ -112,56 +112,56 @@
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  background: var(--color-gray-50);
-  border-top: 1px solid var(--color-gray-200);
-  border-radius: 0 0 8px 8px;
+  background: var(--muted);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
 .loading {
   padding: 48px 24px;
   text-align: center;
-  color: var(--color-gray-500);
+  color: var(--muted-foreground);
 }
 
 /* Dark mode */
 .dark .product-form {
-  background: var(--color-gray-800);
-  border-color: var(--color-gray-700);
+  background: var(--card);
+  border-color: var(--foreground);
 }
 
 .dark .form-section {
-  border-color: var(--color-gray-700);
+  border-color: var(--foreground);
 }
 
 .dark .form-section h2 {
-  color: var(--color-gray-100);
+  color: var(--muted);
 }
 
 .dark .form-group label {
-  color: var(--color-gray-300);
+  color: var(--border);
 }
 
 .dark .form-group input,
 .dark .form-group select,
 .dark .form-group textarea {
-  background: var(--color-gray-900);
-  border-color: var(--color-gray-700);
-  color: var(--color-gray-100);
+  background: var(--background);
+  border-color: var(--foreground);
+  color: var(--muted);
 }
 
 .dark .form-actions {
-  background: var(--color-gray-900);
-  border-color: var(--color-gray-700);
+  background: var(--background);
+  border-color: var(--foreground);
 }
 
 .dark .btn-secondary {
-  background: var(--color-gray-800);
-  color: var(--color-gray-300);
-  border-color: var(--color-gray-600);
+  background: var(--card);
+  color: var(--border);
+  border-color: var(--muted-foreground);
 }
 
 .dark .btn-secondary:hover:not(:disabled) {
-  background: var(--color-gray-700);
+  background: var(--foreground);
 }
 
 /* Responsive */

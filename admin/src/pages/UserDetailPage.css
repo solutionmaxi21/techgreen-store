@@ -36,7 +36,7 @@
   height: 36px;
   background: none;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--gray-500);
   cursor: pointer;
   padding: 0;
@@ -67,12 +67,12 @@
 .stat-card-pro {
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   padding: 16px 20px;
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   min-width: 0;
 } 
 .stat-info {
@@ -89,7 +89,7 @@
 .stat-icon {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,7 +237,7 @@
 .pro-select-sm {
   padding: 6px 12px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-size: 13px;
   background: var(--gray-50);
 }
@@ -247,7 +247,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -276,7 +276,7 @@
   background: none;
   border: 1px dashed var(--error-200);
   color: var(--error-500);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -304,7 +304,7 @@
   padding: 0 6px;
   background: var(--primary-50);
   color: var(--primary-600);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 12px;
   font-weight: 600;
 }
@@ -319,7 +319,7 @@
 .review-item {
   padding: 16px;
   background: var(--gray-50);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
 }
 
@@ -336,7 +336,7 @@
 }
 
 .star-filled {
-  color: #fbbf24;
+  color: var(--warning);
 }
 
 .star-empty {
@@ -365,7 +365,7 @@
 .address-item {
   padding: 12px;
   background: var(--gray-50);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   font-size: 13px;
   line-height: 1.6;
@@ -383,10 +383,10 @@
   right: 8px;
   padding: 2px 8px;
   background: var(--primary-600);
-  color: white;
+  color: var(--primary-foreground);
   font-size: 10px;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   text-transform: uppercase;
 }
 
@@ -403,33 +403,33 @@
 
 /* Dark Mode */
 .dark .stat-card-pro {
-  background: #0d1117;
+  background: var(--card);
 }
 
 .dark .info-content .value {
-  color: #c9d1d9;
+  color: var(--foreground);
 }
 
 .dark .action-row {
-  border-color: #30363d;
+  border-color: var(--border);
 }
 
 .dark .pro-select-sm {
-  background: #161b22;
-  color: #c9d1d9;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .dark .review-item,
 .dark .address-item {
-  background: #161b22;
-  border-color: #30363d;
+  background: var(--background);
+  border-color: var(--border);
 }
 
 .dark .review-text {
-  color: #8b949e;
+  color: var(--muted-foreground);
 }
 
 .dark .badge-count {
-  background: #1f6feb;
-  color: #ffffff;
+  background: var(--info);
+  color: var(--primary-foreground);
 }

@@ -36,10 +36,10 @@
 .filters-section-pro {
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   padding: 24px;
   margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -63,7 +63,7 @@
   padding: 12px 12px 12px 48px;
   background: var(--gray-50);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   color: var(--gray-900);
   transition: all 0.2s;
@@ -101,7 +101,7 @@
   padding: 10px 12px;
   background: var(--gray-50);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   color: var(--gray-900);
   cursor: pointer;
@@ -145,23 +145,23 @@
 }
 
 .user-avatar.color-1 {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: var(--info);
 }
 
 .user-avatar.color-2 {
-  background: linear-gradient(135deg, #10b981, #047857);
+  background: var(--success);
 }
 
 .user-avatar.color-3 {
-  background: linear-gradient(135deg, #f59e0b, #b45309);
+  background: var(--warning);
 }
 
 .user-avatar.color-4 {
-  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+  background: var(--info);
 }
 
 .user-avatar.color-5 {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  background: var(--destructive);
 }
 
 .user-info {
@@ -204,7 +204,7 @@
   background: var(--gray-100);
   color: var(--gray-600);
   padding: 2px 8px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
 }
 
 .ltv-value {
@@ -233,7 +233,7 @@
   color: var(--gray-400);
   cursor: pointer;
   padding: 4px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   transition: all 0.2s;
 }
 
@@ -244,18 +244,18 @@
 
 /* Dark Mode Adjustments */
 .dark .filters-section-pro {
-  background: #0d1117;
+  background: var(--card);
 }
 
 .dark .search-box-pro input {
-  background: #161b22;
+  background: var(--background);
 }
 
 .dark .pro-select-minimal {
-  background: #161b22;
+  background: var(--background);
 }
 
 .dark .order-count-badge {
-  background: #30363d;
-  color: #8b949e;
+  background: var(--muted);
+  color: var(--muted-foreground);
 }

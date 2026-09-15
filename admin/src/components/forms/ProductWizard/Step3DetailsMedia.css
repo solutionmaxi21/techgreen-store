@@ -11,46 +11,46 @@
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid #e5e7eb;
+  border-bottom: 2px solid var(--border);
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--foreground);
 }
 
 .section-icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #3b82f6;
+  color: var(--info);
   flex-shrink: 0;
 }
 
 /* Image Upload Zone */
 .image-upload-zone {
-  border: 2px dashed #d1d5db;
-  border-radius: 0.75rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
   padding: 3rem 2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: #f9fafb;
+  background: var(--background);
   margin-bottom: 1.5rem;
 }
 
 .image-upload-zone:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: var(--info);
+  background: oklch(0.55 0.15 240 / 0.1);
 }
 
 .image-upload-zone.drag-active {
-  border-color: #3b82f6;
-  background: #dbeafe;
+  border-color: var(--info);
+  background: oklch(0.55 0.15 240 / 0.1);
   transform: scale(1.01);
 }
 
 .upload-icon {
   width: 3rem;
   height: 3rem;
-  color: #9ca3af;
+  color: var(--muted-foreground);
   margin: 0 auto 1rem;
   stroke-width: 1.5;
 }
@@ -58,26 +58,26 @@
 .upload-text {
   margin: 0 0 0.5rem;
   font-size: 1rem;
-  color: #374151;
+  color: var(--foreground);
 }
 
 .upload-text strong {
-  color: #3b82f6;
+  color: var(--info);
   font-weight: 600;
 }
 
 .upload-hint {
   margin: 0;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--muted-foreground);
 }
 
 /* Image Count Badge */
 .image-count {
   margin-left: auto;
   padding: 0.25rem 0.75rem;
-  background: #eff6ff;
-  color: #3b82f6;
+  background: oklch(0.55 0.15 240 / 0.1);
+  color: var(--info);
   border-radius: 1rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -86,10 +86,10 @@
 /* Upload Progress */
 .upload-progress-list {
   margin-bottom: 1.5rem;
-  background: #f9fafb;
-  border-radius: 0.5rem;
+  background: var(--background);
+  border-radius: var(--radius-sm);
   padding: 1rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
 }
 
 .upload-progress-item {
@@ -97,8 +97,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem;
-  background: white;
-  border-radius: 0.375rem;
+  background: var(--card);
+  border-radius: var(--radius-sm);
   margin-bottom: 0.5rem;
 }
 
@@ -108,7 +108,7 @@
 
 .upload-filename {
   font-size: 0.875rem;
-  color: #374151;
+  color: var(--foreground);
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -118,8 +118,8 @@
 .upload-spinner {
   width: 1.25rem;
   height: 1.25rem;
-  border: 2px solid #e5e7eb;
-  border-top-color: #3b82f6;
+  border: 2px solid var(--border);
+  border-top-color: var(--info);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -138,22 +138,22 @@
 }
 
 .image-card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   overflow: hidden;
   transition: all 0.2s ease;
 }
 
 .image-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
 .image-preview {
   position: relative;
   aspect-ratio: 1;
-  background: #f9fafb;
+  background: var(--background);
   overflow: hidden;
 }
 
@@ -168,9 +168,9 @@
   top: 0.5rem;
   left: 0.5rem;
   padding: 0.25rem 0.75rem;
-  background: #3b82f6;
-  color: white;
-  border-radius: 0.375rem;
+  background: var(--info);
+  color: var(--card);
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -183,10 +183,10 @@
   right: 0.5rem;
   width: 2rem;
   height: 2rem;
-  background: rgba(239, 68, 68, 0.95);
+  background: var(--destructive);
   border: none;
-  border-radius: 0.375rem;
-  color: white;
+  border-radius: var(--radius-sm);
+  color: var(--card);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -200,7 +200,7 @@
 }
 
 .btn-remove-image:hover {
-  background: #dc2626;
+  background: var(--destructive);
   transform: scale(1.05);
 }
 
@@ -213,32 +213,32 @@
   width: 100%;
   padding: 0.625rem;
   border: none;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border);
   font-size: 0.875rem;
-  color: #374151;
+  color: var(--foreground);
   outline: none;
   transition: background 0.2s ease;
 }
 
 .alt-text-input:focus {
-  background: #f9fafb;
+  background: var(--background);
 }
 
 .image-controls {
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
-  background: #f9fafb;
-  border-top: 1px solid #e5e7eb;
+  background: var(--background);
+  border-top: 1px solid var(--border);
 }
 
 .btn-move {
   flex: 1;
   padding: 0.5rem;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  color: #374151;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
@@ -246,19 +246,19 @@
 }
 
 .btn-move:hover {
-  background: #3b82f6;
-  color: white;
-  border-color: #3b82f6;
+  background: var(--info);
+  color: var(--card);
+  border-color: var(--info);
 }
 
 /* Specifications */
 .btn-add-spec {
   margin-left: auto;
   padding: 0.5rem 1rem;
-  background: #3b82f6;
-  color: white;
+  background: var(--info);
+  color: var(--card);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -266,9 +266,9 @@
 }
 
 .btn-add-spec:hover {
-  background: #2563eb;
+  background: var(--info);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 8px oklch(0.55 0.15 240 / 0.3);
 }
 
 .specifications-list {
@@ -283,25 +283,25 @@
   gap: 0.75rem;
   align-items: center;
   padding: 1rem;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   transition: all 0.2s ease;
 }
 
 .specification-row:hover {
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
 }
 
 .spec-name,
 .spec-value {
   padding: 0.625rem 0.875rem;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  color: #1f2937;
+  color: var(--foreground);
   transition: all 0.2s ease;
 }
 
@@ -312,17 +312,17 @@
 .spec-name:focus,
 .spec-value:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--info);
+  box-shadow: 0 0 0 3px oklch(0.55 0.15 240 / 0.1);
 }
 
 .btn-remove-spec {
   width: 2.5rem;
   height: 2.5rem;
-  background: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  color: #ef4444;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--destructive);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -331,9 +331,9 @@
 }
 
 .btn-remove-spec:hover {
-  background: #ef4444;
-  color: white;
-  border-color: #ef4444;
+  background: var(--destructive);
+  color: var(--card);
+  border-color: var(--destructive);
   transform: scale(1.05);
 }
 
@@ -345,10 +345,10 @@
 .empty-state {
   text-align: center;
   padding: 3rem 2rem;
-  background: #f9fafb;
-  border: 1px dashed #d1d5db;
-  border-radius: 0.75rem;
-  color: #6b7280;
+  background: var(--background);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--muted-foreground);
 }
 
 .empty-state p {
@@ -358,7 +358,7 @@
 
 .hint-text {
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: var(--muted-foreground);
 }
 
 /* Bilingual Specification Row */
@@ -403,8 +403,8 @@
 
 .tag-chip {
   padding: 0.375rem 0.875rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--primary);
+  color: var(--card);
   border-radius: 1rem;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -412,7 +412,7 @@
 }
 
 .tag-count {
-  color: #764ba2;
+  color: var(--primary);
   font-weight: 500;
 }
 
@@ -425,15 +425,15 @@
 
 .setting-item {
   padding: 1.5rem;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   transition: all 0.2s ease;
 }
 
 .setting-item:hover {
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
 }
 
 .toggle-label {
@@ -452,7 +452,7 @@
   position: relative;
   width: 3rem;
   height: 1.75rem;
-  background: #d1d5db;
+  background: var(--border);
   border-radius: 1rem;
   transition: background 0.3s ease;
   flex-shrink: 0;
@@ -466,14 +466,14 @@
   left: 0.25rem;
   width: 1.25rem;
   height: 1.25rem;
-  background: white;
+  background: var(--card);
   border-radius: 50%;
   transition: transform 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 .toggle-label input[type="checkbox"]:checked+.toggle-switch {
-  background: #3b82f6;
+  background: var(--info);
 }
 
 .toggle-label input[type="checkbox"]:checked+.toggle-switch::after {
@@ -488,12 +488,12 @@
 
 .toggle-text strong {
   font-size: 0.9375rem;
-  color: #1f2937;
+  color: var(--foreground);
 }
 
 .toggle-text small {
   font-size: 0.8125rem;
-  color: #6b7280;
+  color: var(--muted-foreground);
 }
 
 /* Field Meta (Char counts, hints) */
@@ -506,12 +506,12 @@
 }
 
 .char-count {
-  color: #6b7280;
+  color: var(--muted-foreground);
   font-weight: 500;
 }
 
 .field-hint {
-  color: #9ca3af;
+  color: var(--muted-foreground);
 }
 
 /* Responsive Design */

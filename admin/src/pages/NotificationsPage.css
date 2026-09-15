@@ -34,23 +34,23 @@
     width: 36px;
     height: 36px;
     border: none;
-    background: var(--bg-secondary, #f3f4f6);
-    border-radius: 8px;
+    background: var(--muted);
+    border-radius: var(--radius-md);
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .back-btn:hover {
-    background: var(--bg-tertiary, #e5e7eb);
+    background: var(--border);
 }
 
 .unread-badge {
-    background: #ef4444;
-    color: white;
+    background: var(--destructive);
+    color: var(--destructive-foreground);
     font-size: 0.75rem;
     font-weight: 600;
     padding: 2px 8px;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
 }
 
 .mark-all-btn {
@@ -58,9 +58,9 @@
     align-items: center;
     gap: 6px;
     padding: 8px 16px;
-    border: 1px solid var(--border-color, #e5e7eb);
-    background: var(--bg-primary, white);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
@@ -68,7 +68,7 @@
 }
 
 .mark-all-btn:hover {
-    background: var(--bg-secondary, #f3f4f6);
+    background: var(--muted);
 }
 
 /* Filter Tabs */
@@ -80,9 +80,9 @@
 
 .filter-tabs .tab {
     padding: 8px 16px;
-    border: 1px solid var(--border-color, #e5e7eb);
-    background: var(--bg-primary, white);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
@@ -90,20 +90,20 @@
 }
 
 .filter-tabs .tab:hover {
-    background: var(--bg-secondary, #f3f4f6);
+    background: var(--muted);
 }
 
 .filter-tabs .tab.active {
-    background: var(--primary-color, #3b82f6);
-    color: white;
-    border-color: var(--primary-color, #3b82f6);
+    background: var(--info);
+    color: var(--primary-foreground);
+    border-color: var(--info);
 }
 
 /* Content */
 .notifications-content {
-    background: var(--bg-primary, white);
-    border-radius: 12px;
-    border: 1px solid var(--border-color, #e5e7eb);
+    background: var(--card);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
     overflow: hidden;
 }
 
@@ -114,7 +114,7 @@
     align-items: center;
     justify-content: center;
     padding: 64px;
-    color: var(--text-secondary, #6b7280);
+    color: var(--muted-foreground);
 }
 
 .loading-state .spinner {
@@ -139,7 +139,7 @@
     align-items: center;
     justify-content: center;
     padding: 64px;
-    color: var(--text-secondary, #6b7280);
+    color: var(--muted-foreground);
 }
 
 .empty-state svg {
@@ -167,13 +167,13 @@
     display: flex;
     gap: 16px;
     padding: 16px 20px;
-    border-bottom: 1px solid var(--border-light, #f3f4f6);
+    border-bottom: 1px solid var(--border);
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .notification-card:hover {
-    background: var(--bg-secondary, #f9fafb);
+    background: var(--muted);
 }
 
 .notification-card:last-child {
@@ -181,39 +181,39 @@
 }
 
 .notification-card.unread {
-    background: rgba(59, 130, 246, 0.05);
-    border-left: 3px solid #3b82f6;
+    background: oklch(0.55 0.15 240 / 0.1);
+    border-left: 3px solid var(--info);
 }
 
 .notification-icon {
     width: 40px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    background: var(--bg-secondary, #f3f4f6);
+    background: var(--muted);
 }
 
 .notification-icon .icon-blue {
-    color: #3b82f6;
+    color: var(--info);
 }
 
 .notification-icon .icon-cyan {
-    color: #06b6d4;
+    color: var(--info);
 }
 
 .notification-icon .icon-amber {
-    color: #f59e0b;
+    color: var(--warning);
 }
 
 .notification-icon .icon-purple {
-    color: #8b5cf6;
+    color: var(--info);
 }
 
 .notification-icon .icon-gray {
-    color: #6b7280;
+    color: var(--muted-foreground);
 }
 
 .notification-body {
@@ -231,7 +231,7 @@
 
 .notification-title {
     font-size: 0.9rem;
-    color: var(--text-primary, #111827);
+    color: var(--foreground);
 }
 
 .notification-title.font-semibold {
@@ -247,20 +247,20 @@
 
 .notification-time {
     font-size: 0.75rem;
-    color: var(--text-secondary, #6b7280);
+    color: var(--muted-foreground);
 }
 
 .unread-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #3b82f6;
+    background: var(--info);
 }
 
 .notification-message {
     margin: 0;
     font-size: 0.8rem;
-    color: var(--text-secondary, #6b7280);
+    color: var(--muted-foreground);
     line-height: 1.4;
 }
 
@@ -268,14 +268,14 @@
 .load-more {
     padding: 16px;
     text-align: center;
-    border-top: 1px solid var(--border-light, #f3f4f6);
+    border-top: 1px solid var(--border);
 }
 
 .load-more-btn {
     padding: 8px 24px;
-    border: 1px solid var(--border-color, #e5e7eb);
-    background: var(--bg-primary, white);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
@@ -283,12 +283,12 @@
 }
 
 .load-more-btn:hover {
-    background: var(--bg-secondary, #f3f4f6);
+    background: var(--muted);
 }
 
 /* Dark mode support */
 .dark .notifications-page {
-    color: #fff;
+    color: var(--foreground);
 }
 
 .dark .back-btn,
@@ -296,35 +296,35 @@
 .dark .filter-tabs .tab,
 .dark .notifications-content,
 .dark .load-more-btn {
-    background: #1f2937;
-    border-color: #374151;
-    color: #e5e7eb;
+    background: var(--card);
+    border-color: var(--border);
+    color: var(--foreground);
 }
 
 .dark .back-btn:hover,
 .dark .mark-all-btn:hover,
 .dark .filter-tabs .tab:hover,
 .dark .load-more-btn:hover {
-    background: #374151;
+    background: var(--muted);
 }
 
 .dark .notification-card:hover {
-    background: #374151;
+    background: var(--muted);
 }
 
 .dark .notification-card.unread {
-    background: rgba(59, 130, 246, 0.1);
+    background: oklch(0.55 0.15 240 / 0.15);
 }
 
 .dark .notification-icon {
-    background: #374151;
+    background: var(--muted);
 }
 
 .dark .notification-title {
-    color: #f3f4f6;
+    color: var(--foreground);
 }
 
 .dark .notification-message,
 .dark .notification-time {
-    color: #9ca3af;
+    color: var(--muted-foreground);
 }

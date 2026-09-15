@@ -11,19 +11,19 @@
   align-items: flex-end;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
 }
 
 .page-header h1 {
   font-size: 28px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
   margin: 0 0 4px 0;
 }
 
 .page-subtitle {
   font-size: 14px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   margin: 0;
 }
 
@@ -36,20 +36,20 @@
 }
 
 .review-stat-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   padding: 20px 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .review-stat-card label {
   display: block;
   font-size: 12px;
   font-weight: 700;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   letter-spacing: 0.02em;
   margin-bottom: 4px;
@@ -58,13 +58,13 @@
 .review-stat-card .val {
   font-size: 28px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .review-stat-card .val-rating {
   font-size: 28px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -80,28 +80,28 @@
 }
 
 .review-stat-card.pending .status-dot {
-  background: var(--warning-500);
+  background: var(--warning);
 }
 
 .review-stat-card.approved .status-dot {
-  background: var(--success-500);
+  background: var(--success);
 }
 
 .review-stat-card.rejected .status-dot {
-  background: var(--error-500);
+  background: var(--destructive);
 }
 
 /* Filters Pro */
 .filters-section-pro {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   padding: 24px;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .search-box-pro {
@@ -114,25 +114,25 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--gray-400);
+  color: var(--muted-foreground);
 }
 
 .search-box-pro input {
   width: 100%;
   padding: 12px 12px 12px 48px;
-  background: var(--gray-50);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   font-size: 14px;
-  color: var(--gray-900);
+  color: var(--foreground);
   transition: all 0.2s;
 }
 
 .search-box-pro input:focus {
   outline: none;
-  border-color: var(--primary-500);
-  background: var(--bg-primary);
-  box-shadow: 0 0 0 3px var(--primary-50);
+  border-color: var(--primary);
+  background: var(--card);
+  box-shadow: 0 0 0 3px var(--secondary);
 }
 
 .filters-row {
@@ -150,7 +150,7 @@
 .filter-group label {
   font-size: 11px;
   font-weight: 700;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
   text-transform: uppercase;
 }
 
@@ -163,7 +163,7 @@
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--gray-400);
+  color: var(--muted-foreground);
   pointer-events: none;
 }
 
@@ -171,11 +171,11 @@
   width: 100%;
   appearance: none;
   padding: 10px 36px 10px 12px;
-  background: var(--gray-50);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   font-size: 14px;
-  color: var(--gray-900);
+  color: var(--foreground);
   cursor: pointer;
 }
 
@@ -189,22 +189,22 @@
 .product-icon-box {
   width: 32px;
   height: 32px;
-  background: var(--gray-100);
-  border-radius: 8px;
+  background: var(--muted);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 .p-name {
   font-weight: 600;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .p-id {
   font-size: 11px;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
   font-family: monospace;
 }
 
@@ -223,27 +223,27 @@
   justify-content: center;
   font-weight: 700;
   font-size: 13px;
-  color: white;
+  color: var(--primary-foreground);
 }
 
 .c-avatar.color-1 {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: var(--info);
 }
 
 .c-avatar.color-2 {
-  background: linear-gradient(135deg, #10b981, #047857);
+  background: var(--success);
 }
 
 .c-avatar.color-3 {
-  background: linear-gradient(135deg, #f59e0b, #b45309);
+  background: var(--warning);
 }
 
 .c-avatar.color-4 {
-  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+  background: var(--info);
 }
 
 .c-avatar.color-5 {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  background: var(--destructive);
 }
 
 .verified-tag {
@@ -252,7 +252,7 @@
   gap: 4px;
   font-size: 10px;
   font-weight: 700;
-  color: var(--success-600);
+  color: var(--success);
   text-transform: uppercase;
 }
 
@@ -271,13 +271,13 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
-  color: var(--gray-700);
+  color: var(--foreground);
   max-width: 400px;
 }
 
 .edited-hint {
   font-size: 11px;
-  color: var(--warning-600);
+  color: var(--warning);
   font-style: italic;
 }
 
@@ -286,7 +286,7 @@
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 .status-col {
@@ -297,7 +297,7 @@
 
 .moderator-hint {
   font-size: 11px;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
 }
 
 .review-actions {
@@ -309,15 +309,15 @@
 .btn-icon-s {
   width: 32px;
   height: 32px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: white;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--card);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 .btn-icon-s:hover {
@@ -325,20 +325,20 @@
 }
 
 .btn-icon-s.approve:hover {
-  background: var(--success-50);
-  color: var(--success-600);
-  border-color: var(--success-200);
+  background: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
+  border-color: var(--success);
 }
 
 .btn-icon-s.reject:hover {
-  background: var(--error-50);
-  color: var(--error-600);
-  border-color: var(--error-200);
+  background: oklch(0.57 0.22 27 / 0.1);
+  color: var(--destructive);
+  border-color: var(--destructive);
 }
 
 .btn-icon-s.delete:hover {
-  background: var(--gray-100);
-  color: var(--gray-900);
+  background: var(--muted);
+  color: var(--foreground);
 }
 
 /* Table Meta */
@@ -348,7 +348,7 @@
   align-items: center;
   margin-bottom: 12px;
   font-size: 14px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 /* Bulk Actions */
@@ -357,18 +357,18 @@
   align-items: center;
   gap: 12px;
   padding: 4px 12px;
-  background: var(--primary-50);
-  border: 1px solid var(--primary-100);
-  border-radius: 20px;
+  background: oklch(0.55 0.15 240 / 0.1);
+  border: 1px solid var(--info);
+  border-radius: var(--radius-xl);
   animation: slideIn 0.3s ease-out;
 }
 
 .btn-bulk-s {
-  background: var(--primary-600);
-  color: white;
+  background: var(--primary);
+  color: var(--primary-foreground);
   border: none;
   padding: 4px 12px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -388,26 +388,26 @@
 
 /* Dark Mode */
 .dark .review-stat-card {
-  background: #0d1117;
+  background: var(--card);
 }
 
 .dark .filters-section-pro {
-  background: #0d1117;
+  background: var(--card);
 }
 
 .dark .search-box-pro input {
-  background: #161b22;
+  background: var(--muted);
 }
 
 .dark .pro-select-minimal {
-  background: #161b22;
-  color: #c9d1d9;
+  background: var(--muted);
+  color: var(--foreground);
 }
 
 .dark .review-text {
-  color: #8b949e;
+  color: var(--muted-foreground);
 }
 
 .dark .btn-icon-s {
-  background: #161b22;
+  background: var(--muted);
 }

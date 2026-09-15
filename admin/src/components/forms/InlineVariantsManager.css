@@ -13,7 +13,7 @@
     align-items: center;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-color, #e1e4e8);
+    border-bottom: 1px solid var(--border);
 }
 
 .ivm-header-info {
@@ -23,7 +23,7 @@
 }
 
 .ivm-header-icon {
-    color: var(--primary-color, #0366d6);
+    color: var(--primary);
     margin-top: 2px;
     flex-shrink: 0;
 }
@@ -32,13 +32,13 @@
     margin: 0 0 2px 0;
     font-size: 15px;
     font-weight: 600;
-    color: var(--text-color, #24292e);
+    color: var(--foreground);
 }
 
 .ivm-header-info p {
     margin: 0;
     font-size: 13px;
-    color: var(--gray-500, #6a737d);
+    color: var(--muted-foreground);
 }
 
 .ivm-header-actions {
@@ -54,11 +54,11 @@
     min-width: 24px;
     height: 24px;
     padding: 0 6px;
-    background: var(--primary-color, #0366d6);
-    color: #fff;
+    background: var(--primary);
+    color: var(--primary-foreground);
     font-size: 12px;
     font-weight: 600;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
 }
 
 /* ---- Loading ---- */
@@ -68,7 +68,7 @@
     justify-content: center;
     gap: 0.75rem;
     padding: 2rem;
-    color: var(--gray-500, #6a737d);
+    color: var(--muted-foreground);
     font-size: 14px;
 }
 
@@ -80,10 +80,10 @@
     justify-content: center;
     gap: 0.75rem;
     padding: 2.5rem 1rem;
-    background: var(--gray-50, #f9fafb);
-    border: 1px dashed var(--border-color, #d1d5da);
-    border-radius: 8px;
-    color: var(--gray-500, #6a737d);
+    background: var(--background);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-md);
+    color: var(--muted-foreground);
     text-align: center;
 }
 
@@ -101,24 +101,24 @@
 
 /* ---- Variant card ---- */
 .ivm-card {
-    background: #fff;
-    border: 1px solid var(--border-color, #e1e4e8);
-    border-radius: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     transition: border-color 0.2s, box-shadow 0.2s;
     overflow: hidden;
 }
 
 .ivm-card:hover {
-    border-color: var(--gray-400, #c8ccd0);
+    border-color: var(--border);
 }
 
 .ivm-card.is-default {
-    border-color: var(--primary-color, #0366d6);
-    box-shadow: 0 0 0 1px var(--primary-color, #0366d6);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
 }
 
 .ivm-card.expanded {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-sm);
 }
 
 .ivm-card.saving {
@@ -138,7 +138,7 @@
 }
 
 .ivm-card-header:hover {
-    background-color: var(--gray-50, #f6f8fa);
+    background-color: var(--background);
 }
 
 .ivm-card-left {
@@ -156,17 +156,17 @@
     min-width: 28px;
     height: 28px;
     padding: 0 6px;
-    background: var(--gray-100, #f1f3f5);
-    color: var(--text-color, #24292e);
+    background: var(--muted);
+    color: var(--foreground);
     font-size: 12px;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     flex-shrink: 0;
 }
 
 .ivm-card.is-default .ivm-badge {
-    background: var(--primary-color, #0366d6);
-    color: #fff;
+    background: var(--primary);
+    color: var(--primary-foreground);
 }
 
 .ivm-card-summary {
@@ -179,14 +179,14 @@
 .ivm-card-name {
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-color, #24292e);
+    color: var(--foreground);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .ivm-card-name.placeholder {
-    color: var(--gray-400, #959da5);
+    color: var(--muted-foreground);
     font-style: italic;
     font-weight: 400;
 }
@@ -196,25 +196,25 @@
     align-items: center;
     gap: 0.75rem;
     font-size: 12px;
-    color: var(--gray-500, #6a737d);
+    color: var(--muted-foreground);
 }
 
 .ivm-sku {
-    background: var(--gray-100, #f1f3f5);
+    background: var(--muted);
     padding: 1px 6px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-size: 11px;
     font-family: monospace;
-    color: var(--gray-600, #586069);
+    color: var(--muted-foreground);
 }
 
 .ivm-price {
     font-weight: 500;
-    color: var(--text-color, #24292e);
+    color: var(--foreground);
 }
 
 .ivm-stock {
-    color: var(--gray-500, #6a737d);
+    color: var(--muted-foreground);
 }
 
 .ivm-warehouse-tag,
@@ -223,30 +223,30 @@
     align-items: center;
     gap: 2px;
     padding: 1px 6px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-size: 11px;
     font-weight: 500;
     white-space: nowrap;
 }
 
 .ivm-warehouse-tag {
-    background: #dbeafe;
-    color: #1e40af;
+    background: oklch(0.55 0.15 240 / 0.1);
+    color: var(--info);
 }
 
 .ivm-supplier-tag {
-    background: #f0fdf4;
-    color: #166534;
+    background: oklch(0.60 0.19 155 / 0.12);
+    color: var(--success);
 }
 
 .dark .ivm-warehouse-tag {
-    background: #1e3a5f;
-    color: #93c5fd;
+    background: oklch(0.55 0.15 240 / 0.15);
+    color: var(--info);
 }
 
 .dark .ivm-supplier-tag {
-    background: #14532d;
-    color: #86efac;
+    background: oklch(0.60 0.19 155 / 0.15);
+    color: var(--success);
 }
 
 .ivm-card-right {
@@ -254,7 +254,7 @@
     align-items: center;
     gap: 0.5rem;
     flex-shrink: 0;
-    color: var(--gray-400, #959da5);
+    color: var(--muted-foreground);
 }
 
 .ivm-default-badge {
@@ -262,8 +262,8 @@
     align-items: center;
     gap: 4px;
     padding: 3px 10px;
-    background: #dbeafe;
-    color: var(--primary-color, #0366d6);
+    background: oklch(0.55 0.15 240 / 0.1);
+    color: var(--primary);
     font-size: 11px;
     font-weight: 600;
     border-radius: 9999px;
@@ -275,8 +275,8 @@
     display: inline-flex;
     align-items: center;
     padding: 2px 8px;
-    background: #fef3c7;
-    color: #92400e;
+    background: oklch(0.75 0.18 80 / 0.15);
+    color: var(--warning);
     font-size: 10px;
     font-weight: 600;
     border-radius: 9999px;
@@ -291,14 +291,14 @@
 }
 
 .dark .ivm-dirty-badge {
-    background: #451a03;
-    color: #fbbf24;
+    background: oklch(0.75 0.18 80 / 0.15);
+    color: var(--warning);
 }
 
 /* ---- Card body (expanded) ---- */
 .ivm-card-body {
     padding: 0 1rem 1rem 1rem;
-    border-top: 1px solid var(--border-color, #e1e4e8);
+    border-top: 1px solid var(--border);
     animation: ivm-slideDown 0.2s ease-out;
 }
 
@@ -339,14 +339,14 @@
 .ivm-field label {
     font-size: 12px;
     font-weight: 500;
-    color: var(--gray-600, #586069);
+    color: var(--muted-foreground);
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
 
 .ivm-field label.required::after {
     content: ' *';
-    color: #e53e3e;
+    color: var(--destructive);
 }
 
 .ivm-field input,
@@ -354,9 +354,9 @@
     width: 100%;
     padding: 7px 10px;
     font-size: 13px;
-    border: 1px solid var(--border-color, #d1d5da);
-    border-radius: 6px;
-    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -372,21 +372,21 @@
 .ivm-field input:focus,
 .ivm-field select:focus {
     outline: none;
-    border-color: var(--primary-color, #0366d6);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.15);
 }
 
 .ivm-field input.valid {
-    border-color: #28a745;
+    border-color: var(--success);
 }
 
 .ivm-field input.invalid {
-    border-color: #e53e3e;
+    border-color: var(--destructive);
 }
 
 .ivm-field input.checking {
     border-style: dashed;
-    background: var(--gray-50, #fafbfc);
+    background: var(--background);
 }
 
 .ivm-field-error {
@@ -394,7 +394,7 @@
     align-items: center;
     gap: 4px;
     font-size: 12px;
-    color: #e53e3e;
+    color: var(--destructive);
 }
 
 /* ---- Input with action button ---- */
@@ -414,28 +414,28 @@
     align-items: center;
     justify-content: center;
     width: 34px;
-    border: 1px solid var(--border-color, #d1d5da);
+    border: 1px solid var(--border);
     border-left: none;
-    border-radius: 0 6px 6px 0;
-    background: var(--gray-50, #f6f8fa);
-    color: var(--gray-600, #586069);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--background);
+    color: var(--muted-foreground);
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
 }
 
 .ivm-gen-btn:hover {
-    background: var(--gray-100, #ebeef0);
-    color: var(--primary-color, #0366d6);
+    background: var(--muted);
+    color: var(--primary);
 }
 
 /* ---- Barcode placeholder ---- */
 .ivm-barcode-placeholder {
     padding: 7px 10px;
     font-size: 12px;
-    color: var(--gray-400, #959da5);
-    background: var(--gray-50, #f9fafb);
-    border: 1px dashed var(--border-color, #d1d5da);
-    border-radius: 6px;
+    color: var(--muted-foreground);
+    background: var(--background);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
     text-align: center;
 }
 
@@ -446,7 +446,7 @@
     align-items: center;
     margin-top: 1rem;
     padding-top: 0.75rem;
-    border-top: 1px solid var(--gray-100, #f1f3f5);
+    border-top: 1px solid var(--muted);
 }
 
 .ivm-card-actions-left,
@@ -464,39 +464,39 @@
     font-size: 12px;
     font-weight: 500;
     border: 1px solid transparent;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.15s;
 }
 
 .ivm-action-btn.default-btn {
-    background: #f0f9ff;
-    color: var(--primary-color, #0366d6);
-    border-color: #bfdbfe;
+    background: oklch(0.55 0.15 240 / 0.1);
+    color: var(--primary);
+    border-color: var(--info);
 }
 
 .ivm-action-btn.default-btn:hover {
-    background: #dbeafe;
+    background: oklch(0.55 0.15 240 / 0.1);
 }
 
 .ivm-action-btn.save-btn {
-    background: #ecfdf5;
-    color: #059669;
-    border-color: #a7f3d0;
+    background: oklch(0.60 0.19 155 / 0.12);
+    color: var(--success);
+    border-color: var(--success);
 }
 
 .ivm-action-btn.save-btn:hover {
-    background: #d1fae5;
+    background: oklch(0.60 0.19 155 / 0.12);
 }
 
 .ivm-action-btn.delete-btn {
-    background: #fff5f5;
-    color: #e53e3e;
-    border-color: #fed7d7;
+    background: oklch(0.57 0.22 27 / 0.08);
+    color: var(--destructive);
+    border-color: var(--destructive);
 }
 
 .ivm-action-btn.delete-btn:hover {
-    background: #fee2e2;
+    background: oklch(0.57 0.22 27 / 0.08);
 }
 
 /* ---- Spinners ---- */
@@ -515,7 +515,7 @@
     width: 20px;
     height: 20px;
     border: 2px solid rgba(0, 0, 0, 0.1);
-    border-left-color: var(--primary-color, #0366d6);
+    border-left-color: var(--primary);
     border-radius: 50%;
     animation: ivm-spin 0.6s linear infinite;
 }
@@ -528,9 +528,9 @@
 .variants-toggle-section {
     margin-top: 0.5rem;
     padding: 1.25rem;
-    background: var(--gray-50, #f9fafb);
-    border: 1px solid var(--border-color, #e1e4e8);
-    border-radius: 8px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
 }
 
 .variants-toggle-row {
@@ -546,20 +546,20 @@
 }
 
 .variants-toggle-label svg {
-    color: var(--primary-color, #0366d6);
+    color: var(--primary);
 }
 
 .variants-toggle-label div h4 {
     margin: 0;
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-color, #24292e);
+    color: var(--foreground);
 }
 
 .variants-toggle-label div p {
     margin: 2px 0 0 0;
     font-size: 12px;
-    color: var(--gray-500, #6a737d);
+    color: var(--muted-foreground);
 }
 
 /* Toggle switch */
@@ -580,8 +580,8 @@
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background-color: var(--gray-300, #d1d5da);
-    border-radius: 24px;
+    background-color: var(--border);
+    border-radius: var(--radius-xl);
     transition: background-color 0.25s;
 }
 
@@ -595,11 +595,11 @@
     background-color: white;
     border-radius: 50%;
     transition: transform 0.25s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-sm);
 }
 
 .toggle-switch input:checked + .toggle-slider {
-    background-color: var(--primary-color, #0366d6);
+    background-color: var(--primary);
 }
 
 .toggle-switch input:checked + .toggle-slider::before {
@@ -608,23 +608,23 @@
 
 /* ---- Dark mode ---- */
 .dark .ivm-card {
-    background: var(--gray-800, #1f2937);
-    border-color: var(--gray-700, #374151);
+    background: var(--card);
+    border-color: var(--border);
 }
 
 .dark .ivm-card-header:hover {
-    background-color: var(--gray-700, #374151);
+    background-color: var(--muted);
 }
 
 .dark .ivm-card-body {
-    border-top-color: var(--gray-700, #374151);
+    border-top-color: var(--border);
 }
 
 .dark .ivm-field input,
 .dark .ivm-field select {
-    background: var(--gray-900, #111827);
-    border-color: var(--gray-600, #4b5563);
-    color: var(--gray-100, #f3f4f6);
+    background: var(--background);
+    border-color: var(--border);
+    color: var(--foreground);
 }
 
 .dark .ivm-field select {
@@ -632,31 +632,31 @@
 }
 
 .dark .ivm-empty {
-    background: var(--gray-800, #1f2937);
-    border-color: var(--gray-600, #4b5563);
+    background: var(--card);
+    border-color: var(--border);
 }
 
 .dark .ivm-badge {
-    background: var(--gray-700, #374151);
-    color: var(--gray-200, #e5e7eb);
+    background: var(--muted);
+    color: var(--foreground);
 }
 
 .dark .ivm-card-name {
-    color: var(--gray-100, #f3f4f6);
+    color: var(--foreground);
 }
 
 .dark .ivm-sku {
-    background: var(--gray-700, #374151);
-    color: var(--gray-300, #d1d5db);
+    background: var(--muted);
+    color: var(--muted-foreground);
 }
 
 .dark .variants-toggle-section {
-    background: var(--gray-800, #1f2937);
-    border-color: var(--gray-700, #374151);
+    background: var(--card);
+    border-color: var(--border);
 }
 
 .dark .variants-toggle-label div h4 {
-    color: var(--gray-100, #f3f4f6);
+    color: var(--foreground);
 }
 
 /* ---- RTL ---- */
@@ -677,12 +677,12 @@
 }
 
 [dir="rtl"] .ivm-input-action input {
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 [dir="rtl"] .ivm-gen-btn {
-    border-radius: 6px 0 0 6px;
-    border-left: 1px solid var(--border-color, #d1d5da);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    border-left: 1px solid var(--border);
     border-right: none;
 }
 
@@ -719,17 +719,17 @@
     gap: 0.5rem;
     margin-top: 0.75rem;
     padding: 0.625rem 0.875rem;
-    background: #fffbeb;
-    border: 1px solid #fcd34d;
-    border-radius: 6px;
+    background: oklch(0.75 0.18 80 / 0.15);
+    border: 1px solid var(--warning);
+    border-radius: var(--radius-sm);
     font-size: 13px;
-    color: #92400e;
+    color: var(--warning);
 }
 
 .dark .ivm-validation-warning {
-    background: #451a03;
-    border-color: #92400e;
-    color: #fbbf24;
+    background: oklch(0.75 0.18 80 / 0.15);
+    border-color: var(--warning);
+    color: var(--warning);
 }
 
 @media (max-width: 480px) {

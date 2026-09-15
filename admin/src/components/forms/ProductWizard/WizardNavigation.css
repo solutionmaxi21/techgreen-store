@@ -4,9 +4,9 @@
   justify-content: space-between;
   padding: 1.5rem 2rem;
   margin-top: 2rem;
-  border-top: 2px solid #e2e8f0;
-  background: #f8fafc;
-  border-radius: 0 0 8px 8px;
+  border-top: 2px solid var(--border);
+  background: var(--background);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   gap: 1rem;
 }
 
@@ -33,7 +33,7 @@
 
 .step-counter {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--muted-foreground);
   font-weight: 500;
 }
 
@@ -44,7 +44,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 0.9375rem;
   cursor: pointer;
@@ -54,38 +54,38 @@
 }
 
 .btn-secondary {
-  background: white;
-  color: #475569;
-  border: 1px solid #cbd5e1;
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #f1f5f9;
-  border-color: #94a3b8;
+  background: var(--muted);
+  border-color: var(--muted-foreground);
 }
 
 .btn-primary {
-  background: #3b82f6;
-  color: white;
-  border: 1px solid #3b82f6;
+  background: var(--info);
+  color: var(--card);
+  border: 1px solid var(--info);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: var(--info);
+  border-color: var(--info);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px oklch(0.55 0.15 240 / 0.3);
 }
 
 .btn-submit {
-  background: #10b981;
-  border-color: #10b981;
+  background: var(--success);
+  border-color: var(--success);
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: #059669;
-  border-color: #059669;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  background: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 4px 12px oklch(0.60 0.19 155 / 0.3);
 }
 
 .btn-secondary:disabled,
@@ -105,8 +105,8 @@
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  border: 2px solid oklch(1 0 0 / 0.3);
+  border-top-color: var(--card);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }

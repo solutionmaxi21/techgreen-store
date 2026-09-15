@@ -40,10 +40,10 @@
   --bento-primary-border: hsl(var(--bento-border-strong, 220 14% 82%));
   --bento-primary-bg: hsl(var(--bento-surface-elevated, 220 18% 97%));
   
-  --bento-success-color: var(--success-color, #10b981);
-  --bento-warning-color: var(--warning-color, #f59e0b);
-  --bento-error-color: var(--error-color, #ef4444);
-  --bento-error-bg: var(--error-bg, #fee2e2);
+  --bento-success-color: var(--success-color, var(--success));
+  --bento-warning-color: var(--warning-color, var(--warning));
+  --bento-error-color: var(--error-color, var(--destructive));
+  --bento-error-bg: var(--error-bg, oklch(0.57 0.22 27 / 0.08));
 }
 
 .collection-form-container {
@@ -52,39 +52,39 @@
 
 /* Styled Back Button */
 button.back-button {
-  display: inline-flex !important;
-  width: auto !important;
-  height: 40px !important;
-  padding: 0 16px !important;
-  align-items: center !important;
-  gap: 8px !important;
-  border-radius: 10px !important;
-  background-color: var(--bg-primary) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-secondary) !important;
-  cursor: pointer !important;
-  font-size: var(--bento-font-size-sm, 14px) !important;
-  font-weight: 500 !important;
-  transition: all 0.2s ease !important;
+  display: inline-flex;
+  width: auto;
+  height: 40px;
+  padding: 0 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--bento-font-size-sm, 14px);
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 button.back-button:hover {
-  background-color: var(--bg-secondary) !important;
-  color: var(--text-primary) !important;
-  border-color: var(--bento-primary-border) !important;
-  transform: translateY(-1px) !important;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--bento-primary-border);
+  transform: translateY(-1px);
 }
 
 .dark button.back-button {
-  background-color: hsl(var(--bento-surface)) !important;
-  border-color: hsl(var(--bento-border)) !important;
-  color: hsl(var(--bento-ink-muted)) !important;
+  background-color: hsl(var(--bento-surface));
+  border-color: hsl(var(--bento-border));
+  color: hsl(var(--bento-ink-muted));
 }
 
 .dark button.back-button:hover {
-  background-color: hsl(var(--bento-surface-strong)) !important;
-  color: hsl(var(--bento-ink)) !important;
-  border-color: hsl(var(--bento-border-strong)) !important;
+  background-color: hsl(var(--bento-surface-strong));
+  color: hsl(var(--bento-ink));
+  border-color: hsl(var(--bento-border-strong));
 }
 
 /* Page Header & Grid Layout */
@@ -239,19 +239,19 @@ button.back-button:hover {
 }
 
 input.benefit-input {
-  flex: 1 !important;
-  background-color: #ffffff !important;
-  border: 1px solid var(--bento-border-color) !important;
-  color: var(--bento-text-primary) !important;
-  height: 40px !important;
-  border-radius: var(--bento-radius-md) !important;
-  padding: 0.5rem 0.75rem !important;
+  flex: 1;
+  background-color: var(--card);
+  border: 1px solid var(--bento-border-color);
+  color: var(--bento-text-primary);
+  height: 40px;
+  border-radius: var(--bento-radius-md);
+  padding: 0.5rem 0.75rem;
 }
 
 .dark input.benefit-input {
-  background-color: hsl(var(--bento-surface)) !important;
-  border: 1px solid hsl(var(--bento-border)) !important;
-  color: hsl(var(--bento-ink)) !important;
+  background-color: hsl(var(--bento-surface));
+  border: 1px solid hsl(var(--bento-border));
+  color: hsl(var(--bento-ink));
 }
 
 .benefit-remove-btn {
@@ -326,23 +326,23 @@ button.bilingual-tab.active {
 
 /* Dark mode overrides for bilingual tabs in CollectionFormPage */
 .dark .bilingual-tabs {
-  background-color: hsl(var(--bento-surface-elevated)) !important;
-  border-color: hsl(var(--bento-border)) !important;
+  background-color: hsl(var(--bento-surface-elevated));
+  border-color: hsl(var(--bento-border));
 }
 
 .dark button.bilingual-tab {
-  color: hsl(var(--bento-ink-muted)) !important;
-  background-color: transparent !important;
+  color: hsl(var(--bento-ink-muted));
+  background-color: transparent;
 }
 
 .dark button.bilingual-tab:hover {
-  background-color: hsl(var(--bento-surface-strong)) !important;
-  color: hsl(var(--bento-ink)) !important;
+  background-color: hsl(var(--bento-surface-strong));
+  color: hsl(var(--bento-ink));
 }
 
 .dark button.bilingual-tab.active {
-  background-color: hsl(var(--bento-surface)) !important;
-  color: hsl(var(--bento-accent)) !important;
+  background-color: hsl(var(--bento-surface));
+  color: hsl(var(--bento-accent));
 }
 
 /* Gradient Picker */
@@ -376,7 +376,7 @@ button.bilingual-tab.active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: var(--card);
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
@@ -430,20 +430,20 @@ button.bilingual-tab.active {
 }
 
 input.product-search-input {
-  width: 100% !important;
-  padding: 8px 12px 8px 38px !important;
-  border: 1px solid var(--bento-border-color) !important;
-  border-radius: var(--bento-radius-md) !important;
-  background-color: var(--bento-bg-card) !important;
-  color: var(--bento-text-primary) !important;
-  font-size: var(--bento-font-size-sm) !important;
-  height: 40px !important;
+  width: 100%;
+  padding: 8px 12px 8px 38px;
+  border: 1px solid var(--bento-border-color);
+  border-radius: var(--bento-radius-md);
+  background-color: var(--bento-bg-card);
+  color: var(--bento-text-primary);
+  font-size: var(--bento-font-size-sm);
+  height: 40px;
 }
 
 .dark input.product-search-input {
-  background-color: hsl(var(--bento-surface)) !important;
-  border-color: hsl(var(--bento-border)) !important;
-  color: hsl(var(--bento-ink)) !important;
+  background-color: hsl(var(--bento-surface));
+  border-color: hsl(var(--bento-border));
+  color: hsl(var(--bento-ink));
 }
 
 .product-search-input-wrapper svg {
@@ -608,133 +608,133 @@ input.product-search-input {
   margin-left: -2rem;
   margin-right: -2rem;
   margin-bottom: -2rem;
-  background-color: var(--bento-bg-card) !important;
+  background-color: var(--bento-bg-card);
   border-top: 1px solid var(--bento-border-color);
   padding: var(--bento-spacing-4) var(--bento-spacing-6);
   display: flex;
   justify-content: flex-end;
   gap: var(--bento-spacing-3);
   z-index: 50;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
 }
 
 .dark .sticky-action-bar {
-  background-color: hsl(var(--bento-surface)) !important;
-  border-color: hsl(var(--bento-border)) !important;
+  background-color: hsl(var(--bento-surface));
+  border-color: hsl(var(--bento-border));
 }
 
 /* Color swatches gradients overrides for vanilla CSS */
 .gradient-swatch.from-blue-500.to-cyan-500 {
-  background: linear-gradient(135deg, #3b82f6, #06b6d4) !important;
-  background-color: #3b82f6 !important;
+  background: var(--info);
+  background-color: var(--info);
 }
 .gradient-swatch.from-purple-500.to-pink-500 {
-  background: linear-gradient(135deg, #a855f7, #ec4899) !important;
-  background-color: #a855f7 !important;
+  background: var(--primary);
+  background-color: var(--primary);
 }
 .gradient-swatch.from-orange-400.to-rose-500 {
-  background: linear-gradient(135deg, #fb923c, #f43f5e) !important;
-  background-color: #fb923c !important;
+  background: var(--primary);
+  background-color: var(--primary);
 }
 .gradient-swatch.from-emerald-400.to-teal-500 {
-  background: linear-gradient(135deg, #34d399, #14b8a6) !important;
-  background-color: #34d399 !important;
+  background: var(--success);
+  background-color: var(--success);
 }
 .gradient-swatch.from-indigo-500.to-blue-600 {
-  background: linear-gradient(135deg, #6366f1, #2563eb) !important;
-  background-color: #6366f1 !important;
+  background: var(--info);
+  background-color: var(--info);
 }
 .gradient-swatch.from-amber-400.to-orange-500 {
-  background: linear-gradient(135deg, #fbbf24, #f97316) !important;
-  background-color: #fbbf24 !important;
+  background: var(--warning);
+  background-color: var(--warning);
 }
 .gradient-swatch.from-rose-400.to-red-500 {
-  background: linear-gradient(135deg, #fb7185, #ef4444) !important;
-  background-color: #fb7185 !important;
+  background: var(--destructive);
+  background-color: var(--destructive);
 }
 .gradient-swatch.from-slate-700.to-slate-900 {
-  background: linear-gradient(135deg, #334155, #0f172a) !important;
-  background-color: #334155 !important;
+  background: var(--primary);
+  background-color: var(--primary);
 }
 
 /* Dark mode overrides for panels and buttons in dual picker and uploaders */
 .dark .bento-card {
-  background-color: hsl(var(--bento-surface)) !important;
-  border: 1px solid hsl(var(--bento-border)) !important;
-  box-shadow: var(--bento-shadow-2) !important;
+  background-color: hsl(var(--bento-surface));
+  border: 1px solid hsl(var(--bento-border));
+  box-shadow: var(--bento-shadow-2);
 }
 
 .dark .bento-card-header {
-  background-color: hsl(var(--bento-surface-elevated)) !important;
-  border-bottom: 1px solid hsl(var(--bento-border)) !important;
+  background-color: hsl(var(--bento-surface-elevated));
+  border-bottom: 1px solid hsl(var(--bento-border));
 }
 
 .dark .gradient-swatch {
-  border-color: transparent !important;
+  border-color: transparent;
 }
 
 .dark .gradient-swatch.active {
-  border-color: hsl(var(--bento-accent)) !important;
+  border-color: hsl(var(--bento-accent));
 }
 
 .product-list-panel {
-  background-color: var(--bento-bg-card) !important;
+  background-color: var(--bento-bg-card);
 }
 
 .dark .product-list-panel {
-  background-color: hsl(var(--bento-surface)) !important;
+  background-color: hsl(var(--bento-surface));
 }
 
 .selected-products-panel {
-  background-color: var(--bento-bg-subtle) !important;
+  background-color: var(--bento-bg-subtle);
 }
 
 .dark .selected-products-panel {
-  background-color: hsl(var(--bento-surface-elevated)) !important;
+  background-color: hsl(var(--bento-surface-elevated));
 }
 
 .panel-header {
-  background-color: inherit !important;
+  background-color: inherit;
 }
 
 .product-picker-item:hover {
-  background-color: var(--bento-bg-hover) !important;
+  background-color: var(--bento-bg-hover);
 }
 
 .dark .product-picker-item:hover {
-  background-color: hsl(var(--bento-surface-strong)) !important;
+  background-color: hsl(var(--bento-surface-strong));
 }
 
 .image-upload-zone {
-  background-color: var(--bento-bg-subtle) !important;
+  background-color: var(--bento-bg-subtle);
 }
 
 .dark .image-upload-zone {
-  background-color: hsl(var(--bento-surface-elevated)) !important;
+  background-color: hsl(var(--bento-surface-elevated));
 }
 
 .image-upload-zone:hover, .image-upload-zone.drag-over {
-  border-color: var(--bento-primary-color) !important;
-  background-color: var(--bento-primary-bg) !important;
+  border-color: var(--bento-primary-color);
+  background-color: var(--bento-primary-bg);
 }
 
 .dark .image-upload-zone:hover, .dark .image-upload-zone.drag-over {
-  background-color: rgba(99, 102, 241, 0.15) !important;
+  background-color: oklch(0.55 0.15 240 / 0.1);
 }
 
 .add-benefit-btn {
-  color: var(--bento-primary-color) !important;
-  background: none !important;
-  border: 1px dashed var(--bento-primary-border) !important;
+  color: var(--bento-primary-color);
+  background: none;
+  border: 1px dashed var(--bento-primary-border);
 }
 
 .add-benefit-btn:hover {
-  background-color: var(--bento-primary-bg) !important;
+  background-color: var(--bento-primary-bg);
 }
 
 .dark .add-benefit-btn:hover {
-  background-color: rgba(99, 102, 241, 0.15) !important;
+  background-color: oklch(0.55 0.15 240 / 0.1);
 }
 
 /* RTL Support */
@@ -749,12 +749,12 @@ input.product-search-input {
 }
 
 [dir='rtl'] input.product-search-input {
-  padding: 8px 38px 8px 12px !important;
+  padding: 8px 38px 8px 12px;
 }
 
 @media (min-width: 768px) {
   [dir='rtl'] .product-list-panel {
     border-right: none;
-    border-left: 1px solid var(--bento-border-color) !important;
+    border-left: 1px solid var(--bento-border-color);
   }
 }

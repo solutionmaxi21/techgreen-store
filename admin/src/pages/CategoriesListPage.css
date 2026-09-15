@@ -1,20 +1,20 @@
 /* Categories Page Specific Styles */
 
 .slug-code {
-  background: #f4f4f5;
+  background: var(--muted);
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-family: 'Courier New', monospace;
   font-size: 0.85em;
-  color: #666;
+  color: var(--muted-foreground);
 }
 
 .level-badge {
   display: inline-block;
-  background: #e0e7ff;
-  color: #4338ca;
+  background: oklch(0.55 0.15 240 / 0.1);
+  color: var(--info);
   padding: 2px 8px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   font-size: 0.85em;
   font-weight: 600;
 }
@@ -36,13 +36,13 @@
 }
 
 .product-count.has-products {
-  background: #d1fae5;
-  color: #065f46;
+  background: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
 }
 
 .product-count.no-products {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: var(--muted);
+  color: var(--muted-foreground);
 }
 
 .checkbox-label {
@@ -62,17 +62,17 @@
 
 /* Form Styles */
 .form-section {
-  background: white;
-  border-radius: 8px;
+  background: var(--card);
+  border-radius: var(--radius-md);
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .form-section-title {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #1f2937;
+  color: var(--foreground);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -91,15 +91,15 @@
 
 .input-hint {
   font-size: 0.85em;
-  color: #6b7280;
+  color: var(--muted-foreground);
   margin-top: 4px;
 }
 
 /* Category Hierarchy Styles */
 .category-hierarchy {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 16px;
   margin-top: 8px;
 }
@@ -112,15 +112,15 @@
 }
 
 .category-path-item {
-  background: white;
+  background: var(--card);
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-size: 0.9em;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
 }
 
 .category-path-separator {
-  color: #9ca3af;
+  color: var(--muted-foreground);
 }
 
 /* Button Group */
@@ -128,28 +128,28 @@
   display: flex;
   gap: 12px;
   padding-top: 20px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border);
   margin-top: 24px;
 }
 
 /* Parent Category Info */
 .parent-info {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 6px;
+  background: oklch(0.55 0.15 240 / 0.1);
+  border: 1px solid var(--info);
+  border-radius: var(--radius-sm);
   padding: 12px;
   margin-top: 8px;
 }
 
 .parent-info-label {
   font-size: 0.85em;
-  color: #1e40af;
+  color: var(--info);
   font-weight: 600;
   margin-bottom: 4px;
 }
 
 .parent-info-value {
-  color: #1e3a8a;
+  color: var(--info);
   font-size: 0.95em;
 }
 
@@ -159,16 +159,16 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  color: #6b7280;
+  color: var(--muted-foreground);
 }
 
 /* Error Alert */
 .error-alert {
-  background: #fee2e2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
+  background: oklch(0.57 0.22 27 / 0.08);
+  border: 1px solid var(--destructive);
+  color: var(--destructive);
   padding: 12px 16px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -177,11 +177,11 @@
 
 /* Success Alert */
 .success-alert {
-  background: #d1fae5;
-  border: 1px solid #a7f3d0;
-  color: #065f46;
+  background: oklch(0.60 0.19 155 / 0.12);
+  border: 1px solid var(--success);
+  color: var(--success);
   padding: 12px 16px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -202,7 +202,7 @@
 }
 
 .tree-prefix {
-  color: #9ca3af;
+  color: var(--muted-foreground);
   font-family: 'Courier New', monospace;
 }
 
@@ -230,9 +230,9 @@
   flex-wrap: wrap;
   margin-bottom: 16px;
   padding: 12px 16px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
 .category-report-toolbar-actions {
@@ -245,12 +245,12 @@
 .selected-count {
   font-size: 0.875rem;
   font-weight: 700;
-  color: #374151;
+  color: var(--foreground);
 }
 
 .report-preparing-text {
   font-size: 0.8125rem;
-  color: #2563eb;
+  color: var(--info);
   font-weight: 600;
 }
 
@@ -260,12 +260,12 @@
 }
 
 .btn-report {
-  color: #2563eb;
+  color: var(--info);
 }
 
 .btn-report:hover:not(:disabled) {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: oklch(0.55 0.15 240 / 0.1);
+  color: var(--info);
 }
 
 .category-table-actions .btn-action {

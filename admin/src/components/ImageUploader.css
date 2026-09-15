@@ -11,7 +11,7 @@
 .image-preview-item {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 2px solid var(--color-gray-200);
   background: var(--color-gray-50);
@@ -47,14 +47,14 @@
 }
 
 .remove-image-btn:hover {
-  background: rgba(239, 68, 68, 0.9);
+  background: var(--destructive);
   transform: scale(1.1);
 }
 
 .upload-area {
   aspect-ratio: 1;
   border: 2px dashed var(--color-gray-300);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 12px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   font-size: 0.875rem;
   font-weight: 500;
   text-transform: capitalize;
@@ -11,84 +11,84 @@
 
 /* Order statuses */
 .status-pending {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: oklch(0.75 0.18 80 / 0.15);
+  color: var(--warning);
 }
 
 .status-processing {
-  background-color: #dbeafe;
-  color: #1e40af;
+  background-color: oklch(0.55 0.15 240 / 0.1);
+  color: var(--info);
 }
 
 .status-shipped {
-  background-color: #e9d5ff;
-  color: #6b21a8;
+  background-color: oklch(0.55 0.15 240 / 0.1);
+  color: var(--info);
 }
 
 .status-delivered {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
 }
 
 .status-cancelled {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: oklch(0.57 0.22 27 / 0.08);
+  color: var(--destructive);
 }
 
 /* Product statuses */
 .status-active {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
 }
 
 .status-inactive {
-  background-color: #f3f4f6;
-  color: #4b5563;
+  background-color: var(--muted);
+  color: var(--foreground);
 }
 
 /* Review statuses */
 .status-approved {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: oklch(0.60 0.19 155 / 0.12);
+  color: var(--success);
 }
 
 .status-rejected {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: oklch(0.57 0.22 27 / 0.08);
+  color: var(--destructive);
 }
 
 /* Dark mode */
 .dark .status-pending {
-  background-color: #78350f;
-  color: #fef3c7;
+  background-color: oklch(0.75 0.18 80 / 0.15);
+  color: var(--warning);
 }
 
 .dark .status-processing {
-  background-color: #1e3a8a;
-  color: #dbeafe;
+  background-color: oklch(0.55 0.15 240 / 0.15);
+  color: var(--info);
 }
 
 .dark .status-shipped {
-  background-color: #581c87;
-  color: #e9d5ff;
+  background-color: oklch(0.55 0.15 240 / 0.15);
+  color: var(--info);
 }
 
 .dark .status-delivered {
-  background-color: #064e3b;
-  color: #d1fae5;
+  background-color: oklch(0.60 0.19 155 / 0.15);
+  color: var(--success);
 }
 
 .dark .status-cancelled {
-  background-color: #7f1d1d;
-  color: #fee2e2;
+  background-color: oklch(0.57 0.22 27 / 0.15);
+  color: var(--destructive);
 }
 
 .dark .status-active {
-  background-color: #064e3b;
-  color: #d1fae5;
+  background-color: oklch(0.60 0.19 155 / 0.15);
+  color: var(--success);
 }
 
 .dark .status-inactive {
-  background-color: #374151;
-  color: #d1d5db;
+  background-color: var(--muted);
+  color: var(--muted-foreground);
 }

@@ -302,7 +302,7 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.cjs'),
       // Use a persistent partition for stored cookies/data
       partition: 'persist:maxi-admin',
       // Disable unnecessary features
@@ -424,6 +424,11 @@ if (hasSingleInstanceLock) app.whenReady().then(() => {
   ses.webRequest.onBeforeSendHeaders(
     { urls: [`${PRODUCTION_BACKEND_ORIGIN}/*`] },
     async (details, callback) => {
+      // Remove the non-standard origin so backend CORS accepts the request
+      // (backend allows requests with no Origin header)
+      delete details.requestHeaders['Origin']
+      delete details.requestHeaders['origin']
+
       // Skip auth endpoints - they rely on cookies, not Bearer tokens
       const url = details.url || ''
       if (url.includes('/auth/refresh') || url.includes('/auth/logout') || url.includes('/auth/login')) {
