@@ -31,14 +31,31 @@ const DashboardPage = () => {
       try {
         setLoading(true);
         setLoadError(null);
-        const [mainStats, recentOrders, topProducts, categoryData] = await Promise.all([
-          dashboardApi.getStats(),
-          dashboardApi.getRecentOrders(10),
-          dashboardApi.getTopProducts(5, 'all'),
-          dashboardApi.getCategorySales('all'),
+
+        const safeFetch = async (fetchFn) => {
+          try { return await fetchFn(); }
+          catch (err) { console.error('Dashboard fetch failed:', err); return null; }
+        };
+
+        const [mainStats, recentOrders, topProducts, categoryData] = await Promise.allSettled([
+          safeFetch(() => dashboardApi.getStats()),
+          safeFetch(() => dashboardApi.getRecentOrders(10)),
+          safeFetch(() => dashboardApi.getTopProducts(5, 'all')),
+          safeFetch(() => dashboardApi.getCategorySales('all')),
         ]);
 
-        setStats({ ...mainStats, recentOrders, topProducts, categoryData });
+        const unwrap = (r) => r.status === 'fulfilled' ? r.value : null;
+        const statsData = unwrap(mainStats) || {};
+        const orders = unwrap(recentOrders) || [];
+        const products = unwrap(topProducts) || [];
+        const categories = unwrap(categoryData) || [];
+
+        setStats({ ...statsData, recentOrders: orders, topProducts: products, categoryData: categories });
+
+        // Only show error if all fetches failed
+        if (!statsData.totalRevenue && !orders.length && !products.length && !categories.length) {
+          setLoadError(new Error('Unable to load dashboard data'));
+        }
       } catch (error) {
         console.error('Stats Error:', error);
         setLoadError(error);

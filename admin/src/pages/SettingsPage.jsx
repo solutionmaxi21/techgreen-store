@@ -120,23 +120,43 @@ const SettingsPage = ({ theme, onToggleTheme }) => {
 
   const loadStats = async () => {
     setStatsError(null);
-    try {
-      const [productsData, ordersData, usersData, reviewsData] = await Promise.all([
-        canReadProducts ? productApi.getAll() : null,
-        canReadOrders ? orderApi.getAll() : null,
-        canReadCustomers ? userApi.getAll() : null,
-        canReadReviews ? reviewApi.getAll() : null,
-      ]);
 
-      setStats({
-        products: productsData ? getCount(productsData, ['products']) : 0,
-        orders: ordersData ? getCount(ordersData, ['orders']) : 0,
-        users: usersData ? getCount(usersData, ['users']) : 0,
-        reviews: reviewsData ? getCount(reviewsData, ['reviews']) : 0,
-      });
-    } catch (error) {
-      console.error('Failed to load stats:', error);
-      setStatsError(error);
+    const safeFetch = async (fetchFn) => {
+      try {
+        return await fetchFn();
+      } catch (err) {
+        console.error('Stats fetch failed:', err);
+        return null;
+      }
+    };
+
+    const [productsData, ordersData, usersData, reviewsData] = await Promise.allSettled([
+      safeFetch(() => canReadProducts ? productApi.getAll() : Promise.resolve(null)),
+      safeFetch(() => canReadOrders ? orderApi.getAll() : Promise.resolve(null)),
+      safeFetch(() => canReadCustomers ? userApi.getAll() : Promise.resolve(null)),
+      safeFetch(() => canReadReviews ? reviewApi.getAll() : Promise.resolve(null)),
+    ]);
+
+    const unwrap = (result) => {
+      if (result.status === 'rejected') return null;
+      return result.value;
+    };
+
+    const pData = unwrap(productsData);
+    const oData = unwrap(ordersData);
+    const uData = unwrap(usersData);
+    const rData = unwrap(reviewsData);
+
+    setStats({
+      products: pData ? getCount(pData, ['products']) : 0,
+      orders: oData ? getCount(oData, ['orders']) : 0,
+      users: uData ? getCount(uData, ['users']) : 0,
+      reviews: rData ? getCount(rData, ['reviews']) : 0,
+    });
+
+    // Only show error if ALL fetches failed
+    if (!pData && !oData && !uData && !rData) {
+      setStatsError(new Error('Unable to load statistics. Please try again.'));
     }
   };
 
