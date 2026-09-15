@@ -1,0 +1,373 @@
+/* ============================================
+   Global Button Styles - Modern & Optimized
+   ============================================ */
+
+:root {
+  --btn-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --btn-shadow-sm: var(--bento-shadow-1);
+  --btn-shadow-md: var(--bento-shadow-2);
+}
+
+/* ============================================
+   Base Button System
+   ============================================ */
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--btn-transition);
+  user-select: none;
+  box-shadow: var(--btn-shadow-sm);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-success:focus-visible,
+.btn-danger:focus-visible,
+.btn-warning:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-success:disabled,
+.btn-danger:disabled,
+.btn-warning:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary:not(:disabled):active,
+.btn-secondary:not(:disabled):active,
+.btn-success:not(:disabled):active,
+.btn-danger:not(:disabled):active,
+.btn-warning:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--bento-accent)), hsl(var(--bento-accent-strong)));
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, hsl(var(--bento-accent-strong)), var(--primary-700));
+  transform: translateY(-1px);
+  box-shadow: var(--bento-shadow-2);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: hsl(var(--bento-surface));
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: hsl(var(--bento-surface-elevated));
+  border-color: hsl(var(--bento-border-strong));
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--bento-shadow-1);
+}
+
+/* Success Button */
+.btn-success {
+  background: linear-gradient(135deg, var(--success-color), #059669);
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-1px);
+  box-shadow: var(--bento-shadow-2);
+}
+
+/* Danger Button */
+.btn-danger {
+  background: linear-gradient(135deg, var(--error-color), #dc2626);
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-1px);
+  box-shadow: var(--bento-shadow-2);
+}
+
+/* Warning Button */
+.btn-warning {
+  background: linear-gradient(135deg, var(--warning-color), #d97706);
+  color: white;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(-1px);
+  box-shadow: var(--bento-shadow-2);
+}
+
+/* ============================================
+   Button Sizes
+   ============================================ */
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+  gap: 6px;
+}
+
+.btn-lg {
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+  gap: 10px;
+}
+
+.btn-xl {
+  padding: 14px 28px;
+  font-size: 1rem;
+  gap: 12px;
+}
+
+/* ============================================
+   Outline Variants
+   ============================================ */
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid currentColor;
+  box-shadow: none;
+}
+
+.btn-outline.btn-primary {
+  color: hsl(var(--bento-accent));
+  background: transparent;
+}
+
+.btn-outline.btn-primary:hover:not(:disabled) {
+  background: var(--status-primary-bg);
+  color: var(--status-primary-text);
+  border-color: hsl(var(--bento-accent));
+}
+
+.btn-outline.btn-success {
+  color: var(--success-color);
+  background: transparent;
+}
+
+.btn-outline.btn-success:hover:not(:disabled) {
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
+  border-color: var(--success-color);
+}
+
+.btn-outline.btn-danger {
+  color: var(--error-color);
+  background: transparent;
+}
+
+.btn-outline.btn-danger:hover:not(:disabled) {
+  background: var(--status-danger-bg);
+  color: var(--status-danger-text);
+  border-color: var(--error-color);
+}
+
+/* ============================================
+   Icon Buttons
+   ============================================ */
+.btn-icon {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(var(--bento-surface));
+  color: var(--text-secondary);
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--btn-transition);
+}
+
+.btn-icon:hover {
+  background: var(--gray-50);
+  color: var(--gray-900);
+  border-color: var(--gray-400);
+  transform: scale(1.05);
+}
+
+.btn-icon.btn-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.btn-icon.btn-lg {
+  width: 48px;
+  height: 48px;
+}
+
+.btn-icon.edit:hover {
+  background: #dbeafe;
+  color: #2563eb;
+  border-color: #3b82f6;
+}
+
+.btn-icon.delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #ef4444;
+}
+
+.btn-icon.view:hover {
+  background: #e0e7ff;
+  color: #4f46e5;
+  border-color: #6366f1;
+}
+
+/* ============================================
+   Button Groups
+   ============================================ */
+.btn-group {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-group-joined {
+  display: inline-flex;
+}
+
+.btn-group-joined > * {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.btn-group-joined > *:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  margin-left: 0;
+}
+
+.btn-group-joined > *:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Action Buttons (For Tables & Cards)
+   ============================================ */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+[data-theme='dark'] .btn-secondary {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-300);
+}
+
+[data-theme='dark'] .btn-secondary:hover:not(:disabled) {
+  background: var(--gray-700);
+  border-color: var(--gray-600);
+  color: var(--gray-100);
+}
+
+[data-theme='dark'] .btn-icon {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-400);
+}
+
+[data-theme='dark'] .btn-icon:hover {
+  background: var(--gray-700);
+  color: var(--gray-200);
+  border-color: var(--gray-600);
+}
+
+[data-theme='dark'] .btn-outline.btn-primary:hover:not(:disabled) {
+  background: rgba(28, 58, 110, 0.15);
+}
+
+[data-theme='dark'] .btn-outline.btn-success:hover:not(:disabled) {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme='dark'] .btn-outline.btn-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-success,
+  .btn-danger,
+  .btn-warning {
+    padding: 10px 16px;
+  }
+  
+  .btn-group {
+    width: 100%;
+  }
+  
+  .btn-group > * {
+    flex: 1;
+  }
+  
+  .btn-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .btn-icon.btn-sm {
+    width: 28px;
+    height: 28px;
+  }
+}

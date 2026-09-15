@@ -1,0 +1,280 @@
+/* Container - Uses standard Card styling */
+.data-table-container {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--bento-radius-md);
+  overflow: hidden;
+  box-shadow: var(--bento-shadow-1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper for scrolling */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 70vh;
+  /* Sticky header needs a height limit */
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  /* Required for sticky headers */
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+/* --- HEADER --- */
+.data-table thead {
+  background-color: hsl(var(--muted) / 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  /* Modern touch */
+}
+
+.data-table th {
+  text-align: left;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid hsl(var(--border));
+  white-space: nowrap;
+  user-select: none;
+  background-color: hsl(var(--muted) / 0.5);
+  /* Needed for sticky opacity */
+}
+
+/* Sorting */
+.data-table th.sortable {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.data-table th.sortable:hover {
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--muted));
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sort-icon {
+  display: flex;
+  color: hsl(var(--muted-foreground));
+}
+
+/* --- BODY --- */
+.data-table tbody tr {
+  transition: background-color 0.15s;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  vertical-align: middle;
+}
+
+/* Row Interactions */
+.data-table tbody tr:hover {
+  background-color: hsl(var(--muted) / 0.3);
+}
+
+.data-table tbody tr.clickable {
+  cursor: pointer;
+}
+
+.data-table tbody tr.selected {
+  background-color: hsl(var(--primary) / 0.05);
+}
+
+/* --- CHECKBOX COLUMN --- */
+.col-checkbox {
+  width: 48px;
+  padding-left: 1.5rem !important;
+  padding-right: 0 !important;
+}
+
+/* Custom Checkbox Style */
+.table-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: hsl(var(--primary));
+}
+
+/* --- STATES --- */
+.data-table-loading,
+.data-table-empty {
+  padding: 3rem;
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid hsl(var(--border));
+  border-top-color: hsl(var(--primary));
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   TABLE EXTRAS (Pagination, Filters, Bulk)
+   ============================================ */
+
+/* --- PAGINATION --- */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  border-radius: var(--radius);
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: hsl(var(--muted));
+  border-color: hsl(var(--muted-foreground));
+}
+
+.pagination-btn.active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- FILTERS TOOLBAR --- */
+.table-filters {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: hsl(var(--card));
+  border-bottom: 1px solid hsl(var(--border));
+  border-radius: var(--radius) var(--radius) 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-input-wrapper {
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+}
+
+/* --- BULK ACTIONS BAR --- */
+.bulk-actions {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: slideDown 0.2s ease-out;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bulk-info {
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bulk-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.bulk-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bulk-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.bulk-btn.danger {
+  background-color: hsl(var(--destructive));
+  border-color: hsl(var(--destructive));
+}

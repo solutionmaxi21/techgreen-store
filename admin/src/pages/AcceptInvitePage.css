@@ -1,0 +1,22 @@
+.invite-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--bg-secondary); color: var(--text-primary); }
+.invite-panel { width: min(460px, 100%); padding: 28px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); box-shadow: 0 14px 40px rgb(0 0 0 / .12); }
+.invite-panel > img { display: block; width: 52px; height: 52px; object-fit: contain; margin: 0 0 24px; }
+.invite-heading { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+.invite-heading svg { color: var(--primary-color); flex: 0 0 auto; }
+.invite-heading h1, .invite-state h1 { margin: 0 0 5px; font-size: 24px; letter-spacing: 0; }
+.invite-heading p, .invite-state p { margin: 0; color: var(--text-secondary); }
+.invite-panel form { display: grid; gap: 15px; }
+.invite-panel label { display: grid; gap: 6px; color: var(--text-secondary); font-size: 13px; font-weight: 600; }
+.invite-panel input { width: 100%; height: 42px; padding: 0 11px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-secondary); color: var(--text-primary); font: inherit; }
+.invite-panel input:disabled { opacity: .75; }
+.invite-password { position: relative; }
+.invite-password > svg { position: absolute; top: 13px; left: 11px; color: var(--text-secondary); }
+.invite-password input { padding-left: 38px; padding-right: 42px; }
+.invite-password button { position: absolute; top: 4px; right: 4px; width: 34px; height: 34px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.invite-submit, .invite-state a { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--primary-color); border-radius: 6px; background: var(--primary-color); color: white; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+.invite-submit:disabled { opacity: .6; }
+.invite-error { margin: 0; padding: 9px 11px; border-radius: 6px; background: var(--status-danger-bg); color: var(--status-danger-text); font-size: 13px; }
+.invite-hint { margin: -3px 0 0; color: var(--text-secondary); font-size: 12px; line-height: 1.45; }
+.invite-state { min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; text-align: center; }
+.invite-state.success svg { color: var(--success-color); }
+.invite-state a { width: 100%; margin-top: 8px; }

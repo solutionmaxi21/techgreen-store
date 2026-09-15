@@ -1,0 +1,128 @@
+.language-switcher-container {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    z-index: 1000;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-main);
+}
+
+.lang-btn:hover {
+    background: hsl(var(--muted));
+}
+
+.lang-btn.active {
+    background: hsl(var(--muted));
+    box-shadow: inset 0 0 0 1px hsl(var(--border));
+}
+
+.lang-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.lang-short {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    letter-spacing: 0.5px;
+}
+
+.chevron {
+    transition: transform 0.2s ease;
+    color: hsl(var(--muted-foreground));
+    margin-left: 2px;
+}
+
+.chevron.rotate {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 160px;
+    background: hsl(var(--bento-surface));
+    border: 1px solid hsl(var(--border));
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: var(--bento-shadow-2, 0 8px 24px rgba(0, 0, 0, 0.12));
+    z-index: 1000;
+    animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: top right;
+}
+
+/* RTL Support for dropdown positioning */
+[dir="rtl"] .lang-dropdown {
+    right: auto;
+    left: 0;
+    transform-origin: top left;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    color: hsl(var(--foreground));
+}
+
+[dir="rtl"] .lang-option {
+    text-align: right;
+}
+
+.lang-option:hover {
+    background: hsl(var(--muted));
+}
+
+.lang-option.selected {
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    font-weight: 600;
+}
+
+.option-flag {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.option-name {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.check-icon {
+    color: hsl(var(--primary));
+}

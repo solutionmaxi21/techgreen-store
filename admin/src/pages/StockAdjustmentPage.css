@@ -1,0 +1,488 @@
+.stock-adjustment-page {
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--gray-50);
+}
+
+/* Header */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--gray-700);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+
+.back-button:hover {
+  background: var(--gray-50);
+  border-color: var(--primary-500);
+  color: var(--primary-600);
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.header-content .page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 4px 0;
+}
+
+.page-subtitle {
+  color: var(--gray-500);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Layout */
+.adjustment-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .adjustment-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--gray-50);
+}
+
+.card-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.card-header svg {
+  color: var(--primary-600);
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border-color);
+  background: var(--gray-50);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Stock Info Section */
+.stock-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 24px;
+}
+
+.product-info {
+  margin-bottom: 24px;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 8px 0;
+}
+
+.product-sku {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gray-500);
+  margin: 0 0 12px 0;
+}
+
+.warehouse-info {
+  font-size: 14px;
+  color: var(--gray-700);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Stock Metrics */
+.stock-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.metric {
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.metric label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.metric-value.reserved {
+  color: var(--warning-600);
+}
+
+.metric-value.available {
+  color: var(--success-600);
+}
+
+/* Alerts */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+.alert-warning {
+  background: var(--warning-50);
+  color: var(--warning-700);
+  border: 1px solid var(--warning-200);
+}
+
+.alert-danger {
+  background: var(--error-50);
+  color: var(--error-700);
+  border: 1px solid var(--error-200);
+}
+
+.last-restocked {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+/* Preview Card */
+.preview-card {
+  border: 2px solid var(--primary-200);
+  background: var(--primary-50);
+}
+
+.preview-card .card-header {
+  background: var(--primary-100);
+  border-color: var(--primary-200);
+}
+
+.preview-calculation {
+  font-size: 15px;
+}
+
+.preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.preview-row.change {
+  color: var(--gray-600);
+}
+
+.preview-row strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.preview-row strong.positive {
+  color: var(--success-600);
+}
+
+.preview-row strong.negative {
+  color: var(--error-600);
+}
+
+.preview-divider {
+  height: 2px;
+  background: var(--primary-200);
+  margin: 12px 0;
+}
+
+.preview-row.result {
+  font-size: 16px;
+}
+
+.preview-row.result strong {
+  font-size: 32px;
+  color: var(--primary-600);
+}
+
+/* Adjustment Form */
+.adjustment-type-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: var(--gray-100);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.type-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--gray-600);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.type-tab:hover {
+  background: var(--gray-200);
+  color: var(--gray-900);
+}
+
+.type-tab.active {
+  background: white;
+  color: var(--primary-600);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.type-tab svg {
+  flex-shrink: 0;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: var(--error-500);
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: white;
+  color: var(--gray-900);
+  transition: all 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-control.large {
+  padding: 14px 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+textarea.form-control {
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Quick Amounts */
+.quick-amounts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.quick-label {
+  font-size: 12px;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.quick-btn {
+  padding: 6px 12px;
+  background: var(--gray-100);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-btn:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-300);
+  color: var(--primary-600);
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--primary-600);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-700);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--gray-700);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+}
+
+/* Loading & Error States */
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  color: var(--gray-500);
+}
+
+.error-state {
+  color: var(--error-500);
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .stock-adjustment-page {
+  background: #0d1117;
+}
+
+[data-theme='dark'] .card {
+  background: #161b22;
+  border-color: #30363d;
+}
+
+[data-theme='dark'] .card-header,
+[data-theme='dark'] .card-footer {
+  background: #0d1117;
+  border-color: #30363d;
+}
+
+[data-theme='dark'] .form-control {
+  background: #0d1117;
+  border-color: #30363d;
+  color: #c9d1d9;
+}
+
+[data-theme='dark'] .metric {
+  background: #0d1117;
+  border-color: #30363d;
+}
+
+[data-theme='dark'] .preview-card {
+  background: #1c2128;
+  border-color: #388bfd;
+}

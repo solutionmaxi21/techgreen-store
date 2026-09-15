@@ -1,0 +1,23 @@
+node_modules
+dist
+dist-app
+release
+.git
+.gitignore
+npm-debug.log*
+
+# Electron (not needed for web Docker build)
+electron/
+build/
+
+# Documentation
+*.md
+docs/
+
+# Environment
+.env.local
+
+# Scripts
+create-icon.js
+refactor-imports.js
+test-keytar.js

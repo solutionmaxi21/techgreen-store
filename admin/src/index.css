@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================
+   1. LEGACY IMPORTS (Keep these for existing pages)
+   ============================================ */
+@import './styles/buttons.css';
+@import './styles/actions.css';
+@import './styles/ui-enhancements.css';
+@import './styles/layout.css';
+@import './styles/forms.css';
+@import './styles/utilities.css';
+@import './styles/bento-theme.css';
+
+:root {
+  /* ============================================
+     2. LEGACY COLOR SYSTEM (Restored)
+     ============================================ */
+  /* Primary: Deep Navy Blue */
+  --primary-50: hsl(220, 70%, 97%);
+  --primary-100: hsl(220, 65%, 92%);
+  --primary-200: hsl(220, 60%, 85%);
+  --primary-300: hsl(220, 55%, 70%);
+  --primary-400: hsl(220, 50%, 55%);
+  --primary-500: hsl(220, 60%, 35%);
+  --primary-600: hsl(220, 65%, 28%);
+  --primary-700: hsl(220, 70%, 22%);
+  --primary-800: hsl(220, 75%, 16%);
+  --primary-900: hsl(220, 80%, 12%);
+
+  /* Accent: Vibrant Orange */
+  --accent-50: hsl(35, 100%, 96%);
+  --accent-100: hsl(35, 100%, 90%);
+  --accent-200: hsl(35, 100%, 80%);
+  --accent-300: hsl(35, 98%, 70%);
+  --accent-400: hsl(35, 95%, 60%);
+  --accent-500: hsl(35, 92%, 50%);
+  --accent-600: hsl(35, 90%, 45%);
+  --accent-700: hsl(35, 85%, 40%);
+  --accent-800: hsl(35, 80%, 35%);
+  --accent-900: hsl(35, 75%, 30%);
+
+  /* Semantic Colors */
+  --success-50: hsl(142, 76%, 95%);
+  --success-500: hsl(142, 76%, 45%);
+  --error-50: hsl(0, 84%, 95%);
+  --error-500: hsl(0, 84%, 60%);
+  --warning-50: hsl(45, 93%, 95%);
+  --warning-500: hsl(45, 93%, 58%);
+
+  /* Grays */
+  --gray-50: hsl(220, 20%, 98%);
+  --gray-100: hsl(220, 18%, 95%);
+  --gray-200: hsl(220, 16%, 90%);
+  --gray-300: hsl(220, 14%, 80%);
+  --gray-400: hsl(220, 12%, 65%);
+  --gray-500: hsl(220, 10%, 50%);
+  --gray-600: hsl(220, 12%, 40%);
+  --gray-700: hsl(220, 14%, 30%);
+  --gray-800: hsl(220, 16%, 20%);
+  --gray-900: hsl(220, 18%, 12%);
+
+  /* Old Layout Variables (Restored) */
+  --bg-primary: hsl(0, 0%, 100%);
+  --bg-secondary: var(--gray-50);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-700);
+  --border-color: var(--gray-200);
+
+  /* Convenience Mappings */
+  --color-primary: var(--primary-500);
+  --color-white: #ffffff;
+  --primary-color: var(--primary-500);
+
+  /* Semantic Color Aliases for Consistency */
+  --success-color: var(--success-500);
+  --success-bg: var(--success-50);
+  --warning-color: var(--warning-500);
+  --warning-bg: var(--warning-50);
+  --error-color: var(--error-500);
+  --error-bg: var(--error-50);
+  --danger-color: var(--error-500);
+  --danger-bg: var(--error-50);
+
+  /* Status tokens (for badges, alerts) */
+  --status-primary-bg: var(--primary-100);
+  --status-primary-text: var(--primary-700);
+  --status-success-bg: var(--success-bg);
+  --status-success-text: var(--success-color);
+  --status-warning-bg: var(--warning-bg);
+  --status-warning-text: var(--warning-color);
+  --status-danger-bg: var(--error-bg);
+  --status-danger-text: var(--error-color);
+  --status-info-bg: var(--primary-50);
+  --status-info-text: var(--primary-600);
+
+  /* ============================================
+     3. NEW "PRO" DESIGN SYSTEM (For AdminLayout)
+     ============================================ */
+  --font-main: 'Inter', sans-serif;
+
+  /* ============================================
+      3.1 BENTO THEME TOKENS (Light)
+      ============================================ */
+  --bento-bg: 220 20% 98%;
+  --bento-surface: 0 0% 100%;
+  --bento-surface-elevated: 220 18% 97%;
+  --bento-surface-strong: 220 16% 94%;
+  --bento-border: 220 16% 90%;
+  --bento-border-strong: 220 14% 82%;
+  --bento-ink: 222 47% 11%;
+  --bento-ink-muted: 220 12% 40%;
+  --bento-ink-subtle: 220 10% 55%;
+  --bento-accent: 220 65% 28%;
+  --bento-accent-strong: 220 70% 22%;
+  --bento-radius-sm: 10px;
+  --bento-radius-md: 14px;
+  --bento-radius-lg: 18px;
+  --bento-gap: 20px;
+  --bento-shadow-1: 0 1px 2px hsl(220 20% 10% / 0.06), 0 1px 0 hsl(220 20% 10% / 0.04);
+  --bento-shadow-2: 0 8px 20px hsl(220 20% 10% / 0.12);
+  --bento-focus: 220 70% 45%;
+
+  /* Semantic surface mappings for legacy usage */
+  --bg-primary: hsl(var(--bento-surface));
+  --bg-secondary: hsl(var(--bento-bg));
+  --text-primary: hsl(var(--bento-ink));
+  --text-secondary: hsl(var(--bento-ink-muted));
+  --border-color: hsl(var(--bento-border));
+
+  /* We map the new system to use HSL raw values so standard css works */
+
+  /* Backgrounds */
+  --background: var(--bento-bg);
+  --card: var(--bento-surface);
+  --foreground: var(--bento-ink);
+
+  /* Primary (Mapped to your Brand Navy) */
+  --primary: var(--bento-accent);
+  --primary-foreground: 210 40% 98%;
+
+  /* Muted */
+  --muted: var(--bento-surface-strong);
+  --muted-foreground: var(--bento-ink-muted);
+
+  /* Borders */
+  --border: var(--bento-border);
+  --input: var(--bento-border);
+
+  /* Accent (Your Orange) */
+  --accent: 21 90% 48%;
+  --accent-foreground: 0 0% 100%;
+
+  /* Layout Dimensions */
+  --sidebar-width: 260px;
+  --sidebar-width-collapsed: 72px;
+  --header-height: 64px;
+  --radius: 0.5rem;
+}
+
+/* Dark Mode Overrides (Bento Grey) */
+[data-theme="dark"] {
+  --bento-bg: 0 0% 11%;
+  --bento-surface: 0 0% 15%;
+  --bento-surface-elevated: 0 0% 17%;
+  --bento-surface-strong: 0 0% 19%;
+  --bento-border: 0 0% 26%;
+  --bento-border-strong: 0 0% 32%;
+  --bento-ink: 0 0% 98%;
+  --bento-ink-muted: 0 0% 80%;
+  --bento-ink-subtle: 0 0% 65%;
+  --bento-accent: 220 70% 62%;
+  --bento-accent-strong: 220 72% 55%;
+  --bento-shadow-1: 0 1px 2px hsl(0 0% 0% / 0.6), 0 1px 0 hsl(0 0% 0% / 0.5);
+  --bento-shadow-2: 0 16px 32px hsl(0 0% 0% / 0.55);
+  --bento-focus: 220 70% 62%;
+
+  --status-primary-bg: hsl(220 30% 20%);
+  --status-primary-text: hsl(220 70% 78%);
+  --status-success-bg: hsl(150 30% 20%);
+  --status-success-text: hsl(150 60% 70%);
+  --status-warning-bg: hsl(40 35% 22%);
+  --status-warning-text: hsl(40 80% 70%);
+  --status-danger-bg: hsl(0 30% 22%);
+  --status-danger-text: hsl(0 75% 72%);
+  --status-info-bg: hsl(210 30% 20%);
+  --status-info-text: hsl(210 70% 75%);
+
+  --bg-primary: hsl(var(--bento-surface));
+  --bg-secondary: hsl(var(--bento-bg));
+  --text-primary: hsl(var(--bento-ink));
+  --text-secondary: hsl(var(--bento-ink-muted));
+  --border-color: hsl(var(--bento-border));
+
+  --background: var(--bento-bg);
+  --foreground: var(--bento-ink);
+  --card: var(--bento-surface);
+  --border: var(--bento-border);
+  --muted: var(--bento-surface-strong);
+  --muted-foreground: var(--bento-ink-muted);
+}
+
+/* ============================================
+   4. GLOBAL RESET
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg-secondary);
+  /* Use legacy var for body safety */
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+[lang="ar"] {
+  --font-main: 'Cairo', sans-serif;
+}
+
+[lang="ar"] body {
+  font-family: var(--font-main);
+}
+
+[dir="rtl"] .nav-icon {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Utility Classes for Compatibility */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}

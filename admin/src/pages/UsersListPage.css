@@ -1,0 +1,261 @@
+.users-list-page {
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin: 0 0 4px 0;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Filters Section Pro */
+.filters-section-pro {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.search-box-pro {
+  position: relative;
+  width: 100%;
+}
+
+.search-box-pro .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+}
+
+.search-box-pro input {
+  width: 100%;
+  padding: 12px 12px 12px 48px;
+  background: var(--gray-50);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--gray-900);
+  transition: all 0.2s;
+}
+
+.search-box-pro input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  background: var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--primary-50);
+}
+
+.filters-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.filter-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.pro-select-minimal {
+  padding: 10px 12px;
+  background: var(--gray-50);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--gray-900);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pro-select-minimal:hover {
+  border-color: var(--gray-300);
+}
+
+/* Table Meta */
+.table-meta {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--gray-500);
+}
+
+.table-meta strong {
+  color: var(--gray-900);
+}
+
+/* User Profil Cell */
+.user-profile-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar.color-1 {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.user-avatar.color-2 {
+  background: linear-gradient(135deg, #10b981, #047857);
+}
+
+.user-avatar.color-3 {
+  background: linear-gradient(135deg, #f59e0b, #b45309);
+}
+
+.user-avatar.color-4 {
+  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+}
+
+.user-avatar.color-5 {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.user-email-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+/* Column Specifics */
+.role-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.role-icon {
+  color: var(--gray-400);
+}
+
+.role-icon.admin {
+  color: var(--warning-500);
+}
+
+.order-count-badge {
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--gray-100);
+  color: var(--gray-600);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.ltv-value {
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.join-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.action-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn-icon-minimal {
+  background: none;
+  border: none;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-icon-minimal:hover {
+  background: var(--error-50);
+  color: var(--error-500);
+}
+
+/* Dark Mode Adjustments */
+[data-theme='dark'] .filters-section-pro {
+  background: #0d1117;
+}
+
+[data-theme='dark'] .search-box-pro input {
+  background: #161b22;
+}
+
+[data-theme='dark'] .pro-select-minimal {
+  background: #161b22;
+}
+
+[data-theme='dark'] .order-count-badge {
+  background: #30363d;
+  color: #8b949e;
+}

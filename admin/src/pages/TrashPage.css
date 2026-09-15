@@ -1,0 +1,21 @@
+.trash-filters {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.trash-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.trash-actions .btn-sm {
+  padding: 8px 12px;
+}
+
+.trash-actions svg {
+  flex-shrink: 0;
+}

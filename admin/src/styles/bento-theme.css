@@ -1,0 +1,603 @@
+/* ============================================
+   BENTO DARK MODE THEME OVERRIDES
+   Clean, consolidated version - no duplicates
+   ============================================ */
+
+/* Universal dark mode styles - catch everything */
+[data-theme="dark"] {
+  background-color: hsl(var(--bento-bg)) !important;
+  color: hsl(var(--bento-ink)) !important;
+}
+
+[data-theme="dark"] * {
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+/* Override white backgrounds explicitly */
+[data-theme="dark"] [style*="background: white"],
+[data-theme="dark"] [style*="background-color: white"],
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background-color: #fff"],
+[data-theme="dark"] [style*="background: #ffffff"],
+[data-theme="dark"] [style*="background-color: #ffffff"] {
+  background-color: hsl(var(--bento-surface)) !important;
+  color: hsl(var(--bento-ink)) !important;
+}
+
+[data-theme="dark"] body {
+  background-color: hsl(var(--bento-bg)) !important;
+  color: hsl(var(--bento-ink)) !important;
+}
+
+[data-theme="dark"] body * {
+  color: hsl(var(--bento-ink)) !important;
+}
+
+/* Override all divs, sections, articles */
+[data-theme="dark"] div,
+[data-theme="dark"] section,
+[data-theme="dark"] article,
+[data-theme="dark"] main,
+[data-theme="dark"] aside {
+  background-color: transparent !important;
+}
+
+/* ============================================
+   CARD AND SURFACE ELEMENTS
+   ============================================ */
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .info-card,
+[data-theme="dark"] .product-card,
+[data-theme="dark"] .details-card,
+[data-theme="dark"] .dashboard-container .stat-card,
+[data-theme="dark"] .premium-profile-card,
+[data-theme="dark"] .profile-card,
+[data-theme="dark"] .card-pro {
+  background: hsl(0 0% 14%) !important;
+  border: 1.5px solid hsl(0 0% 22%) !important;
+  border-radius: 14px !important;
+  color: hsl(0 0% 95%) !important;
+  box-shadow: 0 4px 12px hsl(0 0% 0% / 0.3), 0 1px 3px hsl(0 0% 0% / 0.2) !important;
+  padding: 20px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Keep containers and sections transparent to avoid nesting */
+[data-theme="dark"] .data-table-container,
+[data-theme="dark"] .form-container,
+[data-theme="dark"] .filters-section,
+[data-theme="dark"] .products-section,
+[data-theme="dark"] .section,
+[data-theme="dark"] [class*="-container"]:not(.dashboard-container):not(.page-container),
+[data-theme="dark"] [class*="-section"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: inherit !important;
+}
+
+[data-theme="dark"] .card:hover,
+[data-theme="dark"] .section:hover,
+[data-theme="dark"] .stat-card:hover,
+[data-theme="dark"] .info-card:hover,
+[data-theme="dark"] .product-card:hover,
+[data-theme="dark"] .details-card:hover,
+[data-theme="dark"] [class*="card"]:hover {
+  border-color: hsl(0 0% 28%) !important;
+  box-shadow: 0 8px 24px hsl(0 0% 0% / 0.4), 0 2px 6px hsl(0 0% 0% / 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Stat card top accent border */
+[data-theme="dark"] .stat-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, hsl(var(--bento-accent)), hsl(var(--bento-accent-strong))) !important;
+  border-radius: 14px 14px 0 0 !important;
+}
+
+/* ============================================
+   TEXT HIERARCHY AND TYPOGRAPHY
+   ============================================ */
+
+/* Headers and titles */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .page-header h1,
+[data-theme="dark"] .dashboard-header h1,
+[data-theme="dark"] .card-title,
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .details-title,
+[data-theme="dark"] .supplier-name,
+[data-theme="dark"] .product-name,
+[data-theme="dark"] .title,
+[data-theme="dark"] [class*="title"] {
+  color: hsl(0 0% 98%) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.3px !important;
+}
+
+/* Stat values */
+[data-theme="dark"] .stat-value,
+[data-theme="dark"] [class*="value"] {
+  color: hsl(0 0% 95%) !important;
+  font-weight: 600 !important;
+}
+
+/* Labels and stat labels */
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] label,
+[data-theme="dark"] .form-label,
+[data-theme="dark"] [class*="label"] {
+  color: hsl(0 0% 75%) !important;
+  font-weight: 500 !important;
+}
+
+/* Muted and secondary text */
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .page-subtitle,
+[data-theme="dark"] .info-label,
+[data-theme="dark"] .supplier-subtitle,
+[data-theme="dark"] small,
+[data-theme="dark"] .form-help,
+[data-theme="dark"] [class*="subtitle"],
+[data-theme="dark"] [class*="secondary"] {
+  color: hsl(0 0% 75%) !important;
+  opacity: 1 !important;
+}
+
+/* Body text */
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] td,
+[data-theme="dark"] th,
+[data-theme="dark"] .info-value,
+[data-theme="dark"] .text,
+[data-theme="dark"] li {
+  color: hsl(0 0% 95%) !important;
+}
+
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+[data-theme="dark"] .data-table,
+[data-theme="dark"] table {
+  background-color: hsl(var(--bento-surface)) !important;
+}
+
+[data-theme="dark"] .data-table thead,
+[data-theme="dark"] table thead {
+  background-color: hsl(0 0% 12%) !important;
+}
+
+[data-theme="dark"] .data-table th,
+[data-theme="dark"] table th {
+  background-color: hsl(0 0% 12%) !important;
+  color: hsl(0 0% 98%) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.3px !important;
+  border-bottom: 2px solid hsl(0 0% 24%) !important;
+}
+
+[data-theme="dark"] .data-table td,
+[data-theme="dark"] table td {
+  border-bottom-color: hsl(0 0% 18%) !important;
+  color: hsl(0 0% 95%) !important;
+  background-color: hsl(var(--bento-surface)) !important;
+  padding: 12px 16px !important;
+}
+
+[data-theme="dark"] .data-table tbody tr:hover,
+[data-theme="dark"] table tbody tr:hover {
+  background-color: hsl(0 0% 14%) !important;
+}
+
+/* ============================================
+   FORM ELEMENTS AND INPUTS
+   ============================================ */
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .form-textarea,
+[data-theme="dark"] [class*="input"],
+[data-theme="dark"] [class*="field"] {
+  background-color: hsl(0 0% 13%) !important;
+  border: 1px solid hsl(0 0% 24%) !important;
+  color: hsl(0 0% 95%) !important;
+  border-radius: 8px !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-input:focus {
+  border-color: hsl(220 70% 62%) !important;
+  background-color: hsl(0 0% 15%) !important;
+  box-shadow: 0 0 0 3px hsl(220 70% 62% / 0.25) !important;
+  outline: none !important;
+}
+
+[data-theme="dark"] ::placeholder {
+  color: hsl(0 0% 60%) !important;
+  opacity: 0.8 !important;
+}
+
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+[data-theme="dark"] .btn-primary,
+[data-theme="dark"] .btn-success,
+[data-theme="dark"] .btn-danger,
+[data-theme="dark"] .btn-warning {
+  color: white !important;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: hsl(var(--bento-surface-elevated)) !important;
+  color: hsl(var(--bento-ink)) !important;
+  border-color: hsl(var(--bento-border)) !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover:not(:disabled) {
+  background: hsl(var(--bento-surface-strong)) !important;
+  border-color: hsl(var(--bento-border-strong)) !important;
+  color: hsl(var(--bento-ink)) !important;
+}
+
+[data-theme="dark"] .icon-btn,
+[data-theme="dark"] .btn-icon,
+[data-theme="dark"] [class*="icon-btn"] {
+  background: hsl(var(--bento-surface-elevated)) !important;
+  color: hsl(var(--bento-ink-muted)) !important;
+}
+
+[data-theme="dark"] .icon-btn:hover,
+[data-theme="dark"] .btn-icon:hover {
+  background: hsl(var(--bento-surface-strong)) !important;
+  color: hsl(var(--bento-ink)) !important;
+}
+
+[data-theme="dark"] .btn-back,
+[data-theme="dark"] .back-btn,
+[data-theme="dark"] [class*="back"] {
+  background: hsl(var(--bento-surface-elevated)) !important;
+  color: hsl(var(--bento-ink)) !important;
+  border-color: hsl(var(--bento-border)) !important;
+}
+
+[data-theme="dark"] .btn-back:hover,
+[data-theme="dark"] .back-btn:hover,
+[data-theme="dark"] [class*="back"]:hover {
+  background: hsl(var(--bento-surface-strong)) !important;
+  border-color: hsl(var(--bento-border-strong)) !important;
+}
+
+/* ============================================
+   BADGES AND STATUS INDICATORS
+   ============================================ */
+
+[data-theme="dark"] .category-badge,
+[data-theme="dark"] .status-badge,
+[data-theme="dark"] .badge-primary,
+[data-theme="dark"] .stat-badge-primary,
+[data-theme="dark"] [class*="badge"] {
+  background: hsl(0 0% 18%) !important;
+  color: hsl(0 0% 95%) !important;
+  border: 1px solid hsl(0 0% 24%) !important;
+  border-radius: 6px !important;
+}
+
+[data-theme="dark"] .badge-success,
+[data-theme="dark"] .stat-badge-success {
+  background: var(--status-success-bg) !important;
+  color: var(--status-success-text) !important;
+}
+
+[data-theme="dark"] .badge-warning,
+[data-theme="dark"] .stat-badge-warning {
+  background: var(--status-warning-bg) !important;
+  color: var(--status-warning-text) !important;
+}
+
+[data-theme="dark"] .badge-danger,
+[data-theme="dark"] .stat-badge-danger {
+  background: var(--status-danger-bg) !important;
+  color: var(--status-danger-text) !important;
+}
+
+[data-theme="dark"] .badge-info {
+  background: var(--status-info-bg) !important;
+  color: var(--status-info-text) !important;
+}
+
+/* Trend badges in stat cards */
+[data-theme="dark"] .dashboard-container .trend {
+  background: hsl(0 0% 18%) !important;
+  color: hsl(0 0% 85%) !important;
+  border: 1px solid hsl(0 0% 26%) !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
+}
+
+[data-theme="dark"] .dashboard-container .trend-up {
+  background: hsl(120 20% 20%) !important;
+  color: hsl(120 65% 70%) !important;
+  border-color: hsl(120 25% 30%) !important;
+}
+
+[data-theme="dark"] .dashboard-container .trend-down {
+  background: hsl(0 25% 20%) !important;
+  color: hsl(0 70% 70%) !important;
+  border-color: hsl(0 30% 30%) !important;
+}
+
+/* Stat change indicators */
+[data-theme="dark"] .stat-change.up {
+  color: hsl(120 70% 55%) !important;
+}
+
+[data-theme="dark"] .stat-change.down {
+  color: hsl(0 85% 55%) !important;
+}
+
+[data-theme="dark"] .stat-change.neutral {
+  color: hsl(0 0% 75%) !important;
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+
+[data-theme="dark"] .alert-success,
+[data-theme="dark"] [class*="alert"][class*="success"] {
+  background: var(--status-success-bg) !important;
+  color: var(--status-success-text) !important;
+  border-color: var(--status-success-text) !important;
+}
+
+[data-theme="dark"] .alert-warning,
+[data-theme="dark"] [class*="alert"][class*="warning"] {
+  background: var(--status-warning-bg) !important;
+  color: var(--status-warning-text) !important;
+  border-color: var(--status-warning-text) !important;
+}
+
+[data-theme="dark"] .alert-danger,
+[data-theme="dark"] [class*="alert"][class*="danger"] {
+  background: var(--status-danger-bg) !important;
+  color: var(--status-danger-text) !important;
+  border-color: var(--status-danger-text) !important;
+}
+
+[data-theme="dark"] .alert-info,
+[data-theme="dark"] [class*="alert"][class*="info"] {
+  background: var(--status-info-bg) !important;
+  color: var(--status-info-text) !important;
+  border-color: var(--status-info-text) !important;
+}
+
+
+/* ============================================
+   PROGRESS BARS AND INDICATORS
+   ============================================ */
+
+[data-theme="dark"] .progress,
+[data-theme="dark"] [class*="progress"] {
+  background-color: hsl(0 0% 18%) !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+}
+
+[data-theme="dark"] .progress-bar,
+[data-theme="dark"] [class*="progress-bar"],
+[data-theme="dark"] .indicator::after {
+  background: linear-gradient(90deg, hsl(220 70% 62%), hsl(220 85% 72%)) !important;
+  height: 6px !important;
+  border-radius: 6px !important;
+}
+
+[data-theme="dark"] .indicator.success {
+  background: linear-gradient(90deg, hsl(120 70% 55%), hsl(120 80% 65%)) !important;
+}
+
+[data-theme="dark"] .indicator.warning {
+  background: linear-gradient(90deg, hsl(45 100% 55%), hsl(45 100% 70%)) !important;
+}
+
+[data-theme="dark"] .indicator.danger {
+  background: linear-gradient(90deg, hsl(0 85% 55%), hsl(0 85% 70%)) !important;
+}
+
+/* ============================================
+   NAVIGATION AND SIDEBAR
+   ============================================ */
+
+[data-theme="dark"] .app-sidebar,
+[data-theme="dark"] .app-header,
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .header,
+[data-theme="dark"] nav {
+  background-color: hsl(0 0% 12%) !important;
+  border-color: hsl(0 0% 20%) !important;
+  color: hsl(0 0% 95%) !important;
+}
+
+[data-theme="dark"] .nav-item,
+[data-theme="dark"] [class*="nav-item"] {
+  color: hsl(0 0% 75%) !important;
+}
+
+[data-theme="dark"] .nav-item:hover,
+[data-theme="dark"] [class*="nav-item"]:hover {
+  background-color: hsl(0 0% 18%) !important;
+  color: hsl(0 0% 95%) !important;
+}
+
+[data-theme="dark"] .nav-item.active,
+[data-theme="dark"] [class*="nav-item"].active {
+  background-color: hsl(220 70% 62% / 0.15) !important;
+  color: hsl(220 70% 62%) !important;
+  border-left: 3px solid hsl(220 70% 62%) !important;
+}
+
+/* ============================================
+   TABS AND FILTERS
+   ============================================ */
+
+[data-theme="dark"] .filter-tabs .tab,
+[data-theme="dark"] .status-tab,
+[data-theme="dark"] [class*="tab"] {
+  background: hsl(0 0% 13%) !important;
+  color: hsl(0 0% 75%) !important;
+  border-color: hsl(0 0% 20%) !important;
+  border-radius: 6px !important;
+}
+
+[data-theme="dark"] .filter-tabs .tab.active,
+[data-theme="dark"] .status-tab.active,
+[data-theme="dark"] [class*="tab"].active {
+  background: hsl(0 0% 16%) !important;
+  color: hsl(220 70% 62%) !important;
+  border-color: hsl(220 70% 62%) !important;
+  border-bottom: 2px solid hsl(220 70% 62%) !important;
+}
+
+[data-theme="dark"] .filter-tabs .tab:hover,
+[data-theme="dark"] .status-tab:hover,
+[data-theme="dark"] [class*="tab"]:hover {
+  background: hsl(0 0% 15%) !important;
+  color: hsl(0 0% 95%) !important;
+}
+
+/* ============================================
+   SEARCH BOXES
+   ============================================ */
+
+[data-theme="dark"] .search-box input,
+[data-theme="dark"] .header-search input,
+[data-theme="dark"] [class*="search"] input {
+  background: hsl(0 0% 13%) !important;
+  border: 1px solid hsl(0 0% 24%) !important;
+  color: hsl(0 0% 95%) !important;
+  border-radius: 8px !important;
+}
+
+[data-theme="dark"] .search-box input:focus,
+[data-theme="dark"] .header-search input:focus,
+[data-theme="dark"] [class*="search"] input:focus {
+  border-color: hsl(220 70% 62%) !important;
+  box-shadow: 0 0 0 3px hsl(220 70% 62% / 0.25) !important;
+}
+
+/* ============================================
+   BORDERS AND HEADERS
+   ============================================ */
+
+[data-theme="dark"] .section-header,
+[data-theme="dark"] .card-header,
+[data-theme="dark"] .card-footer,
+[data-theme="dark"] [class*="header"],
+[data-theme="dark"] [class*="footer"] {
+  border-color: hsl(0 0% 20%) !important;
+  background-color: transparent !important;
+}
+
+/* ============================================
+   EMPTY STATES AND PLACEHOLDERS
+   ============================================ */
+
+[data-theme="dark"] .empty-state,
+[data-theme="dark"] [class*="empty"] {
+  color: hsl(var(--bento-ink-muted)) !important;
+  background: hsl(var(--bento-surface)) !important;
+}
+
+[data-theme="dark"] .empty-state-icon,
+[data-theme="dark"] [class*="empty-icon"] {
+  color: hsl(var(--bento-ink-subtle)) !important;
+}
+
+[data-theme="dark"] .product-image-placeholder,
+[data-theme="dark"] .image-placeholder,
+[data-theme="dark"] [class*="placeholder"] {
+  background: hsl(var(--bento-surface-strong)) !important;
+  color: hsl(var(--bento-ink-subtle)) !important;
+  border-color: hsl(var(--bento-border)) !important;
+}
+
+/* ============================================
+   MODALS AND DROPDOWNS
+   ============================================ */
+
+[data-theme="dark"] .modal,
+[data-theme="dark"] .dropdown-menu,
+[data-theme="dark"] [class*="modal"],
+[data-theme="dark"] [class*="dropdown"] {
+  background: hsl(var(--bento-surface)) !important;
+  border-color: hsl(var(--bento-border)) !important;
+}
+
+/* ============================================
+   LOADERS AND ANIMATIONS
+   ============================================ */
+
+[data-theme="dark"] .skeleton,
+[data-theme="dark"] [class*="skeleton"] {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--bento-surface-strong)) 25%,
+    hsl(var(--bento-surface-elevated)) 50%,
+    hsl(var(--bento-surface-strong)) 75%
+  ) !important;
+}
+
+[data-theme="dark"] .spinner,
+[data-theme="dark"] [class*="spinner"] {
+  border-color: hsl(var(--bento-ink) / 0.15) !important;
+  border-top-color: hsl(var(--bento-accent)) !important;
+}
+
+/* ============================================
+   PAGE CONTAINERS
+   ============================================ */
+
+[data-theme="dark"] .page-container,
+[data-theme="dark"] .dashboard-container,
+[data-theme="dark"] .page-content,
+[data-theme="dark"] .supplier-detail-page,
+[data-theme="dark"] .product-details-page,
+[data-theme="dark"] .order-detail-page,
+[data-theme="dark"] .settings-page,
+[data-theme="dark"] .notifications-page,
+[data-theme="dark"] [class*="page"] {
+  background: hsl(var(--bento-bg)) !important;
+  color: hsl(var(--bento-ink)) !important;
+}
+
+/* Avoid inner dark panels in stat cards */
+[data-theme="dark"] .stat-content,
+[data-theme="dark"] .stat-info,
+[data-theme="dark"] .stat-footer {
+  background: transparent !important;
+}
+

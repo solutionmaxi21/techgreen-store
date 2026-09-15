@@ -1,0 +1,338 @@
+/* ============================================
+   Action Buttons - Inline & Context Actions
+   ============================================ */
+
+:root {
+  --action-transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Small Action Buttons
+   ============================================ */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: white;
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--action-transition);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.action-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+  color: var(--gray-900);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   Action Button Variants
+   ============================================ */
+.action-btn.approve,
+.action-btn.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #10b981;
+}
+
+.action-btn.approve:hover,
+.action-btn.success:hover {
+  background: #a7f3d0;
+  border-color: #059669;
+  color: #064e3b;
+}
+
+.action-btn.reject,
+.action-btn.danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #ef4444;
+}
+
+.action-btn.reject:hover,
+.action-btn.danger:hover {
+  background: #fecaca;
+  border-color: #dc2626;
+  color: #7f1d1d;
+}
+
+.action-btn.delete {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #ef4444;
+}
+
+.action-btn.delete:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #dc2626;
+}
+
+.action-btn.edit,
+.action-btn.primary {
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #3b82f6;
+}
+
+.action-btn.edit:hover,
+.action-btn.primary:hover {
+  background: #bfdbfe;
+  border-color: #2563eb;
+  color: #1e3a8a;
+}
+
+.action-btn.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #f59e0b;
+}
+
+.action-btn.warning:hover {
+  background: #fde68a;
+  border-color: #d97706;
+  color: #78350f;
+}
+
+/* ============================================
+   Icon-Only Action Buttons
+   ============================================ */
+.action-btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: var(--gray-600);
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--action-transition);
+}
+
+.action-btn-icon:hover {
+  background: var(--gray-50);
+  color: var(--gray-900);
+  border-color: var(--gray-400);
+  transform: scale(1.08);
+}
+
+.action-btn-icon.delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #ef4444;
+}
+
+.action-btn-icon.edit:hover {
+  background: #dbeafe;
+  color: #2563eb;
+  border-color: #3b82f6;
+}
+
+.action-btn-icon.view:hover {
+  background: #e0e7ff;
+  color: #4f46e5;
+  border-color: #6366f1;
+}
+
+/* ============================================
+   Full-Width Action Buttons
+   ============================================ */
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  background: white;
+  color: var(--gray-700);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--action-transition);
+}
+
+.action-button:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+  color: var(--gray-900);
+  transform: translateX(3px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.action-button svg,
+.action-button i {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-500);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Back Button
+   ============================================ */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: white;
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--action-transition);
+}
+
+.back-button:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+  color: var(--gray-900);
+  transform: translateX(-2px);
+}
+
+/* ============================================
+   Clear/Filter Buttons
+   ============================================ */
+.clear-filters {
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+  color: var(--gray-600);
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--action-transition);
+}
+
+.clear-filters:hover {
+  background: var(--gray-50);
+  color: var(--gray-900);
+  border-color: var(--gray-400);
+}
+
+/* ============================================
+   Bulk Action Buttons
+   ============================================ */
+.bulk-action-btn {
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--action-transition);
+  backdrop-filter: blur(10px);
+}
+
+.bulk-action-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+[data-theme='dark'] .action-btn {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-300);
+}
+
+[data-theme='dark'] .action-btn:hover {
+  background: var(--gray-700);
+  border-color: var(--gray-600);
+  color: var(--gray-100);
+}
+
+[data-theme='dark'] .action-btn-icon {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-400);
+}
+
+[data-theme='dark'] .action-btn-icon:hover {
+  background: var(--gray-700);
+  color: var(--gray-200);
+}
+
+[data-theme='dark'] .action-button {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-300);
+}
+
+[data-theme='dark'] .action-button:hover {
+  background: var(--gray-700);
+  border-color: var(--gray-600);
+  color: var(--gray-100);
+}
+
+[data-theme='dark'] .back-button {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-300);
+}
+
+[data-theme='dark'] .back-button:hover {
+  background: var(--gray-700);
+  color: var(--gray-100);
+}
+
+[data-theme='dark'] .clear-filters {
+  background: transparent;
+  border-color: var(--gray-700);
+  color: var(--gray-400);
+}
+
+[data-theme='dark'] .clear-filters:hover {
+  background: var(--gray-800);
+  color: var(--gray-200);
+  border-color: var(--gray-600);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .action-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .action-button {
+    padding: 10px 12px;
+    font-size: 0.8125rem;
+  }
+  
+  .action-btn-icon {
+    width: 28px;
+    height: 28px;
+  }
+}

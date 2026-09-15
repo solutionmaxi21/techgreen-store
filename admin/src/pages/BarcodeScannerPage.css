@@ -1,0 +1,269 @@
+/* Barcode Scanner Page Styles */
+
+.barcode-scanner-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.scanner-header {
+  margin-bottom: 2rem;
+}
+
+.scanner-header h1 {
+  color: hsl(var(--foreground));
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.scanner-header p {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Scanner Card */
+.scanner-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form */
+.scanner-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input Group */
+.scanner-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.scanner-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.scanner-input {
+  padding: 14px 16px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: 2px solid hsl(var(--border));
+  border-radius: 8px;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: all 0.2s ease;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+}
+
+.scanner-input:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+}
+
+.scanner-input:disabled {
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  cursor: not-allowed;
+}
+
+/* Messages */
+.scanner-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scanner-message.error {
+  background: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+  border: 1px solid hsl(var(--destructive) / 0.2);
+}
+
+.scanner-message.success {
+  background: hsl(120 84% 60% / 0.1);
+  color: hsl(120 84% 40%);
+  border: 1px solid hsl(120 84% 60% / 0.2);
+}
+
+/* Buttons */
+.scanner-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: hsl(var(--primary) / 0.9);
+  box-shadow: 0 4px 12px rgba(9, 105, 218, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border: 1.5px solid hsl(var(--border));
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: hsl(var(--muted));
+  border-color: hsl(var(--foreground) / 0.3);
+}
+
+/* Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Instructions */
+.scanner-instructions {
+  padding: 1rem;
+  background: hsl(var(--muted) / 0.5);
+  border-left: 3px solid hsl(var(--primary));
+  border-radius: 6px;
+}
+
+.scanner-instructions h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: hsl(var(--foreground));
+}
+
+.scanner-instructions ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.scanner-instructions li {
+  margin-bottom: 0.5rem;
+}
+
+/* Formats */
+.scanner-formats {
+  padding: 1rem;
+  background: hsl(var(--muted));
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.scanner-formats strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: hsl(var(--foreground));
+}
+
+/* Info Box */
+.scanner-info {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background: hsl(var(--muted));
+  border-left: 4px solid hsl(var(--primary));
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.scanner-info strong {
+  color: hsl(var(--foreground));
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .barcode-scanner-page {
+    padding: 1rem;
+  }
+
+  .scanner-card {
+    padding: 1.5rem;
+  }
+
+  .scanner-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .scanner-input {
+    font-size: 1rem;
+  }
+}

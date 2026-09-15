@@ -1,0 +1,77 @@
+/* Remove height restrictions that might cause loops */
+.chart-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chart-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+.chart-select {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background-color: hsl(var(--background));
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* FIX: Chart container fills remaining height */
+.chart-container {
+  flex: 1;
+  width: 100%;
+  min-height: 0; /* Crucial for flex containers */
+  position: relative;
+}
+
+.recharts-legend-wrapper {
+  width: 100% !important; 
+  bottom: 0 !important;
+  display: flex;
+  justify-content: center;
+}
+
+/* Custom category pie chart legend */
+.category-legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 12px;
+  padding: 8px 4px 4px;
+  flex-shrink: 0;
+}
+
+.category-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.category-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.category-legend-label {
+  font-size: 11px;
+  color: hsl(var(--foreground));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

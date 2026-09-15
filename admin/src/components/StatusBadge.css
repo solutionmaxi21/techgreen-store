@@ -1,0 +1,94 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Order statuses */
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-processing {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-shipped {
+  background-color: #e9d5ff;
+  color: #6b21a8;
+}
+
+.status-delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Product statuses */
+.status-active {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-inactive {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+/* Review statuses */
+.status-approved {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Dark mode */
+[data-theme='dark'] .status-pending {
+  background-color: #78350f;
+  color: #fef3c7;
+}
+
+[data-theme='dark'] .status-processing {
+  background-color: #1e3a8a;
+  color: #dbeafe;
+}
+
+[data-theme='dark'] .status-shipped {
+  background-color: #581c87;
+  color: #e9d5ff;
+}
+
+[data-theme='dark'] .status-delivered {
+  background-color: #064e3b;
+  color: #d1fae5;
+}
+
+[data-theme='dark'] .status-cancelled {
+  background-color: #7f1d1d;
+  color: #fee2e2;
+}
+
+[data-theme='dark'] .status-active {
+  background-color: #064e3b;
+  color: #d1fae5;
+}
+
+[data-theme='dark'] .status-inactive {
+  background-color: #374151;
+  color: #d1d5db;
+}
