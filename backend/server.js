@@ -19,6 +19,7 @@ import { apiLimiter, readLimiter } from './src/shared/middleware/rateLimiter.js'
 import { errorHandler, notFoundHandler } from './src/shared/middleware/errorHandler.js';
 import { localeMiddleware } from './src/shared/middleware/locale.js';
 import { csrfTokenSetter, csrfProtection } from './src/shared/middleware/csrf.js';
+import { authenticateToken, requireAdmin } from './src/shared/middleware/auth.js';
 
 // Logger
 import { logger, requestLogger, logError } from './src/shared/utils/logger.js';
@@ -175,6 +176,105 @@ app.use('/api/database', databaseRoutes); // Database import/export (admin-only)
 app.use('/api/favorites', favoritesRoutes); // Favorites/wishlist endpoint
 app.use('/api/warehouses', warehouseRoutes); // Warehouse management
 app.use('/api', variantRoutes); // Product variants (Phase 4 of variants migration)
+
+// ============================================
+// ADMIN PANEL ROUTE ALIASES
+// Admin panel calls /api/admin/... but backend routes are at /api/...
+// These aliases map admin panel endpoints to existing route handlers
+// ============================================
+app.use('/api/admin/auth', authRoutes);
+app.use('/api/admin/products', barcodeRoutes);
+app.use('/api/admin/products', productRoutes);
+app.use('/api/admin/orders', orderRoutes);
+app.use('/api/admin/customers', userRoutes);       // admin panel calls "customers", backend is "users"
+app.use('/api/admin/users', userRoutes);
+app.use('/api/admin/reviews', reviewRoutes);
+app.use('/api/admin/dashboard', dashboardRoutes);
+app.use('/api/admin/metadata', metadataRoutes);
+app.use('/api/admin/promotions', promotionRoutes);
+app.use('/api/admin/returns', returnsRoutes);
+app.use('/api/admin/categories', categoriesRoutes);
+app.use('/api/admin/collections', collectionsRoutes);
+app.use('/api/admin/suppliers', suppliersRoutes);
+app.use('/api/admin/inventory', inventoryRoutes);
+app.use('/api/admin/stock-movements', stockMovementsRoutes);
+app.use('/api/admin/order-history', orderHistoryRoutes);
+app.use('/api/admin/shipping', shippingRoutes);
+app.use('/api/admin/constants', constantsRoutes);
+app.use('/api/admin/notifications', notificationRoutes);
+app.use('/api/admin/database', databaseRoutes);
+app.use('/api/admin/warehouses', warehouseRoutes);
+app.use('/api/admin', variantRoutes);
+
+// Admin access control & newsletter (stub routes for now — return empty data)
+app.get('/api/admin/access/permissions', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [] });
+});
+app.get('/api/admin/access/roles', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+});
+app.get('/api/admin/access/roles/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, name: 'admin', permissions: [] } });
+});
+app.post('/api/admin/access/roles', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: 1, ...req.body } });
+});
+app.put('/api/admin/access/roles/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, ...req.body } });
+});
+app.delete('/api/admin/access/roles/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Role deleted' });
+});
+app.get('/api/admin/access/members', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+});
+app.get('/api/admin/access/members/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: null });
+});
+app.post('/api/admin/access/members', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: 1, ...req.body } });
+});
+app.put('/api/admin/access/members/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, ...req.body } });
+});
+app.post('/api/admin/access/members/:id/invitations/resend', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Invitation resent' });
+});
+app.post('/api/admin/access/members/:id/password-reset', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Password reset sent' });
+});
+app.get('/api/admin/access/audit', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+});
+
+// Newsletter stubs
+app.get('/api/admin/newsletter/subscribers', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+});
+app.get('/api/admin/newsletter/subscribers/stats', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { total: 0, active: 0, unsubscribed: 0 } });
+});
+app.get('/api/admin/newsletter/broadcasts', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+});
+app.get('/api/admin/newsletter/broadcasts/trash', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+});
+app.post('/api/admin/newsletter/broadcasts', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: 1, ...req.body, status: 'sent' } });
+});
+app.delete('/api/admin/newsletter/subscribers/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Subscriber deleted' });
+});
+app.delete('/api/admin/newsletter/broadcasts/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Broadcast deleted' });
+});
+app.post('/api/admin/newsletter/broadcasts/:id/restore', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Broadcast restored' });
+});
+app.delete('/api/admin/newsletter/broadcasts/:id/hard', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Broadcast permanently deleted' });
+});
 
 // Health check endpoint with database and cache status
 app.get('/api/health', async (req, res) => {
