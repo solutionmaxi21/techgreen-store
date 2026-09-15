@@ -34,8 +34,8 @@ const getDefaultApiBaseUrl = () => {
     return '/api';
   }
 
-  // In Electron production (file://), call backend directly on default local backend port.
-  return `http://${getDefaultHost()}:3001/api`;
+  // In Electron production (file://), use the hosted backend
+  return DEFAULT_HOSTED_API_BASE_URL;
 };
 
 export const API_BASE_URL = trimTrailingSlashes(
