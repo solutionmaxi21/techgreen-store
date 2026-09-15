@@ -15,7 +15,7 @@ import './AdminLayout.css';
 import { canAccessMenuItem } from '../utils/accessControl';
 
 import { Mail } from 'lucide-react';
-const AdminLayout = ({ children, theme, currentUser, onLogout }) => {
+const AdminLayout = ({ children, theme, onToggleTheme, currentUser, onLogout }) => {
   const { t, i18n } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -228,6 +228,17 @@ const AdminLayout = ({ children, theme, currentUser, onLogout }) => {
               <div className="header-action-group">
                 <NotificationBell isAuthenticated={!!currentUser} />
               </div>
+
+              {onToggleTheme && (
+                <button
+                  className="theme-toggle-btn"
+                  onClick={onToggleTheme}
+                  title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                  aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                >
+                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
+              )}
 
               <div className="user-menu-container" ref={dropdownRef}>
                 <div

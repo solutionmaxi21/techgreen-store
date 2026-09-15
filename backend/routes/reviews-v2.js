@@ -188,7 +188,7 @@ router.post('/', authenticateToken, validate(createReviewSchema), asyncHandler(a
   
   const query = `
     INSERT INTO reviews (
-      product_id, user_id, rating, review_title, review_text, 
+      product_id, user_id, rating, title, review_text,
       verified_purchase, status, created_at
     ) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())
     RETURNING *
@@ -275,7 +275,7 @@ router.put('/:id', authenticateToken, validate(updateReviewSchema), asyncHandler
     UPDATE reviews 
     SET rating = $1, 
         review_text = $2, 
-        review_title = $3,
+        title = $3,
         edited_at = NOW(),
         edit_count = COALESCE(edit_count, 0) + 1,
         status = 'PENDING'
@@ -373,7 +373,7 @@ router.get('/', authenticateToken, requireAdmin, validate(getReviewsSchema), asy
       r.product_id,
       r.user_id,
       r.rating,
-      r.review_title,
+      r.title,
       r.review_text,
       r.verified_purchase,
       r.status,

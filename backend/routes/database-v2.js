@@ -2,6 +2,7 @@ import express from 'express';
 import db from '../src/db/postgres.js';
 import { authenticateToken, requireAdmin } from '../src/shared/middleware/auth.js';
 import { sensitiveLimiter } from '../src/shared/middleware/rateLimiter.js';
+import { asyncHandler } from '../src/shared/middleware/errorHandler.js';
 
 const router = express.Router();
 

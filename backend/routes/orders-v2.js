@@ -327,7 +327,7 @@ router.post('/', authenticateToken, asyncHandler(async (req, res) => {
 
   const shipping_address = normalizeShippingAddress(rawShippingAddress);
 
-  if (items.length === 0) {
+  if (!items || !Array.isArray(items) || items.length === 0) {
     return res.status(400).json({ error: 'Order must contain at least one item' });
   }
 

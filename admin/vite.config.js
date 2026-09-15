@@ -12,7 +12,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:4000',
         changeOrigin: true,
         secure: false,
         // Forward credentials (cookies) through the proxy
@@ -21,7 +21,7 @@ export default defineConfig({
         followRedirects: true,
       },
       '/uploads': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:4000',
         changeOrigin: true,
         secure: false
       }

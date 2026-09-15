@@ -486,6 +486,39 @@
   border-left: 1px solid var(--border-subtle);
 }
 
+/* Theme toggle button */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--card);
+  color: var(--foreground-muted);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-in-out);
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--primary-subtle);
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.dark .theme-toggle-btn:hover {
+  background: oklch(0.72 0.18 155 / 0.1);
+  color: oklch(0.72 0.18 155);
+  border-color: oklch(0.72 0.18 155 / 0.3);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
 /* Icon button */
 .icon-btn {
   background: none;
