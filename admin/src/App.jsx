@@ -223,11 +223,25 @@ function App() {
   }, [isAuthenticated, verifySession]);
 
   useEffect(() => {
-    // Set data-theme attribute on documentElement
-    document.documentElement.setAttribute('data-theme', theme);
+    // Add theme-transition class briefly for smooth color transitions
+    document.documentElement.classList.add('theme-transition');
+
+    // Toggle .dark class on the HTML element (matching storefront's next-themes approach)
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
 
     // Persist to localStorage
     localStorage.setItem('admin-theme', theme);
+
+    // Remove transition class after animation completes
+    const timer = setTimeout(() => {
+      document.documentElement.classList.remove('theme-transition');
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [theme]);
 
   const toggleTheme = () => {

@@ -280,36 +280,36 @@
 }
 
 /* Dark mode */
-[data-theme='dark'] .page-header h1 {
+.dark .page-header h1 {
   color: var(--color-gray-100);
 }
 
-[data-theme='dark'] .page-subtitle {
+.dark .page-subtitle {
   color: var(--color-gray-400);
 }
 
-[data-theme='dark'] .filters-section {
+.dark .filters-section {
   background: var(--color-gray-800);
   border-color: var(--color-gray-700);
 }
 
-[data-theme='dark'] .search-box input,
-[data-theme='dark'] .filters-grid select {
+.dark .search-box input,
+.dark .filters-grid select {
   background: var(--color-gray-900);
   border-color: var(--color-gray-700);
   color: var(--color-gray-100);
 }
 
-[data-theme='dark'] .bulk-actions {
+.dark .bulk-actions {
   background: var(--color-gray-800);
   border-color: var(--color-gray-700);
 }
 
-[data-theme='dark'] .selected-count {
+.dark .selected-count {
   color: var(--color-gray-300);
 }
 
-[data-theme='dark'] .results-count {
+.dark .results-count {
   color: var(--color-gray-400);
 }
 

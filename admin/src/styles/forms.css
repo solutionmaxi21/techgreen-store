@@ -1,8 +1,8 @@
 /* ============================================
-   FORMS & INPUTS DESIGN SYSTEM
+   Form Elements Design System
    ============================================ */
 
-/* --- 1. BASE INPUT STYLES --- */
+/* --- Base Input Styles --- */
 .form-control,
 .form-input,
 .form-select,
@@ -18,30 +18,19 @@ select,
 textarea {
   display: block;
   width: 100%;
-  height: 40px;
-  /* Standard professional height */
+  height: 2.25rem;
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: hsl(var(--foreground));
-  background-color: hsl(var(--background));
-  background-clip: padding-box;
-  border: 1px solid hsl(var(--input));
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: var(--foreground);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
   appearance: none;
-  /* Remove native browser styling */
 }
 
-/* Textarea specific overrides */
-textarea,
-.form-textarea {
-  min-height: 100px;
-  height: auto;
-  resize: vertical;
-}
-
-/* Focus State (The "Ring" Effect) */
+/* --- Focus State --- */
 .form-control:focus,
 .form-input:focus,
 .form-select:focus,
@@ -50,41 +39,49 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.15);
-  /* Subtle brand glow */
-  background-color: hsl(var(--card));
-  /* Ensure it pops */
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px oklch(0.46 0.17 155 / 0.15);
 }
 
-/* Placeholder */
+/* --- Placeholder --- */
 ::placeholder {
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
   opacity: 0.8;
 }
 
-/* Disabled State */
+/* --- Disabled State --- */
 :disabled,
 .form-input:disabled {
-  background-color: hsl(var(--muted));
-  color: hsl(var(--muted-foreground));
+  background-color: var(--muted);
+  color: var(--muted-foreground);
   cursor: not-allowed;
   opacity: 1;
 }
 
-/* Error State */
+/* --- Error State --- */
 .form-input.error,
 .form-select.error,
 .input-error {
-  border-color: hsl(var(--destructive));
+  border-color: var(--destructive);
 }
 
 .form-input.error:focus,
 .input-error:focus {
-  box-shadow: 0 0 0 3px hsl(var(--destructive) / 0.15);
+  box-shadow: 0 0 0 3px oklch(0.57 0.22 27 / 0.15);
 }
 
-/* --- 2. LABELS & HELPERS --- */
+/* --- Textarea --- */
+textarea,
+.form-textarea {
+  min-height: 5rem;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  resize: vertical;
+}
+
+/* ============================================
+   Labels & Helpers
+   ============================================ */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -96,32 +93,34 @@ label,
 .form-label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   margin-bottom: 0.125rem;
 }
 
 .form-label-required::after {
   content: "*";
-  color: hsl(var(--destructive));
+  color: var(--destructive);
   margin-left: 2px;
 }
 
 .form-help {
   font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
 }
 
 .form-error {
   font-size: 0.75rem;
   font-weight: 500;
-  color: hsl(var(--destructive));
+  color: var(--destructive);
   display: flex;
   align-items: center;
   gap: 0.25rem;
   margin-top: 0.25rem;
 }
 
-/* --- 3. INPUT GROUPS (Icons inside inputs) --- */
+/* ============================================
+   Input Groups (Icons inside inputs)
+   ============================================ */
 .input-group {
   position: relative;
   display: flex;
@@ -129,14 +128,13 @@ label,
   width: 100%;
 }
 
-/* The Icon */
 .input-group-icon {
   position: absolute;
   left: 0;
   top: 0;
   height: 100%;
-  width: 40px;
-  color: hsl(var(--muted-foreground));
+  width: 2.5rem;
+  color: var(--muted-foreground);
   pointer-events: none;
   z-index: 10;
   display: flex;
@@ -144,66 +142,62 @@ label,
   justify-content: center;
 }
 
-/* Input Padding Adjustment */
 .input-group input,
 .input-group .form-input,
 .input-group .form-control {
-  padding-left: 40px !important;
-  /* Force space for icon */
+  padding-left: 2.5rem;
 }
 
-/* Adjust padding-right when there's an action button */
 .input-group.has-action input,
 .input-group.has-action .form-input,
 .input-group.has-action .form-control {
-  padding-right: 40px !important;
+  padding-right: 2.5rem;
 }
 
-/* Right-side Action (e.g., Password Eye) */
 .input-group-action {
   position: absolute;
   right: 0;
   top: 0;
   height: 100%;
-  width: 40px;
+  width: 2.5rem;
   background: none;
   border: none;
   padding: 0;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  transition: color 0.2s, background-color 0.2s;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  transition: color 150ms ease, background-color 150ms ease;
 }
 
 .input-group-action:hover {
-  color: hsl(var(--foreground));
-  background-color: hsl(var(--muted));
+  color: var(--foreground);
+  background-color: var(--muted);
 }
 
-/* --- 4. FORM LAYOUTS --- */
-/* The Card Container */
+/* ============================================
+   Form Layouts
+   ============================================ */
 .form-container {
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--bento-radius-md);
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   padding: 1.5rem;
-  box-shadow: var(--bento-shadow-1);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 1.5rem;
 }
 
 .form-section-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   margin: 0 0 1rem 0;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid hsl(var(--border));
+  border-bottom: 1px solid var(--border);
 }
 
-/* Grids */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -232,14 +226,16 @@ label,
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid hsl(var(--border));
+  border-top: 1px solid var(--border);
 }
 
 .form-actions-right {
   justify-content: flex-end;
 }
 
-/* --- 5. CHECKBOXES & RADIOS --- */
+/* ============================================
+   Checkboxes & Radios
+   ============================================ */
 .form-checkbox,
 .form-radio {
   display: flex;
@@ -253,34 +249,32 @@ label,
   appearance: none;
   width: 1.125rem;
   height: 1.125rem;
-  border: 1px solid hsl(var(--input));
-  border-radius: 4px;
-  /* Slightly rounded */
-  background-color: hsl(var(--background));
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  background-color: transparent;
   cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .form-radio input[type="radio"] {
   border-radius: 50%;
 }
 
-/* Checked State */
 .form-checkbox input:checked,
 .form-radio input:checked {
-  background-color: hsl(var(--primary));
-  border-color: hsl(var(--primary));
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
-/* Checkmark (simulated with CSS) */
 .form-checkbox input:checked::after {
   content: "";
   width: 5px;
   height: 9px;
-  border: solid white;
+  border: solid var(--primary-foreground);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg) translateY(-1px);
 }
@@ -289,25 +283,26 @@ label,
   content: "";
   width: 8px;
   height: 8px;
-  background-color: white;
+  background-color: var(--primary-foreground);
   border-radius: 50%;
 }
 
-/* --- 6. SWITCH (TOGGLE) --- */
+/* ============================================
+   Switch (Toggle)
+   ============================================ */
 .switch-toggle {
   position: relative;
-  width: 44px;
-  height: 24px;
-  background-color: hsl(var(--input));
-  /* Muted gray */
+  width: 2.75rem;
+  height: 1.5rem;
+  background-color: var(--input);
   border-radius: 9999px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 150ms ease;
   border: none;
 }
 
 .switch-toggle.active {
-  background-color: hsl(var(--primary));
+  background-color: var(--primary);
 }
 
 .switch-toggle::after {
@@ -315,81 +310,86 @@ label,
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 20px;
-  height: 20px;
-  background-color: white;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--primary-foreground);
   border-radius: 50%;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 150ms ease;
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.2);
 }
 
 .switch-toggle.active::after {
-  transform: translateX(20px);
+  transform: translateX(1.25rem);
 }
 
-/* --- 7. FILE UPLOAD --- */
+/* ============================================
+   File Upload
+   ============================================ */
 .form-file-upload {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 160px;
-  border: 2px dashed hsl(var(--border));
-  border-radius: var(--radius);
-  background-color: hsl(var(--background));
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  background-color: transparent;
   padding: 1.5rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 150ms ease, background-color 150ms ease;
   text-align: center;
 }
 
 .form-file-upload:hover {
-  border-color: hsl(var(--primary));
-  background-color: hsl(var(--muted));
+  border-color: var(--primary);
+  background-color: var(--muted);
 }
 
 .file-upload-icon {
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
   margin-bottom: 0.75rem;
 }
 
 .file-upload-text {
   font-size: 0.875rem;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
 }
 
 .file-upload-text strong {
-  color: hsl(var(--primary));
+  color: var(--primary);
   font-weight: 600;
 }
 
 .file-upload-hint {
   font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
   margin-top: 0.25rem;
 }
 
-/* --- 8. BROWSER UTILITIES --- */
-/* Fix Chrome Autofill Yellow Background */
+/* ============================================
+   Browser Utilities
+   ============================================ */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px hsl(var(--background)) inset !important;
-  -webkit-text-fill-color: hsl(var(--foreground)) !important;
+  -webkit-box-shadow: 0 0 0 30px var(--background) inset;
+  -webkit-text-fill-color: var(--foreground);
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* --- 9. COLLECTION VISUAL ASSETS CUSTOM STYLES --- */
+/* ============================================
+   Image Preview & Upload
+   ============================================ */
 .image-preview-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  background-color: hsl(var(--muted) / 0.3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--muted);
 }
 
 .image-preview-wrapper img {
@@ -402,23 +402,23 @@ input:-webkit-autofill:active {
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
-  background-color: hsl(var(--destructive));
-  color: white;
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: var(--shadow-sm);
+  transition: opacity 150ms ease, transform 150ms ease;
   z-index: 10;
 }
 
 .image-preview-remove:hover {
-  background-color: hsl(var(--destructive) / 0.85);
+  opacity: 0.9;
   transform: scale(1.05);
 }
 
@@ -431,46 +431,45 @@ input:-webkit-autofill:active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px dashed hsl(var(--border));
-  border-radius: var(--radius);
-  background-color: hsl(var(--background));
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  background-color: transparent;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: border-color 150ms ease, background-color 150ms ease;
   text-align: center;
   position: relative;
 }
 
 .image-upload-zone:hover {
-  border-color: hsl(var(--primary));
-  background-color: hsl(var(--muted) / 0.3);
+  border-color: var(--primary);
+  background-color: var(--muted);
 }
 
 .image-upload-zone.drag-over {
-  border-color: hsl(var(--primary));
-  background-color: hsl(var(--primary) / 0.05);
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.15);
+  border-color: var(--primary);
+  background-color: oklch(0.46 0.17 155 / 0.05);
+  box-shadow: 0 0 0 3px oklch(0.46 0.17 155 / 0.15);
 }
 
 .image-upload-spinner-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: oklch(1 0 0 / 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 20;
 }
 
-/* Dark mode adjustment for overlay */
 .dark .image-upload-spinner-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: oklch(0 0 0 / 0.7);
 }
 
 .image-upload-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid hsl(var(--muted));
-  border-top-color: hsl(var(--primary));
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--muted);
+  border-top-color: var(--primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

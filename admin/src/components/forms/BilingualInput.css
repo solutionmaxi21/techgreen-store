@@ -195,33 +195,33 @@ textarea.bilingual-input__field:disabled {
 }
 
 /* Dark mode support */
-[data-theme="dark"] .bilingual-input__tabs {
+.dark .bilingual-input__tabs {
     background-color: hsl(var(--bento-surface-elevated)) !important;
 }
 
-[data-theme="dark"] button.bilingual-input__tab {
+.dark button.bilingual-input__tab {
     color: hsl(var(--bento-ink-muted)) !important;
     background-color: transparent !important;
 }
 
-[data-theme="dark"] button.bilingual-input__tab:hover {
+.dark button.bilingual-input__tab:hover {
     background-color: hsl(var(--bento-surface-strong)) !important;
     color: hsl(var(--bento-ink)) !important;
 }
 
-[data-theme="dark"] button.bilingual-input__tab.active {
+.dark button.bilingual-input__tab.active {
     background-color: hsl(var(--bento-surface)) !important;
     color: hsl(var(--bento-accent)) !important;
 }
 
-[data-theme="dark"] input.bilingual-input__field,
-[data-theme="dark"] textarea.bilingual-input__field {
+.dark input.bilingual-input__field,
+.dark textarea.bilingual-input__field {
     background-color: hsl(var(--bento-surface)) !important;
     border-color: hsl(var(--bento-border)) !important;
     color: hsl(var(--bento-ink)) !important;
 }
 
-[data-theme="dark"] .bilingual-input__preview {
+.dark .bilingual-input__preview {
     background-color: hsl(var(--bento-surface-elevated)) !important;
     color: hsl(var(--bento-ink-muted)) !important;
 }

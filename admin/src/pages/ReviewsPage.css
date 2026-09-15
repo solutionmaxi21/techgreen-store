@@ -387,27 +387,27 @@
 }
 
 /* Dark Mode */
-[data-theme='dark'] .review-stat-card {
+.dark .review-stat-card {
   background: #0d1117;
 }
 
-[data-theme='dark'] .filters-section-pro {
+.dark .filters-section-pro {
   background: #0d1117;
 }
 
-[data-theme='dark'] .search-box-pro input {
+.dark .search-box-pro input {
   background: #161b22;
 }
 
-[data-theme='dark'] .pro-select-minimal {
+.dark .pro-select-minimal {
   background: #161b22;
   color: #c9d1d9;
 }
 
-[data-theme='dark'] .review-text {
+.dark .review-text {
   color: #8b949e;
 }
 
-[data-theme='dark'] .btn-icon-s {
+.dark .btn-icon-s {
   background: #161b22;
 }

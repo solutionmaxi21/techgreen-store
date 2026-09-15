@@ -287,44 +287,44 @@
 }
 
 /* Dark mode support */
-[data-theme="dark"] .notifications-page {
+.dark .notifications-page {
     color: #fff;
 }
 
-[data-theme="dark"] .back-btn,
-[data-theme="dark"] .mark-all-btn,
-[data-theme="dark"] .filter-tabs .tab,
-[data-theme="dark"] .notifications-content,
-[data-theme="dark"] .load-more-btn {
+.dark .back-btn,
+.dark .mark-all-btn,
+.dark .filter-tabs .tab,
+.dark .notifications-content,
+.dark .load-more-btn {
     background: #1f2937;
     border-color: #374151;
     color: #e5e7eb;
 }
 
-[data-theme="dark"] .back-btn:hover,
-[data-theme="dark"] .mark-all-btn:hover,
-[data-theme="dark"] .filter-tabs .tab:hover,
-[data-theme="dark"] .load-more-btn:hover {
+.dark .back-btn:hover,
+.dark .mark-all-btn:hover,
+.dark .filter-tabs .tab:hover,
+.dark .load-more-btn:hover {
     background: #374151;
 }
 
-[data-theme="dark"] .notification-card:hover {
+.dark .notification-card:hover {
     background: #374151;
 }
 
-[data-theme="dark"] .notification-card.unread {
+.dark .notification-card.unread {
     background: rgba(59, 130, 246, 0.1);
 }
 
-[data-theme="dark"] .notification-icon {
+.dark .notification-icon {
     background: #374151;
 }
 
-[data-theme="dark"] .notification-title {
+.dark .notification-title {
     color: #f3f4f6;
 }
 
-[data-theme="dark"] .notification-message,
-[data-theme="dark"] .notification-time {
+.dark .notification-message,
+.dark .notification-time {
     color: #9ca3af;
 }

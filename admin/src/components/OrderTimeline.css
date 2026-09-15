@@ -277,24 +277,24 @@
   color: var(--warning-500, #f59e0b);
 }
 
-[data-theme='dark'] .timeline-bubble {
+.dark .timeline-bubble {
   background: #0d1117;
 }
 
-[data-theme='dark'] .event-note {
+.dark .event-note {
   background: #161b22;
 }
 
-[data-theme='dark'] .actor-badge.admin {
+.dark .actor-badge.admin {
   background: rgba(59, 130, 246, 0.1);
 }
 
-[data-theme='dark'] .timeline-bubble.return-bubble {
+.dark .timeline-bubble.return-bubble {
   background: rgba(245, 158, 11, 0.1);
   border-color: rgba(245, 158, 11, 0.3);
 }
 
-[data-theme='dark'] .guepex-status-line {
+.dark .guepex-status-line {
   background: #161b22;
   border-color: var(--border-color);
 }

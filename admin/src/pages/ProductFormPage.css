@@ -124,43 +124,43 @@
 }
 
 /* Dark mode */
-[data-theme='dark'] .product-form {
+.dark .product-form {
   background: var(--color-gray-800);
   border-color: var(--color-gray-700);
 }
 
-[data-theme='dark'] .form-section {
+.dark .form-section {
   border-color: var(--color-gray-700);
 }
 
-[data-theme='dark'] .form-section h2 {
+.dark .form-section h2 {
   color: var(--color-gray-100);
 }
 
-[data-theme='dark'] .form-group label {
+.dark .form-group label {
   color: var(--color-gray-300);
 }
 
-[data-theme='dark'] .form-group input,
-[data-theme='dark'] .form-group select,
-[data-theme='dark'] .form-group textarea {
+.dark .form-group input,
+.dark .form-group select,
+.dark .form-group textarea {
   background: var(--color-gray-900);
   border-color: var(--color-gray-700);
   color: var(--color-gray-100);
 }
 
-[data-theme='dark'] .form-actions {
+.dark .form-actions {
   background: var(--color-gray-900);
   border-color: var(--color-gray-700);
 }
 
-[data-theme='dark'] .btn-secondary {
+.dark .btn-secondary {
   background: var(--color-gray-800);
   color: var(--color-gray-300);
   border-color: var(--color-gray-600);
 }
 
-[data-theme='dark'] .btn-secondary:hover:not(:disabled) {
+.dark .btn-secondary:hover:not(:disabled) {
   background: var(--color-gray-700);
 }
 

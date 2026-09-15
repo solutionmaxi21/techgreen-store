@@ -635,18 +635,18 @@
 }
 
 /* ============ DARK MODE SUPPORT (OPTIONAL) ============ */
-[data-theme='dark'] .product-details-page {
+.dark .product-details-page {
     background: var(--gray-900);
 }
 
-[data-theme='dark'] .product-details-page .details-card,
-[data-theme='dark'] .product-details-page .details-header {
+.dark .product-details-page .details-card,
+.dark .product-details-page .details-header {
     background: var(--gray-800);
     border-color: var(--gray-700);
 }
 
-[data-theme='dark'] .product-details-page .stat-item,
-[data-theme='dark'] .product-details-page .attribute-item {
+.dark .product-details-page .stat-item,
+.dark .product-details-page .attribute-item {
     background: var(--gray-900);
     border-color: var(--gray-700);
 }

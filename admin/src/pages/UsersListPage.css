@@ -243,19 +243,19 @@
 }
 
 /* Dark Mode Adjustments */
-[data-theme='dark'] .filters-section-pro {
+.dark .filters-section-pro {
   background: #0d1117;
 }
 
-[data-theme='dark'] .search-box-pro input {
+.dark .search-box-pro input {
   background: #161b22;
 }
 
-[data-theme='dark'] .pro-select-minimal {
+.dark .pro-select-minimal {
   background: #161b22;
 }
 
-[data-theme='dark'] .order-count-badge {
+.dark .order-count-badge {
   background: #30363d;
   color: #8b949e;
 }

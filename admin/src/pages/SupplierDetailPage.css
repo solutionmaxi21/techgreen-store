@@ -505,47 +505,47 @@
 }
 
 /* ============ DARK MODE SUPPORT ============ */
-[data-theme="dark"] .supplier-detail-page {
+.dark .supplier-detail-page {
     background: var(--gray-900, #0f172a);
 }
 
-[data-theme="dark"] .supplier-detail-page .btn-back {
+.dark .supplier-detail-page .btn-back {
     color: var(--gray-400, #9ca3af);
 }
 
-[data-theme="dark"] .supplier-detail-page .btn-back:hover {
+.dark .supplier-detail-page .btn-back:hover {
     color: white;
     background: var(--gray-800, #1f2937);
 }
 
-[data-theme="dark"] .supplier-detail-page .info-card,
-[data-theme="dark"] .supplier-detail-page .products-section {
+.dark .supplier-detail-page .info-card,
+.dark .supplier-detail-page .products-section {
     background: var(--gray-800, #1f2937);
     border-color: var(--gray-700, #374151);
 }
 
-[data-theme="dark"] .supplier-detail-page .card-title,
-[data-theme="dark"] .supplier-detail-page .section-title,
-[data-theme="dark"] .supplier-detail-page .supplier-name,
-[data-theme="dark"] .supplier-detail-page .product-name {
+.dark .supplier-detail-page .card-title,
+.dark .supplier-detail-page .section-title,
+.dark .supplier-detail-page .supplier-name,
+.dark .supplier-detail-page .product-name {
     color: white;
 }
 
-[data-theme="dark"] .supplier-detail-page .info-label,
-[data-theme="dark"] .supplier-detail-page .supplier-subtitle {
+.dark .supplier-detail-page .info-label,
+.dark .supplier-detail-page .supplier-subtitle {
     color: var(--gray-400, #9ca3af);
 }
 
-[data-theme="dark"] .supplier-detail-page .info-icon {
+.dark .supplier-detail-page .info-icon {
     background: var(--gray-700, #374151);
 }
 
-[data-theme="dark"] .supplier-detail-page .product-card {
+.dark .supplier-detail-page .product-card {
     background: var(--gray-700, #374151);
     border-color: var(--gray-600, #4b5563);
 }
 
-[data-theme="dark"] .supplier-detail-page .product-image-placeholder {
+.dark .supplier-detail-page .product-image-placeholder {
     background: var(--gray-600, #4b5563);
     color: var(--gray-500, #6b7280);
 }

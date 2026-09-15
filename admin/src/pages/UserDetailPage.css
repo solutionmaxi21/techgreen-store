@@ -402,34 +402,34 @@
 }
 
 /* Dark Mode */
-[data-theme='dark'] .stat-card-pro {
+.dark .stat-card-pro {
   background: #0d1117;
 }
 
-[data-theme='dark'] .info-content .value {
+.dark .info-content .value {
   color: #c9d1d9;
 }
 
-[data-theme='dark'] .action-row {
+.dark .action-row {
   border-color: #30363d;
 }
 
-[data-theme='dark'] .pro-select-sm {
+.dark .pro-select-sm {
   background: #161b22;
   color: #c9d1d9;
 }
 
-[data-theme='dark'] .review-item,
-[data-theme='dark'] .address-item {
+.dark .review-item,
+.dark .address-item {
   background: #161b22;
   border-color: #30363d;
 }
 
-[data-theme='dark'] .review-text {
+.dark .review-text {
   color: #8b949e;
 }
 
-[data-theme='dark'] .badge-count {
+.dark .badge-count {
   background: #1f6feb;
   color: #ffffff;
 }
