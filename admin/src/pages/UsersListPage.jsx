@@ -271,7 +271,7 @@ function UsersListPage() {
                 padding: '4px',
                 display: 'flex',
                 alignItems: 'center',
-                color: 'hsl(var(--primary))',
+                color: 'var(--primary)',
                 fontSize: '12px'
               }}
                 title={t('users.list.verifyEmail')}

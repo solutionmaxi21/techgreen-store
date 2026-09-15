@@ -105,7 +105,7 @@ const BarcodeScannerPage = () => {
         <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: '700' }}>
           {t('barcode_scanner.title')}
         </h1>
-        <p style={{ color: 'hsl(var(--muted-foreground))', marginTop: '8px', marginBottom: 0 }}>
+        <p style={{ color: 'var(--muted-foreground)', marginTop: '8px', marginBottom: 0 }}>
           {t('barcode_scanner.subtitle')}
         </p>
       </div>
@@ -200,7 +200,7 @@ const BarcodeScannerPage = () => {
             paddingRight: isRTL ? '20px' : 0,
             fontSize: '0.9rem',
             lineHeight: '1.6',
-            color: 'hsl(var(--muted-foreground))'
+            color: 'var(--muted-foreground)'
           }}>
             <li>{t('barcode_scanner.instruction_1')}</li>
             <li>{t('barcode_scanner.instruction_2')}</li>
@@ -212,10 +212,10 @@ const BarcodeScannerPage = () => {
         {/* Supported Formats */}
         <div className="scanner-formats" style={{ 
           padding: '12px 16px', 
-          backgroundColor: 'hsl(var(--muted))',
+          backgroundColor: 'var(--muted)',
           borderRadius: '6px',
           fontSize: '0.85rem',
-          color: 'hsl(var(--muted-foreground))'
+          color: 'var(--muted-foreground)'
         }}>
           <strong style={{ display: 'block', marginBottom: '6px' }}>
             {t('barcode_scanner.supported_formats')}:
@@ -234,12 +234,12 @@ const BarcodeScannerPage = () => {
         display: 'flex',
         gap: '12px',
         padding: '16px',
-        backgroundColor: 'hsl(var(--muted))',
-        borderLeft: '4px solid hsl(var(--primary))',
+        backgroundColor: 'var(--muted)',
+        borderLeft: '4px solid var(--primary)',
         borderRadius: '6px',
         marginTop: '24px'
       }}>
-        <AlertCircle size={20} style={{ color: 'hsl(var(--primary))', flexShrink: 0 }} />
+        <AlertCircle size={20} style={{ color: 'var(--primary)', flexShrink: 0 }} />
         <div style={{ fontSize: '0.9rem', lineHeight: '1.5' }}>
           <strong>{t('barcode_scanner.info_title')}:</strong> {t('barcode_scanner.info_description')}
         </div>

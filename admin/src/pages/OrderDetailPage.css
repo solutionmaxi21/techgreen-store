@@ -11,7 +11,7 @@
   align-items: flex-end;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
 }
 
 /* .back-button.icon-only is handled by base class */
@@ -19,7 +19,7 @@
 .title-group h1 {
   font-size: 28px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
   margin: 0 0 4px 0;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
 
 .page-subtitle {
   font-size: 14px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   margin: 0;
 }
 
@@ -69,8 +69,8 @@
 
 /* Cards */
 .card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -78,7 +78,7 @@
 
 .card-header {
   padding: 20px 24px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,14 +87,14 @@
 .card-header h2 {
   font-size: 16px;
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--foreground);
   margin: 0;
 }
 
 .badge-count {
   font-size: 12px;
-  background: var(--gray-100);
-  color: var(--gray-600);
+  background: var(--muted);
+  color: var(--muted-foreground);
   padding: 4px 10px;
   border-radius: var(--radius-xl);
   font-weight: 600;
@@ -111,10 +111,10 @@
   text-align: left;
   font-size: 12px;
   font-weight: 700;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: var(--gray-50);
+  background: var(--muted);
 }
 
 .items-table th:first-child,
@@ -125,7 +125,7 @@
 
 .items-table td {
   padding: 20px 24px;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--muted);
   min-width: 0;
 }
 
@@ -147,8 +147,8 @@
   min-width: 48px;
   object-fit: cover;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
-  background-color: var(--gray-100);
+  border: 1px solid var(--border);
+  background-color: var(--muted);
 }
 
 .product-cell > div {
@@ -169,7 +169,7 @@
 
 .sku {
   font-size: 10px;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
   margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -187,7 +187,7 @@
 /* Order Summary */
 .order-summary {
   padding: 24px;
-  background: var(--gray-50);
+  background: var(--muted);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -197,16 +197,16 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: var(--gray-600);
+  color: var(--muted-foreground);
 }
 
 .summary-row.total-row {
   margin-top: 8px;
   padding-top: 16px;
-  border-top: 2px solid var(--gray-200);
+  border-top: 2px solid var(--border);
   font-size: 20px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 /* Side Column Content */
@@ -221,7 +221,7 @@
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -229,7 +229,7 @@
 .info-item .value {
   font-size: 14px;
   font-weight: 600;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .address-box {
@@ -238,20 +238,20 @@
 
 .addr-line {
   font-size: 14px;
-  color: var(--gray-700);
+  color: var(--foreground);
   line-height: 1.6;
 }
 
 .addr-line.country {
   margin-top: 4px;
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .customer-note {
   padding: 20px 24px;
   font-size: 14px;
-  color: var(--gray-600);
+  color: var(--muted-foreground);
   font-style: italic;
   line-height: 1.6;
 }
@@ -328,14 +328,14 @@
 
 .modal-header {
   padding: 24px 24px 16px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
 }
 
 .modal-header h2 {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .modal-body {
@@ -344,8 +344,8 @@
 
 .modal-footer {
   padding: 16px 24px;
-  border-top: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  background: var(--muted);
 }
 
 @keyframes fadeIn {

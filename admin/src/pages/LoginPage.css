@@ -1,168 +1,193 @@
-/* Layout Container */
+/* ============================================
+   LOGIN PAGE — TechGreen Premium
+   ============================================ */
+
 .login-wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: hsl(var(--background));
+  background-color: var(--background);
   position: relative;
   overflow: hidden;
-  padding: 1rem;
+  padding: var(--space-4);
 }
 
-/* Background Pattern */
+/* Background Pattern — subtle grid */
 .login-bg-pattern {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.4;
-  mask-image: radial-gradient(circle at center, black, transparent 80%);
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
 }
 
-/* Card Styling */
+/* Glow effect behind card */
+.login-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, oklch(0.46 0.17 155 / 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .login-wrapper::before {
+  background: radial-gradient(circle, oklch(0.72 0.18 155 / 0.06), transparent 60%);
+}
+
+/* --- Login Card --- */
 .login-card {
   position: relative;
   width: 100%;
-  max-width: 400px;
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 2.5rem;
+  max-width: 420px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-10);
   z-index: 10;
 }
 
-/* Header Typography */
+/* --- Brand / Header --- */
 .login-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 
 .brand-logo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: -0.25rem;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
 }
 
 .brand-logo-img {
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
-  display: block;
-  /* Add a subtle drop shadow to pop from background */
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius-lg);
 }
 
 .brand-name-text {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: hsl(var(--foreground));
-  letter-spacing: -0.5px;
-  /* Use system font stack or Inter for brand look */
-  font-family: 'Inter', system-ui, sans-serif;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
 }
 
 .login-header h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: hsl(var(--foreground));
-  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+  margin: 0 0 var(--space-2);
 }
 
 .login-header p {
-  color: hsl(var(--muted-foreground));
-  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  font-size: var(--text-sm);
   margin: 0;
 }
 
-/* Form Spacing */
+/* --- Form --- */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--space-5);
+}
+
+.login-form .form-group {
+  gap: var(--space-2);
+}
+
+.login-form label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+}
+
+.login-form input {
+  height: 44px;
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
 }
 
 /* Error Banner */
 .error-banner {
-  padding: 0.75rem;
-  background-color: hsl(var(--destructive) / 0.1);
-  color: hsl(var(--destructive));
-  border-radius: var(--radius);
-  font-size: 0.875rem;
-  font-weight: 500;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--destructive-subtle);
+  color: var(--destructive);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
   text-align: center;
-  border: 1px solid hsl(var(--destructive) / 0.2);
+  border: 1px solid oklch(0.57 0.22 27 / 0.2);
 }
 
-/* Button */
+/* --- Submit Button --- */
 .submit-btn {
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  gap: var(--space-2);
+  background-color: var(--primary);
+  color: var(--primary-foreground);
   border: none;
-  border-radius: var(--radius);
-  font-weight: 600;
-  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 0.5rem;
+  transition: all var(--duration-fast) var(--ease-in-out);
+  margin-top: var(--space-2);
   width: 100%;
-  position: relative;
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: hsl(var(--primary) / 0.9);
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .submit-btn:active:not(:disabled) {
   transform: translateY(0);
-  box-shadow: 0 2px 4px hsl(var(--primary) / 0.2);
+  box-shadow: none;
 }
 
 .submit-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
-  background-color: hsl(var(--primary) / 0.65);
-  color: hsl(var(--primary-foreground) / 0.8);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
   transform: none;
 }
 
-/* Footer */
-.login-footer {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
-}
-
+/* --- Links --- */
 .login-form-links {
   display: flex;
   justify-content: flex-end;
-  margin-top: -0.65rem;
+  margin-top: calc(-1 * var(--space-2));
 }
 
 .login-text-link,
 .login-secondary-link {
-  color: hsl(var(--primary));
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: var(--primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-in-out);
 }
 
 .login-text-link:hover,
 .login-secondary-link:hover {
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -171,12 +196,41 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  gap: var(--space-2);
 }
 
+/* --- Footer --- */
+.login-footer {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+
+/* --- Success State --- */
 .login-success {
   display: grid;
   justify-items: center;
-  gap: 1.25rem;
-  color: hsl(var(--primary));
+  gap: var(--space-5);
+  color: var(--success);
+  text-align: center;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+  .login-card {
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .brand-logo-img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .brand-name-text {
+    font-size: var(--text-lg);
+  }
 }

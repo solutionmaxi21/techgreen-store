@@ -11,7 +11,7 @@
   align-items: flex-end;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
 }
 
 .user-title-row {
@@ -24,7 +24,7 @@
 .page-header h1 {
   font-size: 32px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
   margin: 0;
 }
 
@@ -35,16 +35,16 @@
   width: 36px;
   height: 36px;
   background: none;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   cursor: pointer;
   padding: 0;
   transition: all 0.2s;
 }
 
 .back-button:hover {
-  color: var(--primary-600);
+  color: var(--primary);
 }
 
 /* Layout */
@@ -65,8 +65,8 @@
 
 /* ADD after .stat-card-pro block */
 .stat-card-pro {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 16px 20px;
   display: flex;
@@ -74,7 +74,7 @@
   gap: 14px;
   box-shadow: var(--shadow-sm);
   min-width: 0;
-} 
+}
 .stat-info {
   min-width: 0;
   flex: 1;
@@ -83,7 +83,7 @@
 .stat-info .value {
   font-size: 22px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .stat-icon {
@@ -97,30 +97,30 @@
 }
 
 .stat-icon.orders {
-  background: var(--primary-50);
-  color: var(--primary-600);
+  background: color-mix(in srgb, var(--primary), transparent 90%);
+  color: var(--primary);
 }
 
 .stat-icon.revenue {
-  background: var(--success-50);
-  color: var(--success-600);
+  background: color-mix(in srgb, var(--success), transparent 90%);
+  color: var(--success);
 }
 
 .stat-icon.avg {
-  background: var(--warning-50);
-  color: var(--warning-600);
+  background: color-mix(in srgb, var(--warning), transparent 90%);
+  color: var(--warning);
 }
 
 .stat-icon.join {
-  background: var(--gray-100);
-  color: var(--gray-600);
+  background: var(--muted);
+  color: var(--muted-foreground);
 }
 
 .stat-info label {
   display: block;
   font-size: 11px;
   font-weight: 600;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   margin-bottom: 2px;
   white-space: normal;
@@ -131,13 +131,13 @@
 .stat-info .value {
   font-size: 20px;
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 /* Cards */
 .card-header-pro {
   padding: 20px 24px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -147,7 +147,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--gray-700);
+  color: var(--foreground);
 }
 
 .header-title h2 {
@@ -172,14 +172,14 @@
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
 }
 
 .info-content label {
   display: block;
   font-size: 11px;
   font-weight: 700;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   margin-bottom: 2px;
 }
@@ -187,7 +187,7 @@
 .info-content .value {
   font-size: 14px;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--foreground);
 }
 
 /* Address Display */
@@ -197,13 +197,13 @@
 
 .addr-line {
   font-size: 14px;
-  color: var(--gray-600);
+  color: var(--muted-foreground);
   line-height: 1.6;
 }
 
 .addr-line.country {
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--foreground);
   margin-top: 4px;
 }
 
@@ -220,26 +220,26 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--muted);
 }
 
 .action-name {
   font-size: 14px;
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .action-desc {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 .pro-select-sm {
   padding: 6px 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 13px;
-  background: var(--gray-50);
+  background: var(--muted);
 }
 
 .btn-toggle {
@@ -255,15 +255,15 @@
 }
 
 .btn-toggle.active {
-  background: var(--error-50);
-  color: var(--error-600);
-  border: 1px solid var(--error-100);
+  background: color-mix(in srgb, var(--destructive), transparent 90%);
+  color: var(--destructive);
+  border: 1px solid color-mix(in srgb, var(--destructive), transparent 80%);
 }
 
 .btn-toggle.inactive {
-  background: var(--success-50);
-  color: var(--success-600);
-  border: 1px solid var(--success-100);
+  background: color-mix(in srgb, var(--success), transparent 90%);
+  color: var(--success);
+  border: 1px solid color-mix(in srgb, var(--success), transparent 80%);
 }
 
 .btn-destructive-full {
@@ -274,8 +274,8 @@
   gap: 10px;
   padding: 12px;
   background: none;
-  border: 1px dashed var(--error-200);
-  color: var(--error-500);
+  border: 1px dashed color-mix(in srgb, var(--destructive), transparent 80%);
+  color: var(--destructive);
   border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 600;
@@ -284,15 +284,15 @@
 }
 
 .btn-destructive-full:hover {
-  background: var(--error-50);
-  border-color: var(--error-500);
+  background: color-mix(in srgb, var(--destructive), transparent 90%);
+  border-color: var(--destructive);
 }
 
 /* Typography Helpers */
 .order-id-link {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  color: var(--primary-600);
+  color: var(--primary);
 }
 
 .badge-count {
@@ -302,8 +302,8 @@
   min-width: 24px;
   height: 20px;
   padding: 0 6px;
-  background: var(--primary-50);
-  color: var(--primary-600);
+  background: color-mix(in srgb, var(--primary), transparent 90%);
+  color: var(--primary);
   border-radius: var(--radius-md);
   font-size: 12px;
   font-weight: 600;
@@ -318,9 +318,9 @@
 
 .review-item {
   padding: 16px;
-  background: var(--gray-50);
+  background: var(--muted);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
 }
 
 .review-header {
@@ -340,19 +340,19 @@
 }
 
 .star-empty {
-  color: var(--gray-300);
+  color: var(--border);
 }
 
 .review-text {
   font-size: 14px;
-  color: var(--gray-700);
+  color: var(--foreground);
   margin: 0 0 8px 0;
   line-height: 1.5;
 }
 
 .review-meta {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 /* Addresses List */
@@ -364,17 +364,17 @@
 
 .address-item {
   padding: 12px;
-  background: var(--gray-50);
+  background: var(--muted);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   font-size: 13px;
   line-height: 1.6;
   position: relative;
 }
 
 .address-item.default {
-  background: var(--primary-50);
-  border-color: var(--primary-200);
+  background: color-mix(in srgb, var(--primary), transparent 90%);
+  border-color: color-mix(in srgb, var(--primary), transparent 80%);
 }
 
 .default-badge {
@@ -382,7 +382,7 @@
   top: 8px;
   right: 8px;
   padding: 2px 8px;
-  background: var(--primary-600);
+  background: var(--primary);
   color: var(--primary-foreground);
   font-size: 10px;
   font-weight: 600;
@@ -393,7 +393,7 @@
 .empty-card-state {
   padding: 60px 24px;
   text-align: center;
-  color: var(--gray-400);
+  color: var(--muted-foreground);
 }
 
 .empty-icon {

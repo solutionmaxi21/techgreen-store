@@ -23,15 +23,15 @@
   /* Circle shape matches the profile icon nicely */
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  color: hsl(var(--foreground));
+  color: var(--foreground);
 }
 
 .bellButton:hover {
-  background: hsl(var(--muted));
+  background: var(--muted);
 }
 
 .bellButton:active {
-  background: hsl(var(--muted));
+  background: var(--muted);
   transform: scale(0.96);
 }
 
@@ -57,7 +57,7 @@
   border-radius: 50%;
   font-size: 11px;
   font-weight: 700;
-  border: 2px solid hsl(var(--card));
+  border: 2px solid var(--card);
   /* Punch out the button behind it */
   box-shadow: var(--shadow-sm);
   padding: 0 4px;

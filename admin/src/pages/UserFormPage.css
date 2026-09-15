@@ -14,20 +14,20 @@
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    background: var(--card);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
 }
 
 .back-btn-minimal:hover {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    border-color: var(--gray-300);
+    background: var(--muted);
+    color: var(--foreground);
+    border-color: var(--border);
 }
 
 .modern-form-layout {
@@ -38,31 +38,31 @@
 }
 
 .form-card {
-    background: var(--bg-primary);
+    background: var(--card);
     border-radius: 16px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
 }
 
 .form-card .card-header {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: var(--bg-secondary);
+    background: var(--muted);
 }
 
 .form-card .card-header h2 {
     font-size: 1rem;
     font-weight: 600;
     margin: 0;
-    color: var(--text-primary);
+    color: var(--foreground);
 }
 
 .form-card .card-header svg {
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 .form-card .card-body {
@@ -78,7 +78,7 @@
 .input-with-icon svg {
     position: absolute;
     left: 1rem;
-    color: var(--gray-400);
+    color: var(--muted-foreground);
     pointer-events: none;
 }
 
@@ -109,13 +109,13 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.75rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--muted-foreground);
 }
 
 .status-option input {
@@ -123,24 +123,24 @@
 }
 
 .status-option:hover {
-    background: var(--bg-secondary);
+    background: var(--muted);
 }
 
 .status-option.active {
-    border-color: var(--primary-color);
-    background: var(--primary-50);
-    color: var(--primary-700);
+    border-color: var(--primary);
+    background: color-mix(in srgb, var(--primary), transparent 90%);
+    color: var(--primary);
 }
 
 .status-option .dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--gray-300);
+    background: var(--border);
 }
 
 .status-option.active .dot {
-    background: var(--gray-500);
+    background: var(--muted-foreground);
 }
 
 .form-sticky-actions {
@@ -149,8 +149,8 @@
     left: 0;
     right: 0;
     padding: 1.25rem 2rem;
-    background: var(--bg-primary);
-    border-top: 1px solid var(--border-color);
+    background: var(--card);
+    border-top: 1px solid var(--border);
     box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: center;
@@ -179,7 +179,7 @@
 
 .btn-primary-lg {
     padding: 0.75rem 2rem;
-    background: var(--primary-color);
+    background: var(--primary);
     color: white;
     border: none;
     border-radius: 10px;
@@ -189,16 +189,16 @@
 }
 
 .btn-primary-lg:hover {
-    background: var(--primary-dark);
+    background: var(--primary);
     transform: translateY(-1px);
-    box-shadow: 0 4px 6px -1px rgba(var(--primary-rgb), 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary-lg {
     padding: 0.75rem 2rem;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background: var(--card);
+    color: var(--foreground);
+    border: 1px solid var(--border);
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
@@ -206,8 +206,8 @@
 }
 
 .btn-secondary-lg:hover {
-    background: var(--bg-secondary);
-    border-color: var(--gray-300);
+    background: var(--muted);
+    border-color: var(--border);
 }
 
 .btn-primary-lg:disabled,

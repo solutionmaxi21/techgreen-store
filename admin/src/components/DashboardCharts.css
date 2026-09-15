@@ -15,17 +15,17 @@
 .chart-header h3 {
   margin: 0;
   font-size: 1rem;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   font-weight: 600;
 }
 
 .chart-select {
   padding: 0.4rem 0.8rem;
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  background-color: hsl(var(--background));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
   font-size: 0.875rem;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -70,7 +70,7 @@
 
 .category-legend-label {
   font-size: 11px;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -5,7 +5,7 @@
 }
 
 .promotion-form {
-  background: var(--color-card-bg);
+  background: var(--card);
   border-radius: 8px;
   padding: 2rem;
 }
@@ -13,7 +13,7 @@
 .form-section {
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .form-section:last-child {
@@ -24,11 +24,11 @@
 .form-section h2 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: var(--color-text-primary);
+  color: var(--foreground);
 }
 
 .section-description {
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
   margin-bottom: 1rem;
   font-size: 0.875rem;
 }
@@ -48,18 +48,18 @@
 .form-group label {
   font-weight: 500;
   margin-bottom: 0.5rem;
-  color: var(--color-text-primary);
+  color: var(--foreground);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   padding: 0.75rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   border-radius: 4px;
   font-size: 1rem;
-  background: var(--color-bg);
-  color: var(--color-text-primary);
+  background: var(--background);
+  color: var(--foreground);
   transition: border-color 0.2s;
 }
 
@@ -67,23 +67,23 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--primary);
 }
 
 .form-group input.error,
 .form-group select.error,
 .form-group textarea.error {
-  border-color: var(--color-danger);
+  border-color: var(--destructive);
 }
 
 .form-group small {
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
   margin-top: 0.25rem;
 }
 
 .error-message {
-  color: var(--color-danger);
+  color: var(--destructive);
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
@@ -99,15 +99,15 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .checkbox-label:hover {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-primary);
+  background: var(--muted);
+  border-color: var(--primary);
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -118,7 +118,7 @@
 
 .checkbox-label span {
   flex: 1;
-  color: var(--color-text-primary);
+  color: var(--foreground);
 }
 
 .loading {
@@ -127,5 +127,5 @@
   align-items: center;
   min-height: 400px;
   font-size: 1.125rem;
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
 }

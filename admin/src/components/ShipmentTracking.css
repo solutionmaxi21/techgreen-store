@@ -2,7 +2,7 @@
 .shipment-tracking-card {
   background: var(--card);
   border-radius: var(--radius-xl);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   padding: 24px;
   margin-bottom: 20px;
 }
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .tracking-title h3 {
@@ -38,8 +38,8 @@
 }
 
 .tracking-status.cancelled {
-  background-color: var(--error-bg, oklch(0.57 0.22 27 / 0.08));
-  color: var(--error-color, var(--destructive));
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
+  color: var(--destructive);
 }
 
 /* Tracking Timeline */
@@ -63,16 +63,16 @@
   top: 44px;
   width: 2px;
   height: calc(100% + 24px);
-  background-color: var(--border-color);
+  background-color: var(--border);
   transition: background-color 0.3s ease;
 }
 
 .tracking-connector.completed {
-  background-color: var(--success-color);
+  background-color: var(--success);
 }
 
 .tracking-connector.active {
-  background: var(--success-color);
+  background: var(--success);
 }
 
 .step-icon-wrapper {
@@ -89,36 +89,36 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--border);
   background-color: var(--card);
-  color: var(--gray-400);
+  color: var(--muted-foreground);
 }
 
 /* Step States */
 .tracking-step.completed .step-icon {
-  background-color: var(--success-color);
-  border-color: var(--success-color);
+  background-color: var(--success);
+  border-color: var(--success);
   color: var(--card);
 }
 
 .tracking-step.active .step-icon {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--primary);
+  border-color: var(--primary);
   color: var(--card);
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
   animation: pulse 2s infinite;
 }
 
 .tracking-step.pending .step-icon {
-  background-color: var(--gray-100);
-  border-color: var(--border-color);
-  color: var(--gray-400);
+  background-color: var(--muted);
+  border-color: var(--border);
+  color: var(--muted-foreground);
 }
 
 .tracking-step.cancelled .step-icon {
-  background-color: var(--gray-100);
-  border-color: var(--border-color);
-  color: var(--gray-300);
+  background-color: var(--muted);
+  border-color: var(--border);
+  color: var(--border);
   opacity: 0.5;
 }
 
@@ -140,24 +140,24 @@
 .step-label {
   font-size: 15px;
   font-weight: 600;
-  color: var(--gray-900);
+  color: var(--foreground);
   margin-bottom: 4px;
 }
 
 .tracking-step.pending .step-label,
 .tracking-step.cancelled .step-label {
-  color: var(--gray-500);
+  color: var(--muted-foreground);
 }
 
 .step-description {
   font-size: 13px;
-  color: var(--gray-600);
+  color: var(--muted-foreground);
   line-height: 1.5;
 }
 
 .tracking-step.pending .step-description,
 .tracking-step.cancelled .step-description {
-  color: var(--gray-400);
+  color: var(--muted-foreground);
 }
 
 .step-timestamp {
@@ -166,7 +166,7 @@
   gap: 4px;
   margin-top: 6px;
   font-size: 12px;
-  color: var(--primary-color);
+  color: var(--primary);
   font-weight: 500;
 }
 
@@ -181,70 +181,70 @@
 }
 
 .tracking-alert.cancelled {
-  background-color: var(--error-bg, oklch(0.57 0.22 27 / 0.08));
-  border: 1px solid var(--error-color, var(--destructive));
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
+  border: 1px solid var(--destructive);
 }
 
 .tracking-alert svg {
   flex-shrink: 0;
-  color: var(--error-color);
+  color: var(--destructive);
   margin-top: 2px;
 }
 
 .alert-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--error-color);
+  color: var(--destructive);
   margin-bottom: 4px;
 }
 
 .alert-description {
   font-size: 13px;
-  color: var(--gray-700);
+  color: var(--foreground);
 }
 
 .alert-attempts {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--muted-foreground);
   margin-top: 4px;
 }
 
 /* Return Flow Styles */
 .shipment-tracking-card.return-flow {
-  border-color: var(--warning-color, var(--warning));
+  border-color: var(--warning);
   background: oklch(0.75 0.18 80 / 0.15);
 }
 
 .shipment-tracking-card.return-flow .tracking-title {
-  color: var(--warning-color, var(--warning));
+  color: var(--warning);
 }
 
 /* Tracking Status Badges */
 .tracking-status.delivered {
-  background-color: var(--success-bg, oklch(0.60 0.19 155 / 0.12));
-  color: var(--success-color, var(--success));
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
+  color: var(--success);
 }
 
 .tracking-status.returned {
-  background-color: var(--warning-bg, oklch(0.75 0.18 80 / 0.15));
-  color: var(--warning-color, var(--warning));
+  background-color: oklch(0.75 0.18 80 / 0.15);
+  color: var(--warning);
 }
 
 .tracking-status.failed {
-  background-color: var(--error-bg, oklch(0.57 0.22 27 / 0.08));
-  color: var(--error-color, var(--destructive));
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
+  color: var(--destructive);
 }
 
 /* Failed Step State */
 .tracking-step.failed .step-icon {
-  background-color: var(--error-color, var(--destructive));
-  border-color: var(--error-color, var(--destructive));
+  background-color: var(--destructive);
+  border-color: var(--destructive);
   color: var(--card);
   box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
 }
 
 .tracking-step.failed .step-label {
-  color: var(--error-color, var(--destructive));
+  color: var(--destructive);
 }
 
 /* Tracking Banners */
@@ -279,49 +279,49 @@
 }
 
 .tracking-banner.return {
-  background-color: var(--warning-bg, oklch(0.75 0.18 80 / 0.15));
-  border: 1px solid var(--warning-color, var(--warning));
-  color: var(--warning-color, var(--warning));
+  background-color: oklch(0.75 0.18 80 / 0.15);
+  border: 1px solid var(--warning);
+  color: var(--warning);
 }
 
 .tracking-banner.success {
-  background-color: var(--success-bg, oklch(0.60 0.19 155 / 0.12));
-  border: 1px solid var(--success-color, var(--success));
-  color: var(--success-color, var(--success));
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
+  border: 1px solid var(--success);
+  color: var(--success);
 }
 
 /* Return Flow Alert */
 .tracking-alert.return {
-  background-color: var(--warning-bg, oklch(0.75 0.18 80 / 0.15));
-  border: 1px solid var(--warning-color, var(--warning));
+  background-color: oklch(0.75 0.18 80 / 0.15);
+  border: 1px solid var(--warning);
 }
 
 .tracking-alert.return svg {
-  color: var(--warning-color, var(--warning));
+  color: var(--warning);
 }
 
 .tracking-alert.return .alert-title {
-  color: var(--warning-color, var(--warning));
+  color: var(--warning);
 }
 
 .tracking-alert.failed {
-  background-color: var(--error-bg, oklch(0.57 0.22 27 / 0.08));
-  border: 1px solid var(--error-color, var(--destructive));
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
+  border: 1px solid var(--destructive);
 }
 
 .tracking-alert.failed svg {
-  color: var(--error-color, var(--destructive));
+  color: var(--destructive);
 }
 
 .tracking-alert.failed .alert-title {
-  color: var(--error-color, var(--destructive));
+  color: var(--destructive);
 }
 
 /* Tracking Info */
 .tracking-info {
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
@@ -336,14 +336,14 @@
 .info-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray-600);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .info-value {
   font-size: 14px;
-  color: var(--gray-900);
+  color: var(--foreground);
   font-weight: 500;
   font-family: monospace;
 }

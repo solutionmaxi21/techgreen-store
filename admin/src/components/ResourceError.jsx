@@ -7,13 +7,13 @@ const ResourceError = ({ error, onRetry }) => (
     justifyContent: 'space-between',
     gap: '16px',
     padding: '18px',
-    border: '1px solid hsl(var(--destructive) / 0.35)',
-    background: 'hsl(var(--destructive) / 0.06)',
-    color: 'hsl(var(--foreground))',
+    border: '1px solid color-mix(in srgb, var(--destructive), transparent 65%)',
+    background: 'color-mix(in srgb, var(--destructive), transparent 94%)',
+    color: 'var(--foreground)',
     borderRadius: '8px',
   }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <AlertCircle size={20} color="hsl(var(--destructive))" />
+      <AlertCircle size={20} color="var(--destructive)" />
       <span>{error?.message || 'Unable to load this data.'}</span>
     </div>
     {onRetry && (

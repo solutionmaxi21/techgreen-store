@@ -13,8 +13,8 @@
   aspect-ratio: 1;
   border-radius: var(--radius-md);
   overflow: hidden;
-  border: 2px solid var(--color-gray-200);
-  background: var(--color-gray-50);
+  border: 2px solid var(--border);
+  background: var(--muted);
 }
 
 .image-preview-item img {
@@ -53,24 +53,24 @@
 
 .upload-area {
   aspect-ratio: 1;
-  border: 2px dashed var(--color-gray-300);
+  border: 2px dashed var(--border);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
-  background: var(--color-gray-50);
+  background: var(--muted);
 }
 
 .upload-area:hover {
-  border-color: var(--color-primary);
-  background: var(--color-primary-50);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary), transparent 95%);
 }
 
 .upload-area.drag-active {
-  border-color: var(--color-primary);
-  background: var(--color-primary-100);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary), transparent 90%);
 }
 
 .upload-content {
@@ -88,38 +88,38 @@
 .upload-text {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-gray-700);
+  color: var(--foreground);
   margin: 0 0 8px 0;
 }
 
 .upload-hint {
   font-size: 0.75rem;
-  color: var(--color-gray-500);
+  color: var(--muted-foreground);
   margin: 0;
 }
 
 /* Dark mode */
 .dark .image-preview-item {
-  border-color: var(--color-gray-700);
-  background: var(--color-gray-800);
+  border-color: var(--border);
+  background: var(--background);
 }
 
 .dark .upload-area {
-  border-color: var(--color-gray-600);
-  background: var(--color-gray-800);
+  border-color: var(--muted-foreground);
+  background: var(--background);
 }
 
 .dark .upload-area:hover {
-  border-color: var(--color-primary);
-  background: var(--color-gray-700);
+  border-color: var(--primary);
+  background: var(--muted);
 }
 
 .dark .upload-text {
-  color: var(--color-gray-300);
+  color: var(--foreground);
 }
 
 .dark .upload-hint {
-  color: var(--color-gray-500);
+  color: var(--muted-foreground);
 }
 
 /* Responsive */
@@ -128,11 +128,11 @@
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 12px;
   }
-  
+
   .upload-icon {
     font-size: 36px;
   }
-  
+
   .upload-text {
     font-size: 0.8125rem;
   }

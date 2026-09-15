@@ -212,8 +212,8 @@ const ProductsListPage = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             width: '40px', height: '40px',
-            borderRadius: '6px', border: '1px solid hsl(var(--border))',
-            overflow: 'hidden', backgroundColor: 'hsl(var(--muted))',
+            borderRadius: '6px', border: '1px solid var(--border)',
+            overflow: 'hidden', backgroundColor: 'var(--muted)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             flexShrink: 0
           }}>
@@ -226,19 +226,19 @@ const ProductsListPage = () => {
                 onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerText = 'IMG'; }}
               />
             ) : (
-              <span style={{ fontSize: '10px', color: 'hsl(var(--muted-foreground))' }}>IMG</span>
+              <span style={{ fontSize: '10px', color: 'var(--muted-foreground)' }}>IMG</span>
             )}
           </div>
 
           <div>
-            <div style={{ fontWeight: '600', color: 'hsl(var(--foreground))', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ fontWeight: '600', color: 'var(--foreground)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
               {getLocalizedName(row.name)}
               {(row.variant_count > 1 || (row.variants && row.variants.length > 1)) && (
                 <span style={{
                   fontSize: '10px',
                   fontWeight: 600,
-                  background: 'hsl(var(--primary) / 0.1)',
-                  color: 'hsl(var(--primary))',
+                  background: 'color-mix(in srgb, var(--primary), transparent 90%)',
+                  color: 'var(--primary)',
                   padding: '1px 6px',
                   borderRadius: '9999px',
                   whiteSpace: 'nowrap'
@@ -247,7 +247,7 @@ const ProductsListPage = () => {
                 </span>
               )}
             </div>
-            <div style={{ fontSize: '11px', color: 'hsl(var(--muted-foreground))', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: '11px', color: 'var(--muted-foreground)', fontFamily: 'monospace' }}>
               {row.sku}
             </div>
           </div>
@@ -257,7 +257,7 @@ const ProductsListPage = () => {
     {
       key: 'category',
       label: t('table.category'), // Translated
-      render: (val) => <span style={{ color: 'hsl(var(--muted-foreground))', fontSize: '0.85rem' }}>{getLocalizedName(val) || '—'}</span>
+      render: (val) => <span style={{ color: 'var(--muted-foreground)', fontSize: '0.85rem' }}>{getLocalizedName(val) || '—'}</span>
     },
     {
       key: 'barcode',
@@ -266,10 +266,10 @@ const ProductsListPage = () => {
         <span style={{
           fontFamily: 'monospace',
           fontSize: '0.75rem',
-          backgroundColor: 'hsl(var(--muted))',
+          backgroundColor: 'var(--muted)',
           padding: '2px 8px',
           borderRadius: '4px',
-          color: 'hsl(var(--foreground))',
+          color: 'var(--foreground)',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -306,7 +306,7 @@ const ProductsListPage = () => {
         return (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <StatusBadge status={badgeStatusMap[statusKey]} label={t(`products.${statusKey}`)} />
-            <span style={{ fontSize: '12px', color: 'hsl(var(--muted-foreground))' }}>
+            <span style={{ fontSize: '12px', color: 'var(--muted-foreground)' }}>
               {val} {t('products.units')}
             </span>
           </div>
@@ -347,7 +347,7 @@ const ProductsListPage = () => {
             <button
               className="icon-btn"
               title={t('products.delete_btn')}
-              style={{ color: 'hsl(var(--destructive))' }}
+              style={{ color: 'var(--destructive)' }}
               onClick={(e) => handleDelete(row.id, e)}
             >
               <Trash2 size={16} />
@@ -363,10 +363,10 @@ const ProductsListPage = () => {
       {/* HEADER - RTL margin logic added */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0, color: 'hsl(var(--foreground))' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0, color: 'var(--foreground)' }}>
             {t('products.title')}
           </h1>
-          <p style={{ color: 'hsl(var(--muted-foreground))', marginTop: '4px', fontSize: '0.9rem' }}>
+          <p style={{ color: 'var(--muted-foreground)', marginTop: '4px', fontSize: '0.9rem' }}>
             {t('products.subtitle', { count: totalProducts })}
           </p>
         </div>
@@ -453,8 +453,8 @@ const ProductsListPage = () => {
               minWidth: '110px',
               height: '40px',
               padding: '0 12px',
-              borderColor: 'hsl(var(--border))',
-              color: 'hsl(var(--foreground))'
+              borderColor: 'var(--border)',
+              color: 'var(--foreground)'
             }}
             onClick={() => setFilters({
               search: '',

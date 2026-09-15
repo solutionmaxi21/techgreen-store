@@ -114,10 +114,10 @@ function DataTable({
               style={{
                 fontSize: '0.8rem',
                 padding: '4px 8px',
-                border: '1px solid hsl(var(--border))',
+                border: '1px solid var(--border)',
                 borderRadius: 'var(--radius)',
-                background: 'hsl(var(--background))',
-                color: 'hsl(var(--foreground))',
+                background: 'var(--background)',
+                color: 'var(--foreground)',
                 cursor: 'pointer',
               }}
               value={pageSize}
@@ -142,7 +142,7 @@ function DataTable({
 
           {withEllipsis.map((item, i) =>
             item === '...' ? (
-              <span key={`ellipsis-${i}`} style={{ padding: '0 4px', color: 'hsl(var(--muted-foreground))' }}>…</span>
+              <span key={`ellipsis-${i}`} style={{ padding: '0 4px', color: 'var(--muted-foreground)' }}>…</span>
             ) : (
               <button
                 key={item}

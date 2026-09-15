@@ -196,32 +196,32 @@ textarea.bilingual-input__field:disabled {
 
 /* Dark mode support */
 .dark .bilingual-input__tabs {
-    background-color: hsl(var(--bento-surface-elevated));
+    background-color: var(--card);
 }
 
 .dark button.bilingual-input__tab {
-    color: hsl(var(--bento-ink-muted));
+    color: var(--muted-foreground);
     background-color: transparent;
 }
 
 .dark button.bilingual-input__tab:hover {
-    background-color: hsl(var(--bento-surface-strong));
-    color: hsl(var(--bento-ink));
+    background-color: var(--muted);
+    color: var(--foreground);
 }
 
 .dark button.bilingual-input__tab.active {
-    background-color: hsl(var(--bento-surface));
-    color: hsl(var(--bento-accent));
+    background-color: var(--background);
+    color: var(--primary);
 }
 
 .dark input.bilingual-input__field,
 .dark textarea.bilingual-input__field {
-    background-color: hsl(var(--bento-surface));
-    border-color: hsl(var(--bento-border));
-    color: hsl(var(--bento-ink));
+    background-color: var(--background);
+    border-color: var(--border);
+    color: var(--foreground);
 }
 
 .dark .bilingual-input__preview {
-    background-color: hsl(var(--bento-surface-elevated));
-    color: hsl(var(--bento-ink-muted));
+    background-color: var(--card);
+    color: var(--muted-foreground);
 }
