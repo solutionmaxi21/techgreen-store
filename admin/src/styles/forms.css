@@ -341,7 +341,7 @@ label,
   background-color: white;
   border-radius: 50%;
   transition: transform var(--duration-normal) var(--ease-spring);
-  box-shadow: 0 1px 3px oklch(0 0 0 / 0.2);
+  box-shadow: 0 1px 3px color-mix(in srgb, black, transparent 80%);
 }
 
 .switch-toggle.active::after {
@@ -473,14 +473,14 @@ input:-webkit-autofill:active {
 
 .image-upload-zone.drag-over {
   border-color: var(--primary);
-  background-color: oklch(0.46 0.17 155 / 0.05);
-  box-shadow: 0 0 0 3px oklch(0.46 0.17 155 / 0.15);
+  background-color: color-mix(in srgb, var(--primary), transparent 95%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary), transparent 85%);
 }
 
 .image-upload-spinner-overlay {
   position: absolute;
   inset: 0;
-  background-color: oklch(1 0 0 / 0.7);
+  background-color: color-mix(in srgb, white, transparent 30%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -488,7 +488,7 @@ input:-webkit-autofill:active {
 }
 
 .dark .image-upload-spinner-overlay {
-  background-color: oklch(0 0 0 / 0.7);
+  background-color: color-mix(in srgb, black, transparent 30%);
 }
 
 .image-upload-spinner {

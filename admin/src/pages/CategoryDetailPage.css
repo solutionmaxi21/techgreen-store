@@ -353,12 +353,12 @@
 }
 
 .product-footer .stock.in-stock {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .product-footer .stock.out-of-stock {
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 

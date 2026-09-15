@@ -37,32 +37,32 @@
    ============================================ */
 .action-btn.approve,
 .action-btn.success {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
-  border-color: oklch(0.60 0.19 155 / 0.3);
+  border-color: color-mix(in srgb, var(--success), transparent 70%);
 }
 
 .action-btn.approve:hover,
 .action-btn.success:hover {
-  background: oklch(0.60 0.19 155 / 0.2);
+  background: color-mix(in srgb, var(--success), transparent 80%);
 }
 
 .action-btn.reject,
 .action-btn.danger {
-  background: oklch(0.57 0.22 27 / 0.12);
+  background: color-mix(in srgb, var(--destructive), transparent 88%);
   color: var(--destructive);
-  border-color: oklch(0.57 0.22 27 / 0.3);
+  border-color: color-mix(in srgb, var(--destructive), transparent 70%);
 }
 
 .action-btn.reject:hover,
 .action-btn.danger:hover {
-  background: oklch(0.57 0.22 27 / 0.2);
+  background: color-mix(in srgb, var(--destructive), transparent 80%);
 }
 
 .action-btn.delete {
-  background: oklch(0.57 0.22 27 / 0.12);
+  background: color-mix(in srgb, var(--destructive), transparent 88%);
   color: var(--destructive);
-  border-color: oklch(0.57 0.22 27 / 0.3);
+  border-color: color-mix(in srgb, var(--destructive), transparent 70%);
 }
 
 .action-btn.delete:hover {
@@ -72,24 +72,24 @@
 
 .action-btn.edit,
 .action-btn.primary {
-  background: oklch(0.55 0.15 240 / 0.12);
+  background: color-mix(in srgb, var(--info), transparent 88%);
   color: var(--info);
-  border-color: oklch(0.55 0.15 240 / 0.3);
+  border-color: color-mix(in srgb, var(--info), transparent 70%);
 }
 
 .action-btn.edit:hover,
 .action-btn.primary:hover {
-  background: oklch(0.55 0.15 240 / 0.2);
+  background: color-mix(in srgb, var(--info), transparent 80%);
 }
 
 .action-btn.warning {
-  background: oklch(0.75 0.18 80 / 0.12);
+  background: color-mix(in srgb, var(--warning), transparent 88%);
   color: var(--warning);
-  border-color: oklch(0.75 0.18 80 / 0.3);
+  border-color: color-mix(in srgb, var(--warning), transparent 70%);
 }
 
 .action-btn.warning:hover {
-  background: oklch(0.75 0.18 80 / 0.2);
+  background: color-mix(in srgb, var(--warning), transparent 80%);
 }
 
 /* ============================================
@@ -116,21 +116,21 @@
 }
 
 .action-btn-icon.delete:hover {
-  background: oklch(0.57 0.22 27 / 0.12);
+  background: color-mix(in srgb, var(--destructive), transparent 88%);
   color: var(--destructive);
-  border-color: oklch(0.57 0.22 27 / 0.3);
+  border-color: color-mix(in srgb, var(--destructive), transparent 70%);
 }
 
 .action-btn-icon.edit:hover {
-  background: oklch(0.55 0.15 240 / 0.12);
+  background: color-mix(in srgb, var(--info), transparent 88%);
   color: var(--info);
-  border-color: oklch(0.55 0.15 240 / 0.3);
+  border-color: color-mix(in srgb, var(--info), transparent 70%);
 }
 
 .action-btn-icon.view:hover {
-  background: oklch(0.55 0.15 240 / 0.12);
+  background: color-mix(in srgb, var(--info), transparent 88%);
   color: var(--info);
-  border-color: oklch(0.55 0.15 240 / 0.3);
+  border-color: color-mix(in srgb, var(--info), transparent 70%);
 }
 
 /* ============================================

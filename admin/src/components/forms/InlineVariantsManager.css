@@ -230,22 +230,22 @@
 }
 
 .ivm-warehouse-tag {
-    background: oklch(0.55 0.15 240 / 0.1);
+    background: color-mix(in srgb, var(--info), transparent 90%);
     color: var(--info);
 }
 
 .ivm-supplier-tag {
-    background: oklch(0.60 0.19 155 / 0.12);
+    background: color-mix(in srgb, var(--success), transparent 88%);
     color: var(--success);
 }
 
 .dark .ivm-warehouse-tag {
-    background: oklch(0.55 0.15 240 / 0.15);
+    background: color-mix(in srgb, var(--info), transparent 85%);
     color: var(--info);
 }
 
 .dark .ivm-supplier-tag {
-    background: oklch(0.60 0.19 155 / 0.15);
+    background: color-mix(in srgb, var(--success), transparent 85%);
     color: var(--success);
 }
 
@@ -262,7 +262,7 @@
     align-items: center;
     gap: 4px;
     padding: 3px 10px;
-    background: oklch(0.55 0.15 240 / 0.1);
+    background: color-mix(in srgb, var(--info), transparent 90%);
     color: var(--primary);
     font-size: 11px;
     font-weight: 600;
@@ -275,7 +275,7 @@
     display: inline-flex;
     align-items: center;
     padding: 2px 8px;
-    background: oklch(0.75 0.18 80 / 0.15);
+    background: color-mix(in srgb, var(--warning), transparent 85%);
     color: var(--warning);
     font-size: 10px;
     font-weight: 600;
@@ -291,7 +291,7 @@
 }
 
 .dark .ivm-dirty-badge {
-    background: oklch(0.75 0.18 80 / 0.15);
+    background: color-mix(in srgb, var(--warning), transparent 85%);
     color: var(--warning);
 }
 
@@ -470,33 +470,33 @@
 }
 
 .ivm-action-btn.default-btn {
-    background: oklch(0.55 0.15 240 / 0.1);
+    background: color-mix(in srgb, var(--info), transparent 90%);
     color: var(--primary);
     border-color: var(--info);
 }
 
 .ivm-action-btn.default-btn:hover {
-    background: oklch(0.55 0.15 240 / 0.1);
+    background: color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .ivm-action-btn.save-btn {
-    background: oklch(0.60 0.19 155 / 0.12);
+    background: color-mix(in srgb, var(--success), transparent 88%);
     color: var(--success);
     border-color: var(--success);
 }
 
 .ivm-action-btn.save-btn:hover {
-    background: oklch(0.60 0.19 155 / 0.12);
+    background: color-mix(in srgb, var(--success), transparent 88%);
 }
 
 .ivm-action-btn.delete-btn {
-    background: oklch(0.57 0.22 27 / 0.08);
+    background: color-mix(in srgb, var(--destructive), transparent 92%);
     color: var(--destructive);
     border-color: var(--destructive);
 }
 
 .ivm-action-btn.delete-btn:hover {
-    background: oklch(0.57 0.22 27 / 0.08);
+    background: color-mix(in srgb, var(--destructive), transparent 92%);
 }
 
 /* ---- Spinners ---- */
@@ -719,7 +719,7 @@
     gap: 0.5rem;
     margin-top: 0.75rem;
     padding: 0.625rem 0.875rem;
-    background: oklch(0.75 0.18 80 / 0.15);
+    background: color-mix(in srgb, var(--warning), transparent 85%);
     border: 1px solid var(--warning);
     border-radius: var(--radius-sm);
     font-size: 13px;
@@ -727,7 +727,7 @@
 }
 
 .dark .ivm-validation-warning {
-    background: oklch(0.75 0.18 80 / 0.15);
+    background: color-mix(in srgb, var(--warning), transparent 85%);
     border-color: var(--warning);
     color: var(--warning);
 }

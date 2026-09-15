@@ -181,7 +181,7 @@
 }
 
 .notification-card.unread {
-    background: oklch(0.55 0.15 240 / 0.1);
+    background: color-mix(in srgb, var(--info), transparent 90%);
     border-left: 3px solid var(--info);
 }
 
@@ -313,7 +313,7 @@
 }
 
 .dark .notification-card.unread {
-    background: oklch(0.55 0.15 240 / 0.15);
+    background: color-mix(in srgb, var(--info), transparent 85%);
 }
 
 .dark .notification-icon {

@@ -212,7 +212,7 @@
 /* Return Flow Styles */
 .shipment-tracking-card.return-flow {
   border-color: var(--warning);
-  background: oklch(0.75 0.18 80 / 0.15);
+  background: color-mix(in srgb, var(--warning), transparent 85%);
 }
 
 .shipment-tracking-card.return-flow .tracking-title {
@@ -226,7 +226,7 @@
 }
 
 .tracking-status.returned {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
@@ -279,7 +279,7 @@
 }
 
 .tracking-banner.return {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   border: 1px solid var(--warning);
   color: var(--warning);
 }
@@ -292,7 +292,7 @@
 
 /* Return Flow Alert */
 .tracking-alert.return {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   border: 1px solid var(--warning);
 }
 

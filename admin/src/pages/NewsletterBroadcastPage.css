@@ -129,17 +129,17 @@
 }
 
 .badge-sending {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
 .badge-sent {
-  background-color: oklch(0.60 0.19 155 / 0.12);
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .badge-failed {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 
@@ -200,7 +200,7 @@
 }
 
 .alert-error {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
   border-left: 4px solid var(--destructive);
 }
@@ -473,7 +473,7 @@
 }
 
 .tab-badge-error {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 
@@ -563,11 +563,11 @@
 }
 
 .log-row-error {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
 }
 
 .log-row-error:hover {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
 }
 
 .log-email {
@@ -597,7 +597,7 @@
 }
 
 .retry-badge {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
   padding: 2px 6px;
   border-radius: var(--radius-sm);

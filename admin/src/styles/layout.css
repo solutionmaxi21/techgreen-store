@@ -101,22 +101,22 @@
 }
 
 .stat-badge-primary {
-  background: oklch(0.46 0.17 155 / 0.12);
+  background: color-mix(in srgb, var(--primary), transparent 88%);
   color: var(--primary);
 }
 
 .stat-badge-success {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .stat-badge-warning {
-  background: oklch(0.75 0.18 80 / 0.12);
+  background: color-mix(in srgb, var(--warning), transparent 88%);
   color: var(--warning);
 }
 
 .stat-badge-danger {
-  background: oklch(0.57 0.22 27 / 0.12);
+  background: color-mix(in srgb, var(--destructive), transparent 88%);
   color: var(--destructive);
 }
 

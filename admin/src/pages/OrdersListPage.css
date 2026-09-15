@@ -286,7 +286,7 @@
 }
 
 .dark .filters-section {
-  background: oklch(0.175 0.024 160 / 0.6);
+  background: color-mix(in srgb, var(--card), transparent 40%);
   border-color: var(--border);
   backdrop-filter: blur(8px);
 }

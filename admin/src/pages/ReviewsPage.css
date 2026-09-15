@@ -325,13 +325,13 @@
 }
 
 .btn-icon-s.approve:hover {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
   border-color: var(--success);
 }
 
 .btn-icon-s.reject:hover {
-  background: oklch(0.57 0.22 27 / 0.1);
+  background: color-mix(in srgb, var(--destructive), transparent 90%);
   color: var(--destructive);
   border-color: var(--destructive);
 }
@@ -357,7 +357,7 @@
   align-items: center;
   gap: 12px;
   padding: 4px 12px;
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   border: 1px solid var(--info);
   border-radius: var(--radius-xl);
   animation: slideIn 0.3s ease-out;
@@ -388,13 +388,13 @@
 
 /* Dark Mode */
 .dark .review-stat-card {
-  background: oklch(0.175 0.024 160 / 0.6);
+  background: color-mix(in srgb, var(--card), transparent 40%);
   backdrop-filter: blur(8px);
   border-color: var(--border);
 }
 
 .dark .filters-section-pro {
-  background: oklch(0.175 0.024 160 / 0.6);
+  background: color-mix(in srgb, var(--card), transparent 40%);
   backdrop-filter: blur(8px);
 }
 

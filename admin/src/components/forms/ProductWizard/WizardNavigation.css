@@ -74,7 +74,7 @@
   background: var(--info);
   border-color: var(--info);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px oklch(0.55 0.15 240 / 0.3);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--info), transparent 70%);
 }
 
 .btn-submit {
@@ -85,7 +85,7 @@
 .btn-submit:hover:not(:disabled) {
   background: var(--success);
   border-color: var(--success);
-  box-shadow: 0 4px 12px oklch(0.60 0.19 155 / 0.3);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--success), transparent 70%);
 }
 
 .btn-secondary:disabled,
@@ -105,7 +105,7 @@
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid oklch(1 0 0 / 0.3);
+  border: 2px solid color-mix(in srgb, white, transparent 70%);
   border-top-color: var(--card);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;

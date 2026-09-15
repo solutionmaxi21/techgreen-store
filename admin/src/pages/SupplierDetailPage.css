@@ -431,7 +431,7 @@
     padding: 40px 20px;
     font-size: 16px;
     color: var(--destructive);
-    background: oklch(0.57 0.22 27 / 0.08);
+    background: color-mix(in srgb, var(--destructive), transparent 92%);
     border: 1px solid var(--destructive);
     border-radius: var(--radius-xl);
 }

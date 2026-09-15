@@ -11,33 +11,33 @@
 
 /* Order statuses */
 .status-pending {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
 .status-processing {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
 }
 
 .status-shipped {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
 }
 
 .status-delivered {
-  background-color: oklch(0.60 0.19 155 / 0.12);
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .status-cancelled {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 
 /* Product statuses */
 .status-active {
-  background-color: oklch(0.60 0.19 155 / 0.12);
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
@@ -48,43 +48,43 @@
 
 /* Review statuses */
 .status-approved {
-  background-color: oklch(0.60 0.19 155 / 0.12);
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .status-rejected {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 
 /* Dark mode */
 .dark .status-pending {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
 .dark .status-processing {
-  background-color: oklch(0.55 0.15 240 / 0.15);
+  background-color: color-mix(in srgb, var(--info), transparent 85%);
   color: var(--info);
 }
 
 .dark .status-shipped {
-  background-color: oklch(0.55 0.15 240 / 0.15);
+  background-color: color-mix(in srgb, var(--info), transparent 85%);
   color: var(--info);
 }
 
 .dark .status-delivered {
-  background-color: oklch(0.60 0.19 155 / 0.15);
+  background-color: color-mix(in srgb, var(--success), transparent 85%);
   color: var(--success);
 }
 
 .dark .status-cancelled {
-  background-color: oklch(0.57 0.22 27 / 0.15);
+  background-color: color-mix(in srgb, var(--destructive), transparent 85%);
   color: var(--destructive);
 }
 
 .dark .status-active {
-  background-color: oklch(0.60 0.19 155 / 0.15);
+  background-color: color-mix(in srgb, var(--success), transparent 85%);
   color: var(--success);
 }
 

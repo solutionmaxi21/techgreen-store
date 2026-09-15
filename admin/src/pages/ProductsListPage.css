@@ -60,12 +60,12 @@
 }
 
 .stat-badge-success {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .stat-badge-warning {
-  background: oklch(0.75 0.18 80 / 0.15);
+  background: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
@@ -289,7 +289,7 @@
 }
 
 .dark .filters-section {
-  background: oklch(0.175 0.024 160 / 0.6);
+  background: color-mix(in srgb, var(--card), transparent 40%);
   border-color: var(--border);
   backdrop-filter: blur(8px);
 }
@@ -302,7 +302,7 @@
 }
 
 .dark .bulk-actions {
-  background: oklch(0.175 0.024 160 / 0.8);
+  background: color-mix(in srgb, var(--card), transparent 20%);
   border-color: var(--border);
   backdrop-filter: blur(8px);
 }
@@ -360,17 +360,17 @@
 }
 
 .stock-in {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .stock-low {
-  background: oklch(0.75 0.18 80 / 0.15);
+  background: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
 .stock-out {
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 

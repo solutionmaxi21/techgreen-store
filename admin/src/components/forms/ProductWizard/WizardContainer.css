@@ -64,7 +64,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: oklch(0 0 0 / 0.5);
+  background: color-mix(in srgb, black, transparent 50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   border-radius: 50%;
 }
 

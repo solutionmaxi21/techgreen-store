@@ -11,7 +11,7 @@
 
 .level-badge {
   display: inline-block;
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
   padding: 2px 8px;
   border-radius: var(--radius-xl);
@@ -36,7 +36,7 @@
 }
 
 .product-count.has-products {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
@@ -134,7 +134,7 @@
 
 /* Parent Category Info */
 .parent-info {
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   border: 1px solid var(--info);
   border-radius: var(--radius-sm);
   padding: 12px;
@@ -164,7 +164,7 @@
 
 /* Error Alert */
 .error-alert {
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   border: 1px solid var(--destructive);
   color: var(--destructive);
   padding: 12px 16px;
@@ -177,7 +177,7 @@
 
 /* Success Alert */
 .success-alert {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   border: 1px solid var(--success);
   color: var(--success);
   padding: 12px 16px;
@@ -264,7 +264,7 @@
 }
 
 .btn-report:hover:not(:disabled) {
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
 }
 

@@ -38,12 +38,12 @@
 
 .image-upload-zone:hover {
   border-color: var(--info);
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .image-upload-zone.drag-active {
   border-color: var(--info);
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   transform: scale(1.01);
 }
 
@@ -76,7 +76,7 @@
 .image-count {
   margin-left: auto;
   padding: 0.25rem 0.75rem;
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
   border-radius: 1rem;
   font-size: 0.875rem;
@@ -268,7 +268,7 @@
 .btn-add-spec:hover {
   background: var(--info);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px oklch(0.55 0.15 240 / 0.3);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--info), transparent 70%);
 }
 
 .specifications-list {
@@ -313,7 +313,7 @@
 .spec-value:focus {
   outline: none;
   border-color: var(--info);
-  box-shadow: 0 0 0 3px oklch(0.55 0.15 240 / 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .btn-remove-spec {

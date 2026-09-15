@@ -63,7 +63,7 @@
 }
 
 .alert-error {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
   border-left: 4px solid var(--destructive);
 }
@@ -112,27 +112,27 @@
 }
 
 .badge-subscribed {
-  background-color: oklch(0.60 0.19 155 / 0.12);
+  background-color: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
 }
 
 .badge-unsubscribed {
-  background-color: oklch(0.57 0.22 27 / 0.08);
+  background-color: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
 }
 
 .badge-bounced {
-  background-color: oklch(0.75 0.18 80 / 0.15);
+  background-color: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
 }
 
 .badge-public {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
 }
 
 .badge-authenticated {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
   color: var(--info);
 }
 

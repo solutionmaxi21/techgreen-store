@@ -130,7 +130,7 @@
 .form-textarea:focus {
     outline: none;
     border-color: var(--info);
-    box-shadow: 0 0 0 3px oklch(0.55 0.15 240 / 0.1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--info), transparent 90%);
 }
 
 /* User & Product Search */
@@ -232,7 +232,7 @@
 }
 
 .remove-btn:hover {
-    background: oklch(0.57 0.22 27 / 0.08);
+    background: color-mix(in srgb, var(--destructive), transparent 92%);
 }
 
 /* Responsive */

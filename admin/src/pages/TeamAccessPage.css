@@ -27,17 +27,17 @@
 .ta-table code { font-size: 12px; overflow-wrap: anywhere; }
 .ta-actions { display: flex; gap: 6px; }
 .ta-actions button, .ta-modal-header > button { width: 34px; height: 34px; display: inline-grid; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); color: var(--foreground); cursor: pointer; }
-.ta-status { display: inline-flex; width: fit-content; padding: 4px 8px; border-radius: 999px; background: oklch(0.55 0.15 240 / 0.1); color: var(--info); font-size: 12px; font-weight: 700; text-transform: capitalize; }
-.ta-status.active, .ta-status.success { background: oklch(0.60 0.19 155 / 0.12); color: var(--success); }
-.ta-status.disabled, .ta-status.revoked, .ta-status.failed { background: oklch(0.57 0.22 27 / 0.08); color: var(--destructive); }
-.ta-status.pending_invite { background: oklch(0.75 0.18 80 / 0.12); color: var(--warning); }
+.ta-status { display: inline-flex; width: fit-content; padding: 4px 8px; border-radius: 999px; background: color-mix(in srgb, var(--info), transparent 90%); color: var(--info); font-size: 12px; font-weight: 700; text-transform: capitalize; }
+.ta-status.active, .ta-status.success { background: color-mix(in srgb, var(--success), transparent 88%); color: var(--success); }
+.ta-status.disabled, .ta-status.revoked, .ta-status.failed { background: color-mix(in srgb, var(--destructive), transparent 92%); color: var(--destructive); }
+.ta-status.pending_invite { background: color-mix(in srgb, var(--warning), transparent 88%); color: var(--warning); }
 .ta-email-state { display: block; width: fit-content; margin-top: 5px; color: var(--muted-foreground); font-size: 11px; font-weight: 600; }
 .ta-email-state.verified { color: var(--success); }
 .ta-email-state.pending { color: var(--warning); }
 .ta-role-list { display: grid; }
 .ta-role-row { min-height: 82px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
 .ta-role-row:last-child { border-bottom: 0; }
-.ta-role-icon { width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 auto; border-radius: var(--radius-sm); color: var(--primary); background: oklch(0.46 0.17 155 / 0.1); }
+.ta-role-icon { width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 auto; border-radius: var(--radius-sm); color: var(--primary); background: color-mix(in srgb, var(--primary), transparent 90%); }
 .ta-role-copy { min-width: 180px; flex: 1; }
 .ta-role-copy > div { display: flex; align-items: center; gap: 8px; }
 .ta-role-copy p { margin-top: 4px; font-size: 13px; }

@@ -57,7 +57,7 @@
 
 .incomplete-products-page .stat-badge {
   padding: 0.75rem 1.5rem;
-  background: oklch(0.75 0.18 80 / 0.08);
+  background: color-mix(in srgb, var(--warning), transparent 92%);
   border: 2px solid var(--warning);
   border-radius: var(--radius-xl);
   font-weight: 600;
@@ -150,19 +150,19 @@
 }
 
 .incomplete-products-page .completion-badge[data-level="high"] {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   color: var(--success);
   border: 2px solid var(--success);
 }
 
 .incomplete-products-page .completion-badge[data-level="medium"] {
-  background: oklch(0.75 0.18 80 / 0.15);
+  background: color-mix(in srgb, var(--warning), transparent 85%);
   color: var(--warning);
   border: 2px solid var(--warning);
 }
 
 .incomplete-products-page .completion-badge[data-level="low"] {
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   color: var(--destructive);
   border: 2px solid var(--destructive);
 }
@@ -221,7 +221,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.4rem 0.75rem;
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   border: 1px solid var(--destructive);
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
@@ -235,7 +235,7 @@
 .incomplete-products-page .all-complete {
   margin: 0;
   padding: 0.5rem 1rem;
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   border: 1px solid var(--success);
   border-radius: var(--radius-sm);
   color: var(--success);

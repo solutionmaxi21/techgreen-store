@@ -16,9 +16,9 @@
 }
 
 .dark .card {
-  background: oklch(0.175 0.024 160 / 0.6);
+  background: color-mix(in srgb, var(--card), transparent 40%);
   backdrop-filter: blur(12px);
-  border-color: oklch(0.24 0.025 160 / 0.6);
+  border-color: color-mix(in srgb, var(--border), transparent 40%);
 }
 
 .card:hover {
@@ -164,7 +164,7 @@
   justify-content: center;
   font-weight: 600;
   font-size: 0.875rem;
-  background: linear-gradient(135deg, var(--primary), oklch(0.55 0.18 155));
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--success), transparent 45%));
   color: var(--primary-foreground);
   flex-shrink: 0;
   transition: transform var(--duration-fast) var(--ease-in-out);
@@ -191,7 +191,7 @@
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary), oklch(0.55 0.18 155));
+  background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--success), transparent 45%));
   transition: width 600ms var(--ease-out);
   border-radius: 9999px;
   position: relative;
@@ -201,7 +201,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.2), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, white, transparent 80%), transparent);
   animation: progress-shimmer 2s infinite;
 }
 
@@ -211,15 +211,15 @@
 }
 
 .progress-bar.success {
-  background: linear-gradient(90deg, var(--success), oklch(0.65 0.18 155));
+  background: linear-gradient(90deg, var(--success), color-mix(in srgb, var(--success), transparent 35%));
 }
 
 .progress-bar.warning {
-  background: linear-gradient(90deg, var(--warning), oklch(0.75 0.16 80));
+  background: linear-gradient(90deg, var(--warning), var(--warning));
 }
 
 .progress-bar.danger {
-  background: linear-gradient(90deg, var(--destructive), oklch(0.63 0.22 27));
+  background: linear-gradient(90deg, var(--destructive), color-mix(in srgb, var(--destructive), transparent 37%));
 }
 
 /* ============================================

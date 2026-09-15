@@ -15,7 +15,7 @@
 
 .rich-text-editor:focus-within {
   border-color: var(--info);
-  box-shadow: 0 0 0 3px oklch(0.55 0.15 240 / 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--info), transparent 90%);
 }
 
 /* Toolbar Styling */

@@ -41,7 +41,7 @@
   background: var(--info);
   border-color: var(--info);
   color: var(--card);
-  box-shadow: 0 0 0 4px oklch(0.55 0.15 240 / 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .step.completed .step-circle {
@@ -156,11 +156,11 @@
   }
 
   .step.current {
-    background: oklch(0.55 0.15 240 / 0.1);
+    background: color-mix(in srgb, var(--info), transparent 90%);
   }
 
   .step.completed {
-    background: oklch(0.60 0.19 155 / 0.12);
+    background: color-mix(in srgb, var(--success), transparent 88%);
   }
 
   .step-info {

@@ -106,7 +106,7 @@
 }
 
 .product-details-page .p-meta .status-badge.success {
-    background: oklch(0.60 0.19 155 / 0.12);
+    background: color-mix(in srgb, var(--success), transparent 88%);
     color: var(--success);
     border: 1px solid var(--success);
 }
@@ -118,7 +118,7 @@
 }
 
 .product-details-page .p-meta .status-badge.warning {
-    background: oklch(0.75 0.18 80 / 0.15);
+    background: color-mix(in srgb, var(--warning), transparent 85%);
     color: var(--warning);
     border: 1px solid var(--warning);
 }
@@ -191,7 +191,7 @@
 }
 
 .product-details-page .btn-secondary:hover {
-    background: oklch(0.57 0.22 27 / 0.08);
+    background: color-mix(in srgb, var(--destructive), transparent 92%);
     border-color: var(--destructive);
 }
 

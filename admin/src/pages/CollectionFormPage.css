@@ -674,7 +674,7 @@ input.product-search-input {
 }
 
 .dark .image-upload-zone:hover, .dark .image-upload-zone.drag-over {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
 }
 
 .add-benefit-btn {
@@ -688,7 +688,7 @@ input.product-search-input {
 }
 
 .dark .add-benefit-btn:hover {
-  background-color: oklch(0.55 0.15 240 / 0.1);
+  background-color: color-mix(in srgb, var(--info), transparent 90%);
 }
 
 /* RTL Support */

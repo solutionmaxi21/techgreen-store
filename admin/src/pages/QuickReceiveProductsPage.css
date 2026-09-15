@@ -76,19 +76,19 @@
 }
 
 .summary-card.success {
-  background: oklch(0.60 0.19 155 / 0.12);
+  background: color-mix(in srgb, var(--success), transparent 88%);
   border-color: var(--success);
   color: var(--success);
 }
 
 .summary-card.info {
-  background: oklch(0.55 0.15 240 / 0.1);
+  background: color-mix(in srgb, var(--info), transparent 90%);
   border-color: var(--info);
   color: var(--info);
 }
 
 .summary-card.error {
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   border-color: var(--destructive);
   color: var(--destructive);
 }
@@ -108,7 +108,7 @@
 .failed-items {
   margin-top: 1.5rem;
   padding: 1rem;
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   border: 1px solid var(--destructive);
   border-radius: var(--radius-md);
 }
@@ -142,7 +142,7 @@
   align-items: start;
   gap: 1rem;
   padding: 1.5rem 2rem;
-  background: oklch(0.75 0.18 80 / 0.15);
+  background: color-mix(in srgb, var(--warning), transparent 85%);
   border-bottom: 1px solid var(--warning);
   color: var(--warning);
 }
@@ -261,7 +261,7 @@
 }
 
 .btn-remove:hover:not(:disabled) {
-  background: oklch(0.57 0.22 27 / 0.08);
+  background: color-mix(in srgb, var(--destructive), transparent 92%);
   border-color: var(--destructive);
   color: var(--destructive);
 }
