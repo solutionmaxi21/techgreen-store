@@ -8,6 +8,7 @@ import { authenticateToken, requireAdmin } from '../src/shared/middleware/auth.j
 import { validate } from '../src/shared/middleware/validate.js';
 import { asyncHandler } from '../src/shared/middleware/errorHandler.js';
 import { NotFoundError, ValidationError } from '../src/shared/errors/index.js';
+import db from '../src/db/postgres.js';
 import { ProductService } from '../src/services/index.js';
 import {
   validateBarcode,
@@ -196,6 +197,42 @@ router.get('/barcode-search', authenticateToken, requireAdmin, asyncHandler(asyn
     count: results.length,
     data: results
   });
+}));
+
+// ==========================================
+// GET /barcode-config - Get barcode configuration (admin)
+// ==========================================
+router.get('/barcode-config', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  res.json({
+    success: true,
+    data: {
+      prefix: 'MS',
+      defaultFormat: 'CODE128',
+      availableFormats: ['CODE128', 'EAN13', 'UPCA', 'CODE39'],
+      autoGenerate: true,
+      includePrice: false
+    }
+  });
+}));
+
+// ==========================================
+// GET /meta/categories - Get categories for product forms (admin)
+// ==========================================
+router.get('/meta/categories', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const categories = await db.query(
+    'SELECT id, name, slug FROM categories WHERE deleted_at IS NULL ORDER BY name'
+  );
+  res.json({ success: true, data: categories });
+}));
+
+// ==========================================
+// GET /meta/suppliers - Get suppliers for product forms (admin)
+// ==========================================
+router.get('/meta/suppliers', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const suppliers = await db.query(
+    'SELECT id, name FROM suppliers WHERE deleted_at IS NULL ORDER BY name'
+  );
+  res.json({ success: true, data: suppliers });
 }));
 
 export default router;

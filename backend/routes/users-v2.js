@@ -637,4 +637,67 @@ router.get('/stats/summary', authenticateToken, requireAdmin, asyncHandler(async
   });
 }));
 
+// ==========================================
+// PATCH /:id/role - Update user role (admin)
+// ==========================================
+router.patch('/:id/role', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { role } = req.body;
+
+  const validRoles = ['CUSTOMER', 'STAFF', 'ADMIN'];
+  if (!role || !validRoles.includes(role)) {
+    return res.status(400).json({
+      success: false,
+      error: { code: 'VALIDATION_ERROR', message: `Role must be one of: ${validRoles.join(', ')}` }
+    });
+  }
+
+  const user = await db.queryOne('SELECT id, role FROM users WHERE id = $1 AND deleted_at IS NULL', [userId]);
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: { code: 'NOT_FOUND', message: 'User not found' }
+    });
+  }
+
+  await db.query('UPDATE users SET role = $1, updated_at = NOW() WHERE id = $2', [role, userId]);
+
+  res.json({
+    success: true,
+    data: { id: userId, role },
+    message: 'User role updated successfully'
+  });
+}));
+
+// ==========================================
+// PATCH /:id/status - Toggle user active status (admin)
+// ==========================================
+router.patch('/:id/status', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { is_active } = req.body;
+
+  if (typeof is_active !== 'boolean') {
+    return res.status(400).json({
+      success: false,
+      error: { code: 'VALIDATION_ERROR', message: 'is_active must be a boolean' }
+    });
+  }
+
+  const user = await db.queryOne('SELECT id, is_active FROM users WHERE id = $1 AND deleted_at IS NULL', [userId]);
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: { code: 'NOT_FOUND', message: 'User not found' }
+    });
+  }
+
+  await db.query('UPDATE users SET is_active = $1, updated_at = NOW() WHERE id = $2', [is_active, userId]);
+
+  res.json({
+    success: true,
+    data: { id: userId, is_active },
+    message: is_active ? 'User activated' : 'User deactivated'
+  });
+}));
+
 export default router;

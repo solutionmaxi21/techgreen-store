@@ -222,6 +222,9 @@ app.post('/api/admin/access/roles', authenticateToken, requireAdmin, (req, res) 
 app.put('/api/admin/access/roles/:id', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, data: { id: req.params.id, ...req.body } });
 });
+app.patch('/api/admin/access/roles/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, ...req.body } });
+});
 app.delete('/api/admin/access/roles/:id', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, message: 'Role deleted' });
 });
@@ -237,6 +240,9 @@ app.post('/api/admin/access/members', authenticateToken, requireAdmin, (req, res
 app.put('/api/admin/access/members/:id', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, data: { id: req.params.id, ...req.body } });
 });
+app.patch('/api/admin/access/members/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, ...req.body } });
+});
 app.post('/api/admin/access/members/:id/invitations/resend', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, message: 'Invitation resent' });
 });
@@ -247,25 +253,56 @@ app.get('/api/admin/access/audit', authenticateToken, requireAdmin, (req, res) =
   res.json({ success: true, data: [], total: 0 });
 });
 
-// Newsletter stubs
-app.get('/api/admin/newsletter/subscribers', authenticateToken, requireAdmin, (req, res) => {
-  res.json({ success: true, data: [], total: 0 });
+// Admin access - unauthenticated routes (password reset, invitations)
+app.post('/api/admin-access/password-resets', (req, res) => {
+  res.json({ success: true, message: 'Password reset email sent' });
 });
-app.get('/api/admin/newsletter/subscribers/stats', authenticateToken, requireAdmin, (req, res) => {
+app.get('/api/admin-access/password-resets/:token', (req, res) => {
+  res.json({ success: true, data: { token: req.params.token, valid: true } });
+});
+app.post('/api/admin-access/password-resets/:token/complete', (req, res) => {
+  res.json({ success: true, message: 'Password reset complete' });
+});
+app.get('/api/admin-access/invitations/:token', (req, res) => {
+  res.json({ success: true, data: { token: req.params.token, valid: true } });
+});
+app.post('/api/admin-access/invitations/:token/accept', (req, res) => {
+  res.json({ success: true, message: 'Invitation accepted' });
+});
+
+// Metadata collections alias (admin panel calls /admin/metadata/collections)
+app.get('/api/admin/metadata/collections', authenticateToken, requireAdmin, async (req, res) => {
+  try {
+    const collections = await db.query(
+      'SELECT id, name, slug, description, image_url FROM collections WHERE deleted_at IS NULL ORDER BY name'
+    );
+    res.json({ success: true, data: collections });
+  } catch (err) {
+    res.json({ success: true, data: [] });
+  }
+});
+
+// Newsletter stubs (both singular and plural paths for compatibility)
+const newsletterStub = (req, res) => {
+  res.json({ success: true, data: [], total: 0 });
+};
+const newsletterStatsStub = (req, res) => {
   res.json({ success: true, data: { total: 0, active: 0, unsubscribed: 0 } });
-});
-app.get('/api/admin/newsletter/broadcasts', authenticateToken, requireAdmin, (req, res) => {
-  res.json({ success: true, data: [], total: 0 });
-});
-app.get('/api/admin/newsletter/broadcasts/trash', authenticateToken, requireAdmin, (req, res) => {
-  res.json({ success: true, data: [], total: 0 });
-});
-app.post('/api/admin/newsletter/broadcasts', authenticateToken, requireAdmin, (req, res) => {
+};
+const newsletterCreateStub = (req, res) => {
   res.json({ success: true, data: { id: 1, ...req.body, status: 'sent' } });
-});
+};
+
+app.get('/api/admin/newsletter/subscribers', authenticateToken, requireAdmin, newsletterStub);
+app.get('/api/admin/newsletter/subscribers/stats', authenticateToken, requireAdmin, newsletterStatsStub);
 app.delete('/api/admin/newsletter/subscribers/:id', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, message: 'Subscriber deleted' });
 });
+
+// Broadcasts — plural (apiService.js)
+app.get('/api/admin/newsletter/broadcasts', authenticateToken, requireAdmin, newsletterStub);
+app.get('/api/admin/newsletter/broadcasts/trash', authenticateToken, requireAdmin, newsletterStub);
+app.post('/api/admin/newsletter/broadcasts', authenticateToken, requireAdmin, newsletterCreateStub);
 app.delete('/api/admin/newsletter/broadcasts/:id', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, message: 'Broadcast deleted' });
 });
@@ -273,6 +310,28 @@ app.post('/api/admin/newsletter/broadcasts/:id/restore', authenticateToken, requ
   res.json({ success: true, message: 'Broadcast restored' });
 });
 app.delete('/api/admin/newsletter/broadcasts/:id/hard', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Broadcast permanently deleted' });
+});
+
+// Broadcasts — singular (NewsletterBroadcastPage.jsx)
+app.get('/api/admin/newsletter/broadcast', authenticateToken, requireAdmin, newsletterStub);
+app.post('/api/admin/newsletter/broadcast', authenticateToken, requireAdmin, newsletterCreateStub);
+app.get('/api/admin/newsletter/broadcast/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, subject: '', content: '', status: 'draft' } });
+});
+app.put('/api/admin/newsletter/broadcast/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, data: { id: req.params.id, ...req.body } });
+});
+app.delete('/api/admin/newsletter/broadcast/:id', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Broadcast deleted' });
+});
+app.get('/api/admin/newsletter/broadcast/:id/logs', authenticateToken, requireAdmin, newsletterStub);
+
+// Newsletter trash sub-routes
+app.put('/api/admin/newsletter/broadcasts/trash/:id/restore', authenticateToken, requireAdmin, (req, res) => {
+  res.json({ success: true, message: 'Broadcast restored' });
+});
+app.delete('/api/admin/newsletter/broadcasts/trash/:id/hard-delete', authenticateToken, requireAdmin, (req, res) => {
   res.json({ success: true, message: 'Broadcast permanently deleted' });
 });
 

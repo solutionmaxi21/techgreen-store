@@ -2473,4 +2473,34 @@ router.post('/polling/poll-order', authenticateToken, requireAdmin, asyncHandler
   });
 }));
 
+// ==========================================
+// GET /export - Export orders as CSV (admin)
+// ==========================================
+router.get('/export', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const orders = await db.query(`
+    SELECT o.id, o.user_id, o.total_amount, o.subtotal, o.tax_amount,
+           o.shipping_cost, o.discount_amount, o.payment_status, o.current_status,
+           o.shipping_address, o.billing_address, o.notes,
+           o.created_at, o.updated_at
+    FROM orders o
+    WHERE o.deleted_at IS NULL
+    ORDER BY o.created_at DESC
+  `);
+
+  const headers = ['ID', 'User ID', 'Total', 'Subtotal', 'Tax', 'Shipping', 'Discount', 'Payment Status', 'Status', 'Notes', 'Created', 'Updated'];
+  const rows = orders.map(o => [
+    o.id, o.user_id, o.total_amount, o.subtotal, o.tax_amount,
+    o.shipping_cost, o.discount_amount || 0, o.payment_status, o.current_status,
+    `"${(o.notes || '').replace(/"/g, '""')}"`,
+    o.created_at ? new Date(o.created_at).toISOString() : '',
+    o.updated_at ? new Date(o.updated_at).toISOString() : ''
+  ]);
+
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+
+  res.setHeader('Content-Type', 'text/csv');
+  res.setHeader('Content-Disposition', 'attachment; filename=orders-export.csv');
+  res.send(csv);
+}));
+
 export default router;

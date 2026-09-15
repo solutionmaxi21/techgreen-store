@@ -451,4 +451,96 @@ router.post('/restore', authenticateToken, requireAdmin, sensitiveLimiter, async
   }
 });
 
+// ==========================================
+// POST /verify-password - Admin re-auth before destructive ops
+// ==========================================
+router.post('/verify-password', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const { password } = req.body;
+
+  if (!password) {
+    return res.status(400).json({
+      success: false,
+      message: 'Password is required'
+    });
+  }
+
+  const user = await db.queryOne(
+    'SELECT id, password_hash FROM users WHERE id = $1',
+    [req.user.userId]
+  );
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: 'User not found'
+    });
+  }
+
+  const bcrypt = await import('bcrypt');
+  const isValid = await bcrypt.default.compare(password, user.password_hash);
+
+  if (!isValid) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid password'
+    });
+  }
+
+  res.json({
+    success: true,
+    message: 'Password verified'
+  });
+}));
+
+// ==========================================
+// POST /tables/truncate - Truncate a specific table (admin only)
+// ==========================================
+router.post('/tables/truncate', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const { tableName, confirm } = req.body;
+
+  if (!tableName) {
+    return res.status(400).json({
+      success: false,
+      message: 'Table name is required'
+    });
+  }
+
+  if (confirm !== true) {
+    return res.status(400).json({
+      success: false,
+      message: 'You must set confirm: true to truncate a table'
+    });
+  }
+
+  // Whitelist of tables that can be truncated
+  const allowedTables = [
+    'product_images', 'product_variants', 'product_attributes',
+    'order_items', 'order_history', 'stock_movements',
+    'notifications', 'notification_preferences',
+    'purchase_orders', 'purchase_order_items',
+    'favorites', 'refresh_tokens'
+  ];
+
+  if (!allowedTables.includes(tableName)) {
+    return res.status(403).json({
+      success: false,
+      message: `Cannot truncate table '${tableName}'. Not in allowed list.`
+    });
+  }
+
+  try {
+    await db.query(`TRUNCATE TABLE ${tableName} RESTART IDENTITY CASCADE`);
+    res.json({
+      success: true,
+      message: `Table '${tableName}' truncated successfully`
+    });
+  } catch (error) {
+    console.error('[DB] Truncate error:', error);
+    res.status(500).json({
+      success: false,
+      message: `Failed to truncate table '${tableName}': ${error.message}`
+    });
+  }
+}));
+
 export default router;

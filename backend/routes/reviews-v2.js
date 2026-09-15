@@ -642,4 +642,29 @@ router.get('/stats/summary', authenticateToken, requireAdmin, asyncHandler(async
   });
 }));
 
+// ==========================================
+// GET single review (admin)
+// ==========================================
+router.get('/:id', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const reviewId = parseInt(req.params.id);
+
+  const review = await db.queryOne(`
+    SELECT r.*, u.email as user_email, u.first_name, u.last_name,
+           p.name as product_name, p.slug as product_slug
+    FROM reviews r
+    LEFT JOIN users u ON r.user_id = u.id
+    LEFT JOIN products p ON r.product_id = p.id
+    WHERE r.id = $1 AND r.deleted_at IS NULL
+  `, [reviewId]);
+
+  if (!review) {
+    return res.status(404).json({
+      success: false,
+      error: { code: 'NOT_FOUND', message: 'Review not found' }
+    });
+  }
+
+  res.json({ success: true, data: review });
+}));
+
 export default router;
