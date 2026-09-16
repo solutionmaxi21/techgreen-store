@@ -31,11 +31,7 @@ const nextConfig = {
     }
   },
 
-  // ✅ SECURITY: Remove X-Powered-By header
-  poweredByHeader: false,
-
-  // ✅ SECURITY: Add security headers
-  async headers() {
+  images: {
     unoptimized: false,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],

@@ -1,15 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-/**
- * Keep-alive endpoint for Render backend
- * Prevents the free tier service from sleeping due to inactivity.
- *
- * Setup: Add to vercel.json as a cron job, or use an external service
- * like cron-job.org / UptimeRobot to ping this every 10 minutes.
- *
- * Vercel cron config in vercel.json:
- * { "crons": [{ "path": "/api/cron/keep-alive", "schedule": "*/10 * * * *" }] }
- */
+// Keep-alive endpoint for Render backend
+// Prevents the free tier service from sleeping due to inactivity.
+// Setup: Add to vercel.json as a cron job (schedule: "*/10 * * * *")
 export async function GET(request: NextRequest) {
   // Verify this is a cron request (Vercel sends x-vercel-cron header)
   const isVercelCron = request.headers.get('x-vercel-cron') === '1'
