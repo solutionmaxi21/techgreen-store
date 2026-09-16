@@ -395,8 +395,11 @@ async function startServer() {
     await CacheManager.warmUp();
     logger.info('✅ Cache warmed up successfully');
 
-    // Start Express server - Listen on localhost for local dev
-    const server = app.listen(PORT, '127.0.0.1', () => {
+    // Start Express server
+    // Listen on 0.0.0.0 in production (required by Render/Fly.io/etc.)
+    // Listen on 127.0.0.1 in development for local security
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+    const server = app.listen(PORT, host, () => {
       logger.info({
         port: PORT,
         env: process.env.NODE_ENV || 'development',
