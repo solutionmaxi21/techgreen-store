@@ -63,7 +63,9 @@ export const csrfTokenSetter = (req, res, next) => {
     res.cookie(CSRF_COOKIE_NAME, token, {
       httpOnly: false, // Must be readable by JavaScript
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      // 'none' required for cross-origin: storefront (vercel.app) → backend (onrender.com)
+      // CSRF double-submit pattern protects against cross-site attacks
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     });
