@@ -36,8 +36,11 @@ export const helmetConfig = helmet({
 const getAllowedOrigins = () => {
   const origins = process.env.ALLOWED_ORIGINS;
   if (!origins) {
-    // Default allowed origins for development
+    // Default allowed origins — production Vercel deployments + development
     return [
+      'https://techgreen-store.vercel.app',
+      'https://admin-panel-one-lilac.vercel.app',
+      'https://techgreen.vercel.app',
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:5173', // Vite default port (admin)

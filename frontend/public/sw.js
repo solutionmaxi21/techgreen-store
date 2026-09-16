@@ -106,6 +106,34 @@ self.addEventListener('fetch', (event) => {
   if (request.url.includes('/api/')) {
     event.respondWith(
       fetch(request)
+        .then((response) => {
+          // If server returns 503, retry once after a delay (Render waking up)
+          if (response.status === 503) {
+            console.log('[SW] API returned 503, retrying in 3s:', request.url);
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                fetch(request)
+                  .then((retryResponse) => {
+                    const headers = new Headers(retryResponse.headers);
+                    headers.set('X-Server-Waking', 'true');
+                    resolve(new Response(retryResponse.body, {
+                      status: retryResponse.status,
+                      statusText: retryResponse.statusText,
+                      headers,
+                    }));
+                  })
+                  .catch(() => {
+                    console.log('[SW] API retry also failed:', request.url);
+                    resolve(new Response(
+                      JSON.stringify({ error: 'Server is starting up. Please try again in a moment.' }),
+                      { status: 503, headers: { 'Content-Type': 'application/json' } }
+                    ));
+                  });
+              }, 3000);
+            });
+          }
+          return response;
+        })
         .catch(() => {
           console.log('[SW] API request failed (offline):', request.url);
           return new Response(

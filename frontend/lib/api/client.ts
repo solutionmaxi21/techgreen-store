@@ -227,10 +227,15 @@ export function getLastSuccessfulAuth() {
   return lastSuccessfulAuth
 }
 
+// Retry config for server wake-up (Render free tier sleeps after inactivity)
+const WAKEUP_RETRIES = 2
+const WAKEUP_RETRY_DELAY = 3000 // 3s between retries
+
 async function fetchApi<T>(
   endpoint: string,
   options: RequestInit = {},
-  retryOnUnauthorized = true
+  retryOnUnauthorized = true,
+  retryCount = 0
 ): Promise<ApiResponse<T>> {
 
   // Normalize headers
@@ -340,11 +345,24 @@ async function fetchApi<T>(
     }
 
     if (!response.ok) {
+      // RETRY: When Render is waking up, it returns 503 — retry with backoff
+      if (response.status === 503 && retryCount < WAKEUP_RETRIES) {
+        const delay = WAKEUP_RETRY_DELAY * (retryCount + 1)
+        apiLog(`[API] Server returned 503 - retrying ${endpoint} in ${delay}ms (attempt ${retryCount + 1}/${WAKEUP_RETRIES})`)
+        await new Promise(resolve => setTimeout(resolve, delay))
+        return fetchApi<T>(endpoint, options, retryOnUnauthorized, retryCount + 1)
+      }
+
       // Extract error info from various response shapes
       // Support both { error: { message, code } } and { error: "string" } and { message: "string" }
       let errorMessage = 'An error occurred'
       let errorCode: string | undefined
       let errorDetails: any
+
+      if (response.status === 503) {
+        errorMessage = 'Server is starting up. Please try again in a moment.'
+        errorCode = 'SERVER_STARTING'
+      }
 
       if (data) {
         if (typeof data.error === 'string') {
@@ -392,12 +410,24 @@ async function fetchApi<T>(
     const isNetworkError = error instanceof TypeError &&
       (error.message.includes('fetch') ||
         error.message.includes('network') ||
-        error.message.includes('Failed to fetch'))
+        error.message.includes('Failed to fetch') ||
+        error.message.includes('CORS'))
+
+    // RETRY: When Render free tier is waking up, requests fail with network/CORS errors
+    // Retry up to WAKEUP_RETRIES times with exponential backoff
+    if (isNetworkError && retryCount < WAKEUP_RETRIES) {
+      const delay = WAKEUP_RETRY_DELAY * (retryCount + 1)
+      apiLog(`[API] Server may be waking up - retrying ${endpoint} in ${delay}ms (attempt ${retryCount + 1}/${WAKEUP_RETRIES})`)
+      await new Promise(resolve => setTimeout(resolve, delay))
+      return fetchApi<T>(endpoint, options, retryOnUnauthorized, retryCount + 1)
+    }
 
     return {
       error: {
         message: isNetworkError
-          ? 'Connection failed. Please check your internet and try again.'
+          ? retryCount >= WAKEUP_RETRIES
+            ? 'Server is starting up. Please try again in a moment.'
+            : 'Connection failed. Please check your internet and try again.'
           : (error instanceof Error ? error.message : 'Network error'),
         status: 0,
         code: isNetworkError ? ERROR_CODES.NETWORK_ERROR : undefined,
