@@ -7,6 +7,12 @@
       "schedule": "*/10 * * * *"
     }
   ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://techgreen-store.onrender.com/api/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/sw.js",
