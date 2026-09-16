@@ -12,25 +12,6 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // ✅ API PROXY: Route /api/* requests through Next.js to avoid cross-origin cookie issues
-  // This makes cookies first-party (same domain), fixing auth on modern browsers.
-  // afterFiles phase: Next.js checks filesystem routes first (e.g. /api/cron/*),
-  // then falls through to these rewrites for non-matching /api/* paths.
-  async rewrites() {
-    // Backend URL for proxying — use dedicated env var to avoid circular reference
-    const backendBase = process.env.NEXT_BACKEND_URL || 'https://techgreen-store.onrender.com'
-    // Only proxy when the backend is a full URL (cross-origin)
-    if (!backendBase.startsWith('http')) return []
-    return {
-      afterFiles: [
-        {
-          source: '/api/:path*',
-          destination: `${backendBase}/api/:path*`,
-        },
-      ],
-    }
-  },
-
   images: {
     unoptimized: false,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
