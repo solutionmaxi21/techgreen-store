@@ -17,8 +17,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const BACKEND_URL = process.env.NEXT_BACKEND_URL || 'https://techgreen-store.onrender.com'
 
-// Runtime rewrites needed — the function must be exported
-// We use rewrites() to proxy all methods (GET, POST, PUT, DELETE, PATCH)
 async function proxyRequest(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
@@ -28,7 +26,6 @@ async function proxyRequest(
 
   // Build the backend URL
   const backendUrl = new URL(pathname, BACKEND_URL)
-  // Preserve query string from the original request
   backendUrl.search = request.nextUrl.search
 
   // Build headers to forward
@@ -51,24 +48,36 @@ async function proxyRequest(
     method: request.method,
     headers,
     body,
-    redirect: 'manual', // Don't follow redirects — pass them through
+    redirect: 'manual',
   })
-
-  // Build the response to send back to the client
-  const responseHeaders = new Headers(response.headers)
-
-  // Remove problematic headers from the backend response
-  responseHeaders.delete('transfer-encoding')
-  responseHeaders.delete('connection')
 
   // Read the response body
   const responseBody = await response.arrayBuffer()
 
-  return new NextResponse(responseBody, {
+  // CRITICAL: Forward Set-Cookie headers individually.
+  // The standard Headers API combines multiple Set-Cookie values with commas,
+  // which breaks cookie parsing. getSetCookie() returns them as separate strings.
+  const setCookies = response.headers.getSetCookie?.() ?? []
+  const nextResponse = new NextResponse(responseBody, {
     status: response.status,
     statusText: response.statusText,
-    headers: responseHeaders,
   })
+
+  // Copy all headers EXCEPT Set-Cookie (we handle that separately)
+  response.headers.forEach((value, key) => {
+    if (key.toLowerCase() !== 'set-cookie') {
+      // Skip problematic headers
+      if (key.toLowerCase() === 'transfer-encoding' || key.toLowerCase() === 'connection') return
+      nextResponse.headers.set(key, value)
+    }
+  })
+
+  // Add each Set-Cookie header individually so the browser can parse them
+  for (const cookie of setCookies) {
+    nextResponse.headers.append('Set-Cookie', cookie)
+  }
+
+  return nextResponse
 }
 
 // Export the proxy for all HTTP methods
