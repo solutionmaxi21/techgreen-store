@@ -94,7 +94,9 @@ export const corsConfig = cors({
       console.warn('[CORS] Blocked origin:', origin);
     }
 
-    callback(new Error(`Origin ${origin} not allowed by CORS`));
+    // Return false instead of throwing — Express cors middleware
+    // handles this by omitting CORS headers (browser blocks the response)
+    callback(null, false);
   },
   credentials: true, // Allow cookies and authorization headers
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
