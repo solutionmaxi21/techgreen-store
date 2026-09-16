@@ -52,8 +52,8 @@ const DashboardPage = () => {
 
         setStats({ ...statsData, recentOrders: orders, topProducts: products, categoryData: categories });
 
-        // Only show error if all fetches failed
-        if (!statsData.totalRevenue && !orders.length && !products.length && !categories.length) {
+        // Only show error if the main stats endpoint itself failed
+        if (mainStats.status === 'rejected') {
           setLoadError(new Error('Unable to load dashboard data'));
         }
       } catch (error) {
