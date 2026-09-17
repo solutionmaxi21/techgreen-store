@@ -7,6 +7,7 @@ import { NotFoundError, ValidationError, ConflictError } from '../src/shared/err
 import { generateBilingualSlug } from '../src/shared/utils/index.js';
 import { categoryUpload } from '../src/shared/middleware/categoryUpload.js';
 import CacheManager from '../src/services/cacheManager.js';
+import { sanitizeBilingual, stripHtml } from '../src/shared/utils/sanitize.js';
 import db from '../src/db/postgres.js';
 
 const router = express.Router();
@@ -281,6 +282,11 @@ router.get('/:id', validate(getCategorySchema), asyncHandler(async (req, res) =>
 
 // POST /api/categories - Create new category
 router.post('/', authenticateToken, requireAdmin, validate(createCategorySchema), asyncHandler(async (req, res) => {
+  // Sanitize bilingual fields to prevent stored XSS
+  if (req.body.name && typeof req.body.name === 'object') req.body.name = sanitizeBilingual(req.body.name);
+  if (req.body.category_name && typeof req.body.category_name === 'object') req.body.category_name = sanitizeBilingual(req.body.category_name);
+  if (req.body.description && typeof req.body.description === 'object') req.body.description = sanitizeBilingual(req.body.description);
+
   const {
     name,
     category_name,

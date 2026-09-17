@@ -10,6 +10,7 @@ import {
   updateSupplierSchema,
   deleteSupplierSchema
 } from '../src/shared/validation/index.js';
+import { stripHtml } from '../src/shared/utils/sanitize.js';
 import db from '../src/db/postgres.js';
 
 const router = express.Router();
@@ -122,6 +123,9 @@ router.get('/:id', authenticateToken, requireAdmin, validate(getSupplierSchema),
 
 // POST /api/suppliers - Create new supplier
 router.post('/', authenticateToken, requireAdmin, validate(createSupplierSchema), asyncHandler(async (req, res) => {
+  // Sanitize text fields to prevent stored XSS
+  if (req.body.name) req.body.name = stripHtml(req.body.name);
+  if (req.body.address) req.body.address = stripHtml(req.body.address);
   const { name, contact_email, contact_phone, address } = req.body;
 
   // Check for duplicate name

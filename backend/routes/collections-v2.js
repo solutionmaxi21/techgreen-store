@@ -14,6 +14,7 @@ import { asyncHandler } from '../src/shared/middleware/errorHandler.js';
 import { NotFoundError, ValidationError } from '../src/shared/errors/index.js';
 import { generateBilingualSlug } from '../src/shared/utils/index.js';
 import { categoryUpload } from '../src/shared/middleware/categoryUpload.js';
+import { sanitizeBilingual } from '../src/shared/utils/sanitize.js';
 import db from '../src/db/postgres.js';
 
 const router = express.Router();
@@ -247,6 +248,12 @@ router.post('/upload', authenticateToken, requireAdmin, ...categoryUpload.single
 
 // POST /api/collections
 router.post('/', authenticateToken, requireAdmin, validate(createCollectionSchema), asyncHandler(async (req, res) => {
+  // Sanitize bilingual fields to prevent stored XSS
+  if (req.body.name && typeof req.body.name === 'object') req.body.name = sanitizeBilingual(req.body.name);
+  if (req.body.collection_name && typeof req.body.collection_name === 'object') req.body.collection_name = sanitizeBilingual(req.body.collection_name);
+  if (req.body.description && typeof req.body.description === 'object') req.body.description = sanitizeBilingual(req.body.description);
+  if (req.body.tagline && typeof req.body.tagline === 'object') req.body.tagline = sanitizeBilingual(req.body.tagline);
+
   const {
     name,
     collection_name,

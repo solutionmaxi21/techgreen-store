@@ -17,6 +17,7 @@ import {
 import { asyncHandler } from '../src/shared/middleware/errorHandler.js';
 import { NotFoundError, ValidationError, ConflictError } from '../src/shared/errors/index.js';
 import { ProductService } from '../src/services/index.js';
+import { sanitizeProductData, stripHtml } from '../src/shared/utils/sanitize.js';
 import db from '../src/db/postgres.js';
 
 const router = express.Router();
@@ -291,7 +292,8 @@ router.delete('/:id/hard', authenticateToken, requireAdmin, validate(getProductS
  * Requires admin authentication
  */
 router.post('/', authenticateToken, requireAdmin, validate(createProductSchema), asyncHandler(async (req, res) => {
-  const productData = req.body;
+  // Sanitize input to prevent stored XSS
+  const productData = sanitizeProductData(req.body);
   const userId = req.user.userId;
 
   // Validate SKU doesn't exist
@@ -360,7 +362,8 @@ router.post('/', authenticateToken, requireAdmin, validate(createProductSchema),
  */
 router.put('/:id', authenticateToken, requireAdmin, validate(updateProductSchema), asyncHandler(async (req, res) => {
   const productId = parseInt(req.params.id);
-  const updates = req.body;
+  // Sanitize input to prevent stored XSS
+  const updates = sanitizeProductData(req.body);
   const userId = req.user.userId;
 
   // If SKU is being updated, check it doesn't exist

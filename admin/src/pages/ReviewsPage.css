@@ -138,6 +138,7 @@
 .filters-row {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .filter-group {
@@ -418,4 +419,8 @@
   background: var(--background-subtle);
   border-color: var(--border);
   color: var(--foreground-subtle);
+}
+
+@media (max-width: 768px) {
+  .reviews-page { padding: 16px; }
 }

@@ -259,3 +259,7 @@
   background: var(--muted);
   color: var(--muted-foreground);
 }
+
+@media (max-width: 768px) {
+  .users-list-page { padding: 16px; }
+}

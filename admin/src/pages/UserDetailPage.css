@@ -433,3 +433,8 @@
   background: var(--info);
   color: var(--primary-foreground);
 }
+
+@media (max-width: 768px) {
+  .user-content { grid-template-columns: 1fr; }
+  .user-detail-page { padding: 16px; }
+}
