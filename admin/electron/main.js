@@ -424,13 +424,11 @@ if (hasSingleInstanceLock) app.whenReady().then(() => {
   ses.webRequest.onBeforeSendHeaders(
     { urls: [`${PRODUCTION_BACKEND_ORIGIN}/*`] },
     async (details, callback) => {
-      // Remove the non-standard origin from actual requests (GET/POST/etc)
-      // BUT keep Origin on OPTIONS preflight — the server CORS needs it to
-      // set the correct Access-Control-Allow-Origin header in the response.
-      if (details.method !== 'OPTIONS') {
-        delete details.requestHeaders['Origin']
-        delete details.requestHeaders['origin']
-      }
+      // KEEP the Origin header on ALL requests (including GET/POST).
+      // The backend CORS middleware reads Origin to return the correct
+      // Access-Control-Allow-Origin header. Deleting it causes the browser
+      // to receive a response WITHOUT CORS headers → CORS error.
+      // maxistore-app:// is explicitly allowed in backend security.js.
 
       // Skip auth endpoints - they rely on cookies, not Bearer tokens
       const url = details.url || ''

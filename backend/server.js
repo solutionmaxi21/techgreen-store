@@ -108,15 +108,20 @@ app.use('/api', csrfProtection);
 // Add CORS headers for image files to allow cross-origin loading
 app.use('/uploads', (req, res, next) => {
   // Allow cross-origin loading for product images (storefront + admin)
-  // Uses the same allowed origins as the main CORS config
+  // Matches the main CORS config logic in security.js
   const origin = req.headers.origin;
   if (origin) {
-    const allowedOrigins = process.env.ALLOWED_ORIGINS
-      ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
-      : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'];
-    if (allowedOrigins.includes(origin) ||
-        (process.env.NODE_ENV !== 'production' && (origin.includes('localhost') || origin.includes('127.0.0.1')))) {
+    // Always allow Electron admin panel (any maxistore-app:// origin)
+    if (origin.startsWith('maxistore-app://')) {
       res.header('Access-Control-Allow-Origin', origin);
+    } else {
+      const allowedOrigins = process.env.ALLOWED_ORIGINS
+        ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
+        : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'];
+      if (allowedOrigins.includes(origin) ||
+          (process.env.NODE_ENV !== 'production' && (origin.includes('localhost') || origin.includes('127.0.0.1')))) {
+        res.header('Access-Control-Allow-Origin', origin);
+      }
     }
   }
   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
