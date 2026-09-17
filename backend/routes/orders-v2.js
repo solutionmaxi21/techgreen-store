@@ -941,21 +941,22 @@ router.get('/needs-confirmation', authenticateToken, requireAdmin, asyncHandler(
 // ==========================================
 router.get('/export', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
   const orders = await db.queryMany(`
-    SELECT o.id, o.user_id, o.total_amount, o.subtotal, o.tax_amount,
+    SELECT o.id, o.user_id, o.order_number, o.total_amount, o.subtotal, o.tax_amount,
            o.shipping_cost, o.discount_amount, o.payment_status, o.current_status,
-           o.shipping_address, o.billing_address, o.notes,
-           o.created_at, o.updated_at
+           o.delivery_notes, o.admin_notes, o.tracking_number, o.carrier,
+           o.ordered_at, o.updated_at
     FROM orders o
     WHERE o.deleted_at IS NULL
-    ORDER BY o.created_at DESC
+    ORDER BY o.ordered_at DESC
   `);
 
-  const headers = ['ID', 'User ID', 'Total', 'Subtotal', 'Tax', 'Shipping', 'Discount', 'Payment Status', 'Status', 'Notes', 'Created', 'Updated'];
+  const headers = ['ID', 'User ID', 'Order #', 'Total', 'Subtotal', 'Tax', 'Shipping', 'Discount', 'Payment Status', 'Status', 'Notes', 'Tracking', 'Carrier', 'Created', 'Updated'];
   const rows = orders.map(o => [
-    o.id, o.user_id, o.total_amount, o.subtotal, o.tax_amount,
+    o.id, o.user_id, o.order_number || '', o.total_amount, o.subtotal, o.tax_amount,
     o.shipping_cost, o.discount_amount || 0, o.payment_status, o.current_status,
-    `"${(o.notes || '').replace(/"/g, '""')}"`,
-    o.created_at ? new Date(o.created_at).toISOString() : '',
+    `"${((o.delivery_notes || o.admin_notes || '')+'').replace(/"/g, '""')}"`,
+    o.tracking_number || '', o.carrier || '',
+    o.ordered_at ? new Date(o.ordered_at).toISOString() : '',
     o.updated_at ? new Date(o.updated_at).toISOString() : ''
   ]);
 
