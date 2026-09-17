@@ -6,6 +6,7 @@
 import db from '../db/postgres.js';
 import { ValidationError, NotFoundError, ConflictError } from '../shared/errors/index.js';
 import CacheManager from './cacheManager.js';
+import { generateSlug } from '../shared/utils/index.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -844,18 +845,20 @@ class ProductService {
   async createProduct(productData, userId) {
     return await db.transaction(async (client) => {
       // Insert product with all fields
+      const slug = generateSlug(productData.product_name) + '-' + productData.sku.toLowerCase();
       const productQuery = `
         INSERT INTO products (
-          product_name, brand, sku, category_id, supplier_id,
+          product_name, slug, brand, sku, category_id, supplier_id,
           current_price, sale_price, cost_price, wholesale_price, short_description,
           description, is_active, weight_kg, warranty_months, model_number,
           meta_title, meta_description, tags, is_featured, serial_number
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)
         RETURNING *
       `;
 
       const product = await client.query(productQuery, [
         productData.product_name,
+        slug,
         productData.brand,
         productData.sku,
         productData.category_id,

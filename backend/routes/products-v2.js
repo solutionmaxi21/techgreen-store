@@ -148,6 +148,52 @@ router.get('/storefront/:id', validate(getProductSchema), asyncHandler(async (re
 
 // ============ ADMIN ROUTES (Protected) ============
 
+// ==========================================
+// Named routes BEFORE /:id to avoid parameter shadowing
+// ==========================================
+
+/**
+ * GET /api/products/admin/stats
+ * Get product statistics for dashboard
+ * Requires admin authentication
+ */
+router.get('/admin/stats', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const stats = await ProductService.getProductStats();
+  res.json(stats);
+}));
+
+// ==========================================
+// GET /export - Export products as CSV (admin)
+// ==========================================
+router.get('/export', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const products = await db.query(`
+    SELECT p.id, p.product_name, p.slug, p.short_description, p.current_price, p.sale_price,
+           p.sku, p.barcode, COALESCE(s.quantity, 0) as stock_quantity, p.is_active, p.is_featured,
+           c.category_name, p.created_at, p.updated_at
+    FROM products p
+    LEFT JOIN categories c ON p.category_id = c.id
+    LEFT JOIN stock s ON s.product_id = p.id AND s.deleted_at IS NULL
+    WHERE p.deleted_at IS NULL
+    ORDER BY p.created_at DESC
+  `);
+
+  // Build CSV
+  const headers = ['ID', 'Name', 'Slug', 'SKU', 'Barcode', 'Price', 'Sale Price', 'Stock', 'Active', 'Featured', 'Category', 'Created', 'Updated'];
+  const rows = products.map(p => [
+    p.id, `"${(p.product_name || '').replace(/"/g, '""')}"`, p.slug, p.sku || '', p.barcode || '',
+    p.current_price, p.sale_price || '', p.stock_quantity, p.is_active, p.is_featured,
+    `"${(p.category_name || '').replace(/"/g, '""')}"`,
+    p.created_at ? new Date(p.created_at).toISOString() : '',
+    p.updated_at ? new Date(p.updated_at).toISOString() : ''
+  ]);
+
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+
+  res.setHeader('Content-Type', 'text/csv');
+  res.setHeader('Content-Disposition', 'attachment; filename=products-export.csv');
+  res.send(csv);
+}));
+
 /**
  * GET /api/products
  * Get all products for admin with filters
@@ -517,48 +563,6 @@ router.post('/bulk-receive', authenticateToken, requireAdmin, asyncHandler(async
     message: `Processed ${results.summary.total} products: ${results.summary.created} created, ${results.summary.updated} updated, ${results.summary.errors} errors`,
     results
   });
-}));
-
-/**
- * GET /api/products/stats
- * Get product statistics for dashboard
- * Requires admin authentication
- */
-router.get('/admin/stats', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
-  const stats = await ProductService.getProductStats();
-  res.json(stats);
-}));
-
-// ==========================================
-// GET /export - Export products as CSV (admin)
-// ==========================================
-router.get('/export', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
-  const products = await db.query(`
-    SELECT p.id, p.product_name, p.slug, p.short_description, p.current_price, p.sale_price,
-           p.sku, p.barcode, COALESCE(s.quantity, 0) as stock_quantity, p.is_active, p.is_featured,
-           c.category_name, p.created_at, p.updated_at
-    FROM products p
-    LEFT JOIN categories c ON p.category_id = c.id
-    LEFT JOIN stock s ON s.product_id = p.id AND s.deleted_at IS NULL
-    WHERE p.deleted_at IS NULL
-    ORDER BY p.created_at DESC
-  `);
-
-  // Build CSV
-  const headers = ['ID', 'Name', 'Slug', 'SKU', 'Barcode', 'Price', 'Sale Price', 'Stock', 'Active', 'Featured', 'Category', 'Created', 'Updated'];
-  const rows = products.map(p => [
-    p.id, `"${(p.product_name || '').replace(/"/g, '""')}"`, p.slug, p.sku || '', p.barcode || '',
-    p.current_price, p.sale_price || '', p.stock_quantity, p.is_active, p.is_featured,
-    `"${(p.category_name || '').replace(/"/g, '""')}"`,
-    p.created_at ? new Date(p.created_at).toISOString() : '',
-    p.updated_at ? new Date(p.updated_at).toISOString() : ''
-  ]);
-
-  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-
-  res.setHeader('Content-Type', 'text/csv');
-  res.setHeader('Content-Disposition', 'attachment; filename=products-export.csv');
-  res.send(csv);
 }));
 
 export default router;
