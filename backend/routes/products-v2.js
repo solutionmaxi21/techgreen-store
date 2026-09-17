@@ -179,13 +179,19 @@ router.get('/export', authenticateToken, requireAdmin, asyncHandler(async (req, 
 
   // Build CSV
   const headers = ['ID', 'Name', 'Slug', 'SKU', 'Barcode', 'Price', 'Sale Price', 'Stock', 'Active', 'Featured', 'Category', 'Created', 'Updated'];
-  const rows = products.map(p => [
-    p.id, `"${(p.product_name || '').replace(/"/g, '""')}"`, p.slug, p.sku || '', p.barcode || '',
-    p.current_price, p.sale_price || '', p.stock_quantity, p.is_active, p.is_featured,
-    `"${(p.category_name || '').replace(/"/g, '""')}"`,
-    p.created_at ? new Date(p.created_at).toISOString() : '',
-    p.updated_at ? new Date(p.updated_at).toISOString() : ''
-  ]);
+  const rows = products.map(p => {
+    // Handle JSONB category_name (could be {fr, ar} object or string)
+    const catName = typeof p.category_name === 'object'
+      ? (p.category_name?.fr || p.category_name?.ar || '')
+      : (p.category_name || '');
+    return [
+      p.id, `"${(p.product_name || '').replace(/"/g, '""')}"`, p.slug, p.sku || '', p.barcode || '',
+      p.current_price, p.sale_price || '', p.stock_quantity, p.is_active, p.is_featured,
+      `"${catName.replace(/"/g, '""')}"`,
+      p.created_at ? new Date(p.created_at).toISOString() : '',
+      p.updated_at ? new Date(p.updated_at).toISOString() : ''
+    ];
+  });
 
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
 
