@@ -274,7 +274,7 @@ app.post('/api/admin-access/invitations/:token/accept', (req, res) => {
 app.get('/api/admin/metadata/collections', authenticateToken, requireAdmin, async (req, res) => {
   try {
     const collections = await db.query(
-      'SELECT id, name, slug, description, image_url FROM collections WHERE deleted_at IS NULL ORDER BY name'
+      'SELECT id, collection_name, collection_slug, description, banner_image FROM collections WHERE deleted_at IS NULL ORDER BY collection_name'
     );
     res.json({ success: true, data: collections });
   } catch (err) {
