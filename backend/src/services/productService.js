@@ -1877,7 +1877,7 @@ class ProductService {
       LIMIT $1 OFFSET $2
     `;
 
-    const products = await db.query(dataQuery, [limit, offset]);
+    const products = await db.queryMany(dataQuery, [limit, offset]);
 
     return {
       total: countResult.total,
