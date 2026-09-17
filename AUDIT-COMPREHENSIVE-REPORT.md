@@ -26,6 +26,10 @@
 | 14 | Stock costs/analysis → 500 | View `v_stock_movement_costs` n'existe pas | Replaced with actual query | ✅ VERIFIED |
 | 15 | Promotion create → 500 | `discount_type` enum requires UPPERCASE (PERCENTAGE, not percentage) | Added normalization map + date normalization | ✅ VERIFIED |
 | 16 | getProductsWithBarcodes → wrong data | `db.query()` au lieu de `db.queryMany()` | Changed to `db.queryMany()` | ✅ VERIFIED |
+| 17 | Stored XSS vulnerability | No input sanitization on text fields | Added sanitize.js utility (stripHtml, sanitizeBilingual, sanitizeProductData), applied to products, categories, collections, suppliers routes | ✅ VERIFIED |
+| 18 | UserDetailPage broken on mobile | 2-column grid never collapses | Added @media query for grid collapse at 768px | ✅ |
+| 19 | UsersListPage/ReviewsPage overflow on mobile | Hard-coded 32px padding | Added responsive padding reduction at 768px | ✅ |
+| 20 | ReviewsPage filter overflow | No flex-wrap on filter rows | Added flex-wrap: wrap | ✅ |
 
 ### Backend Endpoint Test Results (37 endpoints)
 
@@ -102,7 +106,7 @@ These routes don't exist in the backend but the frontend doesn't call them eithe
 - Backend proxy in Next.js strips forwarded headers
 
 #### WARNINGS ⚠️
-- Stored XSS: Backend accepts `<script>alert(1)</script>` in product names without sanitization — potential stored XSS
+- ~~Stored XSS: Backend accepts `<script>alert(1)</script>` in product names without sanitization — potential stored XSS~~ → **FIXED**: Input sanitization added (stripHtml, sanitizeBilingual, sanitizeProductData)
 - Password validation could be stronger (no failed attempt tracking visible)
 
 ### Auth System
