@@ -4,14 +4,6 @@ import type { NextRequest } from 'next/server'
 const locales = ['fr', 'ar']
 const defaultLocale = 'fr'
 
-// ─── Backend proxy for /api/* routes ──────────────────────────────────────────
-// Modern browsers block third-party cookies. Proxying through same-origin
-// makes cookies first-party, fixing auth on Chrome/Firefox/Safari.
-const BACKEND_URL = process.env.NEXT_BACKEND_URL || 'https://techgreen-store.onrender.com'
-
-// Local Next.js API routes (not proxied)
-const LOCAL_API_PREFIXES = ['/api/cron/', '/api/revalidate', '/api/contact']
-
 // Protected routes that require authentication
 const PROTECTED_ROUTES = [
   '/account',
@@ -29,17 +21,21 @@ const AUTH_ROUTES = [
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // ── PROXY /api/* TO BACKEND ───────────────────────────────────────────────
+  // ── API ROUTES: Pass through to route handlers ─────────────────────────────
+  // API proxying is handled by app/api/[...path]/route.ts (catch-all proxy)
+  // which uses getSetCookie() to forward Set-Cookie headers INDIVIDUALLY.
+  //
+  // WHY NOT NextResponse.rewrite()?
+  // The JavaScript Headers API combines multiple Set-Cookie values with commas
+  // into a single string. Browsers cannot parse this combined value, so NO
+  // cookies are stored. This caused auth to fail: login returned success (JSON
+  // body was forwarded correctly) but accessToken/refreshToken cookies were
+  // never stored → proxy.ts middleware saw no cookies → redirected to /login.
+  //
+  // The catch-all route handler reads cookies via response.headers.getSetCookie()
+  // and appends each one separately with headers.append('Set-Cookie', cookie).
   if (pathname.startsWith('/api/')) {
-    // Skip local Next.js API routes
-    if (LOCAL_API_PREFIXES.some(prefix => pathname.startsWith(prefix))) {
-      return NextResponse.next()
-    }
-
-    // Rewrite to backend — handled at infrastructure level, no body issues
-    const backendUrl = new URL(pathname, BACKEND_URL)
-    backendUrl.search = request.nextUrl.search
-    return NextResponse.rewrite(backendUrl)
+    return NextResponse.next()
   }
 
   // ── 1. HANDLE LOCALE REDIRECT ─────────────────────────────────────────────

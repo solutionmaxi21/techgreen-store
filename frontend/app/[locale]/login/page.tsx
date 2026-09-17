@@ -80,8 +80,11 @@ export default function LoginPage() {
     const result = await login(email, password)
     if (result.success) {
       toast.success(txt.welcomeBack)
+      // Navigate to homepage. Do NOT call router.refresh() here —
+      // after login the accessToken cookie is set, and a refresh would
+      // trigger proxy.ts to see isAuthRoute && hasAccessToken and
+      // redirect to /account, racing with the push below.
       router.push(`/${language}`)
-      router.refresh()
     } else {
       //const errorMessage = result.error || txt.loginFailed
       //setErrorDialog({ open: true, message: errorMessage })
@@ -117,7 +120,6 @@ export default function LoginPage() {
         if (result.success) {
           toast.success(txt.welcomeBack);
           router.push(`/${language}`);
-          router.refresh();
         } else {
           setErrorDialog({ open: true, message: result.error || txt.googleError });
         }

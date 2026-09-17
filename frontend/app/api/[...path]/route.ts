@@ -1,7 +1,16 @@
 /**
  * Catch-all API proxy route.
  *
- * Forwards /api/* requests to the backend, making auth cookies first-party.
+ * This route catches ALL /api/* requests that don't have a more specific
+ * route handler (e.g. /api/contact, /api/cron/keep-alive).
+ * It forwards them to the backend server, making auth cookies first-party
+ * (same domain) and bypassing the third-party cookie blocking issue.
+ *
+ * Next.js App Router priority: specific routes always win over catch-alls.
+ *   /api/contact      → app/api/contact/route.ts  (specific)
+ *   /api/cron/keep-alive → app/api/cron/keep-alive/route.ts  (specific)
+ *   /api/auth/me       → THIS catch-all → proxied to backend
+ *   /api/products      → THIS catch-all → proxied to backend
  */
 
 import { NextRequest, NextResponse } from 'next/server'
@@ -83,6 +92,7 @@ async function proxyRequest(
   return nextResponse
 }
 
+// Export the proxy for all HTTP methods
 export const GET = proxyRequest
 export const POST = proxyRequest
 export const PUT = proxyRequest

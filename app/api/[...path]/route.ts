@@ -24,26 +24,22 @@ async function proxyRequest(
   const { path } = await params
   const pathname = `/api/${path.join('/')}`
 
-  // Build the backend URL
   const backendUrl = new URL(pathname, BACKEND_URL)
   backendUrl.search = request.nextUrl.search
 
-  // Build headers to forward
+  // Build headers — forward everything from the client
   const headers = new Headers(request.headers)
-
-  // Remove Vercel/Next.js internal headers that might confuse the backend
   headers.delete('x-forwarded-for')
   headers.delete('x-forwarded-host')
   headers.delete('x-forwarded-proto')
   headers.delete('host')
 
-  // Get the request body (if any)
   let body: BodyInit | undefined
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     body = await request.arrayBuffer()
   }
 
-  // Forward the request to the backend
+  // Forward to backend
   const response = await fetch(backendUrl.toString(), {
     method: request.method,
     headers,
@@ -51,30 +47,46 @@ async function proxyRequest(
     redirect: 'manual',
   })
 
-  // Read the response body
+  // Collect Set-Cookie BEFORE consuming the body
+  const setCookieHeader = response.headers.getSetCookie?.()
+
+  // Forward all response headers to the client
+  const responseHeaders = new Headers()
+
+  // Copy response headers, handling Set-Cookie specially
+  response.headers.forEach((value, key) => {
+    const lower = key.toLowerCase()
+    if (lower === 'transfer-encoding' || lower === 'connection') return
+    // Skip Set-Cookie — we handle it below to preserve individual cookies
+    if (lower === 'set-cookie') return
+    responseHeaders.set(key, value)
+  })
+
+  // Read the body AFTER headers
   const responseBody = await response.arrayBuffer()
 
-  // CRITICAL: Forward Set-Cookie headers individually.
-  // The standard Headers API combines multiple Set-Cookie values with commas,
-  // which breaks cookie parsing. getSetCookie() returns them as separate strings.
-  const setCookies = response.headers.getSetCookie?.() ?? []
+  // Create the response
   const nextResponse = new NextResponse(responseBody, {
     status: response.status,
     statusText: response.statusText,
+    headers: responseHeaders,
   })
 
-  // Copy all headers EXCEPT Set-Cookie (we handle that separately)
-  response.headers.forEach((value, key) => {
-    if (key.toLowerCase() !== 'set-cookie') {
-      // Skip problematic headers
-      if (key.toLowerCase() === 'transfer-encoding' || key.toLowerCase() === 'connection') return
-      nextResponse.headers.set(key, value)
+  // Add each Set-Cookie individually to avoid comma-joining
+  if (setCookieHeader && setCookieHeader.length > 0) {
+    for (const cookie of setCookieHeader) {
+      nextResponse.headers.append('Set-Cookie', cookie)
     }
-  })
-
-  // Add each Set-Cookie header individually so the browser can parse them
-  for (const cookie of setCookies) {
-    nextResponse.headers.append('Set-Cookie', cookie)
+  } else {
+    // Fallback: try to get all Set-Cookie values the standard way
+    const cookies = response.headers.get('set-cookie')
+    if (cookies) {
+      // Split on ', ' but only at cookie boundaries (not inside values)
+      const parts = cookies.split(/(?<=^|;\s*),(?=\s*\w+=)/)
+      for (const part of parts) {
+        nextResponse.headers.append('Set-Cookie', part.trim())
+      }
+    }
   }
 
   return nextResponse
