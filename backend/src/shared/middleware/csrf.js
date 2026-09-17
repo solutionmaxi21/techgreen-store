@@ -92,6 +92,14 @@ export const csrfProtection = (req, res, next) => {
     return next();
   }
 
+  // Skip CSRF for admin panel requests — the admin panel is a first-party application
+  // that authenticates via HttpOnly cookies + JWT. CSRF double-submit pattern cannot work
+  // cross-origin (admin panel → backend are different origins), and the admin panel already
+  // has its own security: JWT auth, requireAdmin middleware, CORS origin allowlist, SameSite cookies.
+  if (req.headers['x-client-type'] === 'admin') {
+    return next();
+  }
+
   // Skip in development if explicitly disabled
   if (process.env.NODE_ENV === 'development' && process.env.CSRF_DISABLED === 'true') {
     return next();
