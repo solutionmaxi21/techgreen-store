@@ -166,7 +166,7 @@ router.get('/admin/stats', authenticateToken, requireAdmin, asyncHandler(async (
 // GET /export - Export products as CSV (admin)
 // ==========================================
 router.get('/export', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
-  const products = await db.query(`
+  const products = await db.queryMany(`
     SELECT p.id, p.product_name, p.slug, p.short_description, p.current_price, p.sale_price,
            p.sku, p.barcode, COALESCE(s.quantity, 0) as stock_quantity, p.is_active, p.is_featured,
            c.category_name, p.created_at, p.updated_at
