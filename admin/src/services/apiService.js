@@ -324,7 +324,8 @@ const attemptTokenRefresh = async () => {
     try {
       console.log('[Auth] Attempting token refresh...');
 
-      // Build refresh request - Electron sends refresh token in body (cookies don't work cross-origin from file://)
+      // Build refresh request - send refresh token in body for all clients
+      // Cross-origin cookies are unreliable (3rd-party cookie blocking, browser restrictions)
       const refreshHeaders = {
         'Content-Type': 'application/json',
         'X-Client-Type': 'admin',
@@ -340,6 +341,13 @@ const attemptTokenRefresh = async () => {
           }
         } catch (e) {
           console.log('[Auth] Could not retrieve refresh token from keytar:', e.message);
+        }
+      } else {
+        // Browser mode: send in-memory refresh token in body
+        // Cookies may not be sent cross-origin due to 3rd-party cookie restrictions
+        if (inMemoryRefreshToken) {
+          refreshBody.refreshToken = inMemoryRefreshToken;
+          console.log('[Auth] Sending refresh token in body (cross-origin cookie workaround)');
         }
       }
 

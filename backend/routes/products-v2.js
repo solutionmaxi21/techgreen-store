@@ -302,6 +302,29 @@ router.post('/', authenticateToken, requireAdmin, validate(createProductSchema),
     throw new ValidationError([], 'SKU already exists');
   }
 
+  // Validate FK references exist to prevent 500 from constraint violations
+  const categoryId = productData.categoryId;
+  if (categoryId) {
+    const catCheck = await db.queryMany('SELECT id FROM categories WHERE id = $1', [categoryId]);
+    if (!catCheck || catCheck.length === 0) {
+      throw new ValidationError([{ field: 'categoryId', message: `Category with id ${categoryId} does not exist` }], 'Invalid category');
+    }
+  }
+  const supplierId = productData.supplierId;
+  if (supplierId) {
+    const supCheck = await db.queryMany('SELECT id FROM suppliers WHERE id = $1', [supplierId]);
+    if (!supCheck || supCheck.length === 0) {
+      throw new ValidationError([{ field: 'supplierId', message: `Supplier with id ${supplierId} does not exist` }], 'Invalid supplier');
+    }
+  }
+  const warehouseId = productData.warehouseId || 1;
+  if (warehouseId) {
+    const whCheck = await db.queryMany('SELECT id FROM warehouses WHERE id = $1', [warehouseId]);
+    if (!whCheck || whCheck.length === 0) {
+      throw new ValidationError([{ field: 'warehouseId', message: `Warehouse with id ${warehouseId} does not exist` }], 'Invalid warehouse');
+    }
+  }
+
   // Transform camelCase to snake_case for database
   const transformedData = {
     product_name: productData.name,
@@ -371,6 +394,26 @@ router.put('/:id', authenticateToken, requireAdmin, validate(updateProductSchema
     const skuExists = await ProductService.skuExists(updates.sku, productId);
     if (skuExists) {
       throw new ValidationError([], 'SKU already exists');
+    }
+  }
+
+  // Validate FK references if being updated
+  if (updates.categoryId) {
+    const catCheck = await db.queryMany('SELECT id FROM categories WHERE id = $1', [updates.categoryId]);
+    if (!catCheck || catCheck.length === 0) {
+      throw new ValidationError([{ field: 'categoryId', message: `Category with id ${updates.categoryId} does not exist` }], 'Invalid category');
+    }
+  }
+  if (updates.supplierId) {
+    const supCheck = await db.queryMany('SELECT id FROM suppliers WHERE id = $1', [updates.supplierId]);
+    if (!supCheck || supCheck.length === 0) {
+      throw new ValidationError([{ field: 'supplierId', message: `Supplier with id ${updates.supplierId} does not exist` }], 'Invalid supplier');
+    }
+  }
+  if (updates.warehouseId) {
+    const whCheck = await db.queryMany('SELECT id FROM warehouses WHERE id = $1', [updates.warehouseId]);
+    if (!whCheck || whCheck.length === 0) {
+      throw new ValidationError([{ field: 'warehouseId', message: `Warehouse with id ${updates.warehouseId} does not exist` }], 'Invalid warehouse');
     }
   }
 

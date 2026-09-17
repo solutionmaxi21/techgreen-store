@@ -120,6 +120,41 @@ export const errorHandler = (err, req, res, next) => {
     });
   }
 
+  // Handle PostgreSQL errors (FK violations, unique constraints, type mismatches)
+  if (err.code && err.code.startsWith('23')) {
+    const isProduction = process.env.NODE_ENV === 'production';
+    // 23503 = foreign key violation, 23505 = unique violation, 23502 = not null, 23514 = check violation
+    const codeMap = {
+      '23503': { status: 422, code: 'FOREIGN_KEY_VIOLATION', message: 'Referenced record does not exist' },
+      '23505': { status: 409, code: 'UNIQUE_VIOLATION', message: 'A record with this value already exists' },
+      '23502': { status: 422, code: 'NOT_NULL_VIOLATION', message: 'A required field is missing' },
+      '23514': { status: 422, code: 'CHECK_VIOLATION', message: 'Value does not meet constraints' },
+    };
+    const mapped = codeMap[err.code] || { status: 422, code: 'CONSTRAINT_VIOLATION', message: 'Database constraint violated' };
+    return res.status(mapped.status).json({
+      success: false,
+      error: {
+        code: mapped.code,
+        message: isProduction ? mapped.message : (err.detail || err.message || mapped.message),
+        ...(isProduction ? {} : { constraint: err.constraint, table: err.table }),
+      },
+    });
+  }
+
+  // Handle PostgreSQL type errors (e.g., invalid enum value, type mismatch)
+  if (err.code === '42P01' || err.code === '42804' || err.code === '22P02' || err.severity === 'ERROR') {
+    const isProduction = process.env.NODE_ENV === 'production';
+    return res.status(422).json({
+      success: false,
+      error: {
+        code: 'DATA_TYPE_ERROR',
+        message: isProduction
+          ? 'The provided data is incompatible with the expected format'
+          : (err.message || 'Data type mismatch'),
+      },
+    });
+  }
+
   // Handle unexpected errors
   // In production, don't leak error details
   const isProduction = process.env.NODE_ENV === 'production';
