@@ -33,6 +33,12 @@ async function proxyRequest(
   headers.delete('x-forwarded-host')
   headers.delete('x-forwarded-proto')
   headers.delete('host')
+  // Tell backend NOT to compress — Node.js fetch() auto-decompresses the body
+  // via arrayBuffer(), but the Content-Encoding header would still be forwarded
+  // to the client, causing ERR_CONTENT_DECODING_FAILED (browser tries to
+  // decompress an already-decompressed body).
+  headers.delete('accept-encoding')
+  headers.set('accept-encoding', 'identity')
 
   let body: BodyInit | undefined
   if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -59,6 +65,12 @@ async function proxyRequest(
     if (lower === 'transfer-encoding' || lower === 'connection') return
     // Skip Set-Cookie — we handle it below to preserve individual cookies
     if (lower === 'set-cookie') return
+    // Skip content-encoding: Node.js fetch() auto-decompresses the body via
+    // arrayBuffer(). Forwarding this header causes ERR_CONTENT_DECODING_FAILED
+    // because the browser tries to decompress an already-decompressed body.
+    if (lower === 'content-encoding') return
+    // Skip content-length: body size may change after decompression
+    if (lower === 'content-length') return
     responseHeaders.set(key, value)
   })
 
