@@ -7,34 +7,43 @@ export function getApiBaseUrl(): string {
     return internalApiUrl
   }
 
-  // Client-side: if the public URL is a full cross-origin URL,
-  // use a relative '/api' path instead so Next.js rewrites proxy it
-  // through the same origin. This makes auth cookies first-party,
-  // fixing the third-party cookie blocking in modern browsers.
-  try {
-    const configured = new URL(publicApiUrl)
-    const currentHost = window.location.hostname
+  // ── Client-side: ALWAYS use same-origin '/api' proxy for non-localhost ──────
+  // This is critical for cookie-based auth. When the browser is NOT on localhost,
+  // all API requests MUST go through the same origin (/api/...) so that:
+  //   1. Set-Cookie headers from the backend are first-party (not blocked)
+  //   2. Cookies are sent automatically with same-origin requests
+  //   3. No CORS or third-party cookie issues
+  //
+  // Without this, requests go directly to the backend URL (e.g. Render),
+  // making cookies third-party. Modern browsers block third-party cookies,
+  // so accessToken/refreshToken are never stored → auth always fails.
+  const hostname = window.location.hostname
+  const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1'
 
-    // Cross-origin: switch to same-origin proxy path
-    if (configured.hostname !== currentHost && configured.hostname !== 'localhost') {
-      return '/api'
-    }
-
-    // Local no-Docker fallback: if env points to localhost but app is opened from a LAN/public host
-    const isConfiguredLocalhost = configured.hostname === 'localhost' || configured.hostname === '127.0.0.1'
-    const isBrowserLocalhost = currentHost === 'localhost' || currentHost === '127.0.0.1' || currentHost === '::1'
-
-    if (isConfiguredLocalhost && !isBrowserLocalhost) {
-      return `${window.location.protocol}//${currentHost}:3001/api`
-    }
-  } catch {
-    // Keep configured value if parsing fails
+  if (!isLocalhost) {
+    // Production (Vercel, custom domain, etc.): always use same-origin proxy
+    return '/api'
   }
 
-  return publicApiUrl
+  // ── Localhost development: use configured URL or LAN fallback ──────────────
+  try {
+    const configured = new URL(publicApiUrl)
+    const isConfiguredLocalhost = configured.hostname === 'localhost' || configured.hostname === '127.0.0.1'
+
+    if (isConfiguredLocalhost) {
+      // Both env and browser are localhost: use the configured URL directly
+      return publicApiUrl
+    }
+
+    // Env points to a remote server but browser is on localhost (LAN access)
+    // Use the browser's host with port 3001 (backend Docker port)
+    return `${window.location.protocol}//${hostname}:3001/api`
+  } catch {
+    // URL parsing failed: return the raw value
+    return publicApiUrl
+  }
 }
 
 export function getPublicApiBaseUrl(): string {
-  // Always return the backend URL — used for image/upload paths that must come from backend
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'
 }
