@@ -783,6 +783,12 @@ export const authApi = {
     // Update auth timestamp on successful session check
     if (result.success) {
       updateLastSuccessfulAuth();
+      // Backend returns fresh tokens in response for admin panel (browser mode)
+      // to populate in-memory storage after page refresh (HttpOnly cookies unreadable by JS)
+      if (result.accessToken && result.refreshToken) {
+        storeTokens(result.accessToken, result.refreshToken);
+        console.log('[Auth] Tokens synced from /me response');
+      }
     }
     return result;
   }
