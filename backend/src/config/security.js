@@ -33,6 +33,13 @@ export const helmetConfig = helmet({
  * CORS configuration
  * Restricts which origins can access the API
  */
+// Origins that are ALWAYS allowed — even when ALLOWED_ORIGINS env var overrides the defaults.
+// These are first-party clients (Electron desktop apps) that must never be blocked.
+const ALWAYS_ALLOWED_ORIGINS = [
+  'maxistore-app://admin',   // Electron admin panel
+  'maxistore-app://localhost', // Electron admin panel (alt)
+];
+
 const getAllowedOrigins = () => {
   const origins = process.env.ALLOWED_ORIGINS;
   if (!origins) {
@@ -49,11 +56,12 @@ const getAllowedOrigins = () => {
       'http://127.0.0.1:3000',
       'http://127.0.0.1:3001',
       'http://127.0.0.1:5173',
-      'maxistore-app://admin', // Electron admin panel
-      'maxistore-app://localhost', // Electron admin panel (alt)
+      ...ALWAYS_ALLOWED_ORIGINS,
     ];
   }
-  return origins.split(',').map(origin => origin.trim());
+  // Merge env var origins with always-allowed origins (Electron never blocked)
+  const envOrigins = origins.split(',').map(origin => origin.trim());
+  return [...new Set([...envOrigins, ...ALWAYS_ALLOWED_ORIGINS])];
 };
 
 const isLoopbackOrigin = (origin) => {
