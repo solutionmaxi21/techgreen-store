@@ -3,7 +3,7 @@
  * Handles document fallback and caching strategies
  */
 
-const CACHE_NAME = 'offline-cache-v5';
+const CACHE_NAME = 'offline-cache-v6';
 const OFFLINE_PAGE = '/offline.html';
 
 // Install event - cache the offline page
@@ -103,6 +103,11 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Handle API requests - Network only (never serve stale API data)
+  // IMPORTANT: We must NOT create new Response/Headers objects for API routes
+  // that carry Set-Cookie headers. The Headers constructor combines multiple
+  // Set-Cookie values into a single comma-separated string, which browsers
+  // cannot parse → cookies are never stored → auth breaks.
+  // Solution: always return the original response object untouched.
   if (request.url.includes('/api/')) {
     event.respondWith(
       fetch(request)
@@ -114,14 +119,10 @@ self.addEventListener('fetch', (event) => {
               setTimeout(() => {
                 fetch(request)
                   .then((retryResponse) => {
-                    // Return retry result with header indicating server was waking up
-                    const headers = new Headers(retryResponse.headers);
-                    headers.set('X-Server-Waking', 'true');
-                    resolve(new Response(retryResponse.body, {
-                      status: retryResponse.status,
-                      statusText: retryResponse.statusText,
-                      headers,
-                    }));
+                    // CRITICAL: Return the ORIGINAL response to preserve Set-Cookie headers.
+                    // Do NOT create a new Response() with new Headers() — that destroys
+                    // cookie separation. We simply return the response as-is.
+                    resolve(retryResponse);
                   })
                   .catch(() => {
                     console.log('[SW] API retry also failed:', request.url);

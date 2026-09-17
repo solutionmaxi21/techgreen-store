@@ -78,11 +78,14 @@ async function proxyRequest(
       nextResponse.headers.append('Set-Cookie', cookie)
     }
   } else {
-    // Fallback: try to get all Set-Cookie values the standard way
+    // Fallback: Headers.get('set-cookie') joins multiple cookies with ', '.
+    // Split back at cookie boundaries: a comma followed by 'name=' pattern.
+    // Previous regex (?<=^|;\s*),(?=\s*\w+=) FAILED because the comma between
+    // cookies is preceded by 'None' (from SameSite=None), not by ';'.
+    // Fixed regex: split on ', ' where next token is word+= (new cookie name).
     const cookies = response.headers.get('set-cookie')
     if (cookies) {
-      // Split on ', ' but only at cookie boundaries (not inside values)
-      const parts = cookies.split(/(?<=^|;\s*),(?=\s*\w+=)/)
+      const parts = cookies.split(/,\s*(?=\w+=)/)
       for (const part of parts) {
         nextResponse.headers.append('Set-Cookie', part.trim())
       }
