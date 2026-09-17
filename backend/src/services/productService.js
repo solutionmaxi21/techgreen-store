@@ -1005,10 +1005,11 @@ class ProductService {
       // Insert attributes if provided
       if (productData.attributes && productData.attributes.length > 0) {
         // Ensure sequence is aligned to avoid duplicate key on SERIAL
+        // Note: product_attributes PK column is 'attribute_id' (Prisma @map)
         await client.query(`
           SELECT setval(
-            pg_get_serial_sequence('product_attributes','id'),
-            GREATEST((SELECT COALESCE(MAX(id),0) FROM product_attributes) + 1, 1),
+            pg_get_serial_sequence('product_attributes','attribute_id'),
+            GREATEST((SELECT COALESCE(MAX(attribute_id),0) FROM product_attributes) + 1, 1),
             false
           )
         `);
@@ -1377,10 +1378,11 @@ class ProductService {
 
       // Replace attributes when provided
       if (Array.isArray(updates.attributes)) {
+        // Note: product_attributes PK column is 'attribute_id' (Prisma @map)
         await client.query(`
           SELECT setval(
-            pg_get_serial_sequence('product_attributes','id'),
-            GREATEST((SELECT COALESCE(MAX(id),0) FROM product_attributes) + 1, 1),
+            pg_get_serial_sequence('product_attributes','attribute_id'),
+            GREATEST((SELECT COALESCE(MAX(attribute_id),0) FROM product_attributes) + 1, 1),
             false
           )
         `);
