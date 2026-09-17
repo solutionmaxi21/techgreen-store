@@ -400,18 +400,18 @@ router.get('/low-stock-alert', authenticateToken, requireAdmin, asyncHandler(asy
   const threshold = parseInt(req.query.threshold) || 10;
 
   const query = `
-    SELECT 
+    SELECT
       p.id as product_id,
       p.product_name as name,
       p.sku,
       s.quantity as current_stock,
-      $1 as threshold,
+      $1::integer as threshold,
       w.warehouse_name as warehouse
     FROM products p
     INNER JOIN stock s ON p.id = s.product_id
     LEFT JOIN warehouses w ON s.warehouse_id = w.id
-    WHERE s.quantity > 0 
-      AND s.quantity <= $1
+    WHERE s.quantity > 0
+      AND s.quantity <= $1::integer
       AND p.is_active = true
       AND p.deleted_at IS NULL
     ORDER BY s.quantity ASC

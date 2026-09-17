@@ -358,36 +358,60 @@ router.get('/', authenticateToken, requireAdmin, asyncHandler(async (req, res) =
     offset = 0
   } = req.query;
 
-  let query = 'SELECT * FROM v_stock_movements_detailed WHERE 1=1';
+  let query = `
+    SELECT
+      sm.movement_id,
+      sm.stock_id,
+      sm.type as movement_type,
+      sm.quantity,
+      sm.previous_qty,
+      sm.new_qty,
+      sm.reason,
+      sm.notes,
+      sm.reference_id,
+      sm.created_by,
+      sm.created_at,
+      sm.variant_id,
+      p.product_name,
+      p.sku as product_sku,
+      w.warehouse_name,
+      w.location_address as warehouse_location,
+      st.quantity as current_stock
+    FROM stock_movements sm
+    LEFT JOIN stock st ON sm.stock_id = st.id
+    LEFT JOIN products p ON st.product_id = p.id
+    LEFT JOIN warehouses w ON st.warehouse_id = w.id
+    WHERE 1=1
+  `;
   const params = [];
   let paramIndex = 1;
 
   if (product_id) {
-    query += ` AND product_id = $${paramIndex++}`;
+    query += ` AND st.product_id = $${paramIndex++}`;
     params.push(parseInt(product_id));
   }
 
   if (warehouse_id) {
-    query += ` AND warehouse_id = $${paramIndex++}`;
+    query += ` AND st.warehouse_id = $${paramIndex++}`;
     params.push(parseInt(warehouse_id));
   }
 
   if (movement_type) {
-    query += ` AND movement_type = $${paramIndex++}`;
+    query += ` AND sm.type = $${paramIndex++}`;
     params.push(movement_type);
   }
 
   if (from_date) {
-    query += ` AND created_at >= $${paramIndex++}`;
+    query += ` AND sm.created_at >= $${paramIndex++}`;
     params.push(from_date);
   }
 
   if (to_date) {
-    query += ` AND created_at <= $${paramIndex++}`;
+    query += ` AND sm.created_at <= $${paramIndex++}`;
     params.push(to_date);
   }
 
-  query += ` ORDER BY created_at DESC LIMIT $${paramIndex++} OFFSET $${paramIndex++}`;
+  query += ` ORDER BY sm.created_at DESC LIMIT $${paramIndex++} OFFSET $${paramIndex++}`;
   params.push(parseInt(limit), parseInt(offset));
 
   const movements = await db.queryMany(query, params);
@@ -404,21 +428,39 @@ router.get('/', authenticateToken, requireAdmin, asyncHandler(async (req, res) =
 
 // GET /api/stock-movements/transfers/summary - Get transfer summary by warehouse
 router.get('/transfers/summary', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
-  const summary = await db.queryMany('SELECT * FROM v_warehouse_transfers_summary');
+  const summary = await db.queryMany(`
+    SELECT
+      w.warehouse_name,
+      w.id as warehouse_id,
+      COUNT(sm.movement_id) as total_movements,
+      SUM(CASE WHEN sm.type = 'transfer_out' THEN sm.quantity ELSE 0 END) as transferred_out,
+      SUM(CASE WHEN sm.type = 'transfer_in' THEN sm.quantity ELSE 0 END) as transferred_in
+    FROM warehouses w
+    LEFT JOIN stock s ON w.id = s.warehouse_id
+    LEFT JOIN stock_movements sm ON s.id = sm.stock_id AND sm.type IN ('transfer_in', 'transfer_out')
+    WHERE w.deleted_at IS NULL
+    GROUP BY w.id, w.warehouse_name
+    ORDER BY total_movements DESC
+  `);
   res.json(summary);
 }));
 
 // GET /api/stock-movements/costs/analysis - Cost analysis
 router.get('/costs/analysis', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
   const { months = 6 } = req.query;
-
   const safeMonths = Math.max(1, Math.min(parseInt(months) || 6, 60));
-  const analysis = await db.queryMany(
-    `SELECT * FROM v_stock_movement_costs 
-     WHERE month >= CURRENT_DATE - ($1 || ' months')::INTERVAL
-     ORDER BY month DESC, total_transfer_cost DESC`,
-    [safeMonths.toString()]
-  );
+
+  const analysis = await db.queryMany(`
+    SELECT
+      DATE_TRUNC('month', sm.created_at) as month,
+      sm.type as movement_type,
+      COUNT(*) as movement_count,
+      SUM(sm.quantity) as total_quantity
+    FROM stock_movements sm
+    WHERE sm.created_at >= CURRENT_DATE - ($1 || ' months')::INTERVAL
+    GROUP BY DATE_TRUNC('month', sm.created_at), sm.type
+    ORDER BY month DESC, movement_type
+  `, [safeMonths.toString()]);
 
   res.json(analysis);
 }));
