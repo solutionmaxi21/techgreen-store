@@ -79,14 +79,14 @@ export const corsConfig = cors({
   origin: (origin, callback) => {
     const allowedOrigins = getAllowedOrigins();
 
-    // Allow requests with no origin ONLY in development (mobile apps, curl, postman)
-    // In production, require an origin header from browser clients
+    // Allow requests with no origin (mobile apps, curl, postman, non-browser clients)
     if (!origin) {
-      if (isProduction) {
-        // Still allow non-browser clients (they don't send Origin)
-        // CORS enforcement only applies to browsers anyway
-        return callback(null, true);
-      }
+      return callback(null, true);
+    }
+
+    // BULLETPROOF: Always allow the Electron admin panel (any maxistore-app:// origin)
+    if (origin.startsWith('maxistore-app://')) {
+      console.log('[CORS] Allowed Electron origin:', origin);
       return callback(null, true);
     }
 
@@ -94,15 +94,13 @@ export const corsConfig = cors({
       return callback(null, true);
     }
 
-    // Allow loopback origins ONLY in development (Expo web/dev servers use dynamic ports)
+    // Allow loopback origins in development (Expo web/dev servers use dynamic ports)
     if (!isProduction && isLoopbackOrigin(origin)) {
       return callback(null, true);
     }
 
-    // Log blocked origins in production for monitoring
-    if (isProduction) {
-      console.warn('[CORS] Blocked origin:', origin);
-    }
+    // Log blocked origins for monitoring
+    console.warn('[CORS] Blocked origin:', origin);
 
     // Return false instead of throwing — Express cors middleware
     // handles this by omitting CORS headers (browser blocks the response)
