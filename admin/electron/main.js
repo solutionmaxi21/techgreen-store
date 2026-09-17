@@ -424,10 +424,13 @@ if (hasSingleInstanceLock) app.whenReady().then(() => {
   ses.webRequest.onBeforeSendHeaders(
     { urls: [`${PRODUCTION_BACKEND_ORIGIN}/*`] },
     async (details, callback) => {
-      // Remove the non-standard origin so backend CORS accepts the request
-      // (backend allows requests with no Origin header)
-      delete details.requestHeaders['Origin']
-      delete details.requestHeaders['origin']
+      // Remove the non-standard origin from actual requests (GET/POST/etc)
+      // BUT keep Origin on OPTIONS preflight — the server CORS needs it to
+      // set the correct Access-Control-Allow-Origin header in the response.
+      if (details.method !== 'OPTIONS') {
+        delete details.requestHeaders['Origin']
+        delete details.requestHeaders['origin']
+      }
 
       // Skip auth endpoints - they rely on cookies, not Bearer tokens
       const url = details.url || ''
