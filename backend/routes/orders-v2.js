@@ -2459,6 +2459,26 @@ router.get('/polling/status', authenticateToken, requireAdmin, (req, res) => {
   });
 });
 
+// POST poll specific order now — MUST be before /:action to avoid route shadowing
+router.post('/polling/poll-order', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+  const { trackingNumber } = req.body;
+
+  if (!trackingNumber) {
+    return res.status(400).json({
+      success: false,
+      error: 'Tracking number is required'
+    });
+  }
+
+  const result = await guepexPollingService.pollOrder(trackingNumber);
+
+  res.json({
+    success: true,
+    message: 'Order polled successfully',
+    data: result
+  });
+}));
+
 // POST start/stop polling
 router.post('/polling/:action', authenticateToken, requireAdmin, (req, res) => {
   const { action } = req.params;
@@ -2484,25 +2504,5 @@ router.post('/polling/:action', authenticateToken, requireAdmin, (req, res) => {
     });
   }
 });
-
-// POST poll specific order now
-router.post('/polling/poll-order', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
-  const { trackingNumber } = req.body;
-
-  if (!trackingNumber) {
-    return res.status(400).json({
-      success: false,
-      error: 'Tracking number is required'
-    });
-  }
-
-  const result = await guepexPollingService.pollOrder(trackingNumber);
-
-  res.json({
-    success: true,
-    message: 'Order polled successfully',
-    data: result
-  });
-}));
 
 export default router;
