@@ -4,6 +4,14 @@ import type { NextRequest } from 'next/server'
 const locales = ['fr', 'ar']
 const defaultLocale = 'fr'
 
+// ─── Backend proxy for /api/* routes ──────────────────────────────────────────
+// Modern browsers block third-party cookies. Proxying through same-origin
+// makes cookies first-party, fixing auth on Chrome/Firefox/Safari.
+const BACKEND_URL = process.env.NEXT_BACKEND_URL || 'https://techgreen-store.onrender.com'
+
+// Local Next.js API routes (not proxied)
+const LOCAL_API_PREFIXES = ['/api/cron/', '/api/revalidate', '/api/contact']
+
 // Protected routes that require authentication
 const PROTECTED_ROUTES = [
   '/account',
@@ -21,9 +29,17 @@ const AUTH_ROUTES = [
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Skip /api/* — handled by app/api/[...path]/route.ts catch-all proxy
+  // ── PROXY /api/* TO BACKEND ───────────────────────────────────────────────
   if (pathname.startsWith('/api/')) {
-    return NextResponse.next()
+    // Skip local Next.js API routes
+    if (LOCAL_API_PREFIXES.some(prefix => pathname.startsWith(prefix))) {
+      return NextResponse.next()
+    }
+
+    // Rewrite to backend — handled at infrastructure level, no body issues
+    const backendUrl = new URL(pathname, BACKEND_URL)
+    backendUrl.search = request.nextUrl.search
+    return NextResponse.rewrite(backendUrl)
   }
 
   // ── 1. HANDLE LOCALE REDIRECT ─────────────────────────────────────────────
@@ -84,7 +100,9 @@ function getLocale(request: NextRequest): string {
 
 export const config = {
   matcher: [
-    // Skip API routes — handled by catch-all route
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.jpg|logo.jpg|hero.webp|.*\\..*|_next).*)',
+    // API routes — proxied to backend
+    '/api/:path*',
+    // All other routes — locale/auth handling
+    '/((?!_next/static|_next/image|favicon.ico|icon.jpg|logo.jpg|hero.webp|.*\\..*|_next).*)',
   ],
 }
