@@ -341,23 +341,43 @@ router.post('/', authenticateToken, requireAdmin, validate(createPromotionSchema
   `;
 
   const normalizedApplicableTo = applicableTo ? String(applicableTo).toUpperCase() : 'ALL';
+
+  // Map frontend discount types to DB enum values
+  const discountTypeMap = {
+    'percentage': 'PERCENTAGE',
+    'fixed': 'FIXED',
+    'bogo': 'BOGO',
+    'shipping': 'SHIPPING',
+    'free_shipping': 'SHIPPING',
+    'bundle': 'BUNDLE',
+  };
+  const normalizedDiscountType = discountTypeMap[String(discountType).toLowerCase()] || 'PERCENTAGE';
+
   const normalizedApplicableCollections = Array.isArray(applicableCollections) && applicableCollections.length > 0
-    ? applicableCollections
+    ? JSON.stringify(applicableCollections)
     : null;
+
+  // Normalize dates to ISO format if they're date-only strings
+  const normalizedStartDate = startDate && !startDate.includes('T')
+    ? new Date(startDate + 'T00:00:00Z').toISOString()
+    : startDate;
+  const normalizedEndDate = endDate && !endDate.includes('T')
+    ? new Date(endDate + 'T23:59:59Z').toISOString()
+    : endDate;
 
   const promotion = await db.queryOne(query, [
     promotionCode,
     promotionName,
     description || null,
-    discountType,
+    normalizedDiscountType,
     discountValue,
     minOrderAmount || null,
     normalizedApplicableTo,
-    applicableCategories && applicableCategories.length > 0 ? applicableCategories : null,
+    applicableCategories && applicableCategories.length > 0 ? JSON.stringify(applicableCategories) : null,
     normalizedApplicableCollections,
     maxUses || null,
-    startDate,
-    endDate
+    normalizedStartDate,
+    normalizedEndDate
   ]);
 
   // Invalidate promotion caches after creation
@@ -401,21 +421,40 @@ router.put('/:id', authenticateToken, requireAdmin, validate(updatePromotionSche
   } = req.body;
 
   const normalizedApplicableTo = applicableTo ? String(applicableTo).toUpperCase() : null;
+
+  const discountTypeMap = {
+    'percentage': 'PERCENTAGE',
+    'fixed': 'FIXED',
+    'bogo': 'BOGO',
+    'shipping': 'SHIPPING',
+    'free_shipping': 'SHIPPING',
+    'bundle': 'BUNDLE',
+  };
+  const normalizedDiscountType = discountType ? discountTypeMap[String(discountType).toLowerCase()] || String(discountType).toUpperCase() : null;
+
   const normalizedApplicableCollections = Array.isArray(applicableCollections)
-    ? (applicableCollections.length > 0 ? applicableCollections : null)
+    ? (applicableCollections.length > 0 ? JSON.stringify(applicableCollections) : null)
     : undefined;
+
+  const normalizedStartDate = startDate && !startDate.includes('T')
+    ? new Date(startDate + 'T00:00:00Z').toISOString()
+    : startDate;
+  const normalizedEndDate = endDate && !endDate.includes('T')
+    ? new Date(endDate + 'T23:59:59Z').toISOString()
+    : endDate;
+
   const promotionName = name;
 
   const query = `
     UPDATE promotions
     SET promotion_name = COALESCE($1, promotion_name),
         description = COALESCE($2, description),
-        discount_type = COALESCE($3, discount_type),
+        discount_type = COALESCE($3::discount_type, discount_type),
         discount_value = COALESCE($4, discount_value),
         min_order_amount = COALESCE($5, min_order_amount),
         applicable_to = COALESCE($6::applicable_to, applicable_to),
-        applicable_categories = CASE WHEN $7::INTEGER[] IS NOT NULL THEN $7::INTEGER[] ELSE applicable_categories END,
-        applicable_collections = CASE WHEN $8::INTEGER[] IS NOT NULL THEN $8::INTEGER[] ELSE applicable_collections END,
+        applicable_categories = CASE WHEN $7 IS NOT NULL THEN $7::text ELSE applicable_categories END,
+        applicable_collections = CASE WHEN $8 IS NOT NULL THEN $8::text ELSE applicable_collections END,
         max_uses = COALESCE($9, max_uses),
         start_date = COALESCE($10, start_date),
         end_date = COALESCE($11, end_date),
@@ -427,15 +466,15 @@ router.put('/:id', authenticateToken, requireAdmin, validate(updatePromotionSche
   const promotion = await db.queryOne(query, [
     promotionName,
     description,
-    discountType,
+    normalizedDiscountType,
     discountValue,
     minOrderAmount,
     normalizedApplicableTo,
-    applicableCategories && applicableCategories.length > 0 ? applicableCategories : null,
+    applicableCategories && applicableCategories.length > 0 ? JSON.stringify(applicableCategories) : null,
     normalizedApplicableCollections,
     maxUses,
-    startDate,
-    endDate,
+    normalizedStartDate,
+    normalizedEndDate,
     promotionId
   ]);
 
