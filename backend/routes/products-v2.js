@@ -154,11 +154,12 @@ router.get('/storefront/:id', validate(getProductSchema), asyncHandler(async (re
 // ==========================================
 
 /**
- * GET /api/products/admin/stats
+ * GET /api/products/stats (or /api/admin/products/stats)
  * Get product statistics for dashboard
  * Requires admin authentication
+ * Named route BEFORE /:id to avoid parameter shadowing
  */
-router.get('/admin/stats', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
+router.get('/stats', authenticateToken, requireAdmin, asyncHandler(async (req, res) => {
   const stats = await ProductService.getProductStats();
   res.json(stats);
 }));
