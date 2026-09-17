@@ -485,9 +485,12 @@ router.post('/bulk-delete', authenticateToken, requireAdmin, asyncHandler(async 
     throw new ValidationError('Maximum 500 products can be deleted at once');
   }
 
-  const validIds = productIds.filter(id => Number.isInteger(parseInt(id)));
+  const validIds = productIds.map(id => parseInt(id, 10)).filter(id => Number.isInteger(id) && id > 0);
+  if (validIds.length === 0) {
+    throw new ValidationError('No valid product IDs provided');
+  }
   if (validIds.length !== productIds.length) {
-    throw new ValidationError('All product IDs must be valid integers');
+    throw new ValidationError('All product IDs must be valid positive integers');
   }
 
   console.log(`[BULK DELETE] User ${userId} attempting to delete ${validIds.length} products`);

@@ -142,12 +142,12 @@ class ProductService {
         ) as images,
         (
           SELECT json_agg(jsonb_build_object(
-            'attribute_id', pa2.id,
+            'attribute_id', pa2.attribute_id,
             'attribute_name', pa2.attribute_name,
             'attribute_value', pa2.attribute_value,
             'attribute_type', pa2.attribute_type,
             'display_order', pa2.display_order
-          ) ORDER BY pa2.display_order, pa2.id)
+          ) ORDER BY pa2.display_order, pa2.attribute_id)
           FROM product_attributes pa2
           WHERE pa2.product_id = p.id
         ) as attributes,
@@ -331,12 +331,12 @@ class ProductService {
         ) as images,
         (
           SELECT json_agg(jsonb_build_object(
-            'attribute_id', pa2.id,
+            'attribute_id', pa2.attribute_id,
             'attribute_name', pa2.attribute_name,
             'attribute_value', pa2.attribute_value,
             'attribute_type', pa2.attribute_type,
             'display_order', pa2.display_order
-          ) ORDER BY pa2.display_order, pa2.id)
+          ) ORDER BY pa2.display_order, pa2.attribute_id)
           FROM product_attributes pa2
           WHERE pa2.product_id = p.id
         ) as attributes,
