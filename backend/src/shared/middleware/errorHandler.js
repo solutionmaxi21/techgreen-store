@@ -142,7 +142,7 @@ export const errorHandler = (err, req, res, next) => {
   }
 
   // Handle PostgreSQL type errors (e.g., invalid enum value, type mismatch)
-  if (err.code === '42P01' || err.code === '42804' || err.code === '22P02' || err.severity === 'ERROR') {
+  if (err.code === '42P01' || err.code === '42804' || err.code === '22P02') {
     const isProduction = process.env.NODE_ENV === 'production';
     return res.status(422).json({
       success: false,

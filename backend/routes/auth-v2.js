@@ -479,64 +479,19 @@ router.get('/me', authenticateToken, asyncHandler(async (req, res) => {
     jwtIat: req.user.iat
   };
 
-  // For admin panel (browser): return fresh tokens so frontend can populate
-  // in-memory storage after page refresh (HttpOnly cookies can't be read by JS)
+  // For admin panel (browser): return current access token so frontend can
+  // populate in-memory storage after page refresh (HttpOnly cookies unreadable by JS).
+  // We don't rotate the refresh token here — that happens on /auth/refresh.
   const isAdminClient = req.headers['x-client-type'] === 'admin';
   if (isAdminClient) {
-    const { generateAccessToken, generateRefreshToken } = await import('../src/shared/middleware/auth.js');
-    const newAccessToken = generateAccessToken(req.user);
-    const newRefreshToken = generateRefreshToken(req.user);
-
-    // Store new refresh token hash in DB (rotation)
-    const crypto = await import('crypto');
-    const tokenHash = crypto.createHash('sha256').update(newRefreshToken).digest('hex');
-    const userAgent = req.headers['user-agent'];
-    const ipAddress = req.ip;
-
-    // Get current token family to maintain rotation chain
-    const currentToken = req.cookies?.adminRefreshToken || req.cookies?.refreshToken;
-    if (currentToken) {
-      const currentHash = crypto.createHash('sha256').update(currentToken).digest('hex');
-      const existing = await db.queryOne(
-        'SELECT token_family FROM refresh_tokens WHERE token_hash = $1 AND revoked_at IS NULL',
-        [currentHash]
-      );
-      const family = existing?.token_family || crypto.randomUUID();
-
-      // Revoke old token
-      await db.query(
-        'UPDATE refresh_tokens SET revoked_at = NOW(), revoked_reason = $1 WHERE token_hash = $2',
-        ['session_refresh', currentHash]
-      );
-
-      // Store new token
-      await db.query(
-        `INSERT INTO refresh_tokens (user_id, token_hash, token_family, expires_at, ip_address, user_agent)
-         VALUES ($1, $2, $3, NOW() + INTERVAL '7 days', $4, $5)`,
-        [req.user.userId, tokenHash, family, ipAddress, userAgent]
-      );
+    // Re-read the access token from the Authorization header we already validated
+    const authHeader = req.headers['authorization'];
+    if (authHeader) {
+      response.accessToken = authHeader.split(' ')[1];
     }
-
-    // Set new cookies
-    const { COOKIE_OPTIONS } = await import('../src/shared/middleware/auth.js').catch(() => ({}));
-    const REFRESH_COOKIE_OPTIONS = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      path: '/api/auth',
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    };
-    res.cookie('adminAccessToken', newAccessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      path: '/',
-      maxAge: 15 * 60 * 1000
-    });
-    res.cookie('adminRefreshToken', newRefreshToken, REFRESH_COOKIE_OPTIONS);
-
-    response.accessToken = newAccessToken;
-    response.refreshToken = newRefreshToken;
+    // The refresh token cookie is HttpOnly so we can't return it.
+    // The frontend will get a fresh refresh token on the first /auth/refresh call.
+    // For now, send the access token so Authorization headers work for CSRF bypass.
   }
 
   res.json(response);
