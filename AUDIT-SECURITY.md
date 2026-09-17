@@ -129,10 +129,8 @@ The platform has a **solid security foundation** — JWT with refresh rotation, 
 
 ### 🔴 CRITICAL-2: `audit_db.js` Contains Hardcoded Production Database Credentials
 - **File:** `audit_db.js` (root directory, untracked)
-- **Issue:** Contains plaintext Neon PostgreSQL connection string with username/password:
-  ```
-  postgresql://neondb_owner:npg_FOn4bDUgSft1@ep-flat-dew-a507y0q6-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require
-  ```
+- **Issue:** Contains plaintext Neon PostgreSQL connection string with username/password (REDACTED)
+- **Status:** ✅ FIXED — File deleted
 - **Impact:** Anyone with access to the source code has full database access. If this file is accidentally committed or shared, the database is compromised.
 - **Fix:** Delete this file immediately. Use environment variables for all database connections.
 
