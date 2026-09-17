@@ -3,7 +3,7 @@
  * Handles document fallback and caching strategies
  */
 
-const CACHE_NAME = 'offline-cache-v4';
+const CACHE_NAME = 'offline-cache-v5';
 const OFFLINE_PAGE = '/offline.html';
 
 // Install event - cache the offline page
@@ -114,6 +114,7 @@ self.addEventListener('fetch', (event) => {
               setTimeout(() => {
                 fetch(request)
                   .then((retryResponse) => {
+                    // Return retry result with header indicating server was waking up
                     const headers = new Headers(retryResponse.headers);
                     headers.set('X-Server-Waking', 'true');
                     resolve(new Response(retryResponse.body, {

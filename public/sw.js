@@ -3,7 +3,7 @@
  * Handles document fallback and caching strategies
  */
 
-const CACHE_NAME = 'offline-cache-v4';
+const CACHE_NAME = 'offline-cache-v5';
 const OFFLINE_PAGE = '/offline.html';
 
 // Install event - cache the offline page
