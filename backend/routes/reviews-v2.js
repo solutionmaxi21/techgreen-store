@@ -188,7 +188,7 @@ router.post('/', authenticateToken, validate(createReviewSchema), asyncHandler(a
   
   const query = `
     INSERT INTO reviews (
-      product_id, user_id, rating, review_title, review_text,
+      product_id, user_id, rating, title, review_text,
       verified_purchase, status, created_at
     ) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())
     RETURNING *
@@ -275,7 +275,7 @@ router.put('/:id', authenticateToken, validate(updateReviewSchema), asyncHandler
     UPDATE reviews 
     SET rating = $1, 
         review_text = $2, 
-        review_title = $3,
+        title = $3,
         edited_at = NOW(),
         edit_count = COALESCE(edit_count, 0) + 1,
         status = 'PENDING'
@@ -373,7 +373,7 @@ router.get('/', authenticateToken, requireAdmin, validate(getReviewsSchema), asy
       r.product_id,
       r.user_id,
       r.rating,
-      r.review_title as title,
+      r.title as title,
       r.review_text,
       r.verified_purchase,
       r.status,
@@ -650,7 +650,7 @@ router.get('/:id', authenticateToken, requireAdmin, asyncHandler(async (req, res
 
   const review = await db.queryOne(`
     SELECT r.*, u.email as user_email, u.first_name, u.last_name,
-           p.name as product_name, p.slug as product_slug
+           p.product_name as product_name, p.slug as product_slug
     FROM reviews r
     LEFT JOIN users u ON r.user_id = u.id
     LEFT JOIN products p ON r.product_id = p.id

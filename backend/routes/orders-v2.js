@@ -761,7 +761,7 @@ router.post('/', authenticateToken, asyncHandler(async (req, res) => {
     if (shipping_address) {
       const addressQuery = `
         INSERT INTO addresses (
-          user_id, first_name, last_name, address_line_1, address_line_2, 
+          user_id, first_name, last_name, address_line1, address_line_2,
           city, state_province, postal_code, country, phone, is_default, 
           created_at, updated_at
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW())
@@ -1540,7 +1540,7 @@ router.post('/manual', authenticateToken, requireAdmin, asyncHandler(async (req,
       // For now, just insert like normal order flow.
       const addressQuery = `
         INSERT INTO addresses (
-          user_id, first_name, last_name, address_line_1, address_line_2, 
+          user_id, first_name, last_name, address_line1, address_line_2,
           city, state_province, postal_code, country, phone, is_default, 
           created_at, updated_at
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW())

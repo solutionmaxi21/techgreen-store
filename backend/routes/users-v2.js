@@ -51,7 +51,7 @@ router.get('/addresses', authenticateToken, asyncHandler(async (req, res) => {
     userId: addr.user_id,
     firstName: addr.first_name,
     lastName: addr.last_name,
-    addressLine1: addr.address_line_1,
+    addressLine1: addr.address_line1,
     addressLine2: addr.address_line_2,
     city: addr.city,
     state: addr.state_province,
@@ -88,7 +88,7 @@ router.post('/addresses', authenticateToken, asyncHandler(async (req, res) => {
 
     const query = `
       INSERT INTO addresses (
-        user_id, first_name, last_name, address_line_1, address_line_2,
+        user_id, first_name, last_name, address_line1, address_line_2,
         city, state_province, postal_code, country, phone, is_default, created_at
       ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW())
       RETURNING *
@@ -148,7 +148,7 @@ router.put('/addresses/:id', authenticateToken, asyncHandler(async (req, res) =>
       UPDATE addresses
       SET first_name = COALESCE($1, first_name),
           last_name = COALESCE($2, last_name),
-          address_line_1 = COALESCE($3, address_line_1),
+          address_line1 = COALESCE($3, address_line1),
           address_line2 = $4,
           city = COALESCE($5, city),
           state_province = COALESCE($6, state_province),
@@ -414,7 +414,7 @@ router.get('/:id', authenticateToken, requireAdmin, validate(getUserSchema), asy
 
   // Get addresses
   const addressesQuery = `
-    SELECT id, first_name as "firstName", last_name as "lastName", phone, address_line_1 as street, city, state_province as state, postal_code as "postalCode", country, is_default as "isDefault"
+    SELECT id, first_name as "firstName", last_name as "lastName", phone, address_line1 as street, city, state_province as state, postal_code as "postalCode", country, is_default as "isDefault"
     FROM addresses
     WHERE user_id = $1 AND deleted_at IS NULL
     ORDER BY is_default DESC, created_at DESC

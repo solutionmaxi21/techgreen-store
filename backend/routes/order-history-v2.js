@@ -85,7 +85,7 @@ router.get('/', authenticateToken, requireAdmin, asyncHandler(async (req, res) =
   
   const countQuery = query.replace(/SELECT.*FROM/i, 'SELECT COUNT(*) as total FROM');
   const countResult = await db.queryOne(countQuery, params);
-  const total = parseInt(countResult.total);
+  const total = parseInt(countResult?.total || 0);
   
   query += ` ORDER BY oh.${sortField} ${sortDir} LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}`;
   params.push(limitNum, offset);
