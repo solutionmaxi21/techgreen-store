@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import NotificationBell from '../components/NotificationBell';
 import { Toaster } from 'react-hot-toast';
-import logo from '../assets/logo.png';
+import logo from '../assets/techgreen-logo.png';
 import './AdminLayout.css';
 import { canAccessMenuItem } from '../utils/accessControl';
 
@@ -37,7 +37,7 @@ const AdminLayout = ({ children, theme, onToggleTheme, currentUser, onLogout }) 
   // Removed toggleLanguage as it's now handled by the component
 
   const languages = [
-    { code: 'ar', name: 'العربية', flag: '🇩🇿' },
+    { code: 'ar', name: 'العربية', flag: '🌍' },
     { code: 'fr', name: 'Français', flag: '🇫🇷' }
   ];
 
@@ -129,8 +129,8 @@ const AdminLayout = ({ children, theme, onToggleTheme, currentUser, onLogout }) 
         <aside className={`app-sidebar ${mobileOpen ? 'is-mobile-open' : ''}`}>
           <div className="sidebar-header">
             <div className="brand-logo">
-              <img src={logo} alt="MaxiStore" className="logo-icon-img" />
-              <span className="logo-text">MaxiStore</span>
+              <img src={logo} alt={t('common.brandName')} className="logo-icon-img" />
+              <span className="logo-text">{t('common.brandName')}</span>
             </div>
           </div>
 
@@ -259,7 +259,7 @@ const AdminLayout = ({ children, theme, onToggleTheme, currentUser, onLogout }) 
                   <div className="dropdown-menu">
                     <div className="dropdown-header">
                       <span className="dropdown-name">{currentUser ? `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'Admin' : 'Admin'}</span>
-                      <span className="dropdown-email">{currentUser?.email || 'admin@maxistore.com'}</span>
+                      <span className="dropdown-email">{currentUser?.email || ''}</span>
                     </div>
                     <div className="dropdown-divider"></div>
 

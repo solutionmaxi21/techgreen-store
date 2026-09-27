@@ -1,5 +1,5 @@
 # ============================================================
-# MaxiStore Admin Panel — Production Dockerfile
+# TechGreen Admin Panel — Production Dockerfile
 # Multi-stage build: Vite React → Nginx static server
 # ============================================================
 

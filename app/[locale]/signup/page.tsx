@@ -48,7 +48,7 @@ export default function SignupPage() {
   const localT = {
     fr: {
       createAccount: "Créer un Compte",
-      subtitle: "Rejoignez Solution Maxi aujourd'hui",
+      subtitle: "Rejoignez TechGreen aujourd'hui",
       pwdMismatch: "Les mots de passe ne correspondent pas",
       pwdLength: "Le mot de passe doit contenir 8+ caractères, majuscule, minuscule et chiffre",
       phoneReq: "Numéro de téléphone invalide (ex: 05 50 12 34 56)",
@@ -82,7 +82,7 @@ export default function SignupPage() {
     },
     ar: {
       createAccount: "إنشاء حساب",
-      subtitle: "انضم إلى Solution Maxi اليوم",
+      subtitle: "انضم إلى TechGreen اليوم",
       pwdMismatch: "كلمات المرور غير متطابقة",
       pwdLength: "يجب أن تحتوي كلمة المرور على 8 أحرف وأرقام وحروف كبيرة وصغيرة",
       phoneReq: "رقم الهاتف غير صالح (مثال: 0550123456)",

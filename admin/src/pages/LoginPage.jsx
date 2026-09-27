@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { authApi } from '../services/apiService';
 import { Mail, Lock, Eye, EyeOff, Loader2, ArrowRight, Shield, Zap, Globe } from 'lucide-react';
-import logo from '../assets/logo.png';
+import logo from '../assets/techgreen-logo.png';
 import './LoginPage.css';
 import { isAdminPanelUser } from '../utils/accessControl';
 
@@ -85,7 +85,7 @@ const LoginPage = ({ onLogin, theme, onToggleTheme }) => {
           </div>
         </div>
         <div className="branding-footer">
-          <p>&copy; 2026 MaxiStore. Tous droits réservés.</p>
+          <p>&copy; 2026 {t('common.brandName')}. Tous droits réservés.</p>
         </div>
       </div>
 
@@ -95,7 +95,7 @@ const LoginPage = ({ onLogin, theme, onToggleTheme }) => {
           {/* Mobile logo */}
           <div className="mobile-logo">
             <div className="mobile-logo-icon">
-              <img src={logo} alt="MaxiStore" />
+              <img src={logo} alt={t('common.brandName')} />
             </div>
           </div>
 
@@ -118,7 +118,7 @@ const LoginPage = ({ onLogin, theme, onToggleTheme }) => {
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
-                  placeholder="admin@maxistore.com"
+                  placeholder={t('auth.login.emailLabel')}
                   required
                   autoFocus
                 />

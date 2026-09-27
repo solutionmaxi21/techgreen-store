@@ -17,6 +17,7 @@ import { format, type Locale } from "date-fns"
 import { fr, arDZ } from "date-fns/locale"
 import { useRouter } from "next/navigation"
 import { useLanguage } from "@/lib/language-context"
+import { formatPrice } from "@/lib/utils"
 
 // Safe date formatting helper
 const formatDateSafe = (dateInput: any, formatStr: string, locale: Locale): string => {
@@ -281,9 +282,9 @@ export default function OrdersPage() {
                     <div className="flex items-center gap-2">
                       <DollarSign className="h-5 w-5 text-muted-foreground" />
                       <span className="text-2xl font-bold">
-                        {orders
+                        {formatPrice(orders
                           .filter(order => order.current_status === 'delivered')
-                          .reduce((sum, order) => sum + order.total_amount, 0).toLocaleString()} {t.common.dzd}
+                          .reduce((sum, order) => sum + order.total_amount, 0))}
                       </span>
                     </div>
                   </CardContent>
@@ -369,7 +370,7 @@ export default function OrdersPage() {
                                 <div className="flex-1 min-w-0">
                                   <p className="font-medium text-sm truncate">{getLocalizedName(item.product_name_snapshot, language)}</p>
                                   <p className="text-sm text-muted-foreground">
-                                    {t.ordersPage.details.qty}: {item.quantity} × {item.unit_price.toLocaleString()} {t.common.dzd}
+                                    {t.ordersPage.details.qty}: {item.quantity} × {formatPrice(item.unit_price)}
                                   </p>
                                   {/* Review Status/Action for Delivered Orders */}
                                   {order.current_status === 'delivered' && eligibility && (
@@ -419,7 +420,7 @@ export default function OrdersPage() {
                                   )}
                                 </div>
                                 <div className={`${language === 'ar' ? 'text-left' : 'text-right'}`}>
-                                  <p className="font-semibold">{item.line_total.toLocaleString()} {t.common.dzd}</p>
+                                  <p className="font-semibold">{formatPrice(item.line_total)}</p>
                                 </div>
                               </div>
                             )
@@ -475,7 +476,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-sm text-muted-foreground">{t.ordersPage.details.total}</p>
-                          <p className="text-2xl font-bold">{order.total_amount.toLocaleString()} {t.common.dzd}</p>
+                          <p className="text-2xl font-bold">{formatPrice(order.total_amount)}</p>
                         </div>
                         <Link href={`/${language}/orders/${order.order_id}`}>
                           <Button>

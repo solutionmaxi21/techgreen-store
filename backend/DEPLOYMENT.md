@@ -1,6 +1,6 @@
-# 🚀 MaxiStore Backend - Production Deployment Guide
+# 🚀 TechGreen Backend - Production Deployment Guide
 
-Complete guide for deploying the MaxiStore backend API to a production server.
+Complete guide for deploying the TechGreen backend API to a production server.
 
 ## 📋 Table of Contents
 - [Prerequisites](#prerequisites)
@@ -604,4 +604,4 @@ git pull && npm ci --production && npm run migrate && pm2 reload maxistore-backe
 
 ---
 
-**🎉 Your MaxiStore backend is now production-ready!**
+**🎉 Your TechGreen backend is now production-ready!**

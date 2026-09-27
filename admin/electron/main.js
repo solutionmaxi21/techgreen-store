@@ -43,14 +43,14 @@ const __dirname = path.dirname(__filename)
 // Set user data path to AppData so Electron can write cache/cookies
 const userDataPath = path.join(
   process.env.APPDATA || path.join(process.env.HOME || '', 'AppData', 'Roaming'),
-  'Maxi Store Admin'
+  'TechGreen Admin'
 )
 // CRITICAL: Disable hardware acceleration for Windows Server 2019/RDP performance
 app.disableHardwareAcceleration()
 
 app.setPath('userData', userDataPath)
 
-const SERVICE_NAME = 'Maxi Store Admin'
+const SERVICE_NAME = 'TechGreen Admin'
 const TOKEN_ACCOUNT = 'admin-access-token'
 const REFRESH_TOKEN_ACCOUNT = 'admin-refresh-token'
 const isDev = !app.isPackaged
@@ -58,9 +58,9 @@ const PRODUCTION_BACKEND_ORIGIN = 'https://techgreen-store.onrender.com'
 const DEV_SERVER_URL = 'http://localhost:5174'
 const BUILT_INDEX_PATH = path.join(__dirname, '..', 'dist-app', 'index.html')
 const BUILT_APP_ROOT = path.dirname(BUILT_INDEX_PATH)
-const APP_PROTOCOL_SCHEME = 'maxistore-app'
+const APP_PROTOCOL_SCHEME = 'techgreen-app'
 const APP_PROTOCOL_HOST = 'admin'
-const ADMIN_PROTOCOL_SCHEME = 'maxistore-admin'
+const ADMIN_PROTOCOL_SCHEME = 'techgreen-admin'
 const ADMIN_DEEP_LINK_ROUTES = new Map([
   ['accept-invite', '/accept-invite'],
   ['reset-password', '/reset-password'],
@@ -187,7 +187,7 @@ if (!hasSingleInstanceLock) {
 
 // Log startup information
 log.info('='.repeat(80))
-log.info(`Maxi Store Admin v${app.getVersion()} starting...`)
+log.info(`TechGreen Admin v${app.getVersion()} starting...`)
 log.info(`Mode: ${isDev ? 'Development' : 'Production'}`)
 log.info(`Platform: ${process.platform}`)
 log.info(`Electron: ${process.versions.electron}`)
@@ -304,7 +304,7 @@ function createWindow() {
       sandbox: false,
       preload: path.join(__dirname, 'preload.cjs'),
       // Use a persistent partition for stored cookies/data
-      partition: 'persist:maxi-admin',
+      partition: 'persist:techgreen-admin',
       // Disable unnecessary features
       webgl: false,
       plugins: false,
@@ -417,7 +417,7 @@ if (hasSingleInstanceLock) app.whenReady().then(() => {
   log.info('App is ready')
 
   // Configure Content Security Policy
-  const ses = session.fromPartition('persist:maxi-admin')
+  const ses = session.fromPartition('persist:techgreen-admin')
   ses.protocol.handle(APP_PROTOCOL_SCHEME, handlePackagedAppRequest)
   // Only inject token when renderer hasn't set Authorization header already,
   // and never for auth endpoints (they use HttpOnly cookies for refresh/logout)
@@ -428,7 +428,7 @@ if (hasSingleInstanceLock) app.whenReady().then(() => {
       // The backend CORS middleware reads Origin to return the correct
       // Access-Control-Allow-Origin header. Deleting it causes the browser
       // to receive a response WITHOUT CORS headers → CORS error.
-      // maxistore-app:// is explicitly allowed in backend security.js.
+      // techgreen-app:// is explicitly allowed in backend security.js.
 
       // Skip auth endpoints - they rely on cookies, not Bearer tokens
       const url = details.url || ''

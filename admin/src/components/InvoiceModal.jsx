@@ -4,26 +4,25 @@ import { X, Download, Printer, Loader2 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { formatCurrency, formatDate } from '../utils/formatters';
-import logoSrc from '../assets/logo.jpg';
+import logoSrc from '../assets/techgreen-logo.png';
 import stampSrc from '../assets/stamp.png';
 import './InvoiceModal.css';
 
 // ============================================
 // Company Configuration
-// Update these values with your real business info
+// Source of truth: https://www.tech-green.fr/
+// TODO: a French invoice must carry the company's legal identifiers
+// (SIRET, TVA intracommunautaire, RCS). TechGreen does not publish them,
+// so they are intentionally omitted rather than invented.
 // ============================================
 const COMPANY_INFO = {
-  ownerName: 'MELIANI Moufid',
-  address: '7 Lots CFPA 21003 – EL HARROUCH Skikda (DZ) Algérie',
-  rc: '06A0738153',
-  nif: '180240101278195',
-  nis: '198024010127835',
-  ai: '21235186571',
-  brandName: 'SOLUTION MAXI',
-  tagline: 'Plus de temps à perdre !',
-  phone: '0555 00 00 00 / 0666 00 00 00',
-  email: 'contact@solutionmaxi.dz',
-  website: 'www.solutionmaxi.dz',
+  address: "32 Boulevard de l'Ouest, 69580 Sathonay-Camp, France",
+  brandName: 'TechGreen',
+  tagline: 'Une seconde vie éco-responsable pour votre parc IT',
+  phone: '09 74 56 30 97',
+  // TODO: confirm — TechGreen does not publish a contact email address.
+  email: 'contact@tech-green.fr',
+  website: 'www.tech-green.fr',
 };
 
 /**
@@ -227,7 +226,7 @@ function InvoiceModal({ order, isOpen, onClose }) {
   const tax = order.tax || 0;
   const total = order.total || 0;
 
-  // Calculate HT and TVA from total (19% TVA in Algeria)
+  // Derive the HT base and the TVA amount from the TTC total (rate: TVA_RATE)
   const TVA_RATE = 0.19;
   const totalHT = Math.round(total / (1 + TVA_RATE));
   const tvaAmount = total - totalHT;
@@ -271,12 +270,8 @@ function InvoiceModal({ order, isOpen, onClose }) {
             {/* === TOP HEADER: Company Info (left) + Logo (right) === */}
             <div className="inv-top-header">
               <div className="inv-company-box">
-                <div className="inv-company-owner">{COMPANY_INFO.ownerName}</div>
+                <div className="inv-company-owner">{COMPANY_INFO.brandName}</div>
                 <div className="inv-company-address">{COMPANY_INFO.address}</div>
-                <div className="inv-company-reg">{t('invoice.rc')} : {COMPANY_INFO.rc}</div>
-                <div className="inv-company-reg">{t('invoice.nif')} : {COMPANY_INFO.nif}</div>
-                <div className="inv-company-reg">{t('invoice.nis')} : {COMPANY_INFO.nis}</div>
-                <div className="inv-company-reg">A.I : {COMPANY_INFO.ai}</div>
               </div>
               <div className="inv-logo-section">
                 <img src={logoSrc} alt={COMPANY_INFO.brandName} className="inv-logo" />

@@ -1,6 +1,6 @@
 #!/bin/bash
 ###################################################################
-# MaxiStore Backend - Linux Server Production Setup Script
+# TechGreen Backend - Linux Server Production Setup Script
 ###################################################################
 # This script automates the production setup on Linux servers
 # 
@@ -13,7 +13,7 @@ set -e
 
 echo ""
 echo "========================================"
-echo " MaxiStore Backend - Production Setup"
+echo " TechGreen Backend - Production Setup"
 echo "========================================"
 echo ""
 

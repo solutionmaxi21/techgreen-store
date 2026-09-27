@@ -5,6 +5,7 @@ import { useLanguage } from "@/lib/language-context"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { CONTACT_INFO } from "@/config/constants"
 import { AlertCircle, CheckCircle, Clock } from "lucide-react"
 
 export default function ReturnsRefundsPage() {
@@ -12,80 +13,78 @@ export default function ReturnsRefundsPage() {
 
   const content = {
     fr: {
-      title: "Politique de Retours & Remboursements",
-      intro: "Chez Solutionmaxi, nous voulons que vous soyez entièrement satisfait de votre achat. Découvrez nos conditions de retour et de remboursement ci-dessous.",
+      title: "Retours & Remboursements",
+      intro: "Les conditions dans lesquelles un matériel peut nous être retourné.",
       sections: [
         {
           icon: "check",
-          title: "À la Réception du Produit",
-          content: "Lorsque vous recevez votre commande, vous avez le droit de vérifier le produit directement avec le livreur avant d'accepter le colis. Vérifiez que c'est le bon produit, que l'emballage n'est pas endommagé et que le contenu est intact. C'est votre opportunité d'inspecter le matériel pour tout dommage ou défaut."
+          title: "Vérification à la Réception",
+          content: "À la réception, vous pouvez vérifier le produit avec le transporteur avant d'accepter le colis : référence, état de l'emballage et intégrité du contenu. C'est le moment d'inspecter le matériel."
         },
         {
           icon: "alert",
-          title: "Signalement Immédiat des Problèmes",
-          content: "Si vous découvrez une erreur (produit incorrect, mauvaise référence) ou un défaut de qualité, vous devez le signaler immédiatement au livreur. Important : vous ne pouvez pas vous éloigner du livreur avec le colis avant de l'avoir vérifié et payé."
+          title: "Signalement Immédiat",
+          content: "Si vous constatez une erreur (produit ou référence incorrecte) ou un défaut, signalez-le au transporteur avant de régler le colis. Ne vous éloignez pas avec le colis avant cette vérification."
         },
         {
           icon: "check",
-          title: "Processus d'Échange Gratuit",
-          content: "Si le problème provient de notre part ou si le produit a un défaut de fabrication, nous vous offrons un échange gratuit. Un livreur reviendra vous récupérer l'article défectueux et vous apportera le produit correct - complètement gratuit, frais de livraison inclus."
+          title: "Erreur de Notre Part",
+          content: "Si l'erreur vient de nous, ou si le matériel présente un défaut constaté à la réception, nous prenons en charge le retour et son acheminement."
         },
         {
           icon: "alert",
-          title: "Si l'Erreur Vient de Vous",
-          content: "Si vous avez commandé le mauvais produit par erreur ou si vous n'êtes finalement pas satisfait du choix, vous pouvez toujours demander un échange ou un retour. Cependant, les frais de livraison pour ce type de retour seront à votre charge, et le produit doit être dans son état d'origine, non utilisé ou endommagé par vous."
+          title: "Retour à Votre Initiative",
+          content: "Si le retour résulte de votre choix, le matériel doit nous revenir dans son état d'origine, complet et non utilisé. Les frais d'acheminement du retour sont alors à votre charge. Les délais et conditions applicables vous sont confirmés par écrit par notre équipe avant tout retour."
         },
         {
           icon: "clock",
           title: "Remboursements",
-          content: "Les remboursements sont traités après approbation du retour par notre équipe. Si votre produit arrive gravement endommagé et ne peut être réparé, nous procéderons à un remboursement complet du prix d'achat. Les remboursements sont généralement traités dans les 7-10 jours ouvrables."
+          content: "Un remboursement est traité après réception et contrôle du matériel retourné. Il est effectué sur le moyen de paiement utilisé lors de la commande."
         },
         {
           icon: "alert",
-          title: "Conditions Non Couvertes",
-          content: "Les retours ne sont pas acceptés pour : les produits ouverts et utilisés (sauf défaut de fabrication), les produits endommagés ou modifiés par une mauvaise utilisation, les accessoires manquants après démontage ou utilisation, les produits avec signes évidents d'usage ou de test."
+          title: "Cas Non Couverts",
+          content: "Les retours ne sont pas acceptés pour : les produits ouverts et utilisés (sauf défaut de fabrication), les produits endommagés ou modifiés par une mauvaise utilisation, les accessoires manquants après démontage ou utilisation, les produits présentant des signes évidents d'usage."
         }
       ],
-      contactInfo: "Pour toute question concernant les retours ou les remboursements, contactez-nous à",
-      email: "support@solutionmaxi.com"
+      contactInfo: "Pour toute question sur un retour ou un remboursement, contactez-nous :"
     },
     ar: {
-      title: "سياسة الإرجاع والاسترجاع",
-      intro: "في Solutionmaxi، نريد أن تكون راضياً تماماً عن عملية الشراء. اكتشف شروط الإرجاع والاسترجاع أدناه.",
+      title: "الإرجاع والاسترجاع",
+      intro: "الشروط التي يمكن بموجبها إرجاع المعدات إلينا.",
       sections: [
         {
           icon: "check",
-          title: "عند استلام المنتج",
-          content: "عندما تستقبل طلبك، لديك الحق في التحقق من المنتج مباشرة مع موظف التوصيل قبل قبول الطرد. تحقق من أنه المنتج الصحيح، وأن الصندوق غير تالف، وأن المحتويات سليمة. هذه فرصتك للتحقق من الأجهزة بحثاً عن أي ضرر أو عيب."
+          title: "التحقق عند الاستلام",
+          content: "عند الاستلام، يمكنكم التحقق من المنتج مع موظف الشحن قبل قبول الطرد: المرجع، وحالة التغليف، وسلامة المحتويات. هذه هي فرصتكم لفحص المعدات."
         },
         {
           icon: "alert",
-          title: "الإبلاغ الفوري عن المشاكل",
-          content: "إذا اكتشفت خطأ (منتج خاطئ، مرجع خاطئ) أو عيب في الجودة، يجب عليك الإبلاغ عنه فورًا لموظف التوصيل. مهم: لا يمكنك الابتعاد عن موظف التوصيل بالطرد قبل التحقق منه والدفع."
+          title: "الإبلاغ الفوري",
+          content: "إذا لاحظتم خطأً (منتج أو مرجع غير صحيح) أو عيبًا، أبلغوا موظف الشحن قبل الدفع. لا تبتعدوا بالطرد قبل هذا التحقق."
         },
         {
           icon: "check",
-          title: "عملية الاستبدال المجاني",
-          content: "إذا كانت المشكلة من جانبنا أو كان المنتج به عيب في التصنيع، نقدم لك استبدال مجاني. سيعود موظف توصيل لاستعادة المنتج التالف وإحضار المنتج الصحيح - بالكامل مجاني، بما في ذلك رسوم التوصيل."
+          title: "إذا كان الخطأ من جانبنا",
+          content: "إذا كان الخطأ من جانبنا، أو إذا كانت المعدات بها عيب مُثبت عند الاستلام، فإننا نتحمل مسؤولية الإرجاع ونقل المعدات."
         },
         {
           icon: "alert",
-          title: "إذا كان الخطأ من جانبك",
-          content: "إذا طلبت المنتج الخاطئ بالخطأ أو إذا لم تكن راضياً في النهاية عن الاختيار، يمكنك طلب استبدال أو إرجاع. ومع ذلك، ستكون رسوم التوصيل لهذا النوع من الإرجاع على عاتقك، ويجب أن يكون المنتج في حالته الأصلية، غير مستخدم أو تالف من قبلك."
+          title: "الإرجاع بمبادرة منكم",
+          content: "إذا كان الإرجاع بمبادرة منكم، فيجب أن تعود المعدات بحالتها الأصلية، كاملة وغير مستعملة. وفي هذه الحالة تكون تكاليف نقل الإرجاع على عاتقكم. ويتم تأكيد الآجال والشروط المطبقة كتابيًا من طرف فريقنا قبل أي إرجاع."
         },
         {
           icon: "clock",
-          title: "المستردات",
-          content: "يتم معالجة المستردات بعد موافقة فريقنا على الإرجاع. إذا وصل المنتج الخاص بك تالفاً بشدة ولا يمكن إصلاحه، سنقوم برد كامل سعر الشراء. عادةً ما تتم معالجة المستردات في غضون 7-10 أيام عمل."
+          title: "الاسترجاع",
+          content: "تتم معالجة الاسترجاع بعد استلام المعدات المرجعة وفحصها. ويتم الاسترجاع عبر وسيلة الدفع المستعملة في الطلب."
         },
         {
           icon: "alert",
-          title: "الشروط غير المغطاة",
-          content: "لا يتم قبول الإرجاع للمنتجات التالية: المنتجات المفتوحة والمستخدمة (ما لم يكن هناك عيب صناعي)، المنتجات التالفة أو المعدلة بسبب سوء الاستخدام، الملحقات المفقودة بعد الفك أو الاستخدام، المنتجات التي تظهر عليها علامات واضحة من الاستخدام أو الاختبار."
+          title: "الحالات غير المشمولة",
+          content: "لا يتم قبول الإرجاع في: المنتجات المفتوحة والمستعملة (ما لم يكن هناك عيب صناعي)، المنتجات التالفة أو المعدلة بسبب سوء الاستعمال، الملحقات المفقودة بعد الفك أو الاستعمال، المنتجات التي تظهر عليها علامات استعمال واضحة."
         }
       ],
-      contactInfo: "للاستفسارات حول الإرجاع أو المستردات، اتصل بنا على",
-      email: "support@solutionmaxi.com"
+      contactInfo: "لأي استفسار حول الإرجاع أو الاسترجاع، تواصلوا معنا:"
     }
   }
 
@@ -102,44 +101,51 @@ export default function ReturnsRefundsPage() {
       <Header />
       <main className="flex-1">
         <div className="container mx-auto px-4 py-12">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-            <p className="text-lg text-muted-foreground mb-12">
-              {data.intro}
-            </p>
+          <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
+          <p className="text-lg text-muted-foreground mb-12 max-w-4xl">
+            {data.intro}
+          </p>
 
-            <div className="space-y-6 mb-12">
-              {data.sections.map((section, index) => (
-                <Card key={index} className="border-l-4 border-l-primary">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      {iconMap[section.icon as keyof typeof iconMap]}
-                      {section.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">{section.content}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+            {data.sections.map((section, index) => (
+              <Card key={index} className="border-l-4 border-l-primary h-full">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    {iconMap[section.icon as keyof typeof iconMap]}
+                    {section.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">{section.content}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-            <Card className="bg-muted/50">
-              <CardContent className="py-6">
-                <p className="text-center text-muted-foreground">
-                  {data.contactInfo}{' '}
-                  <a href={`mailto:${data.email}`} className="text-primary hover:underline font-medium">
-                    {data.email}
-                  </a>
-                </p>
-              </CardContent>
-            </Card>
+          <Card className="bg-muted/50">
+            <CardContent className="py-6">
+              <p className="text-center text-muted-foreground">
+                {data.contactInfo}{' '}
+                <a href={`mailto:${CONTACT_INFO.email.primary}`} className="text-primary hover:underline font-medium">
+                  {CONTACT_INFO.email.primary}
+                </a>
+                {' · '}
+                <a
+                  href={`tel:${CONTACT_INFO.phone.primary}`}
+                  dir="ltr"
+                  style={{ direction: 'ltr', unicodeBidi: 'isolate' }}
+                  className="text-primary hover:underline font-medium"
+                >
+                  {CONTACT_INFO.phone.display.primary}
+                </a>
+              </p>
+            </CardContent>
+          </Card>
 
-            <div className="mt-8 text-center">
-              <Link href="/faq" className="text-primary hover:underline">
-                {language === 'ar' ? '← العودة إلى الأسئلة الشائعة' : '← Retour aux questions fréquentes'}
-              </Link>
-            </div>
+          <div className="mt-8 text-center">
+            <Link href={`/${language}/faq`} className="text-primary hover:underline">
+              {language === 'ar' ? '← العودة إلى الأسئلة الشائعة' : '← Retour aux questions fréquentes'}
+            </Link>
           </div>
         </div>
       </main>

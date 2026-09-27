@@ -39,6 +39,7 @@ import {
   FileText,
 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { formatPrice } from "@/lib/utils"
 
 const getLocalizedName = (value: string | { fr?: string; ar?: string } | null | undefined, locale: string = 'fr'): string => {
   if (value === null || value === undefined) return '';
@@ -589,16 +590,16 @@ export default function OrderDetailPage() {
                       <div className="flex-1 min-w-0">
                         <p className="font-medium truncate">{getLocalizedName(item.product_name_snapshot, language)}</p>
                         <p className="text-sm text-muted-foreground">
-                          {(item.unit_price ?? 0).toLocaleString()} {t.common.dzd} × {item.quantity ?? 1}
+                          {formatPrice((item.unit_price ?? 0))} × {item.quantity ?? 1}
                         </p>
                         {(item.discount_amount ?? 0) > 0 && (
                           <p className="text-sm text-primary">
-                            {t.cart.discount}: -{(item.discount_amount ?? 0).toLocaleString()} {t.common.dzd}
+                            {t.cart.discount}: -{formatPrice((item.discount_amount ?? 0))}
                           </p>
                         )}
                       </div>
                       <div className="text-right flex-shrink-0">
-                        <p className="font-semibold">{(item.line_total ?? 0).toLocaleString()} {t.common.dzd}</p>
+                        <p className="font-semibold">{formatPrice((item.line_total ?? 0))}</p>
                       </div>
                     </div>
                   ))}
@@ -621,28 +622,28 @@ export default function OrderDetailPage() {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">{t.cart.subtotal}</span>
-                        <span>{(order.subtotal ?? 0).toLocaleString()} {t.common.dzd}</span>
+                        <span>{formatPrice((order.subtotal ?? 0))}</span>
                       </div>
                       {order.discount_amount != null && order.discount_amount > 0 && (
                         <div className="flex justify-between text-sm text-primary">
                           <span>{t.cart.discount}</span>
-                          <span>-{(order.discount_amount ?? 0).toLocaleString()} {t.common.dzd}</span>
+                          <span>-{formatPrice((order.discount_amount ?? 0))}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">{t.cart.shipping}</span>
-                        <span>{(order.shipping_cost ?? 0).toLocaleString()} {t.common.dzd}</span>
+                        <span>{formatPrice((order.shipping_cost ?? 0))}</span>
                       </div>
                       {order.tax_amount != null && order.tax_amount > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-muted-foreground">{txt.taxes}</span>
-                          <span>{(order.tax_amount ?? 0).toLocaleString()} {t.common.dzd}</span>
+                          <span>{formatPrice((order.tax_amount ?? 0))}</span>
                         </div>
                       )}
                       <Separator />
                       <div className="flex justify-between font-bold text-lg">
                         <span>{t.cart.total}</span>
-                        <span>{(order.total_amount ?? 0).toLocaleString()} {t.common.dzd}</span>
+                        <span>{formatPrice((order.total_amount ?? 0))}</span>
                       </div>
                     </div>
                   </>
@@ -715,22 +716,22 @@ export default function OrderDetailPage() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{t.cart.subtotal}</span>
-                    <span>{(order.subtotal ?? 0).toLocaleString()} {t.common.dzd}</span>
+                    <span>{formatPrice((order.subtotal ?? 0))}</span>
                   </div>
                   {order.discount_amount != null && order.discount_amount > 0 && (
                     <div className="flex justify-between text-sm text-primary">
                       <span>{t.cart.discount}</span>
-                      <span>-{(order.discount_amount ?? 0).toLocaleString()} {t.common.dzd}</span>
+                      <span>-{formatPrice((order.discount_amount ?? 0))}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{t.cart.shipping}</span>
-                    <span>{(order.shipping_cost ?? 0).toLocaleString()} {t.common.dzd}</span>
+                    <span>{formatPrice((order.shipping_cost ?? 0))}</span>
                   </div>
                   <Separator />
                   <div className="flex justify-between font-bold text-lg">
                     <span>{t.cart.total}</span>
-                    <span>{(order.total_amount ?? 0).toLocaleString()} {t.common.dzd}</span>
+                    <span>{formatPrice((order.total_amount ?? 0))}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -770,7 +771,7 @@ export default function OrderDetailPage() {
                           {language === 'ar' ? 'المبلغ المدفوع مسبقاً' : 'Montant Prépayé'}
                         </span>
                         <span className="font-medium text-primary">
-                          {(order.prepaid_amount ?? 0).toLocaleString()} {t.common.dzd}
+                          {formatPrice((order.prepaid_amount ?? 0))}
                         </span>
                       </div>
                       {(order.cod_amount ?? 0) > 0 && (
@@ -779,7 +780,7 @@ export default function OrderDetailPage() {
                             {language === 'ar' ? 'المتبقي للدفع' : 'Restant à Payer'}
                           </span>
                           <span className="font-bold text-warning">
-                            {(order.cod_amount ?? 0).toLocaleString()} {t.common.dzd}
+                            {formatPrice((order.cod_amount ?? 0))}
                           </span>
                         </div>
                       )}
@@ -792,7 +793,7 @@ export default function OrderDetailPage() {
                       <AlertDescription className="text-sm">
                         {txt.payOnDelivery}{' '}
                         <span className="font-bold">
-                          {((order.cod_amount ?? 0) > 0 ? (order.cod_amount ?? 0) : (order.total_amount ?? 0)).toLocaleString()} {t.common.dzd}
+                          {formatPrice(((order.cod_amount ?? 0) > 0 ? (order.cod_amount ?? 0) : (order.total_amount ?? 0)))}
                         </span>{' '}
                         {txt.payOnDelivery2}
                       </AlertDescription>
@@ -810,7 +811,7 @@ export default function OrderDetailPage() {
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">{txt.paidAmount}</span>
                       <span className="font-semibold text-primary">
-                        {order.paid_amount.toLocaleString()} {t.common.dzd}
+                        {formatPrice(order.paid_amount)}
                       </span>
                     </div>
                   )}

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { DarkBgLogo } from "@/components/theme-logo"
-import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail, Linkedin } from "lucide-react"
+import { Facebook, MapPin, Phone, Mail, Linkedin } from "lucide-react"
 import { CONTACT_INFO, COMPANY_INFO } from "../config/constants"
 import { SOCIAL_LINKS } from "../config/socialLinks"
 import { useLanguage } from "@/lib/language-context"
@@ -26,10 +26,12 @@ export function Footer() {
               />
             </div>
             <p className="text-footer-muted mb-4 text-sm leading-relaxed">
-              {language === 'ar' ? `حلول معلوماتية وتكنولوجية للشركات في الجزائر. منذ ${COMPANY_INFO.foundedYear}.` : `${COMPANY_INFO.description}. Depuis ${COMPANY_INFO.foundedYear}.`}
+              {language === 'ar'
+                ? 'إعادة تأهيل معدات الحواسيب والهواتف المحمولة للشركات في منطقة ليون. خبرة 10 سنوات.'
+                : `${COMPANY_INFO.description}. ${COMPANY_INFO.experienceYears} ans d'expérience.`}
             </p>
             <div className="flex gap-3">
-              {SOCIAL_LINKS.filter(link => ['Facebook', 'Instagram', 'LinkedIn'].includes(link.name)).map((social) => (
+              {SOCIAL_LINKS.map((social) => (
                 <Link
                   key={social.name}
                   href={social.url}
@@ -39,7 +41,6 @@ export function Footer() {
                   aria-label={social.ariaLabel}
                 >
                   {social.name === 'Facebook' && <Facebook className="h-4 w-4" aria-hidden="true" />}
-                  {social.name === 'Instagram' && <Instagram className="h-4 w-4" aria-hidden="true" />}
                   {social.name === 'LinkedIn' && <Linkedin className="h-4 w-4" aria-hidden="true" />}
                 </Link>
               ))}
@@ -126,12 +127,6 @@ export function Footer() {
                 <Phone className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                 <a href={`tel:${CONTACT_INFO.phone.primary}`} dir="ltr" style={{ direction: 'ltr', unicodeBidi: 'isolate' }} className="text-footer-muted hover:text-primary transition-colors text-sm">
                   {CONTACT_INFO.phone.display.primary}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                <a href={`tel:${CONTACT_INFO.phone.secondary}`} dir="ltr" style={{ direction: 'ltr', unicodeBidi: 'isolate' }} className="text-footer-muted hover:text-primary transition-colors text-sm">
-                  {CONTACT_INFO.phone.display.secondary}
                 </a>
               </li>
               <li className="flex items-center gap-3">

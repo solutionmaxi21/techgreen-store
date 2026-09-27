@@ -1,5 +1,5 @@
 # ============================================================
-# MaxiStore Backend — Production Dockerfile
+# TechGreen Backend — Production Dockerfile
 # Multi-stage build for Express + PostgreSQL (pg) API
 # ============================================================
 

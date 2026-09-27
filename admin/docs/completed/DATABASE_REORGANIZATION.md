@@ -93,7 +93,7 @@ The mock database has been successfully reorganized for better maintainability a
 
 ### Users (15)
 - 3 admins: admin@example.com, manager@example.com, staff@example.com
-- 12 customers with Algerian addresses
+- 12 customers with legacy addresses
 - Password: admin123 (for admins), customer123 (for customers)
 
 ### Orders (30)

@@ -276,7 +276,7 @@ class GuepexAPIClient {
         'X-API-TOKEN': this.apiToken,
         'Accept': 'application/json',
         'Accept-Encoding': 'gzip, deflate',
-        'User-Agent': 'MaxiStore/1.0 (Algerian E-Commerce)'
+        'User-Agent': 'TechGreen-Store/1.0'
       },
       agent: this.agent,
       timeout: options.timeout || 30000

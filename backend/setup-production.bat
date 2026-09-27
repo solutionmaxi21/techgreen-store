@@ -1,6 +1,6 @@
 @echo off
 REM ===================================================================
-REM MaxiStore Backend - Windows Server Production Setup Script
+REM TechGreen Backend - Windows Server Production Setup Script
 REM ===================================================================
 REM This script automates the production setup on Windows Server
 REM 
@@ -12,7 +12,7 @@ REM ===================================================================
 
 echo.
 echo ========================================
-echo  MaxiStore Backend - Production Setup
+echo  TechGreen Backend - Production Setup
 echo ========================================
 echo.
 

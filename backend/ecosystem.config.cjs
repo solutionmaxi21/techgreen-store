@@ -1,5 +1,5 @@
 /**
- * PM2 Ecosystem Configuration for MaxiStore Backend
+ * PM2 Ecosystem Configuration for TechGreen Backend
  * 
  * PM2 is a production process manager for Node.js applications
  * Features: Auto-restart, clustering, monitoring, log management

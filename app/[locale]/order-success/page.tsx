@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/lib/language-context"
+import { formatPrice } from "@/lib/utils"
 
 function OrderSuccessContent() {
   const searchParams = useSearchParams()
@@ -66,7 +67,7 @@ function OrderSuccessContent() {
           <div className="text-left rtl:text-right space-y-2">
             <p className="font-semibold text-foreground">{txt.codTitle}</p>
             <p className="text-sm text-muted-foreground">
-              {txt.codMsg} <span className="font-bold">{parseInt(total).toLocaleString()} {t.common.dzd}</span> {txt.codMsg2}
+              {txt.codMsg} <span className="font-bold">{formatPrice(parseInt(total))}</span> {txt.codMsg2}
             </p>
           </div>
         </div>

@@ -1,7 +1,7 @@
-# Currency Update - Algerian Dinars (DA)
+# Currency Update - Dinars (DA)
 
 ## Overview
-All pricing throughout the admin panel has been updated to display in **Algerian Dinars (DA)** instead of US Dollars.
+All pricing throughout the admin panel has been updated to display in **dinars (DA)** instead of US Dollars.
 
 ## Changes Made
 
@@ -9,8 +9,8 @@ All pricing throughout the admin panel has been updated to display in **Algerian
 Created a new utility file: `src/utils/formatters.js`
 
 **Key Features:**
-- `formatCurrency(amount)` - Formats numbers as Algerian Dinars with proper locale
-- Format: `123,456 DA` (using French-Algerian locale `fr-DZ`)
+- `formatCurrency(amount)` - Formats numbers as dinars with proper locale
+- Format: `123,456 DA` (using the `fr-DZ` locale)
 - Includes additional utilities for numbers, percentages, dates, etc.
 
 **Example:**
@@ -78,7 +78,7 @@ Revenue: 125 000 DA
 
 ## Number Formatting Details
 
-The Algerian Dinar (DA) uses the **French-Algerian locale** (`fr-DZ`):
+The dinar (DA) uses the **`fr-DZ` locale**:
 - **Thousands separator:** Space (` `)
 - **Decimal separator:** Comma (`,`)
 - **Currency symbol:** `DA` (after the amount)
@@ -102,7 +102,7 @@ Product form inputs now clearly indicate DA currency:
 
 1. **Consistency** - Single source of truth for currency formatting
 2. **Maintainability** - Easy to update currency format in one place
-3. **Localization** - Proper Algerian number formatting
+3. **Localization** - Proper number formatting
 4. **User-Friendly** - Clear DA indication on all prices
 
 ## Testing
@@ -135,5 +135,5 @@ If multi-currency support is needed:
 ---
 
 **Last Updated:** December 2024  
-**Currency:** Algerian Dinar (DA)  
+**Currency:** Dinar (DA)  
 **Locale:** fr-DZ

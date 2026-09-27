@@ -18,7 +18,7 @@ import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
 import { productsApi, categoriesApi, collectionsApi, type Product, type Category, type Collection } from "@/lib/api"
 import { useLanguage } from "@/lib/language-context"
-import { getLocalizedName } from "@/lib/utils"
+import { formatPrice, getLocalizedName } from "@/lib/utils"
 
 type SortOption = "featured" | "price-low" | "price-high" | "newest" | "rating"
 
@@ -227,13 +227,6 @@ export default function StorePage() {
     })
   }, [parentCategories, categorySearch, language])
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(language === 'ar' ? 'ar-DZ' : 'fr-DZ', {
-      style: 'decimal',
-      maximumFractionDigits: 0
-    }).format(price)
-  }
-
   const applyPriceInputs = () => {
     const parsedMin = minPriceInput.trim() === "" ? 0 : Number(minPriceInput)
     const parsedMax = maxPriceInput.trim() === "" ? maxPrice : Number(maxPriceInput)
@@ -252,12 +245,13 @@ export default function StorePage() {
       if (!col.is_active) return false
       if (!collectionsSearch) return true
       const searchLower = collectionsSearch.toLowerCase()
-      const nameAr = col.collection_name?.ar?.toLowerCase() || ''
-      const nameFr = col.collection_name?.fr?.toLowerCase() || ''
-      const taglineAr = col.tagline?.ar?.toLowerCase() || ''
-      const taglineFr = col.tagline?.fr?.toLowerCase() || ''
-      return nameAr.includes(searchLower) || nameFr.includes(searchLower) || 
-             taglineAr.includes(searchLower) || taglineFr.includes(searchLower)
+      const haystack = [
+        getLocalizedName(col.collection_name, 'fr'),
+        getLocalizedName(col.collection_name, 'ar'),
+        getLocalizedName(col.tagline, 'fr'),
+        getLocalizedName(col.tagline, 'ar'),
+      ].join(' ').toLowerCase()
+      return haystack.includes(searchLower)
     })
 
     return (
@@ -279,7 +273,7 @@ export default function StorePage() {
           {/* Current Range Display */}
           <div className="text-center">
             <div className="text-sm font-semibold text-foreground">
-              {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])} {t.common.dzd}
+              {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])}
             </div>
             <div className="text-xs text-muted-foreground mt-0.5">
               {t.store.adjustPriceRange}
@@ -298,8 +292,8 @@ export default function StorePage() {
             />
             {/* Min/Max labels under slider */}
             <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
-              <span>0 {t.common.dzd}</span>
-              <span>{formatPrice(maxPrice)} {t.common.dzd}</span>
+              <span>{formatPrice(0)}</span>
+              <span>{formatPrice(maxPrice)}</span>
             </div>
           </div>
 
@@ -534,9 +528,7 @@ export default function StorePage() {
                           <h4 className={`font-medium text-sm truncate transition-colors ${
                             isSelected ? 'text-primary' : 'text-foreground'
                           }`}>
-                            {language === 'ar' 
-                              ? collection.collection_name?.ar || collection.collection_name?.fr 
-                              : collection.collection_name?.fr || collection.collection_name?.ar}
+                            {getLocalizedName(collection.collection_name, language)}
                           </h4>
                         </div>
 

@@ -1,8 +1,21 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { COUNTRY_COOKIE, MARKETS } from './config/market'
 
 const locales = ['fr', 'ar']
 const defaultLocale = 'fr'
+
+/**
+ * Headers set by hosting/CDN providers that carry the visitor's country.
+ * Read in order; the first present one wins. No external lookup is performed,
+ * so this adds no network call and leaks nothing to a third party.
+ */
+const COUNTRY_HEADERS = [
+  'x-vercel-ip-country',   // Vercel
+  'cf-ipcountry',          // Cloudflare
+  'x-country-code',        // generic / Render
+  'x-geo-country',         // generic
+]
 
 // Protected routes that require authentication
 const PROTECTED_ROUTES = [

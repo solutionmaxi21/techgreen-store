@@ -26,6 +26,8 @@ import { Footer } from "@/components/footer"
 import { toast } from "sonner"
 import { User, Mail, Phone, Lock, MapPin, Plus, Edit, Trash2, Home } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { useMarket } from "@/lib/market-context"
+import { isValidPhoneForMarket } from "@/config/market"
 
 import { useProtectedRoute } from "@/hooks/useProtectedRoute"
 
@@ -34,6 +36,9 @@ export default function AccountPage() {
   const { user, updateUser } = useAuth()
   const router = useRouter()
   const { t, language } = useLanguage()
+  // The country of an address comes from the active market, so the address book
+  // never defaults a visitor from another country to Algeria.
+  const { market } = useMarket()
   const [isLoading, setIsLoading] = useState(false)
   const [addresses, setAddresses] = useState<Address[]>([])
   const [isAddressDialogOpen, setIsAddressDialogOpen] = useState(false)
@@ -68,7 +73,7 @@ export default function AccountPage() {
     city: "",
     state: "",
     postalCode: "",
-    country: "Algeria",
+    country: market.countryName,
     phone: "",
     isDefault: false,
   })
@@ -98,17 +103,12 @@ export default function AccountPage() {
     e.preventDefault()
      const cleanPhone = profileForm.phone.replace(/\s/g, '')
     
-    // 2. Regex for Algerian Numbers (05, 06, 07 followed by 8 digits)
-    const phoneRegex = /^(05|06|07)[0-9]{8}$/
-
-    // 3. Check if phone is not empty and invalid
-    if (cleanPhone && !phoneRegex.test(cleanPhone)) {
+    // Validate against the active market's phone rules (config/market.ts)
+    if (cleanPhone && !isValidPhoneForMarket(cleanPhone, market)) {
       setErrorDialog({
         open: true,
         title: t.alertDialogs.accountError.title,
-        description: language === 'ar' 
-          ? "رقم الهاتف غير صالح (مثال: 0550123456)" 
-          : "Numéro de téléphone invalide (ex: 05 50 12 34 56)",
+        description: market.phone.error[language === "ar" ? "ar" : "fr"],
       })
       return
     }
@@ -269,7 +269,7 @@ export default function AccountPage() {
       city: "",
       state: "",
       postalCode: "",
-      country: "Algeria",
+      country: market.countryName,
       phone: user?.phone || "",
       isDefault: false,
     })

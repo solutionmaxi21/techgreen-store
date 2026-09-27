@@ -1,4 +1,4 @@
--- PostgreSQL Database Schema for Algerian Hardware E-Commerce
+-- PostgreSQL Database Schema for TechGreen E-Commerce
 -- Generated: 2025-12-30
 -- Migration from JSON to PostgreSQL
 

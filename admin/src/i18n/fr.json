@@ -116,6 +116,7 @@
     "returning": "En cours de retour"
   },
   "common": {
+    "brandName": "TechGreen",
     "close": "Fermer",
     "copy": "Copier",
     "pageOf": "Page {{page}} sur {{total}}",
@@ -223,7 +224,7 @@
       "passwordLabel": "Mot de passe",
       "signIn": "Se connecter",
       "signingIn": "Connexion...",
-      "protectedBy": "Protégé par MaxiStore Secure Auth"
+      "protectedBy": "Protégé par TechGreen Secure Auth"
     },
     "errors": {
       "accessDeniedAdmin": "Accès refusé : des privilèges administrateur sont requis.",
@@ -280,7 +281,7 @@
       "creditCard": "Carte bancaire",
       "customerNote": "Note du client",
       "sku": "SKU",
-      "algeria": "Algérie",
+      "country": "Pays",
       "updateStatusFailed": "Échec de la mise à jour du statut",
       "phoneConfirm": {
         "title": "Confirmation téléphonique requise",
@@ -359,8 +360,8 @@
         "selectedDesc": "Le client récupérera la commande directement au magasin. Aucun frais de livraison.",
         "selectWarehouse": "Sélectionner l'entrepôt",
         "warehouse": {
-          "algiers": "Entrepôt Alger (Algiers)",
-          "harrouch": "Dépôt Harrouch (Skikda)"
+          "main": "Entrepôt principal",
+          "secondary": "Dépôt secondaire"
         }
       },
       "shipping": {
@@ -598,7 +599,7 @@
     },
     "help": {
       "title": "Besoin d'assistance infrastructure ?",
-      "desc": "Contactez l'équipe dev à tech@maxistore.com pour la maintenance serveur."
+      "desc": "Contactez l'équipe de développement pour la maintenance serveur."
     }
   },
   "categories": {
@@ -1356,7 +1357,7 @@
       "sectionTitle": " Informations sur le fournisseur",
       "name": "Nom du fournisseur",
       "nameRequired": "Le nom du fournisseur est requis",
-      "namePlaceholder": "ex : Dell Technologies Algérie",
+      "namePlaceholder": "ex : Dell Technologies",
       "nameHint": "Nom légal complet de l'entreprise fournisseur",
       "email": "E-mail de contact",
       "emailRequired": "L'e-mail de contact est requis",
@@ -1819,7 +1820,7 @@
     "serviceUnavailable": "Le service est temporairement indisponible. Réessayez.",
     "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
     "unknownError": "Une erreur inconnue s'est produite",
-    "backendUnavailable": "Impossible de joindre le serveur MaxiStore. Vérifiez la connexion et réessayez."
+    "backendUnavailable": "Impossible de joindre le serveur TechGreen. Vérifiez la connexion et réessayez."
   },
   "confirmation": {
     "confirmAction": "Confirmer l'action",
@@ -2282,9 +2283,6 @@
   },
   "Barcode": "Code-Barres",
   "invoice": {
-    "rc": "RC",
-    "nif": "NIF",
-    "nis": "NIS",
     "dateLabel": "Le",
     "itemNumber": "Article n°",
     "quantityShort": "Qté",
@@ -2293,10 +2291,10 @@
     "totalHt": "Total HT",
     "taxRate": "TVA (19 %)",
     "stampAlt": "Cachet et signature",
-    "amountWordsValue": "{{amount}} dinars algériens TTC.",
+    "amountWordsValue": "{{amount}} TTC.",
     "validityNote": "Nos devis sont valables 20 jours",
     "contactNote": "Pour toute information, n'hésitez pas à nous contacter",
-    "mobile": "Mobile",
+    "mobile": "Téléphone",
     "email": "Courriel",
     "site": "Site",
     "title": "Facture",
@@ -2324,6 +2322,6 @@
     "pending": "En attente",
     "sellerSignature": "Cachet et signature du vendeur",
     "buyerSignature": "Signature du client",
-    "footerNote": "Merci pour votre confiance. Cette facture est générée automatiquement par le système Maxi Store."
+    "footerNote": "Merci pour votre confiance. Cette facture est générée automatiquement par le système TechGreen."
   }
 }

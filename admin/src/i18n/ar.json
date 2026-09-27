@@ -116,6 +116,7 @@
     "returning": "قيد الإرجاع"
   },
   "common": {
+    "brandName": "TechGreen",
     "close": "إغلاق",
     "copy": "نسخ",
     "pageOf": "الصفحة {{page}} من {{total}}",
@@ -223,7 +224,7 @@
       "passwordLabel": "كلمة المرور",
       "signIn": "تسجيل الدخول",
       "signingIn": "جاري تسجيل الدخول...",
-      "protectedBy": "محمي بواسطة MaxiStore Secure Auth"
+      "protectedBy": "محمي بواسطة TechGreen Secure Auth"
     },
     "errors": {
       "accessDeniedAdmin": "تم رفض الوصول: يلزم صلاحيات مسؤول.",
@@ -280,7 +281,7 @@
       "creditCard": "بطاقة بنكية",
       "customerNote": "ملاحظة العميل",
       "sku": "SKU",
-      "algeria": "الجزائر",
+      "country": "البلد",
       "updateStatusFailed": "فشل تحديث الحالة",
       "phoneConfirm": {
         "title": "مطلوب تأكيد هاتفي",
@@ -359,8 +360,8 @@
         "selectedDesc": "سيستلم العميل الطلب مباشرة من المتجر. لا توجد رسوم شحن.",
         "selectWarehouse": "اختر المستودع",
         "warehouse": {
-          "algiers": "مستودع الجزائر (Algiers)",
-          "harrouch": "مستودع الحروش (Skikda)"
+          "main": "المستودع الرئيسي",
+          "secondary": "المستودع الثانوي"
         }
       },
       "shipping": {
@@ -598,7 +599,7 @@
     },
     "help": {
       "title": "هل تحتاج دعم البنية التحتية؟",
-      "desc": "تواصل مع فريق التطوير عبر tech@maxistore.com لصيانة الخادم."
+      "desc": "تواصل مع فريق التطوير لصيانة الخادم."
     }
   },
   "categories": {
@@ -1356,7 +1357,7 @@
       "sectionTitle": " معلومات المورد",
       "name": "اسم المورد",
       "nameRequired": "اسم المورد مطلوب",
-      "namePlaceholder": "مثال: ديل الجزائر",
+      "namePlaceholder": "مثال: ديل",
       "nameHint": "الاسم القانوني الكامل لشركة المورد",
       "email": "البريد الإلكتروني للتواصل",
       "emailRequired": "البريد الإلكتروني مطلوب",
@@ -1819,7 +1820,7 @@
     "serviceUnavailable": "الخدمة غير متاحة مؤقتًا. حاول مرة أخرى.",
     "sessionExpired": "انتهت الجلسة. سجّل الدخول مجددًا.",
     "unknownError": "حدث خطأ غير معروف",
-    "backendUnavailable": "تعذر الوصول إلى خادم MaxiStore. تحقق من الاتصال وحاول مرة أخرى."
+    "backendUnavailable": "تعذر الوصول إلى خادم TechGreen. تحقق من الاتصال وحاول مرة أخرى."
   },
   "confirmation": {
     "confirmAction": "تأكيد الإجراء",
@@ -2282,9 +2283,6 @@
   },
   "Barcode": "الرمز الشريطي",
   "invoice": {
-    "rc": "السجل التجاري",
-    "nif": "الرقم الجبائي",
-    "nis": "الرقم الإحصائي",
     "dateLabel": "التاريخ",
     "itemNumber": "رقم الصنف",
     "quantityShort": "الكمية",
@@ -2293,7 +2291,7 @@
     "totalHt": "الإجمالي دون ضريبة",
     "taxRate": "الضريبة (19٪)",
     "stampAlt": "الختم والتوقيع",
-    "amountWordsValue": "{{amount}} دينار جزائري شامل الضريبة.",
+    "amountWordsValue": "{{amount}} شامل الضريبة.",
     "validityNote": "عروض الأسعار صالحة لمدة 20 يومًا",
     "contactNote": "لأي معلومات، لا تتردد في الاتصال بنا",
     "mobile": "الهاتف",
@@ -2324,6 +2322,6 @@
     "pending": "قيد الانتظار",
     "sellerSignature": "ختم وتوقيع البائع",
     "buyerSignature": "توقيع العميل",
-    "footerNote": "شكراً لثقتكم. تم إنشاء هذه الفاتورة تلقائياً بواسطة نظام Maxi Store."
+    "footerNote": "شكراً لثقتكم. تم إنشاء هذه الفاتورة تلقائياً بواسطة نظام TechGreen."
   }
 }

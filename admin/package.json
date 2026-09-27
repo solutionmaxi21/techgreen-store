@@ -1,11 +1,11 @@
 {
-    "name": "maxi-store-admin",
+    "name": "techgreen-admin",
     "private": true,
     "version": "1.1.0",
     "type": "module",
     "main": "electron/main.js",
-    "description": "Admin panel for Maxi Store packaged as an Electron desktop app.",
-    "author": "Maxi Store",
+    "description": "Admin panel for TechGreen packaged as an Electron desktop app.",
+    "author": "TechGreen",
     "scripts": {
         "dev": "vite --port 5174 --strictPort",
         "build": "vite build",
@@ -17,14 +17,14 @@
         "electron:dist": "vite build && electron-builder --win"
     },
     "build": {
-        "productName": "Maxi Store Admin",
-        "appId": "com.maxistore.admin",
+        "productName": "TechGreen Admin",
+        "appId": "com.techgreen.admin",
         "compression": "maximum",
         "protocols": [
             {
-                "name": "Maxi Store Admin",
+                "name": "TechGreen Admin",
                 "schemes": [
-                    "maxistore-admin"
+                    "techgreen-admin"
                 ]
             }
         ],
@@ -53,12 +53,12 @@
             "allowToChangeInstallationDirectory": true,
             "createDesktopShortcut": true,
             "createStartMenuShortcut": true,
-            "shortcutName": "Maxi Store Admin",
+            "shortcutName": "TechGreen Admin",
             "installerIcon": "build/icon.ico",
             "uninstallerIcon": "build/icon.ico"
         },
         "portable": {
-            "artifactName": "MaxiStoreAdmin-Portable.exe"
+            "artifactName": "TechGreen-Admin-Portable.exe"
         },
         "asar": false
     },

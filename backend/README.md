@@ -1,6 +1,6 @@
-# 🏪 MaxiStore Backend API
+# 🏪 TechGreen Backend API
 
-Enterprise-grade backend API for MaxiStore e-commerce platform. Built with Node.js, Express, and PostgreSQL.
+Enterprise-grade backend API for the TechGreen e-commerce platform. Built with Node.js, Express, and PostgreSQL.
 
 ## 🚀 Features
 
@@ -362,4 +362,4 @@ MIT License - See LICENSE file for details
 
 ---
 
-**Built with ❤️ for the Algerian hardware market**
+**Built with ❤️ for TechGreen**

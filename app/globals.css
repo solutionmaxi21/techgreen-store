@@ -16,6 +16,24 @@
 
 /*
  * ═══════════════════════════════════════════════════════════════
+ * FULL-BLEED CONTAINER — override Tailwind's centered container
+ * ═══════════════════════════════════════════════════════════════
+ * tech-green.fr uses the full width of the viewport: no artificial
+ * side gutters, no narrow centered layout. We keep only the inner
+ * breathing room that readability requires — every call site already
+ * carries its own `px-*` / `px-4 sm:px-6 lg:px-8` padding.
+ *
+ * Overriding the built-in `container` utility here fixes all ~67
+ * call sites at once instead of editing every page component.
+ */
+@utility container {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+/*
+ * ═══════════════════════════════════════════════════════════════
  * TECH-GREEN DESIGN SYSTEM — LIGHT & DARK TOKENS
  * ═══════════════════════════════════════════════════════════════
  * Single Design System with two token sets.

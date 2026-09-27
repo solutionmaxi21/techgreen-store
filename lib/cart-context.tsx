@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react"
 import { toast } from "sonner"
 import type { Product } from "./api"
+import type { BilingualString } from "./api/types"
 import { offlineDB } from "./db/offline-store"
 import { encryptData, decryptData } from "./crypto/hmac-signer"
 import { useAuth } from "./auth-context"
@@ -13,7 +14,7 @@ export interface CartProduct {
   product_id: number
   variant_id?: number
   variant_name?: string
-  product_name: string | { fr: string; ar: string }
+  product_name: BilingualString
   brand: string
   current_price: number
   sale_price: number | null
@@ -64,7 +65,7 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-function getProductDisplayName(name: string | { fr: string; ar: string }): string {
+function getProductDisplayName(name: BilingualString): string {
   if (typeof name === 'string') return name
   return name.fr || name.ar || ''
 }
@@ -128,7 +129,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             const cartData = await offlineDB.appMetadata.get('cart')
             if (cartData?.value) {
               try {
-                const decrypted = await decryptData(cartData.value as string | any, userId)
+                const decrypted = await decryptData(cartData.value as string | any, String(userId))
                 let parsed = typeof decrypted === 'string' ? JSON.parse(decrypted) : JSON.parse(JSON.stringify(decrypted))
 
                 if (!parsed || typeof parsed !== 'object') {
@@ -180,7 +181,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           setUseIndexedDB(true)
         }
         if (mounted) {
-          hydratedUserIdRef.current = userId
+          hydratedUserIdRef.current = userId ?? null
           setIsHydrated(true)
         }
       } catch (error) {
@@ -209,7 +210,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (userId) {
           try {
             const cartData = { items, appliedPromo }
-            const encrypted = await encryptData(JSON.stringify(cartData), userId)
+            const encrypted = await encryptData(JSON.stringify(cartData), String(userId))
             await offlineDB.appMetadata.put({ key: 'cart', value: encrypted })
             setUseIndexedDB(true)
             console.log('💾 Cart saved to IndexedDB')

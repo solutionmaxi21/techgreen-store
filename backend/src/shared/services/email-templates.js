@@ -1,13 +1,12 @@
 // Brand Configuration
-const BRAND = {
-  name: 'Solution Maxi',
+export const BRAND = {
+  name: 'TechGreen',
   color: {
-    primary: '#1e3d9d', // Deep Blue
-    accent: '#fd6428',  // Orange
+    primary: '#1a7a3a', // TechGreen Primary Green
+    accent: '#2e9e52',  // TechGreen Accent Green
     bg: '#f4f7fa',      // Light Gray Background
     text: '#334155'     // Slate Text
-  },
-  logoUrl: `https://test.solutionmaxi.com/logo.jpg` 
+  }
 };
 
 /**
@@ -33,11 +32,11 @@ const wrapHtml = (content, title) => `
       <td align="center" style="padding: 40px 20px;">
         
         <!-- MAIN CONTAINER -->
-        <table role="presentation" width="650" border="0" cellspacing="0" cellpadding="0" style="max-width: 650px; width: 100%; margin: 0 auto; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(30, 61, 157, 0.08);">
+        <table role="presentation" width="650" border="0" cellspacing="0" cellpadding="0" style="max-width: 650px; width: 100%; margin: 0 auto; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(26, 122, 58, 0.08);">
           
           <!-- DECORATIVE HEADER BAR -->
           <tr>
-            <td style="background: linear-gradient(135deg, ${BRAND.color.primary} 0%, #2d5db8 100%); height: 6px; line-height: 0; font-size: 0;">
+            <td style="background: linear-gradient(135deg, ${BRAND.color.primary} 0%, ${BRAND.color.accent} 100%); height: 6px; line-height: 0; font-size: 0;">
               &nbsp;
             </td>
           </tr>
@@ -47,7 +46,7 @@ const wrapHtml = (content, title) => `
             <td align="center" style="padding: 40px 40px 0 40px;">
               <table role="presentation" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td align="center" style="background: linear-gradient(135deg, ${BRAND.color.primary} 0%, #2d5db8 100%); border-radius: 16px; padding: 16px 32px; box-shadow: 0 4px 16px ${BRAND.color.primary}30;">
+                  <td align="center" style="background: linear-gradient(135deg, ${BRAND.color.primary} 0%, ${BRAND.color.accent} 100%); border-radius: 16px; padding: 16px 32px; box-shadow: 0 4px 16px ${BRAND.color.primary}30;">
                     <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase;">
                       ${BRAND.name}
                     </h1>
@@ -71,7 +70,7 @@ const wrapHtml = (content, title) => `
                 <tr>
                   <td align="center">
                     <p style="margin: 0 0 8px 0; color: #64748b; font-size: 13px; line-height: 1.6;">
-                      <strong style="color: ${BRAND.color.primary};">${BRAND.name}</strong> - Votre partenaire e-commerce en Algérie
+                      <strong style="color: ${BRAND.color.primary};">${BRAND.name}</strong> - Une seconde vie éco-responsable pour votre parc IT
                     </p>
                     <p style="margin: 0 0 8px 0; color: #94a3b8; font-size: 12px;">
                       &copy; ${new Date().getFullYear()} ${BRAND.name}. Tous droits réservés.
@@ -148,7 +147,7 @@ export const getVerificationTemplate = (url, name) => {
         <td align="center" style="padding-bottom: 35px;">
           <table role="presentation" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td style="border-radius: 12px; background: linear-gradient(135deg, ${BRAND.color.accent} 0%, #ff7a45 100%); box-shadow: 0 6px 20px ${BRAND.color.accent}40;">
+              <td style="border-radius: 12px; background: linear-gradient(135deg, ${BRAND.color.accent} 0%, ${BRAND.color.primary} 100%); box-shadow: 0 6px 20px ${BRAND.color.accent}40;">
                 <a href="${url}" style="background-color: transparent; border: none; color: #ffffff; padding: 16px 48px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-block; letter-spacing: 0.3px; text-transform: uppercase;">
                   Vérifier mon Email →
                 </a>
@@ -196,7 +195,7 @@ export const getVerificationTemplate = (url, name) => {
       </tr>
     </table>
   `;
-  return wrapHtml(content, 'Vérifiez votre email - Solution Maxi');
+  return wrapHtml(content, `Vérifiez votre email - ${BRAND.name}`);
 };
 
 /**
@@ -252,7 +251,7 @@ export const getResetPasswordTemplate = (url) => {
         <td align="center" style="padding-bottom: 35px;">
           <table role="presentation" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td style="border-radius: 12px; background: linear-gradient(135deg, ${BRAND.color.primary} 0%, #2d5db8 100%); box-shadow: 0 6px 20px ${BRAND.color.primary}40;">
+              <td style="border-radius: 12px; background: linear-gradient(135deg, ${BRAND.color.primary} 0%, ${BRAND.color.accent} 100%); box-shadow: 0 6px 20px ${BRAND.color.primary}40;">
                 <a href="${url}" style="background-color: transparent; border: none; color: #ffffff; padding: 16px 48px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-block; letter-spacing: 0.3px; text-transform: uppercase;">
                   Changer mon mot de passe →
                 </a>
@@ -324,5 +323,5 @@ export const getResetPasswordTemplate = (url) => {
       </tr>
     </table>
   `;
-  return wrapHtml(content, 'Réinitialisation mot de passe - Solution Maxi');
+  return wrapHtml(content, `Réinitialisation mot de passe - ${BRAND.name}`);
 };

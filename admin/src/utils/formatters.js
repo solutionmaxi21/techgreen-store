@@ -3,7 +3,8 @@
 // ============================================
 
 /**
- * Format amount as Algerian Dinars
+ * Format amount as a currency string
+ * NOTE: currency symbol/locale are pending the dedicated currency phase.
  * @param {number} amount - Amount to format
  * @returns {string} - Formatted currency string
  */

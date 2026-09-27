@@ -56,7 +56,7 @@ export default function CartPage() {
       freeShippingMsg: "Livraison gratuite avec le code promo!",
       freeShippingQualify: "Vous bénéficiez de la livraison gratuite!",
       youSaved: "Vous avez économisé",
-      securePayment: "Paiement sécurisé par Solution Maxi",
+      securePayment: "Paiement sécurisé par TechGreen",
       // --- CHANGE 2: Add translations for item removal ---
       removeItemTitle: "Retirer l'article ?",
       removeItemDesc: "Êtes-vous sûr de vouloir retirer cet article de votre panier ?",
@@ -78,7 +78,7 @@ export default function CartPage() {
       freeShippingMsg: "شحن مجاني مع الرمز الترويجي!",
       freeShippingQualify: "أنت مؤهل للشحن المجاني!",
       youSaved: "لقد وفرت",
-      securePayment: "دفع آمن عبر Solution Maxi",
+      securePayment: "دفع آمن عبر TechGreen",
       // --- CHANGE 2: Add translations for item removal ---
       removeItemTitle: "حذف المنتج؟",
       removeItemDesc: "هل أنت متأكد أنك تريد إزالة هذا المنتج من السلة؟",

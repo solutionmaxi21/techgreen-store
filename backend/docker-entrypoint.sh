@@ -2,11 +2,11 @@
 set -e
 
 # ============================================================
-# MaxiStore Backend — Docker Entrypoint
+# TechGreen Backend — Docker Entrypoint
 # Waits for PostgreSQL then starts the Node.js server
 # ============================================================
 
-echo "🚀 MaxiStore Backend starting..."
+echo "🚀 TechGreen Backend starting..."
 echo "   Environment: ${NODE_ENV:-development}"
 echo "   Port: ${PORT:-3001}"
 

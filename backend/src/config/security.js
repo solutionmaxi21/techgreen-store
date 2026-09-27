@@ -36,8 +36,8 @@ export const helmetConfig = helmet({
 // Origins that are ALWAYS allowed — even when ALLOWED_ORIGINS env var overrides the defaults.
 // These are first-party clients (Electron desktop apps) that must never be blocked.
 const ALWAYS_ALLOWED_ORIGINS = [
-  'maxistore-app://admin',   // Electron admin panel
-  'maxistore-app://localhost', // Electron admin panel (alt)
+  'techgreen-app://admin',   // Electron admin panel
+  'techgreen-app://localhost', // Electron admin panel (alt)
 ];
 
 const getAllowedOrigins = () => {
@@ -84,8 +84,8 @@ export const corsConfig = cors({
       return callback(null, true);
     }
 
-    // BULLETPROOF: Always allow the Electron admin panel (any maxistore-app:// origin)
-    if (origin.startsWith('maxistore-app://')) {
+    // BULLETPROOF: Always allow the Electron admin panel (any techgreen-app:// origin)
+    if (origin.startsWith('techgreen-app://')) {
       console.log('[CORS] Allowed Electron origin:', origin);
       return callback(null, true);
     }

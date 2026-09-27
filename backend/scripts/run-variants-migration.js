@@ -37,7 +37,7 @@ const MIGRATIONS = [
 async function main() {
   console.log('');
   console.log('╔══════════════════════════════════════════════════╗');
-  console.log('║   MaxiStore: Product Variants Migration Runner  ║');
+  console.log('║   TechGreen: Product Variants Migration Runner  ║');
   console.log('╚══════════════════════════════════════════════════╝');
   console.log('');
 

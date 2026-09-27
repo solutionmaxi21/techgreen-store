@@ -120,7 +120,7 @@ const transformOrders = () => {
         city: shippingData.city || '',
         state: shippingData.state || '',
         zipCode: shippingData.postal_code || '',
-        country: shippingData.country || 'Algérie',
+        country: shippingData.country || '',
       },
       paymentMethod: order.payment_status === 'paid' ? 'Credit Card' : 'Pending',
       notes: order.delivery_notes || '',

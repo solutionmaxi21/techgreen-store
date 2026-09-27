@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Truck, Shield, Headphones, CreditCard, Star, Zap, Loader2, Sparkles, ShoppingBag } from "lucide-react"
+import { ArrowRight, Laptop, Smartphone, Wrench, Star, Zap, Loader2, Sparkles, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -14,6 +14,7 @@ import { CollectionsSection } from "@/components/collections-section"
 import Container from "@/components/ui/container"
 import { productsApi, categoriesApi, promotionsApi, type Product, type Category, type Promotion } from "@/lib/api"
 import { useLanguage } from "@/lib/language-context"
+import { useMarket } from "@/lib/market-context"
 import { getLocalizedName } from "@/lib/utils"
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
   const [trustBrands, setTrustBrands] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { t, language } = useLanguage()
+  const { formatMoney } = useMarket()
   const isRtl = language === 'ar'
 
   useEffect(() => {
@@ -88,38 +90,38 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <Truck className="h-6 w-6 text-primary" aria-hidden="true" />
+                  <Laptop className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{t.home.freeShipping}</p>
-                  <p className="text-xs text-muted-foreground">{t.home.freeShippingDesc}</p>
+                  <p className="font-semibold text-sm">{t.home.serviceRachatIT}</p>
+                  <p className="text-xs text-muted-foreground">{t.home.serviceRachatITDesc}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <Shield className="h-6 w-6 text-primary" aria-hidden="true" />
+                  <Smartphone className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{t.home.warranty}</p>
-                  <p className="text-xs text-muted-foreground">{t.home.warrantyDesc}</p>
+                  <p className="font-semibold text-sm">{t.home.serviceRachatMobile}</p>
+                  <p className="text-xs text-muted-foreground">{t.home.serviceRachatMobileDesc}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <Headphones className="h-6 w-6 text-primary" aria-hidden="true" />
+                  <Wrench className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{t.home.support247}</p>
-                  <p className="text-xs text-muted-foreground">{t.home.supportDesc}</p>
+                  <p className="font-semibold text-sm">{t.home.serviceRepair}</p>
+                  <p className="text-xs text-muted-foreground">{t.home.serviceRepairDesc}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <CreditCard className="h-6 w-6 text-primary" aria-hidden="true" />
+                  <ShoppingBag className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{t.home.securePayment}</p>
-                  <p className="text-xs text-muted-foreground">{t.home.securePaymentDesc}</p>
+                  <p className="font-semibold text-sm">{t.home.serviceAccessories}</p>
+                  <p className="text-xs text-muted-foreground">{t.home.serviceAccessoriesDesc}</p>
                 </div>
               </div>
             </div>
@@ -141,10 +143,10 @@ export default function HomePage() {
                     <h2 className="text-2xl md:text-3xl font-bold">{getLocalizedName(promotions[0].promotion_name, language)}</h2>
                     <p className="text-primary-foreground/80 mt-2">
                       {promotions[0].discount_type === 'percentage'
-                        ? `${promotions[0].discount_percentage || promotions[0].discount_value}% off`
+                        ? `${promotions[0].discount_percentage || promotions[0].discount_value}% ${isRtl ? 'خصم' : 'de réduction'}`
                         : promotions[0].discount_type === 'fixed'
-                          ? `${promotions[0].discount_amount || promotions[0].discount_value} DZD off`
-                          : 'Free Shipping'}
+                          ? `${formatMoney(promotions[0].discount_amount || promotions[0].discount_value || 0)} ${isRtl ? 'خصم' : 'de réduction'}`
+                          : (isRtl ? 'شحن مجاني' : 'Livraison offerte')}
                     </p>
                     <p className="mt-2 font-mono bg-primary-foreground/10 inline-block px-3 py-1 rounded">
                       {t.home.code}: <span className="font-bold">{promotions[0].coupon_code || promotions[0].promotion_code}</span>

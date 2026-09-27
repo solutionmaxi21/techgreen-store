@@ -2251,7 +2251,7 @@ router.get('/webhooks/guepex', (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Webhook endpoint is active',
-    service: 'Algerian Hardware Store'
+    service: 'TechGreen Store'
   });
 });
 

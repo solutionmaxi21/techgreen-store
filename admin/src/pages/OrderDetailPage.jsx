@@ -620,7 +620,7 @@ function OrderDetailPage() {
                 <>
                   <div className="addr-line">{order.shippingAddress.street}</div>
                   <div className="addr-line">{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}</div>
-                  <div className="addr-line country">{order.shippingAddress.country || t('orders.detail.algeria')}</div>
+                  <div className="addr-line country">{order.shippingAddress.country || t('orders.detail.country')}</div>
                 </>
               ) : (
                 <div className="empty" style={{ color: 'var(--gray-400)', fontStyle: 'italic' }}>{t('orders.detail.noShippingAddress')}</div>

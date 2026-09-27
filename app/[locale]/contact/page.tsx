@@ -106,7 +106,7 @@ export default function ContactPage() {
       <Header />
       <main className="flex-1">
         <div className="container mx-auto px-4 py-12">
-          <div className="max-w-5xl mx-auto">
+          <div>
             <h1 className="text-4xl font-bold mb-6">{txt.title}</h1>
             <p className="text-lg text-muted-foreground mb-12">
               {txt.intro}
@@ -195,8 +195,7 @@ export default function ContactPage() {
                   <CardContent>
                     <div className="space-y-2">
                       <p className="text-muted-foreground" style={{ direction: 'ltr', textAlign: language === 'ar' ? 'right' : 'left' }}>
-                        <a href={`tel:${CONTACT_INFO.phone.primary}`} dir="ltr" style={{ direction: 'ltr', unicodeBidi: 'isolate' }} className="hover:text-primary">{CONTACT_INFO.phone.display.primary}</a><br />
-                        <a href={`tel:${CONTACT_INFO.phone.secondary}`} dir="ltr" style={{ direction: 'ltr', unicodeBidi: 'isolate' }} className="hover:text-primary">{CONTACT_INFO.phone.display.secondary}</a>
+                        <a href={`tel:${CONTACT_INFO.phone.primary}`} dir="ltr" style={{ direction: 'ltr', unicodeBidi: 'isolate' }} className="hover:text-primary">{CONTACT_INFO.phone.display.primary}</a>
                       </p>
                       <span className="text-sm text-muted-foreground">{txt.info.available}</span>
                     </div>
@@ -213,8 +212,7 @@ export default function ContactPage() {
                   <CardContent>
                     <div className="space-y-2">
                       <p className="text-muted-foreground">
-                        <a href={`mailto:${CONTACT_INFO.email.primary}`} className="hover:text-primary">{CONTACT_INFO.email.primary}</a><br />
-                        <a href={`mailto:${CONTACT_INFO.email.support}`} className="hover:text-primary">{CONTACT_INFO.email.support}</a>
+                        <a href={`mailto:${CONTACT_INFO.email.primary}`} className="hover:text-primary">{CONTACT_INFO.email.primary}</a>
                       </p>
                       <span className="text-sm text-muted-foreground">{txt.info.response}</span>
                     </div>
@@ -231,8 +229,7 @@ export default function ContactPage() {
                   <CardContent>
                     <div className="space-y-1 text-muted-foreground">
                       <p>{BUSINESS_HOURS.weekdays}</p>
-                      <p>{BUSINESS_HOURS.weekend}</p>
-                      <p>{BUSINESS_HOURS.closed}</p>
+                      <p className="text-sm">{BUSINESS_HOURS.note}</p>
                     </div>
                   </CardContent>
                 </Card>

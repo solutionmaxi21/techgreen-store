@@ -391,7 +391,7 @@ function UserDetailPage() {
                 <>
                   <div className="addr-line">{user.address.street}</div>
                   <div className="addr-line">{user.address.city}, {user.address.state} {user.address.postalCode || user.address.zipCode}</div>
-                  <div className="addr-line country">{user.address.country || t('orders.detail.algeria')}</div>
+                  <div className="addr-line country">{user.address.country || t('orders.detail.country')}</div>
                 </>
               ) : (
                 <div className="empty-substate">{t('users.detail.noAddress')}</div>

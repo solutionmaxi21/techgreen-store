@@ -20,7 +20,7 @@ function OrderFormPage() {
 
     // Delivery Method: 'home' or 'pickup'
     const [deliveryMethod, setDeliveryMethod] = useState('home');
-    const [pickupWarehouseId, setPickupWarehouseId] = useState(1); // 1 = Algiers, 2 = Harrouch
+    const [pickupWarehouseId, setPickupWarehouseId] = useState(1); // 1 = main warehouse, 2 = secondary warehouse
 
     const [shippingAddress, setShippingAddress] = useState({
         first_name: '',
@@ -31,7 +31,7 @@ function OrderFormPage() {
         city: '',
         state_province: '',
         postal_code: '',
-        country: 'Algeria'
+        country: ''
     });
     const [deliveryNotes, setDeliveryNotes] = useState('');
     const [deliveryCommuneId, setDeliveryCommuneId] = useState('');
@@ -198,21 +198,21 @@ function OrderFormPage() {
     // Auto-select warehouse for pickup based on stock
     useEffect(() => {
         if (deliveryMethod === 'pickup' && orderItems.length > 0) {
-            // Check availability in Algiers (1) and Harrouch (2)
-            let algiersAvailable = true;
-            let harrouchAvailable = true;
+            // Check availability in the main warehouse (1) and the secondary one (2)
+            let mainWarehouseAvailable = true;
+            let secondaryWarehouseAvailable = true;
 
             for (const item of orderItems) {
-                const stockInAlgiers = item.warehouse_stock?.find(w => w.warehouse_id === 1)?.quantity || 0;
-                const stockInHarrouch = item.warehouse_stock?.find(w => w.warehouse_id === 2)?.quantity || 0;
+                const stockInMainWarehouse = item.warehouse_stock?.find(w => w.warehouse_id === 1)?.quantity || 0;
+                const stockInSecondaryWarehouse = item.warehouse_stock?.find(w => w.warehouse_id === 2)?.quantity || 0;
 
-                if (stockInAlgiers < item.quantity) algiersAvailable = false;
-                if (stockInHarrouch < item.quantity) harrouchAvailable = false;
+                if (stockInMainWarehouse < item.quantity) mainWarehouseAvailable = false;
+                if (stockInSecondaryWarehouse < item.quantity) secondaryWarehouseAvailable = false;
             }
 
-            if (algiersAvailable) {
+            if (mainWarehouseAvailable) {
                 setPickupWarehouseId(1);
-            } else if (harrouchAvailable) {
+            } else if (secondaryWarehouseAvailable) {
                 setPickupWarehouseId(2);
             }
             // If neither has full stock, keep default (1) or maybe warn user
@@ -478,8 +478,8 @@ function OrderFormPage() {
                                             value={pickupWarehouseId}
                                             onChange={(e) => setPickupWarehouseId(e.target.value)}
                                         >
-                                            <option value="1">{t('orders.manual.pickup.warehouse.algiers')}</option>
-                                            <option value="2">{t('orders.manual.pickup.warehouse.harrouch')}</option>
+                                            <option value="1">{t('orders.manual.pickup.warehouse.main')}</option>
+                                            <option value="2">{t('orders.manual.pickup.warehouse.secondary')}</option>
                                         </select>
                                     </div>
                                 </div>

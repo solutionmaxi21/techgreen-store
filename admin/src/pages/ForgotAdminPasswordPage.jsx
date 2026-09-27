@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, Loader2, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import logo from '../assets/logo.png';
+import logo from '../assets/techgreen-logo.png';
 import { adminAccessApi } from '../services/apiService';
 import './LoginPage.css';
 
@@ -33,7 +33,7 @@ function ForgotAdminPasswordPage() {
       <section className="login-card">
         <div className="login-header">
           <div className="brand-logo-container">
-            <img src={logo} alt="MaxiStore" className="brand-logo-img" />
+            <img src={logo} alt={t('common.brandName')} className="brand-logo-img" />
           </div>
           <h1>{sent ? t('passwordReset.checkEmail') : t('passwordReset.forgotTitle')}</h1>
           <p>{sent ? t('passwordReset.checkEmailDescription') : t('passwordReset.forgotDescription')}</p>

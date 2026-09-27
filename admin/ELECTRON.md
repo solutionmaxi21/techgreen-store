@@ -1,8 +1,8 @@
-# Maxi Store Admin - Electron Desktop App
+# TechGreen Admin - Electron Desktop App
 
 ## Overview
 
-The Maxi Store Admin Panel is now packaged as a professional Electron desktop application with enterprise-grade security, user experience features, and production-ready configuration.
+The TechGreen Admin Panel is now packaged as a professional Electron desktop application with enterprise-grade security, user experience features, and production-ready configuration.
 
 ## Architecture
 
@@ -119,8 +119,8 @@ npm run electron:dist
 ### Build Output
 
 After running `electron:build`, you'll find in `dist/`:
-- `Maxi Store Admin Setup X.X.X.exe` - NSIS installer
-- `MaxiStoreAdmin-Portable.exe` - Portable executable
+- `TechGreen Admin Setup X.X.X.exe` - NSIS installer
+- `TechGreen-Admin-Portable.exe` - Portable executable
 - `win-unpacked/` - Unpacked application files
 
 ## Production Features
@@ -153,10 +153,10 @@ After running `electron:build`, you'll find in `dist/`:
 Defined in `package.json`:
 ```json
 {
-  "name": "maxi-store-admin",
+  "name": "techgreen-admin",
   "version": "1.0.0",
-  "productName": "Maxi Store Admin",
-  "appId": "com.maxistore.admin"
+  "productName": "TechGreen Admin",
+  "appId": "com.techgreen.admin"
 }
 ```
 
@@ -165,8 +165,8 @@ Defined in `package.json`:
 ```json
 {
   "build": {
-    "productName": "Maxi Store Admin",
-    "appId": "com.maxistore.admin",
+    "productName": "TechGreen Admin",
+    "appId": "com.techgreen.admin",
     "compression": "maximum",
     "win": {
       "target": ["nsis", "portable"],
@@ -182,7 +182,7 @@ Defined in `package.json`:
 
 Application data is stored in:
 ```
-%APPDATA%\Maxi Store Admin\
+%APPDATA%\TechGreen Admin\
 ```
 
 Contains:
@@ -194,7 +194,7 @@ Contains:
 
 Authentication tokens are stored securely in:
 - **Windows**: Windows Credential Manager
-- Service: "Maxi Store Admin"
+- Service: "TechGreen Admin"
 - Account: "admin-access-token"
 
 ## API Integration
@@ -219,9 +219,9 @@ The main process intercepts all requests to `http://localhost:3001/*` and automa
 
 ### App Won't Start
 
-1. Check logs in `%APPDATA%\Maxi Store Admin\logs\main.log`
+1. Check logs in `%APPDATA%\TechGreen Admin\logs\main.log`
 2. Ensure backend is running on `http://localhost:3001`
-3. Try deleting `%APPDATA%\Maxi Store Admin` and restarting
+3. Try deleting `%APPDATA%\TechGreen Admin` and restarting
 
 ### Login Issues
 
@@ -300,4 +300,4 @@ MIT
 
 ---
 
-**Built with ❤️ for Maxi Store**
+**Built with ❤️ for TechGreen**

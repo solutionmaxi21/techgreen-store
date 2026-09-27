@@ -130,13 +130,13 @@ admin/src/services/
   password: 'admin123',
   name: 'Admin User',
   role: 'admin',     // 'admin' or 'customer'
-  phone: '+213 555 000 001',
+  phone: '000 000 000',
   address: {
     street: '123 Admin Street',
-    city: 'Algiers',
-    state: 'Algiers',
-    zipCode: '16000',
-    country: 'Algeria'
+    city: 'Sample City',
+    state: 'Sample State',
+    zipCode: '00000',
+    country: 'Sample Country'
   },
   orders: ['order-001', ...],
   totalOrders: 5,

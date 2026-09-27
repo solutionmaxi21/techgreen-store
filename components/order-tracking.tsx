@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { toast } from "sonner"
 import { useState } from "react"
+import { formatPrice } from "@/lib/utils"
 
 interface OrderTrackingProps {
   order: {
@@ -275,7 +276,7 @@ export function OrderTracking({ order, language = 'fr' }: OrderTrackingProps) {
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-warning">{txt.prepaid}</span>
                   <span className="font-semibold text-primary">
-                    {order.prepaid_amount!.toLocaleString()} DA
+                    {formatPrice(order.prepaid_amount!)}
                   </span>
                 </div>
               )}
@@ -283,7 +284,7 @@ export function OrderTracking({ order, language = 'fr' }: OrderTrackingProps) {
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-warning">{txt.cashOnDelivery}</span>
                   <span className="font-bold text-foreground text-lg">
-                    {order.cod_amount!.toLocaleString()} DA
+                    {formatPrice(order.cod_amount!)}
                   </span>
                 </div>
               )}
@@ -291,7 +292,7 @@ export function OrderTracking({ order, language = 'fr' }: OrderTrackingProps) {
             {(order.cod_amount ?? 0) > 0 && (
               <Alert className="mt-3 bg-card border-warning/30">
                 <AlertDescription className="text-xs text-muted-foreground">
-                  {txt.pleaseHave} <strong>{order.cod_amount!.toLocaleString()} DA</strong> {txt.forDriver}
+                  {txt.pleaseHave} <strong>{formatPrice(order.cod_amount!)}</strong> {txt.forDriver}
                 </AlertDescription>
               </Alert>
             )}

@@ -1,5 +1,5 @@
 # 🚀 Complete Remote Server Deployment Guide
-**MaxiStore Backend - Step-by-Step Production Deployment**
+**TechGreen Backend - Step-by-Step Production Deployment**
 
 This guide walks you through deploying your backend to a remote server from scratch. No prior server experience needed.
 
@@ -1833,7 +1833,7 @@ Print this and keep it handy!
 
 ```
 ═══════════════════════════════════════════════════
-        MAXISTORE BACKEND - QUICK REFERENCE
+        TECHGREEN BACKEND - QUICK REFERENCE
 ═══════════════════════════════════════════════════
 
 SSH CONNECTION:
@@ -1888,7 +1888,7 @@ EMERGENCY RESTART:
 
 ## 🎉 Congratulations!
 
-You've successfully deployed your MaxiStore backend to a production server!
+You've successfully deployed your TechGreen backend to a production server!
 
 ### What You've Accomplished:
 

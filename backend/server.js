@@ -111,8 +111,8 @@ app.use('/uploads', (req, res, next) => {
   // Matches the main CORS config logic in security.js
   const origin = req.headers.origin;
   if (origin) {
-    // Always allow Electron admin panel (any maxistore-app:// origin)
-    if (origin.startsWith('maxistore-app://')) {
+    // Always allow Electron admin panel (any techgreen-app:// origin)
+    if (origin.startsWith('techgreen-app://')) {
       res.header('Access-Control-Allow-Origin', origin);
     } else {
       const allowedOrigins = process.env.ALLOWED_ORIGINS
@@ -142,7 +142,7 @@ app.use(localeMiddleware);
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'MaxiStore Backend API',
+    message: 'TechGreen Backend API',
     version: '1.0.0',
   });
 });
@@ -151,7 +151,7 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
   res.json({
     success: true,
-    message: 'MaxiStore API v1.0.0',
+    message: 'TechGreen API v1.0.0',
     status: 'operational',
   });
 });

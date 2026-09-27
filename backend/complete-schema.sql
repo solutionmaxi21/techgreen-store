@@ -1,5 +1,5 @@
 -- ==========================================
--- MaxiStore Complete Database Schema
+-- TechGreen Complete Database Schema
 -- PostgreSQL 15+ Compatible
 -- ==========================================
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide covers the complete migration process from JSON-based storage to PostgreSQL database for the Algerian Hardware E-Commerce platform.
+This guide covers the complete migration process from JSON-based storage to PostgreSQL database for the TechGreen e-commerce platform.
 
 ## Prerequisites
 

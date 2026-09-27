@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, Eye, EyeOff, Loader2, LockKeyhole, ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { adminAccessApi } from '../services/apiService';
-import logo from '../assets/logo.png';
+import logo from '../assets/techgreen-logo.png';
 import './AcceptInvitePage.css';
 
 function AcceptInvitePage() {
@@ -47,7 +47,7 @@ function AcceptInvitePage() {
   return (
     <main className="invite-page">
       <section className="invite-panel">
-        <img src={logo} alt="MaxiStore" />
+        <img src={logo} alt={t('common.brandName')} />
         {loading ? (
           <div className="invite-state"><Loader2 className="spin" size={28} /><p>{t('invite.validating')}</p></div>
         ) : accepted ? (

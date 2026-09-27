@@ -1,4 +1,4 @@
-# Maxi Store - Admin Panel
+# TechGreen Admin Panel
 
 A modern, feature-rich admin panel for managing an e-commerce store. Built with React, Vite, and a centralized mock database system.
 
@@ -102,9 +102,9 @@ Three demo admin accounts are available:
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/solutionmaxi21/Admin-Panel-Maxistore.git
-cd Admin-Panel-Maxistore
+# Clone the repository (internal — ask the team for the current URL)
+git clone <repository-url>
+cd techgreen-admin
 
 # Install dependencies
 npm install
@@ -220,4 +220,4 @@ This is a demo project for educational purposes.
 
 ---
 
-**Built with ❤️ for Maxi Store**
+**Built with ❤️ for TechGreen**

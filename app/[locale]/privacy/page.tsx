@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
+import { CONTACT_INFO } from "@/config/constants"
 
 export default function PrivacyPage() {
   const { language } = useLanguage()
@@ -15,7 +16,7 @@ export default function PrivacyPage() {
           title: "سياسة الخصوصية",
           lastUpdated: "آخر تحديث: يناير 2026",
           intro:
-            "نحن في Solutionmaxi نتعامل مع بياناتك الشخصية بجدية. في هذه الصفحة نشرح بشكل بسيط ما نجمعه ولماذا وكيف نحميه.",
+            "نحن في TechGreen نتعامل مع بياناتك الشخصية بجدية. في هذه الصفحة نشرح بشكل بسيط ما نجمعه ولماذا وكيف نحميه.",
           sections: [
             {
               id: "data",
@@ -83,7 +84,7 @@ export default function PrivacyPage() {
           title: "Politique de Confidentialité",
           lastUpdated: "Dernière mise à jour : janvier 2026",
           intro:
-            "Chez Solutionmaxi, nous traitons vos données personnelles avec sérieux. Cette page résume de manière simple ce que nous collectons, pourquoi et comment nous les protégeons.",
+            "Chez TechGreen, nous traitons vos données personnelles avec sérieux. Cette page résume de manière simple ce que nous collectons, pourquoi et comment nous les protégeons.",
           sections: [
             {
               id: "data",
@@ -187,10 +188,10 @@ export default function PrivacyPage() {
               </div>
               <div className="flex flex-col items-start md:items-end gap-2">
                 <a
-                  href="mailto:privacy@solutionmaxi.com"
+                  href={`mailto:${CONTACT_INFO.email.primary}`}
                   className="text-sm font-medium text-primary hover:underline"
                 >
-                  privacy@solutionmaxi.com
+                  {CONTACT_INFO.email.primary}
                 </a>
                 <Link href="/" className="text-xs text-muted-foreground hover:text-primary">
                   {data.backLabel}

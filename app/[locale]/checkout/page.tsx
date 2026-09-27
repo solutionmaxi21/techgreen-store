@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, CreditCard, MapPin, Truck, Clock, Loader2, Phone, AlertCircle } from "lucide-react"
+import { ChevronLeft, CreditCard, MapPin, Truck, Clock, Loader2, Phone, AlertCircle, Globe, Info } from "lucide-react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -34,6 +34,9 @@ import { useAuth } from "@/lib/auth-context"
 import { ordersApi, shippingApi, ERROR_CODES } from "@/lib/api"
 import { formatPrice, getImageUrl } from "@/lib/utils"
 import { useLanguage } from "@/lib/language-context"
+import { useMarket } from "@/lib/market-context"
+import { CONTACT_INFO } from "@/config/constants"
+import { CARRIER_INSURANCE_THRESHOLD_BASE, isValidPhoneForMarket } from "@/config/market"
 
 interface Wilaya {
   id: number
@@ -77,6 +80,14 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false)
   const [errorDialog, setErrorDialog] = useState<{ open: boolean; title: string; description: string } | null>(null)
   const { t, language } = useLanguage()
+  const { market, markets, setCountry } = useMarket()
+
+  // The visitor's country drives the whole checkout — currency, region field,
+  // shipping methods and payment methods (see `config/market.ts`). `carrierMode`
+  // is true only where the backend implements a live shipping quote; elsewhere
+  // the checkout shows an honest notice instead of inventing a delivery fee.
+  const carrierMode = market.checkoutMode === 'carrier'
+  const validatePhone = (phone: string) => isValidPhoneForMarket(phone, market)
 
   // Shipping state
   const [wilayas, setWilayas] = useState<Wilaya[]>([])
@@ -95,20 +106,8 @@ export default function CheckoutPage() {
   const [phoneValue, setPhoneValue] = useState<string>("")
   const [shippingError, setShippingError] = useState<string>("")
 
-  // Validate Algerian phone number (05XX, 06XX, 07XX + 8 digits)
-  const validateAlgerianPhone = (phone: string): boolean => {
-    // Remove spaces, dashes, parentheses
-    const cleaned = phone.replace(/[\s\-()]/g, '')
-    
-    // Check formats: +213XXXXXXXXX, 00213XXXXXXXXX, 0XXXXXXXXX
-    const patterns = [
-      /^\+213[567]\d{8}$/,  // +213 5XX/6XX/7XX XXXXXXXX
-      /^00213[567]\d{8}$/,  // 00213 5XX/6XX/7XX XXXXXXXX
-      /^0[567]\d{8}$/       // 05XX/06XX/07XX XXXXXXXX
-    ]
-    
-    return patterns.some(pattern => pattern.test(cleaned))
-  }
+  // Phone validation is per-market: the accepted formats, the placeholder and
+  // the error message all come from `MarketDef.phone` (config/market.ts).
 
   // Helper to get localized text
   const getLocalizedName = (value: string | { fr?: string; ar?: string } | null | undefined, locale: string = 'fr'): string => {
@@ -133,6 +132,14 @@ export default function CheckoutPage() {
       orderSuccess: "Commande passée avec succès!",
       orderFailed: "Échec de la commande. Veuillez réessayer.",
       genericError: "Une erreur s'est produite. Veuillez réessayer.",
+      // Market / country
+      country: "Pays",
+      selectCountry: "Sélectionnez votre pays",
+      unavailableTitle: "Livraison non disponible dans ce pays",
+      unavailableBody:
+        "Les options de livraison vers ce pays ne sont pas encore configurées. Contactez notre équipe : elle vous confirmera les frais de livraison et le délai avant l'expédition.",
+      contactUs: "Nous contacter",
+      shippingToConfirm: "À confirmer",
       // Error messages by code
       errors: {
         outOfStock: "Certains produits ne sont plus disponibles en quantité suffisante. Veuillez mettre à jour votre panier.",
@@ -155,6 +162,14 @@ export default function CheckoutPage() {
       orderSuccess: "تم تأكيد الطلب بنجاح!",
       orderFailed: "فشل إنشاء الطلب. يرجى المحاولة مرة أخرى.",
       genericError: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      // Market / country
+      country: "البلد",
+      selectCountry: "اختر بلدك",
+      unavailableTitle: "التوصيل غير متاح إلى هذا البلد",
+      unavailableBody:
+        "لم يتم بعد إعداد خيارات التوصيل إلى هذا البلد. يرجى التواصل مع فريقنا لتأكيد تكلفة الشحن ومدة التوصيل قبل الإرسال.",
+      contactUs: "تواصل معنا",
+      shippingToConfirm: "سيتم التأكيد",
       // Error messages by code
       errors: {
         outOfStock: "بعض المنتجات غير متوفرة بالكمية المطلوبة. يرجى تحديث سلة التسوق.",
@@ -168,12 +183,20 @@ export default function CheckoutPage() {
 
   const txt = localT[language === 'ar' ? 'ar' : 'fr']
 
-  // Load wilayas on mount with localStorage cache
+  // Load wilayas on mount with localStorage cache.
+  // Only a market with a carrier integration has wilayas; everywhere else the
+  // region list is not fetched at all.
   useEffect(() => {
     const loadWilayas = async () => {
+      if (!carrierMode) {
+        setWilayas([])
+        setLoadingWilayas(false)
+        return
+      }
+
       const cacheKey = 'wilayas_cache'
       const cacheTimeKey = 'wilayas_cache_time'
-      
+
       try {
         // Check cache first (wilayas are static data, cache for 24h)
         if (typeof window !== 'undefined') {
@@ -239,19 +262,29 @@ export default function CheckoutPage() {
       }
     }
     loadWilayas()
-  }, [language])
+  }, [language, carrierMode])
 
   // Validate phone on mount if user has phone
   useEffect(() => {
     if (user?.phone && !phoneValue) {
       setPhoneValue(user.phone)
-      if (!validateAlgerianPhone(user.phone)) {
-        setPhoneError(language === 'ar' 
-          ? 'رقم هاتف جزائري غير صالح (05XX، 06XX، 07XX)' 
-          : 'Numéro de téléphone algérien invalide (05XX, 06XX, 07XX)')
+      if (!validatePhone(user.phone)) {
+        setPhoneError(market.phone.error[language === 'ar' ? 'ar' : 'fr'])
       }
     }
-  }, [user?.phone, language, phoneValue])
+  }, [user?.phone, language, phoneValue, market])
+
+  // Switching country invalidates any shipping selection made for the previous
+  // one: wilayas, communes, stop-desks and their quote all belong to a specific
+  // country, so they must never carry over.
+  useEffect(() => {
+    setSelectedWilaya("")
+    setSelectedCommune("")
+    setSelectedStopDesk("")
+    setDeliveryType("home")
+    setShippingEstimate(null)
+    setShippingError("")
+  }, [market.code])
 
   // Redirect to cart if empty
   useEffect(() => {
@@ -324,6 +357,15 @@ export default function CheckoutPage() {
   // Calculate shipping estimate when commune and delivery type are selected
   useEffect(() => {
     const calculateShipping = async () => {
+      // The shipping cost comes from a carrier integration. A market without one
+      // never produces a total here — the checkout blocks the order and says so
+      // rather than inventing a fee.
+      if (!carrierMode) {
+        setShippingEstimate(null)
+        setShippingError("")
+        return
+      }
+
       // Don't calculate if cart is empty
       if (!items || items.length === 0) {
         setShippingEstimate(null)
@@ -352,13 +394,15 @@ export default function CheckoutPage() {
       try {
         // Transform cart items to shipping calculator format
         const shippingItems = items.map(({ product, quantity }) => ({
+          product_id: product.product_id,
+          variant_id: product.variant_id,
           price: product.sale_price || product.current_price,
           quantity: quantity,
           weight: product.weight || 1,
           length: product.length || 30,
           width: product.width || 20,
           height: product.height || 10,
-          hasInsurance: (product.sale_price || product.current_price) > 50000,
+          hasInsurance: (product.sale_price || product.current_price) > CARRIER_INSURANCE_THRESHOLD_BASE,
           declaredValue: product.sale_price || product.current_price
         }))
 
@@ -391,7 +435,7 @@ export default function CheckoutPage() {
       }
     }
     calculateShipping()
-  }, [selectedCommune, deliveryType, selectedStopDesk, items, language])
+  }, [selectedCommune, deliveryType, selectedStopDesk, items, language, carrierMode])
 
   // Calculate discount
   const calculateDiscount = (): number => {
@@ -414,10 +458,8 @@ export default function CheckoutPage() {
     const value = e.target.value
     setPhoneValue(value)
     
-    if (value && !validateAlgerianPhone(value)) {
-      setPhoneError(language === 'ar' 
-        ? 'رقم هاتف جزائري غير صالح (05XX، 06XX، 07XX)' 
-        : 'Numéro de téléphone algérien invalide (05XX, 06XX, 07XX)')
+    if (value && !validatePhone(value)) {
+      setPhoneError(market.phone.error[language === 'ar' ? 'ar' : 'fr'])
     } else {
       setPhoneError('')
     }
@@ -430,10 +472,16 @@ export default function CheckoutPage() {
     const phone = formData.get('phone') as string
 
     // Validate phone number
-    if (!validateAlgerianPhone(phone)) {
-      toast.error(language === 'ar' 
-        ? 'رقم هاتف جزائري غير صالح. استخدم 05XX، 06XX أو 07XX'
-        : 'Numéro de téléphone algérien invalide. Utilisez 05XX, 06XX ou 07XX')
+    if (!validatePhone(phone)) {
+      toast.error(market.phone.error[language === 'ar' ? 'ar' : 'fr'])
+      return
+    }
+
+    // An order can only be completed in a market with a carrier integration.
+    // This mirrors the disabled submit button so that an order can never be
+    // created with an invented delivery cost, even if the UI state is bypassed.
+    if (!carrierMode) {
+      toast.error(txt.unavailableTitle)
       return
     }
 
@@ -487,7 +535,9 @@ export default function CheckoutPage() {
           city: communeName || '',
           state: wilayas.find(w => w.id === parseInt(selectedWilaya))?.name || '',
           postal_code: formData.get('postalCode') as string,
-          country: 'Algeria',
+          // Taken from the active market, so an order placed from another
+          // country is never recorded as an Algerian one.
+          country: market.countryName,
         },
         delivery_commune_id: parseInt(selectedCommune),
         delivery_wilaya_id: parseInt(selectedWilaya),
@@ -685,208 +735,263 @@ export default function CheckoutPage() {
                     {t.checkout.shippingAddress}
                   </h2>
                   <div className="space-y-4">
-                    {/* Wilaya Selector */}
+                    {/* Country — drives the currency, the region field, the
+                        shipping methods and the payment methods of the whole
+                        checkout, so it is asked before anything else. */}
                     <div className="space-y-2">
-                      <Label htmlFor="wilaya">
-                        {language === 'ar' ? "الولاية" : "Wilaya"}
-                        <span className="text-destructive ml-1">*</span>
+                      <Label htmlFor="country" className="flex items-center gap-2">
+                        <Globe className="h-4 w-4" />
+                        {txt.country}
+                        <span className="text-destructive">*</span>
                       </Label>
-                      <Select value={selectedWilaya} onValueChange={setSelectedWilaya} disabled={loadingWilayas} required>
-                        <SelectTrigger id="wilaya">
-                          <SelectValue placeholder={
-                            loadingWilayas
-                              ? (language === 'ar' ? "جاري التحميل..." : "Chargement...")
-                              : (language === 'ar' ? "اختر الولاية" : "Sélectionnez une wilaya")
-                          } />
+                      <Select value={market.code} onValueChange={setCountry}>
+                        <SelectTrigger id="country">
+                          <SelectValue placeholder={txt.selectCountry} />
                         </SelectTrigger>
                         <SelectContent>
-                          {wilayas.map((wilaya) => (
-                            <SelectItem key={wilaya.id} value={wilaya.id.toString()}>
-                              {wilaya.name}
+                          {markets.map((m) => (
+                            <SelectItem key={m.code} value={m.code}>
+                              {m.name[language === 'ar' ? 'ar' : 'fr']} — {m.currency}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {loadingWilayas && (
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <Loader2 className="h-3 w-3 animate-spin" />
-                          {language === 'ar' ? 'جاري تحميل الولايات...' : 'Chargement des wilayas...'}
-                        </div>
-                      )}
                     </div>
 
-                    {/* Delivery Type - Show after wilaya selection */}
-                    {selectedWilaya && (
-                      <div className="space-y-3 p-4 bg-muted/30 rounded-lg border border-border">
-                        <Label className="font-semibold flex items-center gap-2">
-                          <Truck className="h-4 w-4" />
-                          {language === 'ar' ? "طريقة التوصيل" : "Mode de livraison"}
-                        </Label>
-                        <RadioGroup value={deliveryType} onValueChange={(value: "home" | "stopdesk") => {
-                          setDeliveryType(value)
-                          setSelectedStopDesk("")
-                          setShippingEstimate(null)
-                        }} className="grid gap-3">
-                          {/* Home Delivery Option */}
-                          <div className={`relative flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                            deliveryType === 'home' 
-                              ? 'border-primary bg-primary/5' 
-                              : 'border-border hover:border-muted-foreground/50 hover:bg-muted/50'
-                          }`}>
-                            <RadioGroupItem value="home" id="home-delivery" className="mt-1" />
-                            <Label htmlFor="home-delivery" className="flex-1 cursor-pointer">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-lg">🏠</span>
-                                  <span className="font-medium">{language === 'ar' ? "توصيل منزلي" : "Livraison à domicile"}</span>
-                                </div>
-                              </div>
-                              <p className="text-xs text-muted-foreground mt-1">
-                                {language === 'ar' ? "يتم التوصيل مباشرة إلى عنوانك" : "Livraison directe à votre adresse"}
-                              </p>
-                            </Label>
-                          </div>
-
-                          {/* Stop Desk Option */}
-                          <div className={`relative flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                            deliveryType === 'stopdesk' 
-                              ? 'border-primary bg-primary/5' 
-                              : 'border-border hover:border-muted-foreground/50 hover:bg-muted/50'
-                          } ${stopDesks.length === 0 && !loadingStopDesks ? 'opacity-50' : ''}`}>
-                            <RadioGroupItem 
-                              value="stopdesk" 
-                              id="stopdesk-delivery" 
-                              className="mt-1"
-                              disabled={stopDesks.length === 0 && !loadingStopDesks}
-                            />
-                            <Label htmlFor="stopdesk-delivery" className="flex-1 cursor-pointer">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-lg">📦</span>
-                                  <span className="font-medium">{language === 'ar' ? "نقطة استلام" : "Point relais"}</span>
-                                </div>
-                                {stopDesks.length > 0 && (
-                                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                                    {language === 'ar' ? "أرخص" : "Moins cher"}
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-xs text-muted-foreground mt-1">
-                                {stopDesks.length === 0 && !loadingStopDesks
-                                  ? (language === 'ar' ? "غير متوفر في هذه المنطقة" : "Non disponible dans cette zone")
-                                  : (language === 'ar' ? "استلام من نقطة قريبة - توفير في التكلفة" : "Retrait en point relais - Économisez sur les frais")}
-                              </p>
-                            </Label>
-                          </div>
-                        </RadioGroup>
-                      </div>
-                    )}
-
-                    {/* Stop Desk Selector - Show when delivery type is stopdesk (directly from wilaya) */}
-                    {deliveryType === 'stopdesk' && selectedWilaya && stopDesks.length > 0 && (
-                      <div className="space-y-2">
-                        <Label htmlFor="stopdesk">
-                          {language === 'ar' ? "نقطة الاستلام" : "Point relais"}
-                          <span className="text-destructive ml-1">*</span>
-                        </Label>
-                        <Select 
-                          value={selectedStopDesk} 
-                          onValueChange={(value: string) => {
-                            setSelectedStopDesk(value)
-                            // Auto-populate commune from selected stop desk
-                            const selectedDesk = stopDesks.find(desk => desk.center_id.toString() === value)
-                            if (selectedDesk) {
-                              setSelectedCommune(selectedDesk.commune_id.toString())
-                            }
-                          }}
-                          disabled={loadingStopDesks || stopDesks.length === 0}
-                          required
-                        >
-                          <SelectTrigger id="stopdesk">
-                            <SelectValue placeholder={
-                              loadingStopDesks
-                                ? (language === 'ar' ? "جاري التحميل..." : "Chargement...")
-                                : stopDesks.length === 0
-                                ? (language === 'ar' ? "لا توجد نقاط استلام في هذه الولاية" : "Aucun point relais dans cette wilaya")
-                                : (language === 'ar' ? "اختر نقطة الاستلام" : "Sélectionnez un point relais")
-                            } />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {stopDesks.map((desk) => (
-                              <SelectItem key={desk.center_id} value={desk.center_id.toString()}>
-                                <div className="flex flex-col">
-                                  <span className="font-medium">{desk.name}</span>
-                                  <span className="text-xs text-muted-foreground">{desk.commune_name} - {desk.address}</span>
-                                </div>
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        {loadingStopDesks && (
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <Loader2 className="h-3 w-3 animate-spin" />
-                            {language === 'ar' ? 'جاري تحميل نقاط الاستلام...' : 'Chargement des points relais...'}
-                          </div>
-                        )}
-                        {!loadingStopDesks && stopDesks.length === 0 && selectedWilaya && (
-                          <p className="text-xs text-warning">
-                            {language === 'ar' 
-                              ? "لا توجد نقاط استلام في هذه الولاية. يرجى اختيار التوصيل المنزلي." 
-                              : "Aucun point relais n'est disponible dans cette wilaya. Veuillez choisir la livraison à domicile."}
-                          </p>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Commune Selector - Show only for home delivery */}
-                    {deliveryType === 'home' && selectedWilaya && (
-                      <div className="space-y-2">
-                        <Label htmlFor="commune">
-                          {language === 'ar' ? "البلدية" : "Commune"}
-                          <span className="text-destructive ml-1">*</span>
-                        </Label>
-                        <Select 
-                          value={selectedCommune} 
-                          onValueChange={setSelectedCommune}
-                          disabled={loadingCommunes || communes.length === 0}
-                          required
-                        >
-                          <SelectTrigger id="commune">
-                            <SelectValue placeholder={
-                              loadingCommunes
-                              ? (language === 'ar' ? "جاري التحميل..." : "Chargement...")
-                              : communes.length === 0
-                              ? (language === 'ar' ? "لا توجد بلديات متاحة" : "Aucune commune disponible")
-                              : (language === 'ar' ? "اختر البلدية" : "Sélectionnez une commune")
-                            } />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {communes.map((commune) => (
-                              <SelectItem key={commune.id} value={commune.id.toString()}>
-                                {commune.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        {loadingCommunes && (
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <Loader2 className="h-3 w-3 animate-spin" />
-                            {language === 'ar' ? 'جاري تحميل البلديات...' : 'Chargement des communes...'}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Selected Stop Desk Info */}
-                    {deliveryType === 'stopdesk' && selectedStopDesk && (
-                      <div className="text-sm bg-muted/50 p-3 rounded-lg border">
-                        <p className="font-medium">
-                          {stopDesks.find(d => d.center_id.toString() === selectedStopDesk)?.name}
+                    {/* A market with no carrier integration cannot produce a real
+                        delivery cost. Say so plainly rather than inventing one,
+                        and give the visitor a way to order anyway. */}
+                    {!carrierMode && (
+                      <div className="rounded-lg border border-warning/40 bg-warning/10 p-4">
+                        <p className="flex items-center gap-2 font-medium">
+                          <Info className="h-4 w-4" />
+                          {txt.unavailableTitle}
                         </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {stopDesks.find(d => d.center_id.toString() === selectedStopDesk)?.commune_name} - {stopDesks.find(d => d.center_id.toString() === selectedStopDesk)?.address}
-                        </p>
+                        <p className="mt-2 text-sm text-muted-foreground">{txt.unavailableBody}</p>
+                        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+                          <a
+                            href={`tel:${CONTACT_INFO.phone.primary}`}
+                            className="font-medium text-primary hover:underline"
+                            dir="ltr"
+                          >
+                            {CONTACT_INFO.phone.display.primary}
+                          </a>
+                          <Link
+                            href={`/${language}/contact`}
+                            className="font-medium text-primary hover:underline"
+                          >
+                            {txt.contactUs}
+                          </Link>
+                        </div>
                       </div>
+                    )}
+
+                    {carrierMode && (
+                      <>
+                        {/* Wilaya Selector */}
+                        <div className="space-y-2">
+                          <Label htmlFor="wilaya">
+                            {language === 'ar' ? "الولاية" : "Wilaya"}
+                            <span className="text-destructive ml-1">*</span>
+                          </Label>
+                          <Select value={selectedWilaya} onValueChange={setSelectedWilaya} disabled={loadingWilayas} required>
+                            <SelectTrigger id="wilaya">
+                              <SelectValue placeholder={
+                                loadingWilayas
+                                  ? (language === 'ar' ? "جاري التحميل..." : "Chargement...")
+                                  : (language === 'ar' ? "اختر الولاية" : "Sélectionnez une wilaya")
+                              } />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {wilayas.map((wilaya) => (
+                                <SelectItem key={wilaya.id} value={wilaya.id.toString()}>
+                                  {wilaya.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          {loadingWilayas && (
+                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                              <Loader2 className="h-3 w-3 animate-spin" />
+                              {language === 'ar' ? 'جاري تحميل الولايات...' : 'Chargement des wilayas...'}
+                            </div>
+                          )}
+                        </div>
+    
+                        {/* Delivery Type - Show after wilaya selection */}
+                        {selectedWilaya && (
+                          <div className="space-y-3 p-4 bg-muted/30 rounded-lg border border-border">
+                            <Label className="font-semibold flex items-center gap-2">
+                              <Truck className="h-4 w-4" />
+                              {language === 'ar' ? "طريقة التوصيل" : "Mode de livraison"}
+                            </Label>
+                            <RadioGroup value={deliveryType} onValueChange={(value: "home" | "stopdesk") => {
+                              setDeliveryType(value)
+                              setSelectedStopDesk("")
+                              setShippingEstimate(null)
+                            }} className="grid gap-3">
+                              {/* Home Delivery Option */}
+                              <div className={`relative flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                deliveryType === 'home' 
+                                  ? 'border-primary bg-primary/5' 
+                                  : 'border-border hover:border-muted-foreground/50 hover:bg-muted/50'
+                              }`}>
+                                <RadioGroupItem value="home" id="home-delivery" className="mt-1" />
+                                <Label htmlFor="home-delivery" className="flex-1 cursor-pointer">
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg">🏠</span>
+                                      <span className="font-medium">{language === 'ar' ? "توصيل منزلي" : "Livraison à domicile"}</span>
+                                    </div>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    {language === 'ar' ? "يتم التوصيل مباشرة إلى عنوانك" : "Livraison directe à votre adresse"}
+                                  </p>
+                                </Label>
+                              </div>
+    
+                              {/* Stop Desk Option */}
+                              <div className={`relative flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                                deliveryType === 'stopdesk' 
+                                  ? 'border-primary bg-primary/5' 
+                                  : 'border-border hover:border-muted-foreground/50 hover:bg-muted/50'
+                              } ${stopDesks.length === 0 && !loadingStopDesks ? 'opacity-50' : ''}`}>
+                                <RadioGroupItem 
+                                  value="stopdesk" 
+                                  id="stopdesk-delivery" 
+                                  className="mt-1"
+                                  disabled={stopDesks.length === 0 && !loadingStopDesks}
+                                />
+                                <Label htmlFor="stopdesk-delivery" className="flex-1 cursor-pointer">
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg">📦</span>
+                                      <span className="font-medium">{language === 'ar' ? "نقطة استلام" : "Point relais"}</span>
+                                    </div>
+                                    {stopDesks.length > 0 && (
+                                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                                        {language === 'ar' ? "أرخص" : "Moins cher"}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    {stopDesks.length === 0 && !loadingStopDesks
+                                      ? (language === 'ar' ? "غير متوفر في هذه المنطقة" : "Non disponible dans cette zone")
+                                      : (language === 'ar' ? "استلام من نقطة قريبة - توفير في التكلفة" : "Retrait en point relais - Économisez sur les frais")}
+                                  </p>
+                                </Label>
+                              </div>
+                            </RadioGroup>
+                          </div>
+                        )}
+    
+                        {/* Stop Desk Selector - Show when delivery type is stopdesk (directly from wilaya) */}
+                        {deliveryType === 'stopdesk' && selectedWilaya && stopDesks.length > 0 && (
+                          <div className="space-y-2">
+                            <Label htmlFor="stopdesk">
+                              {language === 'ar' ? "نقطة الاستلام" : "Point relais"}
+                              <span className="text-destructive ml-1">*</span>
+                            </Label>
+                            <Select 
+                              value={selectedStopDesk} 
+                              onValueChange={(value: string) => {
+                                setSelectedStopDesk(value)
+                                // Auto-populate commune from selected stop desk
+                                const selectedDesk = stopDesks.find(desk => desk.center_id.toString() === value)
+                                if (selectedDesk) {
+                                  setSelectedCommune(selectedDesk.commune_id.toString())
+                                }
+                              }}
+                              disabled={loadingStopDesks || stopDesks.length === 0}
+                              required
+                            >
+                              <SelectTrigger id="stopdesk">
+                                <SelectValue placeholder={
+                                  loadingStopDesks
+                                    ? (language === 'ar' ? "جاري التحميل..." : "Chargement...")
+                                    : stopDesks.length === 0
+                                    ? (language === 'ar' ? "لا توجد نقاط استلام في هذه الولاية" : "Aucun point relais dans cette wilaya")
+                                    : (language === 'ar' ? "اختر نقطة الاستلام" : "Sélectionnez un point relais")
+                                } />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {stopDesks.map((desk) => (
+                                  <SelectItem key={desk.center_id} value={desk.center_id.toString()}>
+                                    <div className="flex flex-col">
+                                      <span className="font-medium">{desk.name}</span>
+                                      <span className="text-xs text-muted-foreground">{desk.commune_name} - {desk.address}</span>
+                                    </div>
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            {loadingStopDesks && (
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <Loader2 className="h-3 w-3 animate-spin" />
+                                {language === 'ar' ? 'جاري تحميل نقاط الاستلام...' : 'Chargement des points relais...'}
+                              </div>
+                            )}
+                            {!loadingStopDesks && stopDesks.length === 0 && selectedWilaya && (
+                              <p className="text-xs text-warning">
+                                {language === 'ar' 
+                                  ? "لا توجد نقاط استلام في هذه الولاية. يرجى اختيار التوصيل المنزلي." 
+                                  : "Aucun point relais n'est disponible dans cette wilaya. Veuillez choisir la livraison à domicile."}
+                              </p>
+                            )}
+                          </div>
+                        )}
+    
+                        {/* Commune Selector - Show only for home delivery */}
+                        {deliveryType === 'home' && selectedWilaya && (
+                          <div className="space-y-2">
+                            <Label htmlFor="commune">
+                              {language === 'ar' ? "البلدية" : "Commune"}
+                              <span className="text-destructive ml-1">*</span>
+                            </Label>
+                            <Select 
+                              value={selectedCommune} 
+                              onValueChange={setSelectedCommune}
+                              disabled={loadingCommunes || communes.length === 0}
+                              required
+                            >
+                              <SelectTrigger id="commune">
+                                <SelectValue placeholder={
+                                  loadingCommunes
+                                  ? (language === 'ar' ? "جاري التحميل..." : "Chargement...")
+                                  : communes.length === 0
+                                  ? (language === 'ar' ? "لا توجد بلديات متاحة" : "Aucune commune disponible")
+                                  : (language === 'ar' ? "اختر البلدية" : "Sélectionnez une commune")
+                                } />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {communes.map((commune) => (
+                                  <SelectItem key={commune.id} value={commune.id.toString()}>
+                                    {commune.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            {loadingCommunes && (
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <Loader2 className="h-3 w-3 animate-spin" />
+                                {language === 'ar' ? 'جاري تحميل البلديات...' : 'Chargement des communes...'}
+                              </div>
+                            )}
+                          </div>
+                        )}
+    
+                        {/* Selected Stop Desk Info */}
+                        {deliveryType === 'stopdesk' && selectedStopDesk && (
+                          <div className="text-sm bg-muted/50 p-3 rounded-lg border">
+                            <p className="font-medium">
+                              {stopDesks.find(d => d.center_id.toString() === selectedStopDesk)?.name}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {stopDesks.find(d => d.center_id.toString() === selectedStopDesk)?.commune_name} - {stopDesks.find(d => d.center_id.toString() === selectedStopDesk)?.address}
+                            </p>
+                          </div>
+                        )}
+                      </>
                     )}
 
 
@@ -969,27 +1074,32 @@ export default function CheckoutPage() {
                     {t.checkout.paymentMethod}
                   </h2>
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
-                    <div className="flex items-center gap-3 p-4 border border-border rounded-lg cursor-pointer hover:bg-muted/50">
-                      <RadioGroupItem value="cod" id="cod" />
-                      <Label htmlFor="cod" className="flex-1 cursor-pointer">
-                        <div className="font-medium">{t.checkout.cashOnDelivery}</div>
-                        <div className="text-sm text-muted-foreground">{txt.codDesc}</div>
-                      </Label>
-                    </div>
-                    <div className="relative flex items-center gap-3 p-4 border border-border rounded-lg opacity-60 mt-3">
-                      <RadioGroupItem value="cib" id="cib" disabled />
-                      <Label htmlFor="cib" className="flex-1">
-                        <div className="font-medium flex items-center gap-2">
-                          Carte CIB / EDAHABIA
-                          <span className="text-xs bg-warning/15 text-warning px-2 py-0.5 rounded-full">
-                            {language === 'ar' ? 'قريباً' : 'Bientôt'}
-                          </span>
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {language === 'ar' ? 'هذه الطريقة غير متاحة حالياً' : 'Cette méthode n\'est pas encore disponible'}
-                        </div>
-                      </Label>
-                    </div>
+                    {/* Only the methods the active market actually offers. */}
+                    {market.paymentMethods.includes('cod') && (
+                      <div className="flex items-center gap-3 p-4 border border-border rounded-lg cursor-pointer hover:bg-muted/50">
+                        <RadioGroupItem value="cod" id="cod" />
+                        <Label htmlFor="cod" className="flex-1 cursor-pointer">
+                          <div className="font-medium">{t.checkout.cashOnDelivery}</div>
+                          <div className="text-sm text-muted-foreground">{txt.codDesc}</div>
+                        </Label>
+                      </div>
+                    )}
+                    {market.code === 'DZ' && (
+                      <div className="relative flex items-center gap-3 p-4 border border-border rounded-lg opacity-60 mt-3">
+                        <RadioGroupItem value="cib" id="cib" disabled />
+                        <Label htmlFor="cib" className="flex-1">
+                          <div className="font-medium flex items-center gap-2">
+                            Carte CIB / EDAHABIA
+                            <span className="text-xs bg-warning/15 text-warning px-2 py-0.5 rounded-full">
+                              {language === 'ar' ? 'قريباً' : 'Bientôt'}
+                            </span>
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {language === 'ar' ? 'هذه الطريقة غير متاحة حالياً' : 'Cette méthode n\'est pas encore disponible'}
+                          </div>
+                        </Label>
+                      </div>
+                    )}
                   </RadioGroup>
                 </div>
               </div>
@@ -1043,7 +1153,9 @@ export default function CheckoutPage() {
                         <Truck className="h-3.5 w-3.5" />
                         {t.cart.shipping}
                       </span>
-                      {!selectedCommune ? (
+                      {!carrierMode ? (
+                        <span className="text-muted-foreground">{txt.shippingToConfirm}</span>
+                      ) : !selectedCommune ? (
                         <span className="text-muted-foreground">—</span>
                       ) : loadingShipping ? (
                         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
@@ -1074,7 +1186,7 @@ export default function CheckoutPage() {
                     type="submit"
                     className="w-full mt-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground"
                     size="lg"
-                    disabled={loading || loadingShipping || !shippingEstimate || !!shippingError || !!phoneError}
+                    disabled={loading || loadingShipping || !carrierMode || !shippingEstimate || !!shippingError || !!phoneError}
                   >
                     {loading ? (
                       <span className="flex items-center gap-2">

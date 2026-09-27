@@ -1,6 +1,8 @@
 {
-  "name": "algerian-hardware-e-commerce",
+  "name": "techgreen-store",
   "version": "0.1.0",
+  "description": "TechGreen Store — reconditionnement informatique & téléphonie. Rachat, réparation, vente d'accessoires et de matériel reconditionné.",
+  "author": "TechGreen",
   "type": "module",
   "private": true,
   "scripts": {

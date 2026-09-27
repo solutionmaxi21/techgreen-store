@@ -103,18 +103,18 @@ export function createMenu(mainWindow) {
                 {
                     label: 'Learn More',
                     click: async () => {
-                        await shell.openExternal('https://github.com')
+                        await shell.openExternal('https://www.tech-green.fr/')
                     }
                 },
                 { type: 'separator' },
                 {
-                    label: 'About Maxi Store Admin',
+                    label: 'About TechGreen Admin',
                     click: () => {
                         dialog.showMessageBox(mainWindow, {
                             type: 'info',
-                            title: 'About Maxi Store Admin',
-                            message: 'Maxi Store Admin Panel',
-                            detail: `Version: ${app.getVersion()}\nElectron: ${process.versions.electron}\nChrome: ${process.versions.chrome}\nNode.js: ${process.versions.node}`
+                            title: 'About TechGreen Admin',
+                            message: 'TechGreen Admin Panel',
+                            detail: `Une seconde vie éco-responsable pour votre parc IT\nhttps://www.tech-green.fr/\n\nVersion: ${app.getVersion()}\nElectron: ${process.versions.electron}\nChrome: ${process.versions.chrome}\nNode.js: ${process.versions.node}`
                         })
                     }
                 }

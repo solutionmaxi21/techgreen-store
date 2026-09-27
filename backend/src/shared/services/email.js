@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 // === IMPORT THE NEW TEMPLATES ===
-import { getVerificationTemplate, getResetPasswordTemplate } from './email-templates.js';
+import { BRAND, getVerificationTemplate, getResetPasswordTemplate } from './email-templates.js';
 
 dotenv.config();
 
@@ -40,7 +40,7 @@ export const sendEmail = async ({ to, subject, html }) => {
 
   try {
     const info = await transporter.sendMail({
-      from: `"MaxiStore Algérie" <${process.env.EMAIL_USER}>`, // Updated Name
+      from: `"${BRAND.name}" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       html,
@@ -64,7 +64,7 @@ export const sendVerificationEmail = async (email, token, name) => {
 
   await sendEmail({ 
     to: email, 
-    subject: 'Bienvenue sur MaxiStore ! Confirmez votre email', 
+    subject: `Bienvenue sur ${BRAND.name} ! Confirmez votre email`,
     html 
   });
 };

@@ -1,7 +1,7 @@
 {
-  "name": "MaxiStore - Quincaillerie en Ligne",
-  "short_name": "MaxiStore",
-  "description": "La meilleure quincaillerie en ligne en Algérie - Outils, équipements et matériaux de qualité",
+  "name": "TechGreen — Reconditionnement informatique & téléphonie",
+  "short_name": "TechGreen",
+  "description": "Rachat, réparation et reconditionnement de matériel informatique et de téléphones mobiles. Une seconde vie éco-responsable pour votre parc IT.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -16,7 +16,7 @@
     }
   ],
   "categories": ["shopping", "business"],
-  "lang": "fr-DZ",
+  "lang": "fr-FR",
   "dir": "ltr",
   "scope": "/",
   "screenshots": [

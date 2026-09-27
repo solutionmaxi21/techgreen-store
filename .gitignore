@@ -11,3 +11,7 @@ backend/uploads/
 logs/
 *.log
 tsconfig.tsbuildinfo
+
+# Real user records (bcrypt password hashes, emails, phone numbers).
+# Kept on disk, never published.
+database/users/

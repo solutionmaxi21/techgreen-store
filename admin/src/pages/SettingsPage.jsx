@@ -742,7 +742,7 @@ const SettingsPage = ({ theme, onToggleTheme }) => {
               <div className="card-body-pro">
                 <div className="profile-info">
                   <div className="auth-name">{t('settings.profile.name')}</div>
-                  <div className="auth-email">admin@maxistore.com</div>
+                  <div className="auth-email">—</div>
                   <div className="auth-role">
                     <Shield size={12} />
                     {t('settings.profile.role')}

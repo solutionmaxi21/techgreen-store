@@ -1,6 +1,6 @@
-# k6 Performance Testing for MaxiStore
+# k6 Performance Testing for TechGreen
 
-This directory contains k6 scripts for performance testing the MaxiStore backend and storefront.
+This directory contains k6 scripts for performance testing the TechGreen backend and storefront.
 
 ## Prerequisites
 

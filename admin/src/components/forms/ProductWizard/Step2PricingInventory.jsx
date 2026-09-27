@@ -55,8 +55,8 @@ const Step2PricingInventory = ({ formData, updateFormData, errors, clearError, s
       // Fallback warehouse
       setWarehouses([{
         warehouse_id: 1,
-        warehouse_name: "Entrepôt Central Alger",
-        location_address: "Zone Industrielle Rouiba, Alger 16012"
+        warehouse_name: "Entrepôt principal",
+        location_address: ""
       }]);
     } finally {
       setLoading(false);

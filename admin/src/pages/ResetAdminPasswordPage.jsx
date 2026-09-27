@@ -9,7 +9,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import logo from '../assets/logo.png';
+import logo from '../assets/techgreen-logo.png';
 import { adminAccessApi } from '../services/apiService';
 import './AcceptInvitePage.css';
 
@@ -72,7 +72,7 @@ function ResetAdminPasswordPage() {
   return (
     <main className="invite-page">
       <section className="invite-panel">
-        <img src={logo} alt="MaxiStore" />
+        <img src={logo} alt={t('common.brandName')} />
         {loading ? (
           <div className="invite-state">
             <Loader2 className="spin" size={28} />

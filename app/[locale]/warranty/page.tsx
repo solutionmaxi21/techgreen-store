@@ -5,6 +5,7 @@ import { useLanguage } from "@/lib/language-context"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { CONTACT_INFO } from "@/config/constants"
 import { Shield, Clock, CheckCircle, AlertCircle, HelpCircle } from "lucide-react"
 
 export default function WarrantyPage() {
@@ -12,82 +13,80 @@ export default function WarrantyPage() {
 
   const content = {
     fr: {
-      title: "Politique de Garantie",
-      intro: "Tous nos produits sont couverts par une garantie constructeur pour vous protéger en cas de défaut de fabrication.",
+      title: "Garantie",
+      intro: "Le matériel que nous vendons est testé, reconditionné et suivi après la vente.",
       sections: [
         {
           icon: "shield",
+          title: "Matériel Reconditionné et Testé",
+          content: "Chaque appareil est contrôlé et reconditionné avant sa mise en vente. Les défauts constatés à la réception sont pris en charge."
+        },
+        {
+          icon: "clock",
           title: "Durée de la Garantie",
-          content: "Chaque produit bénéficie d'une garantie allant de 1 à 3 ans selon son type et le constructeur. La durée exacte est indiquée dans les spécifications du produit. La garantie commence à partir de la date d'achat."
+          content: "La durée de garantie dépend du type de matériel et de son état de reconditionnement. Elle est indiquée sur la fiche du produit et rappelée sur votre facture."
         },
         {
           icon: "check",
           title: "Ce qui est Couvert",
-          content: "La garantie couvre les défauts de fabrication, les pannes matérielles et les dysfonctionnements dus à des vices cachés. Elle ne couvre PAS les dommages causés par une mauvaise utilisation, les chutes, les dégâts liquides, ou l'usure normale."
+          content: "Sont couverts les défauts de fonctionnement apparus dans des conditions normales d'utilisation, ainsi que les vices cachés."
         },
         {
           icon: "alert",
-          title: "Signalement de Défauts à la Livraison",
-          content: "Si vous découvrez un défaut au moment de la réception, signalez-le immédiatement au livreur. Nous procéderons à un échange gratuit : un livreur viendra récupérer l'article défectueux et vous en apportera un neuf, sans frais supplémentaires."
-        },
-        {
-          icon: "clock",
-          title: "Comment Utiliser la Garantie",
-          content: "Pour faire valoir votre garantie : 1) Signalez le problème dans les délais (dès réception ou rapidement après), 2) Conservez votre facture et vos preuves d'achat, 3) Contactez-nous avec votre numéro de commande et une description du problème. Nous vous aiderons ensuite."
+          title: "Ce qui n'est pas Couvert",
+          content: "Ne sont pas couverts : les dommages liés à une mauvaise utilisation, les chutes, les dégâts causés par un liquide, l'usure normale, ainsi que toute intervention effectuée hors de nos ateliers."
         },
         {
           icon: "help",
-          title: "Défauts Post-Livraison",
-          content: "Si un défaut apparaît après la période de vérification à la livraison, contactez-nous avec votre facture et une description précise du problème. Nous évaluerons si c'est un défaut couvert par la garantie et procéderons à un échange ou une réparation si applicable."
+          title: "Faire Valoir la Garantie",
+          content: "Conservez votre facture : elle est indispensable. Contactez-nous avec votre numéro de commande et une description précise du problème. Nous vous indiquerons la marche à suivre."
         },
         {
           icon: "alert",
-          title: "Limitation de Garantie",
-          content: "La garantie n'est valable que si : le produit a été utilisé normalement, la facture d'achat est fournie, aucune modification n'a été apportée au produit, les défauts ne sont pas dus à des dégâts externes ou une mauvaise manipulation."
+          title: "Défaut Constaté à la Réception",
+          content: "Si vous découvrez un défaut au moment de la réception, signalez-le au transporteur avant de régler le colis, puis contactez-nous : nous prenons en charge le remplacement du matériel concerné."
         }
       ],
-      importantNote: "Important : Conservez toujours votre facture d'achat. Elle est votre preuve d'achat et est indispensable pour faire valoir votre garantie.",
-      contactInfo: "Pour des réclamations en garantie, contactez-nous à",
-      email: "support@solutionmaxi.com"
+      importantNote: "Important : conservez toujours votre facture d'achat. Elle est votre preuve d'achat et reste indispensable pour faire valoir la garantie.",
+      contactInfo: "Pour toute réclamation en garantie, contactez-nous :"
     },
     ar: {
-      title: "سياسة الضمان",
-      intro: "جميع منتجاتنا مشمولة بضمان المصنع لحمايتك في حالة عيوب التصنيع.",
+      title: "الضمان",
+      intro: "المعدات التي نبيعها مُختبرة ومُجدَّدة ومتابعة بعد البيع.",
       sections: [
         {
           icon: "shield",
+          title: "معدات مُجدَّدة ومُختبرة",
+          content: "كل جهاز يتم فحصه وتجديده قبل عرضه للبيع. والعيوب المُثبتة عند الاستلام يتم التكفل بها."
+        },
+        {
+          icon: "clock",
           title: "مدة الضمان",
-          content: "كل منتج يستفيد من ضمان يتراوح من 1 إلى 3 سنوات حسب نوعه والمصنع. المدة الدقيقة مذكورة في مواصفات المنتج. يبدأ الضمان من تاريخ الشراء."
+          content: "تختلف مدة الضمان حسب نوع المعدات وحالة تجديدها. وهي مذكورة في بطاقة المنتج ومُبيَّنة في فاتورتكم."
         },
         {
           icon: "check",
           title: "ما يغطيه الضمان",
-          content: "يغطي الضمان عيوب التصنيع والأعطال المادية والأعطال الناجمة عن العيوب الخفية. لا يغطي الضرر الناجم عن سوء الاستخدام أو السقوط أو تلف السوائل أو البلى العادي."
+          content: "يشمل الضمان عيوب التشغيل التي تظهر في ظروف الاستعمال العادية، وكذلك العيوب الخفية."
         },
         {
           icon: "alert",
-          title: "الإبلاغ عن العيوب عند التسليم",
-          content: "إذا اكتشفت عيب عند الاستلام، أبلغ عنه فورًا لموظف التوصيل. سنقدم استبدالاً مجاني: سيأتي موظف توصيل لاستعادة المنتج المعيب وإحضار منتج جديد، بدون تكاليف إضافية."
-        },
-        {
-          icon: "clock",
-          title: "كيفية استخدام الضمان",
-          content: "للمطالبة بالضمان: 1) أبلغ عن المشكلة ضمن المواعيد (عند الاستلام أو بسرعة بعده)، 2) احتفظ بفاتورتك وأدلة شرائك، 3) اتصل بنا برقم طلبك ووصف المشكلة. سنساعدك بعد ذلك."
+          title: "ما لا يغطيه الضمان",
+          content: "لا يشمل الضمان: الأضرار الناتجة عن سوء الاستعمال، السقوط، التلف بفعل السوائل، البلى العادي، وكذلك أي تدخل يتم خارج ورشاتنا."
         },
         {
           icon: "help",
-          title: "العيوب بعد التسليم",
-          content: "إذا ظهر عيب بعد فترة التحقق من التسليم، اتصل بنا مع فاتورتك ووصف دقيق للمشكلة. سنقيم ما إذا كان عيبًا مغطى بالضمان وسنقوم بالاستبدال أو الإصلاح إذا أمكن."
+          title: "المطالبة بالضمان",
+          content: "احتفظوا بفاتورتكم: فهي ضرورية. تواصلوا معنا برقم طلبكم ووصف دقيق للمشكلة، وسنوضح لكم الإجراءات الواجب اتباعها."
         },
         {
           icon: "alert",
-          title: "قيود الضمان",
-          content: "الضمان صحيح فقط إذا كان: المنتج قد تم استخدامه بشكل طبيعي، تم تقديم فاتورة الشراء، لم يتم إجراء أي تعديلات على المنتج، العيوب لم تكن بسبب أضرار خارجية أو معالجة خاطئة."
+          title: "عيب مُثبت عند الاستلام",
+          content: "إذا اكتشفتم عيبًا عند الاستلام، أبلغوا موظف الشحن قبل الدفع، ثم تواصلوا معنا: نتكفل باستبدال المعدات المعنية."
         }
       ],
-      importantNote: "مهم: احفظ دائماً فاتورة الشراء الخاصة بك. إنها دليل الشراء الخاص بك وضرورية للمطالبة بالضمان.",
-      contactInfo: "لمطالبات الضمان، اتصل بنا على",
-      email: "support@solutionmaxi.com"
+      importantNote: "مهم: احتفظوا دائمًا بفاتورة الشراء. فهي دليل شرائكم وتبقى ضرورية للمطالبة بالضمان.",
+      contactInfo: "لأي مطالبة بالضمان، تواصلوا معنا:"
     }
   }
 
@@ -106,55 +105,62 @@ export default function WarrantyPage() {
       <Header />
       <main className="flex-1">
         <div className="container mx-auto px-4 py-12">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-            <p className="text-lg text-muted-foreground mb-12">
-              {data.intro}
-            </p>
+          <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
+          <p className="text-lg text-muted-foreground mb-12 max-w-4xl">
+            {data.intro}
+          </p>
 
-            <div className="space-y-6 mb-12">
-              {data.sections.map((section, index) => (
-                <Card key={index} className="border-l-4 border-l-primary">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      {iconMap[section.icon as keyof typeof iconMap]}
-                      {section.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">{section.content}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+            {data.sections.map((section, index) => (
+              <Card key={index} className="border-l-4 border-l-primary h-full">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    {iconMap[section.icon as keyof typeof iconMap]}
+                    {section.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">{section.content}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-            <Card className="bg-warning/10 border-warning/30">
-              <CardContent className="py-6">
-                <div className="flex gap-3">
-                  <AlertCircle className="h-6 w-6 text-warning shrink-0" />
-                  <p className="text-foreground">
-                    {data.importantNote}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-muted/50 mt-6">
-              <CardContent className="py-6">
-                <p className="text-center text-muted-foreground">
-                  {data.contactInfo}{' '}
-                  <a href={`mailto:${data.email}`} className="text-primary hover:underline font-medium">
-                    {data.email}
-                  </a>
+          <Card className="bg-warning/10 border-warning/30">
+            <CardContent className="py-6">
+              <div className="flex gap-3">
+                <AlertCircle className="h-6 w-6 text-warning shrink-0" />
+                <p className="text-foreground">
+                  {data.importantNote}
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
 
-            <div className="mt-8 text-center">
-              <Link href="/faq" className="text-primary hover:underline">
-                {language === 'ar' ? '← العودة إلى الأسئلة الشائعة' : '← Retour aux questions fréquentes'}
-              </Link>
-            </div>
+          <Card className="bg-muted/50 mt-6">
+            <CardContent className="py-6">
+              <p className="text-center text-muted-foreground">
+                {data.contactInfo}{' '}
+                <a href={`mailto:${CONTACT_INFO.email.primary}`} className="text-primary hover:underline font-medium">
+                  {CONTACT_INFO.email.primary}
+                </a>
+                {' · '}
+                <a
+                  href={`tel:${CONTACT_INFO.phone.primary}`}
+                  dir="ltr"
+                  style={{ direction: 'ltr', unicodeBidi: 'isolate' }}
+                  className="text-primary hover:underline font-medium"
+                >
+                  {CONTACT_INFO.phone.display.primary}
+                </a>
+              </p>
+            </CardContent>
+          </Card>
+
+          <div className="mt-8 text-center">
+            <Link href={`/${language}/faq`} className="text-primary hover:underline">
+              {language === 'ar' ? '← العودة إلى الأسئلة الشائعة' : '← Retour aux questions fréquentes'}
+            </Link>
           </div>
         </div>
       </main>

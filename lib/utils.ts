@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { getPublicApiBaseUrl } from '@/lib/api/base-url'
+import { formatActivePrice } from '@/lib/currency'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -21,13 +22,18 @@ export function getLocalizedName(
   return value
 }
 
-// Format price in Algerian Dinar
+/**
+ * Format an amount for display.
+ *
+ * The amount is expected in the base currency (see `config/market.ts`); it is
+ * converted to whatever currency the visitor's market uses. The active currency
+ * is published by `MarketProvider` via `setActiveCurrency()`, so this stays a
+ * plain function usable from any component.
+ *
+ * For new code that can use hooks, prefer `useMarket().formatMoney`.
+ */
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('fr-DZ', {
-    style: 'decimal',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price) + ' DZD'
+  return formatActivePrice(price)
 }
 
 // Calculate discount percentage

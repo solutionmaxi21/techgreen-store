@@ -1,7 +1,7 @@
 {
-  "name": "store-backend",
+  "name": "techgreen-store-backend",
   "version": "1.0.0",
-  "description": "Backend API for MaxiStore Admin Panel",
+  "description": "Backend API for TechGreen Admin Panel",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -37,7 +37,7 @@
     "express",
     "store"
   ],
-  "author": "",
+  "author": "TechGreen",
   "license": "MIT",
   "engines": {
     "node": ">=18"

@@ -41,7 +41,7 @@ export class OfflineDatabase extends Dexie {
   appMetadata!: Table<AppMetadata, string>;
 
   constructor() {
-    super('MaxiStoreOfflineDB');
+    super('TechGreenOfflineDB');
     
     // Schema version 1
     this.version(1).stores({

@@ -4,7 +4,7 @@
 New-Item -ItemType Directory -Force -Path "k6/results" | Out-Null
 
 Write-Host "==================================" -ForegroundColor Cyan
-Write-Host "🚀 MaxiStore Performance Test Suite" -ForegroundColor Cyan
+Write-Host "🚀 TechGreen Performance Test Suite" -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
 Write-Host ""
 
