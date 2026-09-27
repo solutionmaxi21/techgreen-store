@@ -14,4 +14,8 @@ tsconfig.tsbuildinfo
 
 # Real user records (bcrypt password hashes, emails, phone numbers).
 # Kept on disk, never published.
-database/users/
+#
+# The leading "**/" is required: a pattern containing a slash anywhere but the
+# end is anchored to the repository root, so a bare "database/users/" silently
+# misses the copy that lives under frontend/.
+**/database/users/
